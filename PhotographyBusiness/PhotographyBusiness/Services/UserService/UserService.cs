@@ -65,6 +65,7 @@ namespace PhotographyBusiness.Services.UserService
                     {
                         //TODO
                        
+
                     }
                 }
                 await _genericDbService.UpdateObjectAsync(user);
