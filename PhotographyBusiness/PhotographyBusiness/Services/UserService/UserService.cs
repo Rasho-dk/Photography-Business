@@ -2,36 +2,37 @@
 
 namespace PhotographyBusiness.Services.UserService
 {
-    public class UserSerice : IUserService
+    public class UserService : IUserService
     {
-        private List<User> users;
-        private GenericDbService<User> _grDbUserService;
-        public UserSerice(GenericDbService<User> genericDbService)
+        private List<User> _users;
+        private GenericDbService<User> _genericDbService;
+        public UserService(GenericDbService<User> genericDbService)
         {
-            _grDbUserService = genericDbService;
+            _genericDbService = genericDbService;
             //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
         }
-        public UserSerice()
+        public UserService()
         {
-            users = MockData.MockUsers.GetMockUsers();
+            _users = MockData.MockUsers.GetMockUsers();
         }
         public async Task CreateUser(User user)
         {
-            throw new NotImplementedException();
+            _users.Add(user);    
+            await _genericDbService.AddObjectAsync(user);
         }
 
         public async Task<User> DeleteUser(int id)
         {
-            throw new NotImplementedException();
+
         }
 
         public List<User> GetAllUsers()
         {
-            return users;
+            return _users;
 
         }
 
-        public async Task<User> GetStudentById(int id)
+        public async Task<User> GetUserById(int id)
         {
             throw new NotImplementedException();
         }
