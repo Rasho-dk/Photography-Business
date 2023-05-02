@@ -9,9 +9,9 @@ namespace PhotographyBusiness.MockData
 
         private static List<User> users = new List<User>()
         {
-            new User("admin", passwordHasher.HashPassword(null, "admin"), "admin", true),
-            new User("123", passwordHasher.HashPassword(null, "123"), "123", false),
-            new User("tyler1", passwordHasher.HashPassword(null, "tyler1"), "tyler1", false)
+            new User("admin@admin.com", passwordHasher.HashPassword(null, "admin"), "admin", true),
+            new User("123@123.com", passwordHasher.HashPassword(null, "123"), "123", false),
+            new User("tyler1@tyler1.com", passwordHasher.HashPassword(null, "tyler1"), "tyler1", false)
         };
 
         public static List<User> GetMockUsers()
