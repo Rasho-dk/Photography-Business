@@ -64,6 +64,7 @@ namespace PhotographyBusiness.Services.UserService
                     if (us.UserId.Equals(user.UserId))
                     {
                         //TODO
+                       
                     }
                 }
                 await _genericDbService.UpdateObjectAsync(user);
