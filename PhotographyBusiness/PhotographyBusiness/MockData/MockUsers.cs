@@ -18,11 +18,5 @@ namespace PhotographyBusiness.MockData
         { 
             return users; 
         }
-
-        public static void AddMockUser(User user)
-        {
-            users.Add(user);
-            
-        }
     }
 }
