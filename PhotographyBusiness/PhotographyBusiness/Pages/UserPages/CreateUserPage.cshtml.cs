@@ -18,6 +18,8 @@ namespace PhotographyBusiness.Pages.UserPages
         public string PhoneNumber { get; set; }
         [BindProperty]
         public string FullName { get; set; }
+        [BindProperty, DataType(DataType.Password)]
+        public string ConfirmPassword { get; set; }
 
         public CreateUserPageModel()
         {
@@ -26,12 +28,17 @@ namespace PhotographyBusiness.Pages.UserPages
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+            if (Password == ConfirmPassword)
             {
+                if (ModelState.IsValid)
+                {
+                    // UserService to create the new user
+                    return RedirectToPage("../Index");
+                }
                 return Page();
+                
             }
-            // UserService to create the new user
-            return RedirectToPage("Index");
+            return Page();
         }
     }
 }
