@@ -2,33 +2,45 @@
 @model PhotographyBusiness.Pages.UserPages.CreateUserPageModel
 @{
 }
-<div class="d-flex justify-content-center" style="background-color: #292929; height: 79vh">
-    <div class="d-flex flex-column w-25 m-4">
-        <form method="post" class="">
-            <div class="form-group p-2">
-                <label asp-for="@Model.Email" class="control-lable text-white">Email</label>
-                <input asp-for="@Model.Email" class="form-control" />
-            </div>
-            <div class="form-group p-2">
-                <label asp-for="@Model.FullName" class="control-lable text-white">Full name</label>
-                <input asp-for="@Model.FullName" class="form-control" />
-            </div>  
-            <div class="form-group p-2">
-                <label asp-for="@Model.PhoneNumber" class="control-lable text-white">Phone</label>
-                <input asp-for="@Model.PhoneNumber" class="form-control" />
-            </div>
-            <div class="form-group p-2">
-                <label asp-for="@Model.Password" class="control-lable text-white"></label>
-                <input asp-for="@Model.Password" class="form-control" />
-            </div>
-            <div class="form-group p-2">
-                <label asp-for="@Model.ConfirmPassword" class="control-lable text-white">Repeat password</label>
-                <input asp-for="@Model.ConfirmPassword" class="form-control" />
-            </div>
-            <div class="form-group m-2 d-flex justify-content-between">
-                <a asp-page="../Index/" class="btn btn-primary" style="width: 6vw; border-radius: 0;">Go back</a>
-                <input type="submit" value="Create" class="btn btn-success" style="width: 6vw; border-radius: 0;" />
-            </div>
-        </form>
+
+<link rel="stylesheet" href="~/css/styles.css" />
+
+<div class="transparent-black">
+    <div class="d-flex justify-content-center" style=" height: 79vh;">
+        <div class="d-flex flex-column m-4" style="min-width: 30vw">
+            <form method="post" class="p-4" style="background-color: rgba(0,0,0,0.7)">
+                <div class="form-group p-2">
+                    <label asp-for="@Model.Email" class="control-lable text-white">Email</label>
+                    <input asp-for="@Model.Email" class="form-control" />
+                </div>
+                <div class="form-group p-2">
+                    <label asp-for="@Model.FullName" class="control-lable text-white">Full name</label>
+                    <input asp-for="@Model.FullName" class="form-control" />
+                </div>
+                <div class="form-group p-2">
+                    <label asp-for="@Model.PhoneNumber" class="control-lable text-white">Phone</label>
+                    <input asp-for="@Model.PhoneNumber" class="form-control" />
+                </div>
+                <div class="form-group p-2">
+                    <label asp-for="@Model.Password" class="control-lable text-white"></label>
+                    <input asp-for="@Model.Password" class="form-control" />
+                </div>
+                <div class="form-group p-2">
+                    <label asp-for="@Model.ConfirmPassword" class="control-lable text-white">Repeat password</label>
+                    <input asp-for="@Model.ConfirmPassword" class="form-control" />
+                </div>
+                <div class="form-group m-2 d-flex justify-content-between">
+                    <a asp-page="../Index/" class="btn btn-dark btn-border-white" style="border-radius: 0; min-width: 6vw;">Go back</a>
+                    <input type="submit" value="Create" class="btn btn-light" style="min-width: 6vw; border-radius: 0;" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+
+
+<style>
+    .bg-img {
+        background-image: url(../../wwwroot/media/img3.jpg);
+    }
+</style>

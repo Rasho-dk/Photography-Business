@@ -1,5 +1,6 @@
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services;
+using PhotographyBusiness.Services.UserService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddTransient<GenericDbService<User>>();
-    ;
+builder.Services.AddSingleton<IUserService, UserService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
