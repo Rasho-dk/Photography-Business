@@ -14,14 +14,21 @@ namespace PhotographyBusiness.Services
             }
         }
 
-        public Task DeleteObjectAsync(T obj)
+        public async Task DeleteObjectAsync(T obj)
         {
-            throw new NotImplementedException();
+            using (var context = new ItemDbContext())
+            {
+                context.Set<T>().Remove(obj);
+                await context.SaveChangesAsync();
+            }
         }
 
-        public Task<T> GetObjectByIdAsync(int id)
+        public async Task<T> GetObjectByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            using(var context = new ItemDbContext())
+            {
+                return await context.Set<T>().FindAsync(id);
+            }
         }
 
         public async Task<IEnumerable<T>> GetObjectsAsync()
@@ -45,9 +52,12 @@ namespace PhotographyBusiness.Services
             }
         }
 
-        public Task UpdateObjectAsync(T obj)
+        public async Task UpdateObjectAsync(T obj)
         {
-            throw new NotImplementedException();
+            using (var context = new ItemDbContext())
+            {
+                context.Set<T>().Update(obj);
+            }
         }
     }
 }
