@@ -7,7 +7,7 @@ namespace PhotographyBusiness.Services
     {
         public async Task AddObjectAsync(T obj)
         {
-            using(var context = new ItemDbContext())
+            using(var context = new ObjectDbContext())
             {
                 context.Set<T>().Add(obj);
                 await context.SaveChangesAsync();
@@ -16,7 +16,7 @@ namespace PhotographyBusiness.Services
 
         public async Task DeleteObjectAsync(T obj)
         {
-            using (var context = new ItemDbContext())
+            using (var context = new ObjectDbContext())
             {
                 context.Set<T>().Remove(obj);
                 await context.SaveChangesAsync();
@@ -25,7 +25,7 @@ namespace PhotographyBusiness.Services
 
         public async Task<T> GetObjectByIdAsync(int id)
         {
-            using(var context = new ItemDbContext())
+            using(var context = new ObjectDbContext())
             {
                 return await context.Set<T>().FindAsync(id);
             }
@@ -33,7 +33,7 @@ namespace PhotographyBusiness.Services
 
         public async Task<IEnumerable<T>> GetObjectsAsync()
         {
-            using(var context = new ItemDbContext())
+            using(var context = new ObjectDbContext())
             {
                 return await context.Set<T>().AsNoTracking().ToListAsync();
             }
@@ -41,7 +41,7 @@ namespace PhotographyBusiness.Services
 
         public async Task SaveObjects(List<T> objects)
         {
-            using (var context = new ItemDbContext())
+            using (var context = new ObjectDbContext())
             {
                 foreach(T obj in objects)
                 {
@@ -54,7 +54,7 @@ namespace PhotographyBusiness.Services
 
         public async Task UpdateObjectAsync(T obj)
         {
-            using (var context = new ItemDbContext())
+            using (var context = new ObjectDbContext())
             {
                 context.Set<T>().Update(obj);
             }
