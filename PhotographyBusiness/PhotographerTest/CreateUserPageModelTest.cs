@@ -24,7 +24,45 @@ namespace PhotographerTest
                 Name = "Arun",
                 PhoneNumber = "1234567890"
             };
-        }      
+        }
+
+        [TestMethod]
+        public void CreateUserPageModel_OnPost_UnSuccessfullyCreatesNewUser()
+        {
+            //Her bliver oprettet en mock obj af "IUserService" interface fra "Mock" Klass som hedder Moq library.
+
+            var userservicemock = new Mock<IUserService>();
+
+            //Arrange
+
+            //Her bliver der oprettes en ny instance af CreateUserPageModel ved at passere "userservicemock" som en 
+            //konstrutur som bruger Object property af userservicemock.
+            //Den giver lov til at oprette en instance af "CreateUserPageModel" med en fake implementation. 
+            var model = new CreateUserPageModel(userservicemock.Object)
+            {
+                Email = "Test@hotmail.com",
+
+                //Her kan se at de fejler at Password passer ikke med hinanden. 
+                Password = "123456789",
+                ConfirmPassword = "12345678",
+
+                FullName = "SILAS Hello",
+                PhoneNumber = "123456789012"
+            };
+
+            try
+            {
+                User CallBackUser = null;
+                userservicemock.Setup(x => x.CreateUser(It.IsAny<User>())).Throws(new Exception("User cant be created"));
+                _createUserPageModel.OnPost();
+            }
+            catch (Exception ex)
+            {
+                Xunit.Assert.Equal("User cant be created", ex.Message);
+            }
+
+
+        }
 
         [TestMethod]
         public void CreateUserPageModel_OnPost_SuccessfullyCreatesNewUser()
@@ -61,34 +99,7 @@ namespace PhotographerTest
             Xunit.Assert.Equal(model.Password, CallBackUser.Password);
 
         }
-        [TestMethod]
-        public void CreateUserPageModel_OnPost_UnSuccessfullyCreatesNewUser()
-        {
-            var userservicemock = new Mock<IUserService>();
-
-            //Arrange
-            var model = new CreateUserPageModel(userservicemock.Object)
-            {
-                Email = "Test@hotmail.com",
-                Password = "123456789",
-                ConfirmPassword = "12345678",
-                FullName = "SILAS Hello",
-                PhoneNumber = "123456789012"
-            };
-
-            try
-            {
-                User CallBackUser = null;
-                userservicemock.Setup(x => x.CreateUser(It.IsAny<User>())).Throws(new Exception("User cant be created"));
-                _createUserPageModel.OnPost();
-            }
-            catch(Exception ex)
-            {
-                Xunit.Assert.Equal("User cant be created",ex.Message);
-            }
-
-
-        }
+       
 
     }
 
