@@ -22,12 +22,16 @@ namespace PhotographyBusiness.Models
         [StringLength(50)]
         public string Name { get; set; }
 
-        public User(string userId, string email, string password, string name)
+        [Required]
+        public bool IsAdmin { get; set; }
+
+
+        public User(string email, string password, string name, bool isAdmin)
         {
-            UserId = userId;
             Email = email;
             Password = password;
             Name = name;
+            IsAdmin = isAdmin;
         }
 
         public User()
