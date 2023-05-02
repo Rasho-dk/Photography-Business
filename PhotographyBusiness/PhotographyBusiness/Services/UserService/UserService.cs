@@ -23,7 +23,20 @@ namespace PhotographyBusiness.Services.UserService
 
         public async Task<User> DeleteUser(int id)
         {
-
+            User userToBeDeleted = null;
+            foreach(var user in _users)
+            {
+                if(user.UserId.Equals(id))
+                {
+                    userToBeDeleted = user;
+                }
+            }
+            if(userToBeDeleted != null)
+            {
+                _users.Remove(userToBeDeleted);
+                await _genericDbService.DeleteObjectAsync(userToBeDeleted); 
+            }
+            return userToBeDeleted;
         }
 
         public List<User> GetAllUsers()
@@ -34,12 +47,27 @@ namespace PhotographyBusiness.Services.UserService
 
         public async Task<User> GetUserById(int id)
         {
-            throw new NotImplementedException();
+            foreach(var user in _users)
+            {
+                if(user.UserId.Equals(id))
+                    return user;
+            }
+            return null;
         }
 
         public async Task UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            if(user is not null)
+            {
+                foreach(var us in _users)
+                {
+                    if (us.UserId.Equals(user.UserId))
+                    {
+                        //TODO
+                    }
+                }
+                await _genericDbService.UpdateObjectAsync(user);
+            }
         }
     }
 }
