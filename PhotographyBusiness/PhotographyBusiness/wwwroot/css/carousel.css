@@ -24,6 +24,15 @@
     font-size: 0;
 }
 
+img {
+    transition: all .2s ease-in-out;
+}
+
+
+img:hover {
+    transform: scale(1.1);
+}
+
 .carousel {
     display: inline-block;
     animation: 60s slide infinite linear;
