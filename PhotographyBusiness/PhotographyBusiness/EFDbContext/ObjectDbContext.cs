@@ -2,7 +2,7 @@
 
 namespace PhotographyBusiness.EFDbContext
 {
-    public class ItemDbContext : DbContext
+    public class ObjectDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
