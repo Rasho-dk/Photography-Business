@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@keyframes slide {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.wrapper:hover .carousel {
+    animation-play-state: paused;
+}
+
+.wrapper {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 0;
+}
+
+.carousel {
+    display: inline-block;
+    animation: 60s slide infinite linear;
+}
+
+.carousel img {
+    height: 50vh;
+    object-fit: cover;
+}
