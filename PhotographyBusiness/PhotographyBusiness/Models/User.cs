@@ -11,7 +11,7 @@ namespace PhotographyBusiness.Models
         public string UserId { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
         public string Email { get; set; }
 
         [Required]
