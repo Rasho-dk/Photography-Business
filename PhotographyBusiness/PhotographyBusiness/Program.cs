@@ -1,3 +1,4 @@
+using PhotographyBusiness.EFDbContext;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services;
 using PhotographyBusiness.Services.UserService;
@@ -9,6 +10,9 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddTransient<GenericDbService<User>>();
 builder.Services.AddSingleton<IUserService, UserService>();
+
+builder.Services.AddDbContext<ObjectDbContext>();
+
 
 var app = builder.Build();
 
