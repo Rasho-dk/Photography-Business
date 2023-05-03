@@ -63,6 +63,7 @@ namespace PhotographyBusiness.Services.UserService
                 {
                     if (us.UserId.Equals(user.UserId))
                     {
+                        //TODO Update User
 
                     }
                 }
