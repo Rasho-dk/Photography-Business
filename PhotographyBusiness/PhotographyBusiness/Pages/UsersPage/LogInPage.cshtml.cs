@@ -38,15 +38,17 @@ namespace PhotographyBusiness.Pages.UsersPage
             List<User> users = userService.GetAllUsers();   
             foreach (var user in users)
             {
-                if(user.Email.Equals(Email))
+                // if (Email == user.Email) // Hvis man ville bruge email til claim.
+                if(user.Name.Equals(user.Name)) // Arun: Name istedet for email, da det ser lidt pænere ud at have admin som Claim og ikke Jacks Email // 
+                   
                 {
                     var passwordHasher = new PasswordHasher<string>();  
                     if(passwordHasher.VerifyHashedPassword(null,user.Password,Password) == PasswordVerificationResult.Success)
                     {
                         LoggedInUser = user;
-                        var claims = new List<Claim> { new Claim(ClaimTypes.Name,Email)};
-                        if (Email.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));
-                        
+                        var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name)}; // Ændret fra email til user.Name
+                        if (user.Name.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin")); // Arun: Betyder så også at Jacks admin User kommer til at have navnet "Admin"
+                        // if (user.Email == "jack@jacksphotography.co.uk") claims.Add(new Claim(ClaimTypes.Role, "admin")) <-- Hvis vi hellere ville bruge email.
                         var claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
                         //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                         return RedirectToAction("../Pages/Index");
