@@ -14,7 +14,7 @@ namespace PhotographyBusiness.Services.BookingService
         {
             _genericDbService = genericDbService;
             //Bookings = _genericDbService.GetObjectsAsync<Booking>().Result.ToList();
-            Bookings = new List<Booking>();
+            Bookings = MockBookings.GetAllMockBookings();
         }
 
 
@@ -37,12 +37,11 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> GetBookingsByUserId(int userId)
         {
-            //List<Booking> bookings = from booking in Bookings 
-            //                         where booking.UserId == userId 
-            //                         select booking;
+            IEnumerable<Booking> bookings = from booking in Bookings
+                                     where booking.UserId == userId
+                                     select booking;
 
-            //return bookings;
-            return null;
+            return bookings.ToList();
         }
 
         public Task CreateBooking(Booking booking)
