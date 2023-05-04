@@ -13,19 +13,6 @@ namespace PhotographerTest
     {
         private IUserService _userService;
         private CreateUserPageModel _createUserPageModel;
-        [TestInitialize]
-        public void Initialze()
-        {
-            _userService = new UserService();
-            _createUserPageModel = new CreateUserPageModel(_userService);
-            User user = new User()
-            {
-                Email = "Test@homtail.com",
-                Name = "Arun",
-                PhoneNumber = "1234567890"
-            };
-        }
-
         [TestMethod]
         public void CreateUserPageModel_OnPost_UnSuccessfullyCreatesNewUser()
         {
@@ -45,17 +32,16 @@ namespace PhotographerTest
                 //Her kan se at de fejler at Password passer ikke med hinanden. 
                 Password = "123456789",
                 RepeatPassword = "12345678",
-
-                FullName = "SILAS Hello",
+                FirstName = "SILAS",
+                LastName = "Hello",
                 PhoneNumber = "123456789012"
             };
 
             try
             {
                 User CallBackUser = null;
-                userservicemock.Setup(x => x.CreateUser(It.IsAny<User>())).Throws(new Exception("User cant be created"));
-                _createUserPageModel.OnPost();
-            }
+                userservicemock.Setup(x => x.CreateUserAsyn(It.IsAny<User>())).Throws(new Exception("User cant be created"));
+                }
             catch (Exception ex)
             {
                 Xunit.Assert.Equal("User cant be created", ex.Message);
@@ -80,13 +66,13 @@ namespace PhotographerTest
                 Email = "Test@hotmail.com",
                 Password = "123456789",
                 RepeatPassword = "123456789",
-                FullName = "SILAS Hello",
+                FirstName = "SILAS",
+                LastName ="Hello",
                 PhoneNumber = "123456789012"
             };
-
             User CallBackUser = null;
             userservicemock
-                .Setup(x => x.CreateUser(It.IsAny<User>()))
+                .Setup(x => x.CreateUserAsyn(It.IsAny<User>()))
                 .Callback<User>(u => CallBackUser = u);
             //Act 
             var result = model.OnPost();
@@ -94,7 +80,7 @@ namespace PhotographerTest
             Xunit.Assert.IsType<RedirectToPageResult>(result);
             Xunit.Assert.NotNull(CallBackUser);
             Xunit.Assert.Equal(model.Email, CallBackUser.Email);
-            Xunit.Assert.Equal(model.FullName, CallBackUser.Name);
+            Xunit.Assert.Equal(model.FirstName + " " + model.LastName, CallBackUser.Name);
             Xunit.Assert.Equal(model.PhoneNumber, CallBackUser.PhoneNumber);
             Xunit.Assert.Equal(model.Password, CallBackUser.Password);
 
