@@ -41,7 +41,7 @@ namespace PhotographyBusiness.Pages.AccountPages
                     //_userService.CreateUser(new Models.User(Email, passwordHasher.HashPassword(null, Password), FullName, PhoneNumber));
 
                     // Shero: Jeg har brugt det kun for at lave unit test på den..Den er uden HashPassword
-                    _userService.CreateUser(new Models.User(Email, Password, $"{FirstName} {LastName}", PhoneNumber));
+                    _userService.CreateUserAsyn(new Models.User(Email, Password, $"{FirstName} {LastName}", PhoneNumber));
 
                     return RedirectToPage("../Index");
                 }
