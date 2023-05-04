@@ -19,6 +19,12 @@ namespace PhotographyBusiness.Models
         [Required, DataType(DataType.DateTime)]
         public DateTime DateTo { get; set; }
         public bool IsAccepted { get; set; }
+        [Required]
+        public string Address { get; set; }
+        [Required]
+        public int UserId { get; set; }
+        [Required]
+        public User User { get; set; }
 
         /// <summary>
         /// The full constructor
@@ -31,7 +37,7 @@ namespace PhotographyBusiness.Models
         /// <param name="dateFrom"></param>
         /// <param name="dateTo">The date to, if the event stretches over many days</param>
         /// <param name="isAccepted">Returns false if the admin has not accepted the booking, and true if he has</param>
-        public Booking(string category, double price, string customerNote, string adminNote, DateTime dateFrom, DateTime dateTo, bool isAccepted)
+        public Booking(string category, double price, string customerNote, string adminNote, DateTime dateFrom, DateTime dateTo, bool isAccepted, string address, User user, int userId)
         {
             Category = category;
             Price = price;
@@ -40,6 +46,9 @@ namespace PhotographyBusiness.Models
             DateFrom = dateFrom;
             DateTo = dateTo;
             IsAccepted = isAccepted;
+            Address = address;
+            User = user;
+            UserId = userId;
         }
 
         /// <summary>
@@ -50,13 +59,16 @@ namespace PhotographyBusiness.Models
         /// <param name="customerNote"></param>
         /// <param name="dateFrom"></param>
         /// <param name="dateTo"></param>
-        public Booking(string category, string customerNote, DateTime dateFrom, DateTime dateTo)
+        public Booking(string category, string customerNote, DateTime dateFrom, DateTime dateTo, string address, User user)
         {
+            User = user;
             Category = category;
             CustomerNote = customerNote;
             DateFrom = dateFrom;
             DateTo = dateTo;
+            Address = address;
             IsAccepted = false;
+            UserId = user.UserId;
         }
 
         /// <summary>
