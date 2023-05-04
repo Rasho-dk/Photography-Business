@@ -6,22 +6,24 @@ namespace PhotographyBusiness.Services.UserService
     {
         public List<User> Users {  get; } 
         private GenericDbService<User> _genericDbService;
-        //public UserService(GenericDbService<User> genericDbService)
-        //{
-        //    _genericDbService = genericDbService;
-        //    //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
-        //}
+        public UserService(GenericDbService<User> genericDbService)
+        {
+            _genericDbService = genericDbService;
+            //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
+            Users = MockData.MockUsers.GetMockUsers();
+
+        }
         public UserService()
         {
-            Users = MockData.MockUsers.GetMockUsers();
+            
         }
-        public async Task CreateUser(User user)
+        public async Task CreateUserAsyn(User user)
         {
             Users.Add(user);    
             await _genericDbService.AddObjectAsync(user);
         }
 
-        public async Task<User> DeleteUser(int id)
+        public async Task<User> DeleteUserAsyn(int id)
         {
             User userToBeDeleted = null;
             foreach(var user in Users)
@@ -44,8 +46,7 @@ namespace PhotographyBusiness.Services.UserService
             return Users;
 
         }
-
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetUserByIdAsyn(int id)
         {
             foreach(var user in Users)
             {
@@ -55,7 +56,7 @@ namespace PhotographyBusiness.Services.UserService
             return null;
         }
 
-        public async Task UpdateUser(User user)
+        public async Task UpdateUserAsyn(User user)
         {
             if(user is not null)
             {

@@ -26,6 +26,13 @@ namespace PhotographyBusiness.Models
         [StringLength(12)]
         public string PhoneNumber { get; set; }
 
+        /// <summary>
+        /// The full constructor
+        /// </summary>
+        /// <param name="email">Email of the user. Used to log in</param>
+        /// <param name="password">Hashed password of the user.</param>
+        /// <param name="name">Name of the user</param>
+        /// <param name="phoneNumber">Phonenumber of the user</param>
 
         public User(string email, string password, string name, string phoneNumber)
         {
@@ -34,7 +41,9 @@ namespace PhotographyBusiness.Models
             Name = name;
             PhoneNumber = phoneNumber;
         }
-
+        /// <summary>
+        /// Defeault constructor for DB
+        /// </summary>
         public User()
         {
      

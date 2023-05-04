@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="~/PhotographyBusiness.styles.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
 
-@*    <link href="~/css/dropdown.css" rel="stylesheet" />
-*@
-
 </head>
 <body>
     <header>
@@ -47,25 +44,26 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">About us</a>
                         </li>
                         <li class="nav-item ms-3">
-                            <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0" asp-area="" asp-page="/Index">Enquiry</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/BookingPages/TestCalender">Calender</a>
                         </li>
                         <li class="nav-item ms-3">
-                            <a asp-page="/AccountPages/LogInPage" class="btn nav-link text-dark" style="border-radius: 0; min-width: 5vw; max-width: 10vw; box-shadow: inset 0px 0px 0px 1px black; border: 1px solid black;">Login</a>
+                            <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/Index">Enquiry</a>
                         </li>
 
+
                        @{
-                           if (LogInPageModel.LoggedInUser == null)
+                           if ( Context.User.Identity.Name == null)
                            {
                                 <li class="nav-item dropdown ms-3">
                           
                                 
                             
-                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
-                                    style="border-radius: 0; min-width: 5vw; max-width: 10vw; box-shadow: inset 0px 0px 0px 1px black; border: 1px solid black;">
+                                    <a class="nav-link dropdown-toggle text-dark btn-border-black btn-square text-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                    style="min-width: 5vw; max-width: 15vw;">
                                     Login                              
                                     </a>
                           
-                                    <div class="dropdown-menu login-dropdown" style="opacity:0.9;" aria-labelledby="navbarDropdown">                         
+                                    <div class="dropdown-menu login-dropdown dropdown-menu-center" style="opacity:0.9; min-width: 18vw;" aria-labelledby="navbarDropdown">                         
                                             <form asp-page="/AccountPages/LogInPage" method="post">
                                                 <div class="dropdown-item text-dark">
                                                     <label for="inputEmail">Email address</label>

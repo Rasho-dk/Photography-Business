@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using PhotographyBusiness.Pages.UserPages;
+using PhotographyBusiness.Pages.AccountPages;
 using PhotographyBusiness.Services.UserService;
 using Moq;
 using PhotographyBusiness.Models;
@@ -44,7 +44,7 @@ namespace PhotographerTest
 
                 //Her kan se at de fejler at Password passer ikke med hinanden. 
                 Password = "123456789",
-                ConfirmPassword = "12345678",
+                RepeatPassword = "12345678",
 
                 FullName = "SILAS Hello",
                 PhoneNumber = "123456789012"
@@ -53,7 +53,7 @@ namespace PhotographerTest
             try
             {
                 User CallBackUser = null;
-                userservicemock.Setup(x => x.CreateUser(It.IsAny<User>())).Throws(new Exception("User cant be created"));
+                userservicemock.Setup(x => x.CreateUserAsyn(It.IsAny<User>())).Throws(new Exception("User cant be created"));
                 _createUserPageModel.OnPost();
             }
             catch (Exception ex)
@@ -79,14 +79,14 @@ namespace PhotographerTest
             {
                 Email = "Test@hotmail.com",
                 Password = "123456789",
-                ConfirmPassword = "123456789",
+                RepeatPassword = "123456789",
                 FullName = "SILAS Hello",
                 PhoneNumber = "123456789012"
             };
 
             User CallBackUser = null;
             userservicemock
-                .Setup(x => x.CreateUser(It.IsAny<User>()))
+                .Setup(x => x.CreateUserAsyn(It.IsAny<User>()))
                 .Callback<User>(u => CallBackUser = u);
             //Act 
             var result = model.OnPost();
