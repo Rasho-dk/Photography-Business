@@ -18,11 +18,13 @@ namespace PhotographyBusiness.Pages.AccountPages
         public string Password { get; set; }
         [BindProperty, DisplayName("phone number")]
         public string PhoneNumber { get; set; }
-        [BindProperty, DisplayName("full name")]
-        public string FullName { get; set; }
         [BindProperty, DataType(DataType.Password), DisplayName("repeat password")]
         [Compare("Password", ErrorMessage = "The passwords do not match.")]
         public string RepeatPassword { get; set; }
+        [BindProperty, DisplayName("first name")]
+        public string FirstName { get; set; }
+        [BindProperty, DisplayName("last name")]
+        public string LastName { get; set; }
 
         public CreateUserPageModel(IUserService userService)
         {
@@ -37,9 +39,9 @@ namespace PhotographyBusiness.Pages.AccountPages
                 if (ModelState.IsValid)
                 {
                     //_userService.CreateUser(new Models.User(Email, passwordHasher.HashPassword(null, Password), FullName, PhoneNumber));
-                    
+
                     // Shero: Jeg har brugt det kun for at lave unit test på den..Den er uden HashPassword
-                    _userService.CreateUser(new Models.User(Email, Password, FullName, PhoneNumber));
+                    _userService.CreateUser(new Models.User(Email, Password, $"{FirstName} {LastName}", PhoneNumber));
 
                     return RedirectToPage("../Index");
                 }
