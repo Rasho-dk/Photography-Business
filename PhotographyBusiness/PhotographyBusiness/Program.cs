@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using PhotographyBusiness.EFDbContext;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services;
+using PhotographyBusiness.Services.MailService;
 using PhotographyBusiness.Services.UserService;
 using System.Security.Claims;
 
@@ -12,6 +14,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddTransient<GenericDbService<User>>();
 builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<IMailService, MailService>();
 
 builder.Services.AddDbContext<ObjectDbContext>();
 
@@ -28,6 +31,11 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 {
     cookieOptions.LoginPath = "/AccountPages/LogInPage";
 });
+
+builder.Services.AddMvc().AddRazorPagesOptions(options => {
+    options.Conventions.AuthorizeFolder("/..");
+
+}).SetCompatibilityVersion(CompatibilityVersion.Latest);
 
 
 

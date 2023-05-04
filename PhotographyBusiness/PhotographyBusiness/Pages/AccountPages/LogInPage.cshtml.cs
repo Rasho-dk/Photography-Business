@@ -14,7 +14,7 @@ namespace PhotographyBusiness.Pages.AccountPages
     {
         public IUserService userService { get; set; }   
         //Kun  en bruger i brug
-        public static User LoggedInUser { get; set; } = null;
+        //public static User LoggedInUser { get; set; } = null;
         [BindProperty]
         [Required(ErrorMessage = "Please enter your email address.")]
         [StringLength(100, ErrorMessage = "The email address must be no more than {1} characters long.")]
@@ -42,14 +42,14 @@ namespace PhotographyBusiness.Pages.AccountPages
                         var passwordHasher = new PasswordHasher<string>();
                         if (passwordHasher.VerifyHashedPassword(null, user.Password, Password) == PasswordVerificationResult.Success)
                         {
-                            LoggedInUser = user;
+                            //LoggedInUser = user;
                             var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) }; // Ændret email til user.Name
                             if (user.Name.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));  // Arun: Betyder så også at Jacks admin User kommer til at have navnet "Admin"
                         // if (user.Email == "EXAMPLE@jacksphotography.co.uk") claims.Add(new Claim(ClaimTypes.Role, "admin")) <-- Hvis vi hellere ville bruge email.
 
                             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                           await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                             return RedirectToPage("/Index");
                         }
                       

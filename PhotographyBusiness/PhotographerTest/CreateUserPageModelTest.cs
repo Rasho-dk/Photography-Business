@@ -53,7 +53,7 @@ namespace PhotographerTest
             try
             {
                 User CallBackUser = null;
-                userservicemock.Setup(x => x.CreateUser(It.IsAny<User>())).Throws(new Exception("User cant be created"));
+                userservicemock.Setup(x => x.CreateUserAsyn(It.IsAny<User>())).Throws(new Exception("User cant be created"));
                 _createUserPageModel.OnPost();
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace PhotographerTest
 
             User CallBackUser = null;
             userservicemock
-                .Setup(x => x.CreateUser(It.IsAny<User>()))
+                .Setup(x => x.CreateUserAsyn(It.IsAny<User>()))
                 .Callback<User>(u => CallBackUser = u);
             //Act 
             var result = model.OnPost();
