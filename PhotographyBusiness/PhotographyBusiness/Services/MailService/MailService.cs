@@ -60,5 +60,15 @@ namespace PhotographyBusiness.Services.MailService
 
             await SendMail(message);
         }
+
+        public async Task SendUserCreationEmail(string email, string name)
+        {
+            MailMessage message = new MailMessage(new MailAddress(_sender), new MailAddress(email));
+            message.Subject = $"Jack Saunders Photography - Account verification";
+            message.Body = $"An account has been created on Jack Saunders Photography using this Email" +
+                $"\nUsername: {name}";
+
+            await SendMail(message);
+        }
     }
 }

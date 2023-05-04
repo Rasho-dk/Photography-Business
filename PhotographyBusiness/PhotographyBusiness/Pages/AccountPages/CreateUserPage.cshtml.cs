@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PhotographyBusiness.Services.MailService;
 using PhotographyBusiness.Services.UserService;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,7 @@ namespace PhotographyBusiness.Pages.AccountPages
     public class CreateUserPageModel : PageModel
     {
         private IUserService _userService;
+        private IMailService _mailService;
         private PasswordHasher<string> passwordHasher;
 
         [BindProperty, DataType(DataType.EmailAddress), DisplayName("email")]
@@ -26,9 +28,10 @@ namespace PhotographyBusiness.Pages.AccountPages
         [BindProperty, DisplayName("last name")]
         public string LastName { get; set; }
 
-        public CreateUserPageModel(IUserService userService)
+        public CreateUserPageModel(IUserService userService, IMailService mailService)
         {
             _userService = userService;
+            _mailService = mailService;
             passwordHasher = new PasswordHasher<string>();
         }
 
@@ -41,7 +44,8 @@ namespace PhotographyBusiness.Pages.AccountPages
                     //_userService.CreateUser(new Models.User(Email, passwordHasher.HashPassword(null, Password), FullName, PhoneNumber));
 
                     // Shero: Jeg har brugt det kun for at lave unit test på den..Den er uden HashPassword
-                    _userService.CreateUser(new Models.User(Email, Password, $"{FirstName} {LastName}", PhoneNumber));
+                    //_userService.CreateUser(new Models.User(Email, Password, $"{FirstName} {LastName}", PhoneNumber));
+                    _mailService.SendUserCreationEmail(Email, $"{FirstName} {LastName}");
 
                     return RedirectToPage("../Index");
                 }
