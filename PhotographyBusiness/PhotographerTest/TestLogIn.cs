@@ -24,8 +24,7 @@ namespace PhotographerTest
 
         }
         [TestMethod]
-        //[ExpectedException(typeof(FormatException))]
-        public void Login_UnHappyPath()
+        public void Login_Test_UnHappyPath()
         {
             var userservicemock = new Mock<IUserService>();
             var model = new LogInPageModel(userservicemock.Object)
@@ -49,12 +48,6 @@ namespace PhotographerTest
             {
                 Assert.AreEqual("Invalid email or password.Please try again", model.DisplayMessage);
             }
-
-
-
-
-
-
 
         }
     }
