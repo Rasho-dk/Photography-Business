@@ -37,7 +37,7 @@ namespace PhotographyBusiness.Pages.AccountPages
                 foreach (var user in users)
                 {
                 // if (Email == user.Email) // Hvis man ville bruge email til Claim
-                    if (user.Name.Equals(user.Name))
+                    if (user.Name.Equals(user.Name)) // Arun: Name istedet for Email til Claims
                     {
                         var passwordHasher = new PasswordHasher<string>();
                         if (passwordHasher.VerifyHashedPassword(null, user.Password, Password) == PasswordVerificationResult.Success)
@@ -48,8 +48,8 @@ namespace PhotographyBusiness.Pages.AccountPages
                         // if (user.Email == "EXAMPLE@jacksphotography.co.uk") claims.Add(new Claim(ClaimTypes.Role, "admin")) <-- Hvis vi hellere ville bruge email.
 
                             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                        //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                        HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                             return RedirectToPage("/Index");
                         }
                       
