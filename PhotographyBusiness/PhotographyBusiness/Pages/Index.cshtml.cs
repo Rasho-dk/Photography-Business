@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PhotographyBusiness.Pages.AccountPages;
 
 namespace PhotographyBusiness.Pages
 {
@@ -14,6 +17,10 @@ namespace PhotographyBusiness.Pages
 
         public void OnGet()
         {
+            if(LogInPageModel.LoggedInUser == null)
+            {
+                HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            }
 
         }
     }

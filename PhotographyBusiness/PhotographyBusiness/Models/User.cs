@@ -37,7 +37,7 @@ namespace PhotographyBusiness.Models
 
         public User()
         {
-
+     
         }
     }
 }
