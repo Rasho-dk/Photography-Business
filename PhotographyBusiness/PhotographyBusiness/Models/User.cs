@@ -8,7 +8,7 @@ namespace PhotographyBusiness.Models
         [Required]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         [EmailAddress(ErrorMessage = "Invalid email address.")]
@@ -37,7 +37,7 @@ namespace PhotographyBusiness.Models
 
         public User()
         {
-
+     
         }
     }
 }

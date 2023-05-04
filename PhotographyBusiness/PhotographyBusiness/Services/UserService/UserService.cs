@@ -4,27 +4,27 @@ namespace PhotographyBusiness.Services.UserService
 {
     public class UserService : IUserService
     {
-        private List<User> _users;
+        public List<User> Users {  get; } 
         private GenericDbService<User> _genericDbService;
-        public UserService(GenericDbService<User> genericDbService)
-        {
-            _genericDbService = genericDbService;
-            //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
-        }
+        //public UserService(GenericDbService<User> genericDbService)
+        //{
+        //    _genericDbService = genericDbService;
+        //    //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
+        //}
         public UserService()
         {
-            _users = MockData.MockUsers.GetMockUsers();
+            Users = MockData.MockUsers.GetMockUsers();
         }
         public async Task CreateUser(User user)
         {
-            _users.Add(user);    
+            Users.Add(user);    
             await _genericDbService.AddObjectAsync(user);
         }
 
         public async Task<User> DeleteUser(int id)
         {
             User userToBeDeleted = null;
-            foreach(var user in _users)
+            foreach(var user in Users)
             {
                 if(user.UserId.Equals(id))
                 {
@@ -33,7 +33,7 @@ namespace PhotographyBusiness.Services.UserService
             }
             if(userToBeDeleted != null)
             {
-                _users.Remove(userToBeDeleted);
+                Users.Remove(userToBeDeleted);
                 await _genericDbService.DeleteObjectAsync(userToBeDeleted); 
             }
             return userToBeDeleted;
@@ -41,13 +41,13 @@ namespace PhotographyBusiness.Services.UserService
 
         public List<User> GetAllUsers()
         {
-            return _users;
+            return Users;
 
         }
 
         public async Task<User> GetUserById(int id)
         {
-            foreach(var user in _users)
+            foreach(var user in Users)
             {
                 if(user.UserId.Equals(id))
                     return user;
@@ -59,10 +59,11 @@ namespace PhotographyBusiness.Services.UserService
         {
             if(user is not null)
             {
-                foreach(var us in _users)
+                foreach(var us in Users)
                 {
                     if (us.UserId.Equals(user.UserId))
                     {
+                        //TODO Update User
 
                     }
                 }

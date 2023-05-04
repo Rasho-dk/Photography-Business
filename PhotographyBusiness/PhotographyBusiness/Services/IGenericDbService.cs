@@ -1,6 +1,6 @@
 ﻿namespace PhotographyBusiness.Services
 {
-    public interface IService<T>
+    public interface IGenericDbService<T>
     {
         Task<IEnumerable<T>> GetObjectsAsync();
         Task AddObjectAsync(T obj);
