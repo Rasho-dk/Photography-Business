@@ -1,4 +1,4 @@
-﻿@using PhotographyBusiness.Pages.UsersPage
+﻿@using PhotographyBusiness.Pages.AccountPages
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,11 +50,11 @@
                             <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0" asp-area="" asp-page="/Index">Enquiry</a>
                         </li>
                         <li class="nav-item ms-3">
-                            <a asp-page="/UsersPage/LogInPage" class="btn nav-link text-dark" style="border-radius: 0; min-width: 5vw; max-width: 10vw; box-shadow: inset 0px 0px 0px 1px black; border: 1px solid black;">Login</a>
+                            <a asp-page="/AccountPages/LogInPage" class="btn nav-link text-dark" style="border-radius: 0; min-width: 5vw; max-width: 10vw; box-shadow: inset 0px 0px 0px 1px black; border: 1px solid black;">Login</a>
                         </li>
 
                        @{
-                           if (LogIndPageModel.LoggedInUser == null)
+                           if (LogInPageModel.LoggedInUser == null)
                            {
                                 <li class="nav-item dropdown ms-3">
                           
@@ -66,7 +66,7 @@
                                     </a>
                           
                                     <div class="dropdown-menu login-dropdown" style="opacity:0.9;" aria-labelledby="navbarDropdown">                         
-                                            <form asp-page="/UsersPage/LogInPage" method="post">
+                                            <form asp-page="/AccountPages/LogInPage" method="post">
                                                 <div class="dropdown-item text-dark">
                                                     <label for="inputEmail">Email address</label>
                                                     <input type="email" class="form-control" id="inputEmail" name="Email" placeholder="Email">
@@ -81,7 +81,7 @@
                                                 </div>
                                             </form>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" style="color:black" asp-page="/UsersPage/CreateUserPage">Register</a>
+                                            <a class="dropdown-item" style="color:black" asp-page="/AccountPages/CreateUserPage">Register</a>
                                 
                                     </div>
 
@@ -101,7 +101,7 @@
                                         <li><a class="dropdown-item text-dark" href="#">MyProfile</a></li>
                                         <li><a class="dropdown-item text-dark" href="#">Booking</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-dark" href="/UsersPage/LogOutPage" >Log out</a></li>
+                                        <li><a class="dropdown-item text-dark" href="/AccountPages/LogOutPage" >Log out</a></li>
                                     </ul>
                                 </li>
 

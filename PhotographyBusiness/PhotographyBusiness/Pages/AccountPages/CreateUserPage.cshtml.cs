@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Services.UserService;
 using System.ComponentModel.DataAnnotations;
 
-namespace PhotographyBusiness.Pages.UserPages
+namespace PhotographyBusiness.Pages.AccountPages
 {
     public class CreateUserPageModel : PageModel
     {

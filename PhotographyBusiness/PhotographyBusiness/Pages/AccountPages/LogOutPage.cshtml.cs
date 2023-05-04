@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PhotographyBusiness.Pages.UsersPage
+namespace PhotographyBusiness.Pages.AccountPages
 {
     public class LogOutPageModel : PageModel
     {
         public async Task<IActionResult> OnGet()
         {
-            LogIndPageModel.LoggedInUser = null;
+            LogInPageModel.LoggedInUser = null;
 
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToPage("/index");

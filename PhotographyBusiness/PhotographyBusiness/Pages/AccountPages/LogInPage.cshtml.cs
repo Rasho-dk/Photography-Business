@@ -8,9 +8,9 @@ using PhotographyBusiness.Services.UserService;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
-namespace PhotographyBusiness.Pages.UsersPage
+namespace PhotographyBusiness.Pages.AccountPages
 {
-    public class LogIndPageModel : PageModel
+    public class LogInPageModel : PageModel
     {
         public IUserService userService { get; set; }   
         //Kun  en bruger i brug
@@ -25,7 +25,7 @@ namespace PhotographyBusiness.Pages.UsersPage
         [StringLength(20, MinimumLength = 8, ErrorMessage = "The password must be between 8 and 20 characters long.")]
         public string? Password { get; set; }    
         public string DisplayMessage { get; set; }
-        public LogIndPageModel(IUserService userService)
+        public LogInPageModel(IUserService userService)
         {
             this.userService = userService; 
         }
