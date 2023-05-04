@@ -7,6 +7,13 @@ namespace PhotographyBusiness.Pages.AccountPages
     {
         public void OnGet()
         {
+<<<<<<< HEAD
+=======
+            //LogInPageModel.LoggedInUser = null;
+
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToPage("/index");
+>>>>>>> main
         }
     }
 }
