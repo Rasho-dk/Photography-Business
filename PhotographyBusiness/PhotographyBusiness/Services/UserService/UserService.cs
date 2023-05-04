@@ -46,7 +46,6 @@ namespace PhotographyBusiness.Services.UserService
             return Users;
 
         }
-
         public async Task<User> GetUserByIdAsyn(int id)
         {
             foreach(var user in Users)
