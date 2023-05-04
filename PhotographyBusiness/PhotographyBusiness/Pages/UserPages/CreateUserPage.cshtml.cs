@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Services.UserService;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace PhotographyBusiness.Pages.UserPages
@@ -11,16 +12,17 @@ namespace PhotographyBusiness.Pages.UserPages
         private IUserService _userService;
         private PasswordHasher<string> passwordHasher;
         
-        [BindProperty]
+        [BindProperty, DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [BindProperty, DataType(DataType.Password)]
         public string Password { get; set; }
-        [BindProperty]
+        [BindProperty, DisplayName("Phone number")]
         public string PhoneNumber { get; set; }
-        [BindProperty]
+        [BindProperty, DisplayName("Full name")]
         public string FullName { get; set; }
-        [BindProperty, DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; }
+        [BindProperty, DataType(DataType.Password), DisplayName("Repeat password")]
+        [Compare("Password", ErrorMessage = "The passwords do not match.")]
+        public string RepeatPassword { get; set; }
 
         public CreateUserPageModel(IUserService userService)
         {
@@ -30,7 +32,7 @@ namespace PhotographyBusiness.Pages.UserPages
 
         public IActionResult OnPost()
         {
-            if (Password == ConfirmPassword)
+            if (Password == RepeatPassword)
             {
                 if (ModelState.IsValid)
                 {
