@@ -55,10 +55,9 @@ namespace PhotographyBusiness.Pages.AccountPages
                                 return RedirectToPage("/Index");
                             }
                         }
-                        catch (ArgumentNullException ex) 
+                        catch (Exception ex) 
                         {
-                        DisplayMessage = "Invalid email or password.Please try again";
-
+                                 DisplayMessage = "Invalid email or password.Please try again";
                         }
 
 
