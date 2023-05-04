@@ -1,0 +1,21 @@
+﻿body {
+    background-image: url(../media/img2.jpg);
+    background-size: contain;
+}
+
+.bg-img {
+}
+
+.btn-border-white {
+    box-shadow: inset 0px 0px 0px 1px white;
+    border: 1px solid white;
+}
+
+.btn-square {
+    border-radius: 0;
+    min-width: 5vw;
+}
+
+.transparent-black {
+    background-color: rgba(0,0,0,0.6)
+}
