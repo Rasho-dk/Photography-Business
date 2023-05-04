@@ -32,26 +32,29 @@ namespace PhotographyBusiness.Pages.UsersPage
 
         public async Task<IActionResult> OnPost()
         {
-            List<User> users = userService.GetAllUsers();   
-            foreach (var user in users)
-            {
-                if(user.Email.Equals(Email))
+            
+                List<User> users = userService.GetAllUsers();
+                foreach (var user in users)
                 {
-                    var passwordHasher = new PasswordHasher<string>();  
-                    if(passwordHasher.VerifyHashedPassword(null,user.Password,Password) == PasswordVerificationResult.Success)
+                    if (user.Email.Equals(Email))
                     {
-                        LoggedInUser = user;
-                        var claims = new List<Claim> { new Claim(ClaimTypes.Name,Email)};
-                        if (Email.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));
-                        
-                        var claimsIdentity = new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
-                        //TODO 
-                        //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                        return RedirectToPage("/Index");
-                    }
-                }    
-            }
-            DisplayMessage = "Error";
+                        var passwordHasher = new PasswordHasher<string>();
+                        if (passwordHasher.VerifyHashedPassword(null, user.Password, Password) == PasswordVerificationResult.Success)
+                        {
+                            LoggedInUser = user;
+                            var claims = new List<Claim> { new Claim(ClaimTypes.Name, Email) };
+                            if (Email.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));
+
+                            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                            HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                            return RedirectToPage("/Index");
+                        }
+                      
+                    }                    
+                }
+            DisplayMessage = "Invalid email or password.Please try again";
+
             return Page();
         }
     }
