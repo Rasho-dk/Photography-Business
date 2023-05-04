@@ -31,9 +31,8 @@ namespace PhotographyBusiness.Models
         /// <param name="dateFrom"></param>
         /// <param name="dateTo">The date to, if the event stretches over many days</param>
         /// <param name="isAccepted">Returns false if the admin has not accepted the booking, and true if he has</param>
-        public Booking(int bookingId, string category, double price, string customerNote, string adminNote, DateTime dateFrom, DateTime dateTo, bool isAccepted)
+        public Booking(string category, double price, string customerNote, string adminNote, DateTime dateFrom, DateTime dateTo, bool isAccepted)
         {
-            BookingId = bookingId;
             Category = category;
             Price = price;
             CustomerNote = customerNote;
