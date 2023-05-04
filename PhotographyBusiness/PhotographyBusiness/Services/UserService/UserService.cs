@@ -6,14 +6,16 @@ namespace PhotographyBusiness.Services.UserService
     {
         public List<User> Users {  get; } 
         private GenericDbService<User> _genericDbService;
-        //public UserService(GenericDbService<User> genericDbService)
-        //{
-        //    _genericDbService = genericDbService;
-        //    //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
-        //}
+        public UserService(GenericDbService<User> genericDbService)
+        {
+            _genericDbService = genericDbService;
+            //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
+            Users = MockData.MockUsers.GetMockUsers();
+
+        }
         public UserService()
         {
-            Users = MockData.MockUsers.GetMockUsers();
+            
         }
         public async Task CreateUser(User user)
         {

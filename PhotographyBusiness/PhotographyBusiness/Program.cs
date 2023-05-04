@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using PhotographyBusiness.EFDbContext;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services;
@@ -30,6 +31,11 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 {
     cookieOptions.LoginPath = "/AccountPages/LogInPage";
 });
+
+builder.Services.AddMvc().AddRazorPagesOptions(options => {
+    options.Conventions.AuthorizeFolder("/..");
+
+}).SetCompatibilityVersion(CompatibilityVersion.Latest);
 
 
 
