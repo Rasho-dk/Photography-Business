@@ -43,7 +43,7 @@ namespace PhotographyBusiness.Services.UserService
 
         public List<User> GetAllUsers()
         {
-            return Users;
+            return Users; 
 
         }
         public async Task<User> GetUserByIdAsyn(int id)
