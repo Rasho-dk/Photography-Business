@@ -2,25 +2,27 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Services.UserService;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace PhotographyBusiness.Pages.UserPages
+namespace PhotographyBusiness.Pages.AccountPages
 {
     public class CreateUserPageModel : PageModel
     {
         private IUserService _userService;
         private PasswordHasher<string> passwordHasher;
-        
-        [BindProperty]
+
+        [BindProperty, DataType(DataType.EmailAddress), DisplayName("email")]
         public string Email { get; set; }
-        [BindProperty, DataType(DataType.Password)]
+        [BindProperty, DataType(DataType.Password), DisplayName("password")]
         public string Password { get; set; }
-        [BindProperty]
+        [BindProperty, DisplayName("phone number")]
         public string PhoneNumber { get; set; }
-        [BindProperty]
+        [BindProperty, DisplayName("full name")]
         public string FullName { get; set; }
-        [BindProperty, DataType(DataType.Password)]
-        public string ConfirmPassword { get; set; }
+        [BindProperty, DataType(DataType.Password), DisplayName("repeat password")]
+        [Compare("Password", ErrorMessage = "The passwords do not match.")]
+        public string RepeatPassword { get; set; }
 
         public CreateUserPageModel(IUserService userService)
         {
@@ -30,14 +32,14 @@ namespace PhotographyBusiness.Pages.UserPages
 
         public IActionResult OnPost()
         {
-            if (Password == ConfirmPassword)
+            if (Password == RepeatPassword)
             {
                 if (ModelState.IsValid)
                 {
                     //_userService.CreateUser(new Models.User(Email, passwordHasher.HashPassword(null, Password), FullName, PhoneNumber));
                     
                     // Shero: Jeg har brugt det kun for at lave unit test på den..Den er uden HashPassword
-                    _userService.CreateUser(new Models.User(Email,Password, FullName, PhoneNumber));
+                    _userService.CreateUser(new Models.User(Email, Password, FullName, PhoneNumber));
 
                     return RedirectToPage("../Index");
                 }

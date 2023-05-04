@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using PhotographyBusiness.Pages.UsersPage;
+using PhotographyBusiness.Pages.AccountPages;
 
 namespace PhotographyBusiness.Pages
 {
@@ -17,7 +17,7 @@ namespace PhotographyBusiness.Pages
 
         public void OnGet()
         {
-            if(LogIndPageModel.LoggedInUser == null)
+            if(LogInPageModel.LoggedInUser == null)
             {
                 HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             }
