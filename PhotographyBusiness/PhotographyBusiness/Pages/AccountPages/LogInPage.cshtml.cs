@@ -12,7 +12,7 @@ namespace PhotographyBusiness.Pages.AccountPages
 {
     public class LogInPageModel : PageModel
     {
-        public IUserService userService { get; set; }   
+        public IUserService userService; 
         //Kun  en bruger i brug
         //public static User LoggedInUser { get; set; } = null;
         [BindProperty]
