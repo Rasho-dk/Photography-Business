@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using PhotographyBusiness.Pages.UsersPage
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +8,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PhotographyBusiness.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
+
+@*    <link href="~/css/dropdown.css" rel="stylesheet" />
+*@
+
 </head>
 <body>
     <header>
@@ -21,6 +27,8 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-grow-0">
                     <ul class="navbar-nav">
+
+
                         <li class="nav-item dropdown ms-3">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Portfolio
@@ -33,6 +41,8 @@
                                 <li><a class="dropdown-item text-dark" href="#">Miscellaneous</a></li>
                             </ul>
                         </li>
+
+
                         <li class="nav-item ms-3">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">About us</a>
                         </li>
@@ -40,8 +50,68 @@
                             <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0" asp-area="" asp-page="/Index">Enquiry</a>
                         </li>
                         <li class="nav-item ms-3">
-                            <a asp-page="/UserPages/CreateUserPage" class="btn nav-link text-dark" style="border-radius: 0; min-width: 5vw; max-width: 10vw; box-shadow: inset 0px 0px 0px 1px black; border: 1px solid black;">Login</a>
+                            <a asp-page="/UsersPage/LogInPage" class="btn nav-link text-dark" style="border-radius: 0; min-width: 5vw; max-width: 10vw; box-shadow: inset 0px 0px 0px 1px black; border: 1px solid black;">Login</a>
                         </li>
+
+                       @{
+                           if (LogIndPageModel.LoggedInUser == null)
+                           {
+                                <li class="nav-item dropdown ms-3">
+                          
+                                
+                            
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                    style="border-radius: 0; min-width: 5vw; max-width: 10vw; box-shadow: inset 0px 0px 0px 1px black; border: 1px solid black;">
+                                    Login                              
+                                    </a>
+                          
+                                    <div class="dropdown-menu login-dropdown" style="opacity:0.9;" aria-labelledby="navbarDropdown">                         
+                                            <form asp-page="/UsersPage/LogInPage" method="post">
+                                                <div class="dropdown-item text-dark">
+                                                    <label for="inputEmail">Email address</label>
+                                                    <input type="email" class="form-control" id="inputEmail" name="Email" placeholder="Email">
+                                                </div>
+                                                <div class="dropdown-item text-dark">
+                                                    <label for="inputPassword">Password</label>
+                                                    <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="Password">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <button type="submit" class="btn btn-primary m-2">Sign in</button>
+
+                                                </div>
+                                            </form>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" style="color:black" asp-page="/UsersPage/CreateUserPage">Register</a>
+                                
+                                    </div>
+
+                                </li>                           
+                           }
+                          else
+                          {
+                                //<li class="nav-item">
+                                //    User :@LogIndPageModel.LoggedInUser.Name
+                                //</li>                        
+
+                                <li class="nav-item dropdown ms-3">
+                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-regular fa-user fa-beat"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item text-dark" href="#">MyProfile</a></li>
+                                        <li><a class="dropdown-item text-dark" href="#">Booking</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item text-dark" href="/UsersPage/LogOutPage" >Log out</a></li>
+                                    </ul>
+                                </li>
+
+                          }
+                        }
+                     
+
+                        
+                      
+
                     </ul>
                 </div>
             </div>
@@ -61,3 +131,6 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+ 
