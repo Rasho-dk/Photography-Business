@@ -1,0 +1,12 @@
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace PhotographyBusiness.wwwroot
+{
+    public class package : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+    }
+}
