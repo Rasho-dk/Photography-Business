@@ -16,4 +16,8 @@
     <PackageReference Include="Microsoft.TestPlatform.Portable" Version="17.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\BookingService\" />
+  </ItemGroup>
+
 </Project>
