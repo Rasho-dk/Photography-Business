@@ -22,6 +22,11 @@ body {
     border: 1px solid white;
 }
 
+.btn-border-black {
+    box-shadow: inset 0px 0px 0px 1px black;
+    border: 1px solid black;
+}
+
 .btn-square {
     border-radius: 0
 }
@@ -43,3 +48,13 @@ body {
     padding: 20px;
     opacity: 3;
 }*/
+
+@media only screen and (min-width: 576px) {
+    .dropdown-menu-center {
+        left: 50% !important;
+        right: auto !important;
+        text-align: center !important;
+        transform: translate(-50%, 0) !important;
+    }
+}
+
