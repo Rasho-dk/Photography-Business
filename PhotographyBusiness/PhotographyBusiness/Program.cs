@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using PhotographyBusiness.EFDbContext;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services;
+using PhotographyBusiness.Services.MailService;
 using PhotographyBusiness.Services.UserService;
 using System.Security.Claims;
 
@@ -12,6 +13,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddTransient<GenericDbService<User>>();
 builder.Services.AddSingleton<IUserService, UserService>();
+builder.Services.AddSingleton<IMailService, MailService>();
 
 builder.Services.AddDbContext<ObjectDbContext>();
 
