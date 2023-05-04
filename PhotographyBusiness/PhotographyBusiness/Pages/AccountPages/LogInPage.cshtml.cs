@@ -36,14 +36,16 @@ namespace PhotographyBusiness.Pages.AccountPages
                 List<User> users = userService.GetAllUsers();
                 foreach (var user in users)
                 {
-                    if (user.Email.Equals(Email))
+                // if (Email == user.Email) // Hvis man ville bruge email til Claim
+                    if (user.Name.Equals(user.Name))
                     {
                         var passwordHasher = new PasswordHasher<string>();
                         if (passwordHasher.VerifyHashedPassword(null, user.Password, Password) == PasswordVerificationResult.Success)
                         {
                             LoggedInUser = user;
-                            var claims = new List<Claim> { new Claim(ClaimTypes.Name, Email) };
-                            if (Email.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));
+                            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) }; // Ændret email til user.Name
+                            if (user.Name.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));  // Arun: Betyder så også at Jacks admin User kommer til at have navnet "Admin"
+                        // if (user.Email == "EXAMPLE@jacksphotography.co.uk") claims.Add(new Claim(ClaimTypes.Role, "admin")) <-- Hvis vi hellere ville bruge email.
 
                             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -53,6 +55,10 @@ namespace PhotographyBusiness.Pages.AccountPages
                       
                     }                    
                 }
+
+
+
+
             DisplayMessage = "Invalid email or password.Please try again";
 
             return Page();
