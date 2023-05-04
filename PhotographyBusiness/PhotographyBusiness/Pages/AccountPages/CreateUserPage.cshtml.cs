@@ -12,15 +12,15 @@ namespace PhotographyBusiness.Pages.AccountPages
         private IUserService _userService;
         private PasswordHasher<string> passwordHasher;
 
-        [BindProperty, DataType(DataType.EmailAddress)]
+        [BindProperty, DataType(DataType.EmailAddress), DisplayName("email")]
         public string Email { get; set; }
-        [BindProperty, DataType(DataType.Password)]
+        [BindProperty, DataType(DataType.Password), DisplayName("password")]
         public string Password { get; set; }
-        [BindProperty, DisplayName("Phone number")]
+        [BindProperty, DisplayName("phone number")]
         public string PhoneNumber { get; set; }
-        [BindProperty, DisplayName("Full name")]
+        [BindProperty, DisplayName("full name")]
         public string FullName { get; set; }
-        [BindProperty, DataType(DataType.Password), DisplayName("Repeat password")]
+        [BindProperty, DataType(DataType.Password), DisplayName("repeat password")]
         [Compare("Password", ErrorMessage = "The passwords do not match.")]
         public string RepeatPassword { get; set; }
 
