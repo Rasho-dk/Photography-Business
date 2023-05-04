@@ -13,6 +13,7 @@ namespace PhotographyBusiness.Services.BookingService
         public BookingService(GenericDbService<Booking> genericDbService)
         {
             _genericDbService = genericDbService;
+            //Bookings = _genericDbService.GetObjectsAsync<Booking>().Result.ToList();
             Bookings = new List<Booking>();
         }
 
@@ -24,10 +25,17 @@ namespace PhotographyBusiness.Services.BookingService
 
         public async Task<Booking> GetBookingById(int id)
         {
-            return await _genericDbService.GetObjectByIdAsync(id);
+            foreach(Booking booking in Bookings)
+            {
+                if(id == booking.BookingId)
+                {
+                    return booking;
+                }
+            }
+            return null;
         }
 
-        public async Task<List<Booking>> GetBookingsByUserId(int userId)
+        public List<Booking> GetBookingsByUserId(int userId)
         {
             //List<Booking> bookings = from booking in Bookings 
             //                         where booking.UserId == userId 
@@ -37,17 +45,17 @@ namespace PhotographyBusiness.Services.BookingService
             return null;
         }
 
-        public Task<Booking> CreateBooking(Booking booking)
+        public Task CreateBooking(Booking booking)
         {
             return _genericDbService.AddObjectAsync(booking);
         }
 
-        public Task<Booking> DeleteBooking(int id)
+        public Task DeleteBooking(int id)
         {
             return _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
         }
 
-        public Task<Booking> UpdateBooking(Booking booking)
+        public Task UpdateBooking(Booking booking)
         {
             return _genericDbService.UpdateObjectAsync(booking);
         }
