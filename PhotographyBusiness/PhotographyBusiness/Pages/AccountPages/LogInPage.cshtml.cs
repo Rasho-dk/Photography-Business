@@ -36,13 +36,14 @@ namespace PhotographyBusiness.Pages.AccountPages
             List<User> users = userService.GetAllUsers();
             foreach (var user in users)
             {
-                // if (Email == user.Email) // Hvis man ville bruge email til Claim
-                if (user.Name.Equals(user.Name))
+                 if (Email == user.Email) // Hvis man ville bruge email til Claim
+                //if (user.Name.Equals(user.Name))
                 {
                     var passwordHasher = new PasswordHasher<string>();
                     try
                     {
                         if (passwordHasher.VerifyHashedPassword(null, user.Password, Password) == PasswordVerificationResult.Success)
+                        //if (user.Password.Equals(Password))
                         {
                             //LoggedInUser = user;
                             var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) }; // Ændret email til user.Name
