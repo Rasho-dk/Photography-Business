@@ -4,11 +4,7 @@ namespace PhotographyBusiness.MockData
 {
     public class MockBookings
     {
-        //public static List<Booking> BookingRequests = new List<Booking>()
-        //{
 
-
-        //};
 
         private static List<Booking> Bookings = new List<Booking>()
         {
@@ -21,11 +17,11 @@ namespace PhotographyBusiness.MockData
 
         };
 
-        public static List<Booking> GetAllMockBookings()
-        {
-            return Bookings;
-        }
-
+    public static List<Booking> GetAllMockBookings()
+    {
+        return Bookings;
+    }
 
     }
 }
+

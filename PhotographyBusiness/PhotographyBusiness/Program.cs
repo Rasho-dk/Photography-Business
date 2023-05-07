@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PhotographyBusiness.EFDbContext;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services;
+using PhotographyBusiness.Services.BookingService;
 using PhotographyBusiness.Services.MailService;
 using PhotographyBusiness.Services.UserService;
 using System.Security.Claims;
@@ -13,6 +14,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddTransient<GenericDbService<User>>();
+builder.Services.AddSingleton<GenericDbService<Booking>>();
+builder.Services.AddSingleton<IBookingService, BookingService>();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IMailService, MailService>();
 

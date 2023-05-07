@@ -9,6 +9,7 @@ namespace PhotographyBusiness.Services.MailService
         Task SendRequestMail(Booking booking);
         Task SendConfirmationMail(Booking booking);
         Task SendCancellationMail(Booking booking);
+        Task SendUserCreationEmail(string email, string name);
 
     }
 }

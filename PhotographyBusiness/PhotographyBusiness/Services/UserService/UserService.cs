@@ -41,6 +41,19 @@ namespace PhotographyBusiness.Services.UserService
             return userToBeDeleted;
         }
 
+        public async Task<User> GetUserByEmailAsync(string email)
+        {
+            foreach(var user in Users)
+            {
+                if (user.Email.Equals(email)) 
+                {
+                    return user;
+                }
+            }
+
+            return null;
+        }
+
         public List<User> GetAllUsers()
         {
             return Users; 
