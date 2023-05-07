@@ -114,11 +114,44 @@
         </nav>
     </header>
     @RenderBody()
-    <footer class="footer text-muted bg-white">
-        <div class="container">
-            &copy; 2023 - PortfolioPrototype - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    <footer>
+
+        <div id="inner-footer" class="row clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+
+                        <img src="~/media/logo.png" style=" padding-top:15px; padding-left: 220px; height: 150px" class="pop-out" />
+                    </div>
+                    <div class="col-md-4">
+
+
+                        <br />
+                    </div>
+                    <div class="col-md-4">
+                        <h5 style="padding-left: 270px">Follow us on</h5>
+                        <div style="padding-left: 280px">
+                            <i class="fa fa-brands fa-square-twitter fa-2xl"></i><a href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								line-height: 30px;"> Twitter</a><br />
+                        </div>
+                        <div style="padding-left: 280px">
+                            <i class="fa fa-brands fa-square-facebook fa-2xl"></i><a href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								line-height: 30px;"> Facebook</a><br />
+                        </div>
+                        <div style="padding-left: 280px">
+                            <i class="fa fa-brands fa-square-instagram fa-2xl"></i><a href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								line-height: 30px;"> Instagram</a><br />
+                        </div>
+                        <div style="padding-left: 280px">
+                            <i class="fa fa-brands fa-square-youtube fa-2xl"></i><a href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								line-height: 30px;"> Youtube</a><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
