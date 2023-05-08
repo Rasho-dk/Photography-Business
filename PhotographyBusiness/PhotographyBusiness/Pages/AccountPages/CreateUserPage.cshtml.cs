@@ -1,3 +1,4 @@
+using MailKit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,6 +11,7 @@ namespace PhotographyBusiness.Pages.AccountPages
     public class CreateUserPageModel : PageModel
     {
         private IUserService _userService;
+        private Services.MailService.IMailService _mailService;
         private PasswordHasher<string> passwordHasher;
 
         [BindProperty, DataType(DataType.EmailAddress), DisplayName("email")]
@@ -26,9 +28,10 @@ namespace PhotographyBusiness.Pages.AccountPages
         [BindProperty, DisplayName("last name")]
         public string LastName { get; set; }
 
-        public CreateUserPageModel(IUserService userService)
+        public CreateUserPageModel(IUserService userService, Services.MailService.IMailService mailService)
         {
             _userService = userService;
+            _mailService = mailService;
             passwordHasher = new PasswordHasher<string>();
         }
 
@@ -42,6 +45,7 @@ namespace PhotographyBusiness.Pages.AccountPages
 
                     // Shero: Jeg har brugt det kun for at lave unit test på den..Den er uden HashPassword
                     _userService.CreateUserAsyn(new Models.User(Email, Password, $"{FirstName} {LastName}", PhoneNumber));
+                    _mailService.SendUserCreationEmail(Email, $"{FirstName} {LastName}");
 
                     return RedirectToPage("../Index");
                 }
