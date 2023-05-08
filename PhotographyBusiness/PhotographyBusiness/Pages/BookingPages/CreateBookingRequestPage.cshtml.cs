@@ -40,8 +40,9 @@ namespace PhotographyBusiness.Pages.BookingPages
             {
                 return RedirectToPage("/AccountPages/LogInPage");
             }
-
-            User = _userService.GetUserByEmailAsync(HttpContext.User.Identity.Name).Result;
+            
+            User = _userService.GetUserByNameAsync(HttpContext.User.Identity.Name.).Result;
+            //User = _userService.GetUserByEmailAsync(HttpContext.User.Identity.Name).Result;
             return Page();
         }
 
