@@ -1,6 +1,9 @@
 ﻿using PhotographyBusiness.Models;
-using System.Net;
-using System.Net.Mail;
+//using System.Net;
+//using System.Net.Mail;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MailKit;
 
 namespace PhotographyBusiness.Services.MailService
 {
@@ -12,61 +15,94 @@ namespace PhotographyBusiness.Services.MailService
 
         public MailService() {  }
 
-        public async Task SendMail(MailMessage message)
+        /// <summary>
+        /// Internal helper-method for connecting to SMTP and sending emails asynchronously
+        /// </summary>
+        /// <param name="message">A MimeMessage with sender, receiver, subject, and body</param>
+        /// <returns>Void</returns>
+        /// <exception cref="Exception"></exception>
+        public async Task SendMail(MimeMessage message)
         {
-            var client = new SmtpClient("smtp.office365.com", 587)
+            using (SmtpClient client = new SmtpClient()) 
             {
-                UseDefaultCredentials = false,
-                EnableSsl = true,
-                Credentials = new NetworkCredential(_sender, _senderPW)
-            };
-
-            await client.SendMailAsync(message);
+                try
+                {
+                    await client.ConnectAsync("smtp-mail.outlook.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
+                    await client.AuthenticateAsync(_sender, _senderPW);
+                    await client.SendAsync(message);
+                }
+                catch (Exception ex)
+                {
+                    // Exception handling
+                }
+                finally
+                {
+                    await client.DisconnectAsync(true);
+                    client.Dispose();
+                }
+            }
         }
 
         public async Task SendCancellationMail(Booking booking)
         {
-            MailMessage message = new MailMessage(new MailAddress(_sender), new MailAddress(booking.User.Email));
+            MimeMessage message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Jack Saunders Photography", _sender));
+            message.To.Add(MailboxAddress.Parse(booking.User.Email));
             message.Subject = $"Your booking has ben cancelled {booking.BookingId}";
-            message.Body = $"Dear {booking.User.Name}," +
-                $"\nWe are sorry to inform you that your booking ID: {booking.BookingId} from {booking.DateFrom} to {booking.DateTo} has ben cancelled." +
-                $"\nKind Regards, Jack Saunders Photography";
+            message.Body = new TextPart("plain")
+            { Text = $@"Dear {booking.User.Name},
+We are sorry to inform you that your booking ID: {booking.BookingId} from {booking.DateFrom} to {booking.DateTo} has ben cancelled.
+Kind Regards, Jack Saunders Photography"
+            };
+                
 
             await SendMail(message);
         }
 
         public async Task SendConfirmationMail(Booking booking)
         {
-            MailMessage message = new MailMessage(new MailAddress(_sender), new MailAddress(booking.User.Email));
+            MimeMessage message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Jack Saunders Photography", _sender));
+            message.To.Add(MailboxAddress.Parse(booking.User.Email));
             message.Subject = $"Booking confirmation {booking.BookingId}";
-            message.Body = $"Dear {booking.User.Name}," +
-                $"\nWe are happy to inform you that your booking {booking.BookingId} from {booking.DateFrom} to {booking.DateTo} has been confirmed" +
-                $"Kind Regards, Jack Saunders Photography";
-            
+            message.Body = new TextPart("plain")
+            {
+                Text = $@"Dear {booking.User.Name},
+We are happy to inform you that your booking {booking.BookingId} from {booking.DateFrom} to {booking.DateTo} has been confirmed
+Kind Regards, Jack Saunders Photography"
+            };
             await SendMail(message);
         }
 
-        
-
         public async Task SendRequestMail(Booking booking)
         {
-            MailMessage message = new MailMessage(new MailAddress(_sender), new MailAddress(_jackEmail));
+            MimeMessage message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Jack Saunders Photography", _sender));
+            message.To.Add(MailboxAddress.Parse(_jackEmail));
             message.Subject = $"You have a new booking enquiry!";
-            message.Body = $"You have a new booking enquiry - ID {booking.BookingId}" +
-                $"\nYou can view it on your admin dashboard now under Booking Enquiries." +
-                $"\nName: {booking.User.Name}" +
-                $"\nEmail: {booking.User.Email}" +
-                $"\nPhone: {booking.Address}";
-
+            message.Body = new TextPart("plain")
+            {
+                Text = $@"You have a new booking enquiry - ID {booking.BookingId}
+You can view it on your admin dashboard now under Booking Enquiries.
+Name: {booking.User.Name}
+Email: {booking.User.Email}
+Phone: {booking.Address}"
+            };
+                
             await SendMail(message);
         }
 
         public async Task SendUserCreationEmail(string email, string name)
         {
-            MailMessage message = new MailMessage(new MailAddress(_sender), new MailAddress(email));
+            MimeMessage message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Jack Saunders Photography", _sender));
+            message.To.Add(MailboxAddress.Parse(email));
             message.Subject = $"Jack Saunders Photography - Account verification";
-            message.Body = $"An account has been created on Jack Saunders Photography using this Email" +
-                $"\nUsername: {name}";
+            message.Body = new TextPart("plain")
+            {
+                Text = $@"An account has been created on Jack Saunders Photography using this Email 
+Username: {name}"
+            };     
 
             await SendMail(message);
         }
