@@ -49,9 +49,6 @@ namespace PhotographyBusiness.Pages.AccountPages
         //}
         #endregion
 
-
-
-
         /// <summary>
         /// This method must first retrieve the list of the Users via _userService and checl whether the user with (Eamil,Password) exists in the lsit
         /// If the user email exist and the password is match,a new list of the Claim objects is created which is initialized with a new Claim containing UserName.
@@ -71,8 +68,8 @@ namespace PhotographyBusiness.Pages.AccountPages
                     var passwordHasher = new PasswordHasher<string>();
                     try
                     {
-                       // if (passwordHasher.VerifyHashedPassword(null, user.Password, Password) == PasswordVerificationResult.Success)
-                        if (user.Password.Equals(Password))
+                        if (passwordHasher.VerifyHashedPassword(null, user.Password, Password) == PasswordVerificationResult.Success)
+                       // if (user.Password.Equals(Password))
                         {
                             //LoggedInUser = user;
                             var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) }; // Ændret email til user.Name
@@ -81,7 +78,7 @@ namespace PhotographyBusiness.Pages.AccountPages
 
                             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                            //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                             return RedirectToPage("/Index");
                         }
                     }
