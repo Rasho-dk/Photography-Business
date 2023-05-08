@@ -1,6 +1,6 @@
 ﻿body {
     background-image: url(../media/img2.jpg);
-    background-size: contain;
+    background-size: auto 100vh;
 }
 
 .bg-img {
