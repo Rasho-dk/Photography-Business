@@ -2,11 +2,11 @@
 {
     public interface IGenericDbService<T>
     {
-        Task<IEnumerable<T>> GetObjectsAsync();
-        Task AddObjectAsync(T obj);
-        Task DeleteObjectAsync(T obj);
-        Task UpdateObjectAsync(T obj);
-        Task<T> GetObjectByIdAsync(int id);
-        Task SaveObjects(List<T> objects);
+        public Task<IEnumerable<T>> GetObjectsAsync();
+        public Task AddObjectAsync(T obj);
+        public Task DeleteObjectAsync(T obj);
+        public Task UpdateObjectAsync(T obj);
+        public Task<T> GetObjectByIdAsync(int id);
+        public Task SaveObjects(List<T> objects);
     }
 }
