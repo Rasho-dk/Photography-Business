@@ -1,6 +1,4 @@
 ﻿using PhotographyBusiness.Models;
-//using System.Net;
-//using System.Net.Mail;
 using MailKit.Net.Smtp;
 using MimeKit;
 using MailKit;

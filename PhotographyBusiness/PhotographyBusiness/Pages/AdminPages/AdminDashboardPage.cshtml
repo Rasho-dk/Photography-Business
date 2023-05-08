@@ -7,7 +7,138 @@
 
 <div class="container d-flex flex-column">
     <h1 class="">Admin Dashboard</h1>
-    <div class="btn-border-black" style="min-height: 53vh">
+    <div class="" style="">
+        <div class="text-center">
+            <table class="w-100 no-border">
+                <tr>
+                    <th class="w-25 no-border">
+                        <div class="d-grid">
+                            <a asp-page="#"><img src="~/media/icons/iconsrequest.png" style="width: 6vw"></img></a>
+                            <a asp-page="#" class="text-dark text-decoration-none">Requests</a>
+                            <br />
+                            <a asp-page="#" class="text-dark text-decoration-none" style="text-align: left">Most recent</a>
 
+                        </div>
+                    </th >
+                    <th class="w-25 no-border">
+                        <div class="d-grid">
+                            <a asp-page="#"><img src="~/media/icons/iconbooking.png" style="width: 6vw"></img></a>
+                            <a asp-page="#" class="text-dark text-decoration-none">Bookings</a>
+                            <br />
+                            <a asp-page="#" class="text-dark text-decoration-none" style="text-align: left">Upcoming</a>
+                        </div>
+                    </th>
+                    <th class="w-25 no-border">
+                        <div class="d-grid">
+                            <a asp-page="#"><img src="~/media/icons/iconusers.png" style="width: 6vw"></img></a>
+                            <a asp-page="#" class="text-dark text-decoration-none">Users</a>
+                            <br />
+                            <a asp-page="#" class="text-dark text-decoration-none" style="text-align: left">Newly joined</a>
+                        </div>
+                    </th>
+                    <th class="w-25 no-border">
+                        <div class="d-grid">
+                            <a asp-page="#"><img src="~/media/icons/iconanalytics.png" style="width: 6vw"></img></a>
+                            <a asp-page="#" class="text-dark text-decoration-none">Analytics</a>
+                            <br />
+                            <a asp-page="#" class="text-dark text-decoration-none" style="text-align: left">Quick overview</a>
+                        </div>
+                    </th>
+                </tr>
+            </table>
+            <div class="d-flex justify-content-around">
+                <table class="w-25 left-border">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                    </tr>
+                    @foreach (var request in Model.Requests) {
+                        <tr>
+                            <td>@request.BookingId</td>
+                            <td>@request.User.Name</td>
+                            <td>@request.Category</td>
+                        </tr>
+                    }
+                    
+                </table>
+                <table class="w-25 right-border left-border">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                    </tr>
+                    @foreach (var booking in Model.Bookings)
+                    {
+                        <tr>
+                            <td>@booking.BookingId</td>
+                            <td>@booking.User.Name</td>
+                            <td>@booking.Category</td>
+                        </tr>
+                    }
+                </table>
+                <table class="w-25 right-border">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                    @foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            <td>@user.UserId</td>
+                            <td>@user.Name</td>
+                            <td>@user.Email</td>
+                        </tr>
+                    }
+                </table>
+                <div class="w-25 right-border top-border">
+                    <div class="">
+                        <h5 class="m-2" style="text-align: left">Total users: @Model.TotalUsers <img src="~/media/icons/iconusers.png" style="height: 25px"></img></h5>
+                        <h5 class="m-2" style="text-align: left">Total accepted bookings: @Model.TotalBookings <img src="~/media/icons/iconbooking.png" style="height: 25px"></img></h5>
+                        <h5 class="m-2" style="text-align: left">Bookings this month: @Model.BookingsThisMonth <img src="~/media/icons/iconbooking.png" style="height: 25px"></img></h5>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </div>
 </div>
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    .no-border {
+        border: none;
+    }
+
+    th {
+        border: none;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    table {
+        border-top: solid 2px black;
+        border-bottom: solid 2px black;
+    }
+
+    .right-border {
+        border-right: solid 2px black;
+    }
+
+    .top-border {
+        border-top: solid 2px black;
+        border-bottom: solid 2px black;
+    }
+
+    .left-border {
+        border-left: solid 2px black;
+    }
+
+    td {
+        border: solid 1px black;
+    }
+</style>

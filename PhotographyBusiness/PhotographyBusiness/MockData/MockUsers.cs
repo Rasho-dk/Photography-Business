@@ -15,7 +15,7 @@ namespace PhotographyBusiness.MockData
         };
 
         public static List<User> GetMockUsers()
-        { 
+        {
             return users; 
         }
     }
