@@ -3,7 +3,6 @@ using PhotographyBusiness.Pages.AccountPages;
 using PhotographyBusiness.Services.UserService;
 using Moq;
 using PhotographyBusiness.Models;
-//using Xunit;
 
 
 namespace PhotographerTest
@@ -11,8 +10,6 @@ namespace PhotographerTest
     [TestClass]
     public class CreateUserPageModelTest
     {
-        private IUserService _userService;
-        private CreateUserPageModel _createUserPageModel;
         [TestMethod]
         public void CreateUserPageModel_OnPost_UnSuccessfullyCreatesNewUser()
         {
@@ -70,10 +67,12 @@ namespace PhotographerTest
                 LastName ="Hello",
                 PhoneNumber = "123456789012"
             };
+
             User CallBackUser = null;
             userservicemock
                 .Setup(x => x.CreateUserAsyn(It.IsAny<User>()))
                 .Callback<User>(u => CallBackUser = u);
+
             //Act 
             var result = model.OnPost();
 
