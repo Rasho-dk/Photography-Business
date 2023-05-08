@@ -63,6 +63,7 @@ namespace PhotographyBusiness.Services.UserService
                     return user;
                 }
             }
+            return null;
         }
 
         public List<User> GetAllUsers()
