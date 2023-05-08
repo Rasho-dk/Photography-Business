@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.IdentityModel.Tokens;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.UserService;
 using System.ComponentModel.DataAnnotations;
@@ -62,36 +63,46 @@ namespace PhotographyBusiness.Pages.AccountPages
             List<User> users = userService.GetAllUsers();
             foreach (var user in users)
             {
-                 if (Email.ToLower() == user.Email.ToLower()) // Hvis man ville bruge email til Claim
-                //if (user.Name.Equals(user.Name))
+                if (Email.IsNullOrEmpty())
                 {
-                    var passwordHasher = new PasswordHasher<string>();
-                    try
+                    DisplayMessage = "Invalid email or password.Please try again";
+
+                }
+                else
+                {
+                    if (Email.ToLower() == user.Email.ToLower()) // Hvis man ville bruge email til Claim
                     {
-                        if (passwordHasher.VerifyHashedPassword(null, user.Password, Password) == PasswordVerificationResult.Success)
-                       // if (user.Password.Equals(Password))
+                        var passwordHasher = new PasswordHasher<string>();
+
+                        try
                         {
-                            //LoggedInUser = user;
-                            var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) }; // Ændret email til user.Name
-                            if (user.Name.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));  // Arun: Betyder så også at Jacks admin User kommer til at have navnet "Admin"
-                                                                                                             // if (user.Email == "EXAMPLE@jacksphotography.co.uk") claims.Add(new Claim(ClaimTypes.Role, "admin")) <-- Hvis vi hellere ville bruge email.
+                            if (passwordHasher.VerifyHashedPassword(null, user.Password, Password) == PasswordVerificationResult.Success)
+                            //if (user.Password.Equals(Password))
+                            {
+                                //LoggedInUser = user;
+                                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) }; // Ændret email til user.Name
+                                if (user.Name.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));  // Arun: Betyder så også at Jacks admin User kommer til at have navnet "Admin"
+                                                                                                                 // if (user.Email == "EXAMPLE@jacksphotography.co.uk") claims.Add(new Claim(ClaimTypes.Role, "admin")) <-- Hvis vi hellere ville bruge email.
 
-                            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
-                            return RedirectToPage("/Index");
+                                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                                return RedirectToPage("/Index");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                            DisplayMessage = "Invalid email or password.Please try again";
                         }
                     }
-                    catch (Exception ex)
-                    {
 
-                        DisplayMessage = "Invalid email or password.Please try again";
-                    }
                 }
             }
             DisplayMessage = "Invalid email or password.Please try again";
 
             return Page();
         }
+            }
     }
-}
+
