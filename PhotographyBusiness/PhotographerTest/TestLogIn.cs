@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Pages.AccountPages;
@@ -50,14 +51,16 @@ namespace PhotographerTest
         //    Assert.IsNotNull(result);
         //    Assert.AreEqual(false, result);
         //}
+        private static PasswordHasher<string> _passwordHasher = new PasswordHasher<string>();
 
         [TestMethod]
         public async Task Login_OnPostTest_HappyPath_()
         {
+
             //Arrange
             var userservicemock = new Mock<IUserService>();
             var model = new LogInPageModel(userservicemock.Object)
-            {
+            {             
                 Email = "Test@outlook.com",
                 Password = "123456789",
 
@@ -65,7 +68,11 @@ namespace PhotographerTest
 
             var users = new List<User>()
             {
-            new User() { Name = "Test", Password = "123456789", Email = "Test@outlook.com" }
+            new User()
+            { Name = "Test",
+             Password = "123456789",
+              Email = "Test@outlook.com"
+            }
             };
 
             //Act
@@ -99,7 +106,7 @@ namespace PhotographerTest
             var users = new List<User>()
             {
                 new User() {Name = "Test1",Password="1234567890",Email="Test1@Test1.com"},
-                
+
             };
 
             try
