@@ -22,7 +22,6 @@ namespace PhotographyBusiness.Pages.BookingPages
         public string FullAddress { get; set; }
         public Booking Booking { get; set; }
         public User User { get; set; }
-        public BookingRequest BookingRequest { get; set; }
 
         public CreateBookingRequestPageModel(IBookingService bookingService, IUserService userService)
         {
