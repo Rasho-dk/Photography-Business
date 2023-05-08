@@ -17,4 +17,8 @@
     <PackageReference Include="Microsoft.TestPlatform.Portable" Version="17.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\media\icons\" />
+  </ItemGroup>
+
 </Project>

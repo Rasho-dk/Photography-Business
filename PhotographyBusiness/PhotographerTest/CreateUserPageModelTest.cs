@@ -3,7 +3,7 @@ using PhotographyBusiness.Pages.AccountPages;
 using PhotographyBusiness.Services.UserService;
 using Moq;
 using PhotographyBusiness.Models;
-
+using PhotographyBusiness.Services.MailService;
 
 namespace PhotographerTest
 {
@@ -16,13 +16,14 @@ namespace PhotographerTest
             //Her bliver oprettet en mock obj af "IUserService" interface fra "Mock" Klass som hedder Moq library.
 
             var userservicemock = new Mock<IUserService>();
+            var mailservicemock = new Mock<IMailService>();
 
             //Arrange
 
             //Her bliver der oprettes en ny instance af CreateUserPageModel ved at passere "userservicemock" som en 
             //konstrutur som bruger Object property af userservicemock.
             //Den giver lov til at oprette en instance af "CreateUserPageModel" med en fake implementation. 
-            var model = new CreateUserPageModel(userservicemock.Object)
+            var model = new CreateUserPageModel(userservicemock.Object, mailservicemock.Object)
             {
                 Email = "Test@hotmail.com",
 
@@ -52,13 +53,14 @@ namespace PhotographerTest
         {
             //Her bliver oprettet en mock obj af"IUserService" interface fra "Mock" Klass som hedder Moq library.
             var userservicemock = new Mock<IUserService>();
+            var mailservicemock = new Mock<IMailService>();
 
             //Arrange
 
             //Her bliver der oprettes en ny instance af CreateUserPageModel ved at passere "userservicemock" som en 
             //konstrutur som bruger Object property af userservicemock.
             //Den giver lov til at oprette en instance af "CreateUserPageModel" med en fake implementation. 
-            var model = new CreateUserPageModel(userservicemock.Object)
+            var model = new CreateUserPageModel(userservicemock.Object, mailservicemock.Object)
             {
                 Email = "Test@hotmail.com",
                 Password = "123456789",

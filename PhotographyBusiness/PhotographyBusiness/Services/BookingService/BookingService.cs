@@ -58,5 +58,20 @@ namespace PhotographyBusiness.Services.BookingService
         {
             return _genericDbService.UpdateObjectAsync(booking);
         }
+
+        public async Task<List<Booking>> GetAllBookingsThisMonth()
+        {
+            return GetAllBookings().Where(b => b.Date >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
+        }
+
+        public async Task<List<Booking>> GetUpcomingBookings()
+        {
+            return GetAllBookings().Where(b => b.IsAccepted == true && b.Date > DateTime.Now).ToList();
+        }
+
+        public async Task<List<Booking>> GetMostRecentRequests()
+        {
+            return GetAllBookings().Where(b => b.IsAccepted == false).OrderBy(b => b.DateCreated).Take(5).ToList();
+        }
     }
 }

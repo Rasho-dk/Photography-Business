@@ -3,7 +3,7 @@
 @{
 }
 
-
+<script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
 
 <div class="container d-flex flex-column">
     <h1 class="">Admin Dashboard</h1>
@@ -13,35 +13,35 @@
                 <tr>
                     <th class="w-25 no-border">
                         <div class="d-grid">
-                            <a asp-page="#"><img src="~/media/icons/iconsrequest.png" style="width: 6vw"></img></a>
+                            <a asp-page="#"><i class="fa fa-envelope-o fa-5x text-dark" aria-hidden="true"></i></a>
                             <a asp-page="#" class="text-dark text-decoration-none">Requests</a>
                             <br />
-                            <a asp-page="#" class="text-dark text-decoration-none" style="text-align: left">Most recent</a>
+                            <a class="text-dark text-decoration-none" style="text-align: left">Most recent</a>
 
                         </div>
                     </th >
                     <th class="w-25 no-border">
                         <div class="d-grid">
-                            <a asp-page="#"><img src="~/media/icons/iconbooking.png" style="width: 6vw"></img></a>
+                            <a asp-page="#"><i class="fa fa-calendar-check-o fa-5x text-dark" aria-hidden="true"></i></a>
                             <a asp-page="#" class="text-dark text-decoration-none">Bookings</a>
                             <br />
-                            <a asp-page="#" class="text-dark text-decoration-none" style="text-align: left">Upcoming</a>
+                            <a class="text-dark text-decoration-none" style="text-align: left">Upcoming</a>
                         </div>
                     </th>
                     <th class="w-25 no-border">
                         <div class="d-grid">
-                            <a asp-page="#"><img src="~/media/icons/iconusers.png" style="width: 6vw"></img></a>
+                            <a asp-page="#"><i class="fa fa-users fa-5x text-dark" aria-hidden="true"></i></a>
                             <a asp-page="#" class="text-dark text-decoration-none">Users</a>
                             <br />
-                            <a asp-page="#" class="text-dark text-decoration-none" style="text-align: left">Newly joined</a>
+                            <a class="text-dark text-decoration-none" style="text-align: left">Recently joined</a>
                         </div>
                     </th>
                     <th class="w-25 no-border">
                         <div class="d-grid">
-                            <a asp-page="#"><img src="~/media/icons/iconanalytics.png" style="width: 6vw"></img></a>
+                            <a asp-page="#"><i class="fa fa-bar-chart fa-5x text-dark" aria-hidden="true"></i></img></a>
                             <a asp-page="#" class="text-dark text-decoration-none">Analytics</a>
                             <br />
-                            <a asp-page="#" class="text-dark text-decoration-none" style="text-align: left">Quick overview</a>
+                            <a class="text-dark text-decoration-none" style="text-align: left">Quick overview</a>
                         </div>
                     </th>
                 </tr>
@@ -66,14 +66,14 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Category</th>
+                        <th>Date</th>
                     </tr>
                     @foreach (var booking in Model.Bookings)
                     {
                         <tr>
                             <td>@booking.BookingId</td>
                             <td>@booking.User.Name</td>
-                            <td>@booking.Category</td>
+                            <td>@booking.Date</td>
                         </tr>
                     }
                 </table>
@@ -94,9 +94,14 @@
                 </table>
                 <div class="w-25 right-border top-border">
                     <div class="">
-                        <h5 class="m-2" style="text-align: left">Total users: @Model.TotalUsers <img src="~/media/icons/iconusers.png" style="height: 25px"></img></h5>
-                        <h5 class="m-2" style="text-align: left">Total accepted bookings: @Model.TotalBookings <img src="~/media/icons/iconbooking.png" style="height: 25px"></img></h5>
-                        <h5 class="m-2" style="text-align: left">Bookings this month: @Model.BookingsThisMonth <img src="~/media/icons/iconbooking.png" style="height: 25px"></img></h5>
+                        <div>
+
+                        </div>
+                        <h5 class="m-2" style="text-align: left">Total users: @Model.TotalUsers <i class="fa fa-users" aria-hidden="true" style="height: 25px"></i></h5>
+                        <h5 class="m-2" style="text-align: left">Bookings completed: ToDo <i class="fa fa-check-circle-o" aria-hidden="true" style="height: 25px"></i></h5>
+                        <h5 class="m-2" style="text-align: left">Total accepted bookings: @Model.TotalBookings <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i></h5>
+                        <h5 class="m-2" style="text-align: left">Accepted bookings last 30 days: @Model.BookingsThisMonth <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i></h5>
+                        
                     </div>
                 </div>
             </div>
@@ -140,5 +145,9 @@
 
     td {
         border: solid 1px black;
+    }
+
+    h5 {
+        font-size: 1.1rem;
     }
 </style>

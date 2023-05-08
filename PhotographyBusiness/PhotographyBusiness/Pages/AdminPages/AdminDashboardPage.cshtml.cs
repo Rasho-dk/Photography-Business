@@ -26,12 +26,12 @@ namespace PhotographyBusiness.Pages.AdminPages
 
         public void OnGet() // NOTE: De fleste metoder skal overføres til de passende services!
         {
-            Requests = _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).Take(5).ToList(); // Get most recent bookings requests
-            Bookings = _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).Take(5).ToList(); // Get upcoming bookings
+            Requests = _bookingService.GetMostRecentRequests().Result; // Get 5 most recent bookings requests
+            Bookings = _bookingService.GetUpcomingBookings().Result.Take(5).OrderBy(b => b.Date).ToList(); // Get top 5 upcoming bookings
             Users = _userService.GetAllUsers().Take(5).ToList(); // Get 5 newest order by newest
             TotalUsers = _userService.GetAllUsers().Count();
-            TotalBookings = _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).ToList().Count();
-            BookingsThisMonth = _bookingService.GetAllBookings().Where(b => b.IsAccepted == false).ToList().Count(); // Placeholder for now
+            TotalBookings = _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).ToList().Count(); // Total bookings
+            BookingsThisMonth = _bookingService.GetAllBookingsThisMonth().Result.Count(); // Bookings last 30 days
         }
     }
 }

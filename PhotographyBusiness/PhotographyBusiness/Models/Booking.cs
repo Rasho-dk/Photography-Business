@@ -15,9 +15,9 @@ namespace PhotographyBusiness.Models
         public string CustomerNote { get; set; }
         public string AdminNote { get; set; }
         [Required, DataType(DataType.DateTime)]
-        public DateTime DateFrom { get; set; }
+        public DateTime Date { get; set; }
         [Required, DataType(DataType.DateTime)]
-        public DateTime DateTo { get; set; }
+        public DateTime DateCreated { get; set; }
         public bool IsAccepted { get; set; }
         [Required]
         public string Address { get; set; }
@@ -37,14 +37,14 @@ namespace PhotographyBusiness.Models
         /// <param name="dateFrom"></param>
         /// <param name="dateTo">The date to, if the event stretches over many days</param>
         /// <param name="isAccepted">Returns false if the admin has not accepted the booking, and true if he has</param>
-        public Booking(string category, double price, string customerNote, string adminNote, DateTime dateFrom, DateTime dateTo, bool isAccepted, string address, User user, int userId)
+        public Booking(string category, double price, string customerNote, string adminNote, DateTime date, DateTime dateCreated, bool isAccepted, string address, User user, int userId)
         {
             Category = category;
             Price = price;
             CustomerNote = customerNote;
             AdminNote = adminNote;
-            DateFrom = dateFrom;
-            DateTo = dateTo;
+            Date = date;
+            DateCreated = dateCreated;
             IsAccepted = isAccepted;
             Address = address;
             User = user;
@@ -59,13 +59,13 @@ namespace PhotographyBusiness.Models
         /// <param name="customerNote"></param>
         /// <param name="dateFrom"></param>
         /// <param name="dateTo"></param>
-        public Booking(string category, string customerNote, DateTime dateFrom, DateTime dateTo, string address, User user)
+        public Booking(string category, string customerNote, DateTime date, string address, User user)
         {
             User = user;
             Category = category;
             CustomerNote = customerNote;
-            DateFrom = dateFrom;
-            DateTo = dateTo;
+            Date = date;
+            Date = DateTime.Now;
             Address = address;
             IsAccepted = false;
             UserId = user.UserId;
