@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
 
 </head>
-<body>
+<body class="">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white box-shadow border-bottom">
             <div class="container justify-content-center">
@@ -112,45 +112,6 @@
         </nav>
     </header>
     @RenderBody()
-    <footer class="container">
-        <div class="d-flex justify-content-between">
-            <div class="pt-2">
-                <img src="~/media/logo.png" style="height: 20vh" class="pop-out" />
-                <h5 style="font-size: 12px" class="pt-1">&copy2023 Copyright Jack Saunders Photography</h5>
-            </div>
-            <div class="pt-2">
-                <h5 style="">Follow us on</h5>
-                <div style="">
-                    <i class="fa fa-brands fa-square-twitter fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
-								"> Twitter</a><br />
-                </div>
-                <div style="">
-                    <i class="fa fa-brands fa-square-facebook fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
-								"> Facebook</a><br />
-                </div>
-                <div style="">
-                    <i class="fa fa-brands fa-square-instagram fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
-								"> Instagram</a><br />
-                </div>
-                <div style="">
-                    <i class="fa fa-brands fa-square-youtube fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
-								"> Youtube</a><br />
-                </div>
-                <div style="">
-                    <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 12px;
-								"> Privacy Policy</a>
-                    <a class="text-dark" style="font-size:12px">|</a>
-
-                    <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 12px;">
-                        Terms & Conditions
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <footer>
-        
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -158,6 +119,42 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+<footer class="bg-white pb-1">
+    <div class="d-flex justify-content-between container">
+        <div class="pt-2">
+            <img src="~/media/logo.png" style="height: 20vh" class="pop-out" />
+            <h5 style="font-size: 12px" class="pt-1">&copy2023 Copyright Jack Saunders Photography</h5>
+        </div>
+        <div class="pt-2">
+            <h5 style="">Follow us on</h5>
+            <div style="">
+                <i class="fa fa-brands fa-square-twitter fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								"> Twitter</a><br />
+            </div>
+            <div style="">
+                <i class="fa fa-brands fa-square-facebook fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								"> Facebook</a><br />
+            </div>
+            <div style="">
+                <i class="fa fa-brands fa-square-instagram fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								"> Instagram</a><br />
+            </div>
+            <div style="">
+                <i class="fa fa-brands fa-square-youtube fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								"> Youtube</a><br />
+            </div>
+            <div style="">
+                <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 12px;
+								"> Privacy Policy</a>
+                <a class="text-dark" style="font-size:12px">|</a>
+
+                <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 12px;">
+                    Terms & Conditions
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
 </html>
 
 

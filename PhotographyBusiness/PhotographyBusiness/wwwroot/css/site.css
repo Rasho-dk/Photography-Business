@@ -13,10 +13,6 @@ html {
   min-height: 100%;
 }
 
-body {
-  margin-bottom: 60px;
-}
-
 .btn-border-white {
     box-shadow: inset 0px 0px 0px 1px white;
     border: 1px solid white;
