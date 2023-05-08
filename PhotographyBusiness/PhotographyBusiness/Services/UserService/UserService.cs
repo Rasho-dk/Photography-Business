@@ -54,6 +54,17 @@ namespace PhotographyBusiness.Services.UserService
             return null;
         }
 
+        public async Task<User> GetUserByNameAsync(string name)
+        {
+            foreach(var user in Users)
+            {
+                if (user.Name.Equals(name))
+                {
+                    return user;
+                }
+            }
+        }
+
         public List<User> GetAllUsers()
         {
             return Users; 
