@@ -24,7 +24,7 @@ namespace PhotographyBusiness.Pages.AdminPages
             _bookingService = bookingService;
         }
 
-        public void OnGet()
+        public void OnGet() // NOTE: De fleste metoder skal overføres til de passende services!
         {
             Requests = _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).Take(5).ToList(); // Get most recent bookings requests
             Bookings = _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).Take(5).ToList(); // Get upcoming bookings
