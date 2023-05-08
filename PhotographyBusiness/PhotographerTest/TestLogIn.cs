@@ -99,8 +99,8 @@ namespace PhotographerTest
             var userservicemock = new Mock<IUserService>();
             var model = new LogInPageModel(userservicemock.Object)
             {
-                Email = "Test1@Test1.com",
-                Password = "123456789"
+                Email = null,               
+                Password = "1234567890"
             };
 
             var users = new List<User>()

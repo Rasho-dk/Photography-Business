@@ -17,13 +17,8 @@ namespace PhotographyBusiness.Pages.AccountPages
         //Kun en bruger i brug
         //public static User LoggedInUser { get; set; } = null;
         [BindProperty]
-        [Required(ErrorMessage = "Please enter your email address.")]
-        [StringLength(100, ErrorMessage = "The email address must be no more than {1} characters long.")]
-        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Please enter a valid email address. exampel@exampel.com")]
+        public User User { get; set; }    
         public string Email { get; set; }
-        [BindProperty, DataType(DataType.Password)]
-        [Required(ErrorMessage = "Please enter your password.")]
-        [StringLength(20, MinimumLength = 8, ErrorMessage = "The password must be between 8 and 20 characters long.")]
         public string? Password { get; set; }
         public string DisplayMessage { get; set; }
         public LogInPageModel(IUserService userService)
@@ -63,20 +58,20 @@ namespace PhotographyBusiness.Pages.AccountPages
             List<User> users = userService.GetAllUsers();
             foreach (var user in users)
             {
-                if (Email.IsNullOrEmpty())
+                if (User.Email.IsNullOrEmpty())
                 {
                     DisplayMessage = "Invalid email or password.Please try again";
 
                 }
                 else
                 {
-                    if (Email.ToLower() == user.Email.ToLower()) // Hvis man ville bruge email til Claim
+                    if (User.Email.ToLower() == user.Email.ToLower()) // Hvis man ville bruge email til Claim
                     {
                         var passwordHasher = new PasswordHasher<string>();
 
                         try
                         {
-                            if (passwordHasher.VerifyHashedPassword(null, user.Password, Password) == PasswordVerificationResult.Success)
+                            if (passwordHasher.VerifyHashedPassword(null, user.Password, User.Password) == PasswordVerificationResult.Success)
                             //if (user.Password.Equals(Password))
                             {
                                 //LoggedInUser = user;

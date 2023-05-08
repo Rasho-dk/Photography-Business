@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PhotographyBusiness.Models
@@ -10,12 +11,14 @@ namespace PhotographyBusiness.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
 
-        [Required]
-        [EmailAddress(ErrorMessage = "Invalid email address.")]
+        [Required(ErrorMessage = "Please enter your email address.")]
+        [StringLength(100, ErrorMessage = "The email address must be no more than {1} characters long.")]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Please enter a valid email address. exampel@exampel.com")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [BindProperty, DataType(DataType.Password)]
+        [Required(ErrorMessage = "Please enter your password.")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "The password must be between 8 and 20 characters long.")]
         public string Password { get; set; }
 
         [Required]
