@@ -28,6 +28,8 @@ namespace PhotographyBusiness.Models
         [Required]
         [StringLength(12)]
         public string PhoneNumber { get; set; }
+        
+        public DateTime DateCreated { get; set; }
 
         /// <summary>
         /// The full constructor
@@ -43,6 +45,7 @@ namespace PhotographyBusiness.Models
             Password = password;
             Name = name;
             PhoneNumber = phoneNumber;
+            DateCreated = DateTime.Now;
         }
         /// <summary>
         /// Defeault constructor for DB
