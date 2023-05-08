@@ -73,5 +73,13 @@ namespace PhotographyBusiness.Services.BookingService
         {
             return GetAllBookings().Where(b => b.IsAccepted == false).OrderBy(b => b.DateCreated).Take(5).ToList();
         }
+
+        public async Task<List<Booking>> FilterBookingsByDate(DateTime date)
+        {
+             IEnumerable<Booking> filteredBookings = from booking in Bookings 
+                                                     where booking.Date >= date 
+                                                     select booking;
+            return filteredBookings.ToList();
+        }
     }
 }
