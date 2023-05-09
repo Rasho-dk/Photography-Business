@@ -69,8 +69,8 @@ namespace PhotographyBusiness.Pages.AccountPages
 
                         try
                         {
-                            //if (passwordHasher.VerifyHashedPassword(null, user.Password, User.Password) == PasswordVerificationResult.Success)
-                            if (user.Password.Equals(User.Password))
+                            if (passwordHasher.VerifyHashedPassword(null, user.Password, User.Password) == PasswordVerificationResult.Success)
+                            //if (user.Password.Equals(User.Password))
                             {
                                 //LoggedInUser = user;
                                 var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) }; 
@@ -78,7 +78,7 @@ namespace PhotographyBusiness.Pages.AccountPages
 
                                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-                                //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
+                                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
                                 return RedirectToPage("/Index");
                             }
                         }

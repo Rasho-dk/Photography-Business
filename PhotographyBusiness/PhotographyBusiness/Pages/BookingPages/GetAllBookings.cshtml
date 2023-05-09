@@ -1,0 +1,42 @@
+﻿@page
+@model PhotographyBusiness.Pages.BookingPages.GetAllBookingsModel
+@{
+}
+<br />
+<h1>Booking</h1>
+<br />
+<div class="test">
+    <table class="table table-bordered table-hover table-striped" width="60%" border:1px solid black;>
+        <thead>
+            <tr class="btn-secondary active">
+                <th>Name</th>
+                <th>Eamil</th>
+                <th>Category</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (@Model.bookings != null)
+            {
+                foreach (var booking in Model.bookings)
+                {
+                    <tr class="btn-secondary">
+                        <td>
+                            @booking.User.Name
+                        </td>
+                        <td>
+                            @booking.User.Email
+                        </td>
+
+                        <td>
+                            @booking.Category
+                        </td>   
+                        <td>
+                            @booking.Date
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
