@@ -2,6 +2,7 @@ using MailKit;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.UserService;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -41,11 +42,10 @@ namespace PhotographyBusiness.Pages.AccountPages
             {
                 if (ModelState.IsValid)
                 {
-                    //_userService.CreateUser(new Models.User(Email, passwordHasher.HashPassword(null, Password), FullName, PhoneNumber));
-
                     // Shero: Jeg har brugt det kun for at lave unit test på den..Den er uden HashPassword
-                    _userService.CreateUserAsyn(new Models.User(Email, Password, $"{FirstName} {LastName}", PhoneNumber));
-                    _mailService.SendUserCreationEmail(Email, $"{FirstName} {LastName}");
+                    //_userService.CreateUserAsyn(new Models.User(Email, Password, $"{FirstName} {LastName}", PhoneNumber));
+                    _userService.CreateUserAsyn(new Models.User(Email, passwordHasher.HashPassword(Email, Password), $"{FirstName} {LastName}", PhoneNumber));
+                    //_mailService.SendUserCreationEmail(Email, $"{FirstName} {LastName}");
 
                     return RedirectToPage("../Index");
                 }

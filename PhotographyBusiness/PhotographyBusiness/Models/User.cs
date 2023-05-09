@@ -16,9 +16,8 @@ namespace PhotographyBusiness.Models
         [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Please enter a valid email address. exampel@exampel.com")]
         public string Email { get; set; }
 
-        [BindProperty, DataType(DataType.Password)]
         [Required(ErrorMessage = "Please enter your password.")]
-        [StringLength(20, MinimumLength = 8, ErrorMessage = "The password must be between 8 and 20 characters long.")]
+        [StringLength(100, MinimumLength = 8, ErrorMessage = "The password must be between 8 and 20 characters long.")]
         public string Password { get; set; }
 
         [Required]
