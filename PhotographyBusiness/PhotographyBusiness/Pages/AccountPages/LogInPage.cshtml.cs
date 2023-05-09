@@ -17,7 +17,7 @@ namespace PhotographyBusiness.Pages.AccountPages
         //Kun en bruger i brug
         //public static User LoggedInUser { get; set; } = null;
         [BindProperty]
-        public User User { get; set; }    
+        public User Userr { get; set; }    
         public string DisplayMessage { get; set; }
         public LogInPageModel(IUserService userService)
         {
@@ -56,20 +56,20 @@ namespace PhotographyBusiness.Pages.AccountPages
             List<User> users = userService.GetAllUsers();
             foreach (var user in users)
             {
-                if (User.Email.IsNullOrEmpty())
+                if (Userr.Email.IsNullOrEmpty())
                 {
                     DisplayMessage = "Invalid email or password.Please try again";
 
                 }
                 else
                 {
-                    if (User.Email.ToLower() == user.Email.ToLower()) // Hvis man ville bruge email til Claim
+                    if (Userr.Email.ToLower() == user.Email.ToLower()) // Hvis man ville bruge email til Claim
                     {
                         var passwordHasher = new PasswordHasher<string>();
 
                         try
                         {
-                            if (passwordHasher.VerifyHashedPassword(null, user.Password, User.Password) == PasswordVerificationResult.Success)
+                            if (passwordHasher.VerifyHashedPassword(null, user.Password, Userr.Password) == PasswordVerificationResult.Success)
                             //if (user.Password.Equals(User.Password))
                             {
                                 //LoggedInUser = user;

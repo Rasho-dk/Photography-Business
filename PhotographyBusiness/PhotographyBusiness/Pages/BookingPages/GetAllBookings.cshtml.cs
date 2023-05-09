@@ -18,7 +18,7 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         public async Task<IActionResult> OnGet()
         {
-           bookings = bookingService.GetAllBookings();    
+           bookings = bookingService.GetAllBookings().Where(x => x.IsAccepted == true).ToList(); 
             return Page();  
         }
     }
