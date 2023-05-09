@@ -12,7 +12,7 @@ namespace PhotographyBusiness.MockData
             new Booking("Family", 3200, "I want me some photos motherfucker", "aight bet", new DateTime(2023,04,15), new DateTime (2023,04,18), true, "Mock Address", new User("mock@email.com", "password", "Mock User", "12345678"), 1),
             new Booking("Portrait", 200, "Give me photos", "Ok", new DateTime(2023,06,2), new DateTime (2023,04,18), true, "Mock Address", new User("mock@email.com", "password", "Mock User", "12345678"), 1),
             new Booking("Portrait", 100, "Give me photos", "Ok", new DateTime(2023,06,15), new DateTime (2023,04,18), true, "Mock Address", new User("mock@email.com", "password", "Mock User", "12345678"), 1),
-            new Booking("Portrait", 400, "Give me photos", "Ok", new DateTime(2023,06,27), new DateTime (2023,04,18), true, "Mock Addressasdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd", new User("mock@email.com", "password", "Mock User", "12345678"), 1),
+            new Booking("Portrait", 400, "Give me photos", "Ok", new DateTime(2023,06,27), new DateTime (2023,04,18), true, "Mock Address", new User("mock@email.com", "password", "Mock User", "12345678"), 1),
             // Arun: understående er Bookings requests
             new Booking("Marriage", "pls take pics", new DateTime (2023,05,01), "Mock Address", new User("mock@email.com", "password", "Mock User 1", "12345678")),
             new Booking("Marriage", "pls again",new DateTime (2023,05,03), "Mock Address", new User("mock@email.com", "password", "Mock User 2", "12345678"))
