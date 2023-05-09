@@ -15,18 +15,23 @@ namespace PhotographyBusiness.Services.BookingService
         public BookingService(GenericDbService<Booking> genericDbService)
         {
             _genericDbService = genericDbService;
-            //Bookings = GetAllBookings().Result;
+            //Bookings = GetAllBookingsAsync().Result;
             Bookings = MockBookings.GetAllMockBookings();
         }
 
 
-        public async Task<List<Booking>> GetAllBookings()
+        internal async Task<List<Booking>> GetAllBookingsAsync()
         {
             using (var context = new ObjectDbContext()) // Silas: vi skal også have useren med, når vi kalder på bookingen
             {
                 return await context.Bookings.Include(b => b.User).AsNoTracking().ToListAsync();
             }
-            //return Bookings;
+        }
+
+        public List<Booking> GetAllBookings()
+        {
+            
+            return Bookings;
         }
 
         public Booking GetBookingById(int id)
@@ -69,22 +74,22 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> GetAllBookingsThisMonth()
         {
-            return GetAllBookings().Result.Where(b => b.Date >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
+            return GetAllBookings().Where(b => b.Date >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
         }
 
         public List<Booking> GetUpcomingBookings()
         {
-            return GetAllBookings().Result.Where(b => b.IsAccepted == true && b.Date > DateTime.Now).ToList();
+            return GetAllBookings().Where(b => b.IsAccepted == true && b.Date > DateTime.Now).ToList();
         }
 
         public List<Booking> GetMostRecentRequests()
         {
-            return GetAllBookings().Result.Where(b => b.IsAccepted == false).OrderBy(b => b.DateCreated).Take(5).ToList();
+            return GetAllBookings().Where(b => b.IsAccepted == false).OrderBy(b => b.DateCreated).Take(5).ToList();
         }
 
         public List<Booking> GetAllLBookingsRequests()
         {
-            return GetAllBookings().Result.Where(b => b.IsAccepted == false).ToList();
+            return GetAllBookings().Where(b => b.IsAccepted == false).ToList();
         }
     }
 }

@@ -5,7 +5,7 @@ namespace PhotographyBusiness.Services.BookingService
     public interface IBookingService
     {
 
-        public Task<List<Booking>> GetAllBookings();
+        public List<Booking> GetAllBookings();
         public Booking GetBookingById(int id);
         public List<Booking> GetBookingsByUserId(int userId);
         public Task DeleteBooking(int id);
