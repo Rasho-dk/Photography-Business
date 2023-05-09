@@ -13,8 +13,8 @@ namespace PhotographyBusiness.Services.BookingService
         public BookingService(GenericDbService<Booking> genericDbService)
         {
             _genericDbService = genericDbService;
-            //Bookings = _genericDbService.GetObjectsAsync<Booking>().Result.ToList();
-            Bookings = MockBookings.GetAllMockBookings();
+            Bookings = _genericDbService.GetObjectsAsync().Result.ToList();
+            //Bookings = MockBookings.GetAllMockBookings();
         }
 
 
