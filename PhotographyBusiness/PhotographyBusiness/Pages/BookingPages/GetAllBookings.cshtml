@@ -1,0 +1,144 @@
+﻿@page "id:int"
+@model PhotographyBusiness.Pages.BookingPages.GetAllBookingsModel
+@{
+}
+
+<br />
+<h1 style="font-family:fantasy;">Bookings</h1>
+<br />
+<div>
+    <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black;">
+        <thead>
+            <tr class="table-light">
+                <th>Name</th>
+                <th>Eamil</th>
+                <th>Category</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (@Model.bookings != null)
+            {
+                foreach (var booking in Model.bookings)
+                {
+                    <tr class="table-light">
+                        <td>
+
+                            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">@booking.User.Name</button>
+                            @*<a asp-page="/BookingPages/BookingInfoPage" asp-route-id="@booking.User.UserId">@booking.User.Name</a>*@
+                        </td>
+                        <td>
+                            @booking.User.Email
+                        </td>
+
+                        <td>
+                            @booking.Category
+                        </td>   
+                        <td>
+                            @booking.Date
+                        </td>
+                       
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!-- kunde information -->
+                            <div>Admin</div>
+
+
+                        </div>
+                        <div class="col-md-4">
+                            <!-- admin information -->
+                            <div>Customer</div>
+                            <div>
+                                <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black;">
+                                    <thead>
+                                        <tr class="table-light">
+                                            <th>Name</th>
+                                            <th>Eamil</th>
+                                            <th>Category</th>
+                                            <th>Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (@Model.bookings != null)
+                                        {
+                                            foreach (var booking in Model.bookings)
+                                            {
+                                                <tr class="table-light">
+                                                    <td>
+                                                        @booking.User.Name
+                                                    </td>
+                                                    <td>
+                                                        @booking.User.Email
+                                                    </td>
+
+                                                    <td>
+                                                        @booking.Category
+                                                    </td>
+                                                    <td>
+                                                        @booking.Date
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button asp-page="#" type="button" class="btn btn-light" data-bs-dismiss="modal">Edit</button>
+                <button  asp-page="#" type="button" class="btn btn-danger">Delete</button>
+                <button asp-page="#" type="button" class="btn btn-border-black">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+@section scripts{
+    <script>
+        var myModal = document.getElementById('myModal')
+        var myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', function () {
+            myInput.focus()
+        })
+    </script>
+
+}
+
