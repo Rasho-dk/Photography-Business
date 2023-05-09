@@ -9,8 +9,8 @@ namespace PhotographyBusiness.Services.UserService
         public UserService(GenericDbService<User> genericDbService)
         {
             _genericDbService = genericDbService;
-            Users = genericDbService.GetObjectsAsync().Result.ToList(); 
-            //Users = MockData.MockUsers.GetMockUsers();
+            //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
+            Users = MockData.MockUsers.GetMockUsers();
 
         }
         public UserService()
