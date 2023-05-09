@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace PhotographyBusiness.Models
 {
@@ -9,11 +10,12 @@ namespace PhotographyBusiness.Models
         public int BookingId { get; set; }
         [Required]
         public string Category { get; set; }
-        [DataType(DataType.Currency)]
-        public double Price { get; set; }
+        [DataType(DataType.Currency), AllowNull]
+        public double? Price { get; set; }
         [Required]
         public string CustomerNote { get; set; }
-        public string AdminNote { get; set; }
+        [AllowNull]
+        public string? AdminNote { get; set; }
         [Required, DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
         [Required, DataType(DataType.DateTime)]
@@ -21,9 +23,7 @@ namespace PhotographyBusiness.Models
         public bool IsAccepted { get; set; }
         [Required]
         public string Address { get; set; }
-        [Required]
-        public int UserId { get; set; }
-        [Required]
+        public int? UserId { get; set; }
         public User User { get; set; }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace PhotographyBusiness.Models
             IsAccepted = isAccepted;
             Address = address;
             User = user;
-            UserId = userId;
+            //UserId = userId;
         }
 
         /// <summary>
@@ -59,16 +59,15 @@ namespace PhotographyBusiness.Models
         /// <param name="customerNote"></param>
         /// <param name="dateFrom"></param>
         /// <param name="dateTo"></param>
-        public Booking(string category, string customerNote, DateTime date, string address, User user)
+        public Booking(string category, string customerNote, string address, User user)
         {
             User = user;
             Category = category;
             CustomerNote = customerNote;
-            Date = date;
-            Date = DateTime.Now;
+            //Date = date;
+            DateCreated = DateTime.Now;
             Address = address;
             IsAccepted = false;
-            UserId = user.UserId;
         }
 
         /// <summary>
