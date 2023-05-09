@@ -1,0 +1,61 @@
+﻿@page
+@model PhotographyBusiness.Pages.BookingPages.AcceptRequestPageModel
+@{
+}
+
+
+<div class="container d-flex flex-column">
+
+    <div class="text-center">
+        <br />
+            <h1>Booking Requests</h1>
+        <br />
+        <table class="w-100 no-border split-modal">
+            <tr>
+                <th class="w-50 border-right align-top">
+                    <div class="d-grid">
+                        <div>
+                            <label asp-for="@Model.Booking.Category" class="control-label text-black">Category</label>
+                            <input asp-for="@Model.Booking.Category" class="form-control" readonly />
+                        </div>
+                        <div>
+                            <label asp-for="@Model.Booking.Date" class="control-label text-black">Date</label>
+                            <input asp-for="@Model.Booking.Date" class="form-control" readonly />
+                        </div>
+                        <div>
+                            <label asp-for="@Model.Booking.Address" class="control-label text-black">Address</label>
+                            <input asp-for="@Model.Booking.Address" class="form-control" readonly />
+                        </div>
+                        <div>
+                            <label asp-for="@Model.Booking.Price" class="control-label text-black">Price</label>
+                            <input asp-for="@Model.Booking.Price" class="form-control" readonly/>
+                        </div>
+                        <div>
+                            <label asp-for="@Model.Booking.AdminNote" class="control-label text-black">Admin Note</label>
+                            <input asp-for="@Model.Booking.AdminNote" class="form-control" reaonly/>
+                        </div>
+                    </div>
+                </th>
+                <th class="">
+
+                </th>
+                <th class="w-50 border-left align-top">
+                    <div class="d-grid">
+                        <label asp-for="@Model.Booking.User.Name" class="control-label text-black">Customer Name</label>
+                        <input asp-for="@Model.Booking.User.Name" class="form-control" readonly />
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Booking.User.Email" class="control-label text-black">Customer Email</label>
+                        <input asp-for="@Model.Booking.User.Email" class="form-control" readonly />
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Booking.CustomerNote" class="control-label text-black">Customer Note</label>
+                        <input asp-for="@Model.Booking.CustomerNote" class="form-control" readonly />
+                    </div>
+                </th>
+            </tr>
+        </table>
+
+    </div>
+
+</div>

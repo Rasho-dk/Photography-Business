@@ -70,6 +70,18 @@ namespace PhotographyBusiness.Services.BookingService
         {
             return _genericDbService.UpdateObjectAsync(booking);
         }
+        public Task AcceptBooking(int id)
+        {
+            foreach(Booking booking in Bookings)
+            {
+                if(booking.BookingId == id)
+                {
+                    booking.IsAccepted = true;
+                    return _genericDbService.SaveObjects(Bookings);
+                }
+            }
+            return null;
+        }
 
         public async Task<List<Booking>> GetAllBookingsThisMonth()
         {
