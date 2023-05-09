@@ -10,8 +10,12 @@ namespace PhotographyBusiness.Pages.BookingPages
     {
         private IBookingService bookingService;
         public List<Booking> bookings;
+        [BindProperty]
+        public DateTime DateInput { get; set; } = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond)
+            .AddSeconds(-DateTime.Now.Second).AddMinutes(-DateTime.Now.Minute).AddHours(-DateTime.Now.Hour).AddHours(12); 
 
-        public DateTime Date { get; set; }
+        [BindProperty]
+        public string SearchInput { get; set; }
 
        
 
@@ -28,8 +32,21 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         public IActionResult OnPostDateFilter()
         {
-            bookings = bookingService.FilterBookingsByDate(Date).ToList();
+            bookings = bookingService.FilterBookingsByDate(DateInput).ToList();
             return Page();
+        }
+
+        public IActionResult OnpostNameSearch()
+        {
+            bookings = bookingService.FilterBookingsByNameOrEmail(SearchInput).ToList();
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostCateGorySearch()
+        {
+            bookings = bookingService.FilterBookingsByCategory(SearchInput).Result;
+            return Page();
+            
         }
     }
 }

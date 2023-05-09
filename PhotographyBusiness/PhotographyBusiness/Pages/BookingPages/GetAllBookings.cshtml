@@ -7,16 +7,26 @@
 <h1 style="font-family:fantasy;">Bookings</h1>
 <br />
 
-<div class="d-flex justify-content-start">
-	<div class="col-4">
+<div class="d-flex justify-content-evenly">
+	<div class="col-4 w-25">
 		<form method="post" class="form-inline">
-			<div class="input-group mb-3">
-				<input asp-for="Date" class="form-control mr-1" placeholder="Enter search term" />
-				<input type="submit" asp-page-handler="DateFilter" value="#" class="btn btn-primary" />
+			<div class="input-group mb-2">
+				<input asp-for="DateInput" class="form-control me-1" placeholder="Enter search term" />
+				<input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
 			</div>
 		</form>
 	</div>
+
+    <div class="col-4 w-25">
+        <form method="post" class="form-inline">
+            <div class="input-group mb-2">
+                <input asp-for="SearchInput" class="form-control me-1" placeholder="Filter by Name, Last name or Email " />
+                <input type="submit" asp-page-handler="NameSearch" value="Search" class="btn btn-border-black" />
+            </div>
+        </form>
+    </div>
 </div> 
+
 <div>
     <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black;">
         <thead>

@@ -76,28 +76,33 @@ namespace PhotographyBusiness.Services.BookingService
             return GetAllBookings().Where(b => b.IsAccepted == false).OrderBy(b => b.DateCreated).Take(5).ToList();
         }
 
-        public IEnumerable<Booking> FilterBookingsByDate(DateTime date)
-        {
-            return from booking in Bookings
-                   where booking.Date >= date
-                   select booking;
-
-        }
-        public async Task<List<Booking>> FilterBookingsByName(string name)
-        {
-            IEnumerable<Booking> filteredBookings = from booking in Bookings 
-                                                    where booking.User.Name.Contains(name)
-                                                    select booking;
-            return filteredBookings.ToList();
-        }
-
-        public async Task<List<Booking>> FilterBookingsByEmail(string Email)
+        public async Task<List<Booking>> FilterBookingsByDate(DateTime date)
         {
             IEnumerable<Booking> filteredBookings = from booking in Bookings
-                                                    where booking.User.Email.ToLower().Contains((Email))
+                                                    where booking.Date >= date
                                                     select booking;
+
+            return filteredBookings.ToList();
+
+        }
+        public async Task<List<Booking>>FilterBookingsByNameOrEmail(string searchinput)
+        {
+            IEnumerable<Booking> filteredBookings =  from booking in Bookings 
+                                                     where booking.User.Name.Contains(searchinput)
+                                                     || booking.User.Email.Contains(searchinput)
+                                                     select booking;
             return filteredBookings.ToList();
         }
+
+        // REDUNDANT EMAIL SEARCHING IMPLEMENTED IN NAME SEARCH
+
+        //public async Task<List<Booking>> FilterBookingsByEmail(string Email)         
+        //{
+        //    IEnumerable<Booking> filteredBookings = from booking in Bookings
+        //                                            where booking.User.Email.ToLower().Contains((Email))
+        //                                            select booking;
+        //    return filteredBookings.ToList();
+        //}
 
         public async Task<List<Booking>> FilterBookingsByCategory(string Category)
         {

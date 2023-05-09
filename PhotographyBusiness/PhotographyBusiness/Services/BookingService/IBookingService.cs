@@ -14,7 +14,10 @@ namespace PhotographyBusiness.Services.BookingService
         public Task<List<Booking>> GetAllBookingsThisMonth();
         public Task<List<Booking>> GetUpcomingBookings();
         public Task<List<Booking>> GetMostRecentRequests();
-        public IEnumerable<Booking> FilterBookingsByDate(DateTime date);
+        public Task<List<Booking>> FilterBookingsByDate(DateTime date);
+        public Task<List<Booking>> FilterBookingsByNameOrEmail(string searchinput);
+        public Task<List<Booking>> FilterBookingsByCategory(string Category);
+
 
     }
 }
