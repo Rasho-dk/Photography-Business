@@ -115,7 +115,7 @@ namespace PhotographyBusiness.Services.BookingService
         public async Task<List<Booking>> FilterBookingsByCategory(string Category)
         {
             IEnumerable<Booking> filteredBookings = from booking in Bookings
-                                                    where booking.Category().Contains((Category))
+                                                    where booking.Category.Contains((Category))
                                                     select booking;
             return filteredBookings.ToList();
         }
