@@ -22,8 +22,8 @@
                     </th >
                     <th class="w-25 no-border">
                         <div class="d-grid">
-                            <a asp-page="#"><i class="fa fa-calendar-check-o fa-5x text-dark pop-out" aria-hidden="true"></i></a>
-                            <a asp-page="#" class="text-dark text-decoration-none">Bookings</a>
+                            <a asp-page="../BookingPages/GetAllBookings"><i class="fa fa-calendar-check-o fa-5x text-dark pop-out" aria-hidden="true"></i></a>
+                            <a asp-page="../BookingPages/GetAllBookings" class="text-dark text-decoration-none">Bookings</a>
                             <br />
                             <a class="text-dark text-decoration-none" style="text-align: left">Upcoming</a>
                         </div>
@@ -71,9 +71,9 @@
                     @foreach (var booking in Model.Bookings)
                     {
                         <tr>
-                            <td><a asp-page="#" asp-route-id="@booking.BookingId" class="btn btn-dark btn-round">@booking.BookingId</a></td>
-                            <td><a asp-page="#" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.User.Name</a></td>
-                            <td><a asp-page="#" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.Date</a></td>
+                            <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="btn btn-dark btn-round">@booking.BookingId</a></td>
+                            <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.User.Name</a></td>
+                            <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.Date</a></td>
                         </tr>
                     }
                 </table>
