@@ -18,6 +18,7 @@ namespace PhotographyBusiness.Services.BookingService
         public Task<List<Booking>> FilterBookingsByDate(DateTime startdate, DateTime endDate);
         public Task<List<Booking>> FilterBookingsByNameOrEmail(string searchinput);
         public Task<List<Booking>> FilterBookingsByCategory(string Category);
+        public Task<List<Booking>> SortBookingByCategory();
 
 
     }
