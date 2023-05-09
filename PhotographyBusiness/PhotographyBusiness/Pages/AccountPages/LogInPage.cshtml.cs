@@ -18,8 +18,6 @@ namespace PhotographyBusiness.Pages.AccountPages
         //public static User LoggedInUser { get; set; } = null;
         [BindProperty]
         public User User { get; set; }    
-        public string Email { get; set; }
-        public string? Password { get; set; }
         public string DisplayMessage { get; set; }
         public LogInPageModel(IUserService userService)
         {
@@ -46,9 +44,9 @@ namespace PhotographyBusiness.Pages.AccountPages
         #endregion
 
         /// <summary>
-        /// This method must first retrieve the list of the Users via _userService and checl whether the user with (Eamil,Password) exists in the lsit
+        /// This method must first retrieve the list of the Users via _userService and check whether the user with (Eamil,Password) exists in the liit
         /// If the user email exist and the password is match,a new list of the Claim objects is created which is initialized with a new Claim containing UserName.
-        /// And if the user is admin new claim containing a "admin" and add to the list of the Claim with ClaimTypes.Role.
+        /// And if the user is admin new claim containing a "admin" and add the new claim to the list of the Claim with ClaimTypes.Role.
         /// Then ClaimIdentity object is created with our new list of Claims and a SignIn is made with the CalimsIdentity.
         /// <returns>If Login pass redurect to page ("/Index"), otherwise errore message dispaly </returns>
 
@@ -72,12 +70,11 @@ namespace PhotographyBusiness.Pages.AccountPages
                         try
                         {
                             if (passwordHasher.VerifyHashedPassword(null, user.Password, User.Password) == PasswordVerificationResult.Success)
-                            //if (user.Password.Equals(Password))
+                            //if (user.Password.Equals(User.Password))
                             {
                                 //LoggedInUser = user;
-                                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) }; // Ændret email til user.Name
-                                if (user.Name.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));  // Arun: Betyder så også at Jacks admin User kommer til at have navnet "Admin"
-                                                                                                                 // if (user.Email == "EXAMPLE@jacksphotography.co.uk") claims.Add(new Claim(ClaimTypes.Role, "admin")) <-- Hvis vi hellere ville bruge email.
+                                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) }; 
+                                if (user.Name.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));  
 
                                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 

@@ -13,7 +13,7 @@
                 <tr>
                     <th class="w-25 no-border">
                         <div class="d-grid">
-                            <a asp-page="#"><i class="fa fa-envelope-o fa-5x text-dark" aria-hidden="true"></i></a>
+                            <a asp-page="#"><i class="fa fa-envelope-o fa-5x text-dark pop-out" aria-hidden="true"></i></a>
                             <a asp-page="#" class="text-dark text-decoration-none">Requests</a>
                             <br />
                             <a class="text-dark text-decoration-none" style="text-align: left">Most recent</a>
@@ -22,7 +22,7 @@
                     </th >
                     <th class="w-25 no-border">
                         <div class="d-grid">
-                            <a asp-page="#"><i class="fa fa-calendar-check-o fa-5x text-dark" aria-hidden="true"></i></a>
+                            <a asp-page="#"><i class="fa fa-calendar-check-o fa-5x text-dark pop-out" aria-hidden="true"></i></a>
                             <a asp-page="#" class="text-dark text-decoration-none">Bookings</a>
                             <br />
                             <a class="text-dark text-decoration-none" style="text-align: left">Upcoming</a>
@@ -30,7 +30,7 @@
                     </th>
                     <th class="w-25 no-border">
                         <div class="d-grid">
-                            <a asp-page="#"><i class="fa fa-users fa-5x text-dark" aria-hidden="true"></i></a>
+                            <a asp-page="#"><i class="fa fa-users fa-5x text-dark pop-out" aria-hidden="true"></i></a>
                             <a asp-page="#" class="text-dark text-decoration-none">Users</a>
                             <br />
                             <a class="text-dark text-decoration-none" style="text-align: left">Recently joined</a>
@@ -38,7 +38,7 @@
                     </th>
                     <th class="w-25 no-border">
                         <div class="d-grid">
-                            <a asp-page="#"><i class="fa fa-bar-chart fa-5x text-dark" aria-hidden="true"></i></img></a>
+                            <a asp-page="#"><i class="fa fa-bar-chart fa-5x text-dark pop-out" aria-hidden="true"></i></img></a>
                             <a asp-page="#" class="text-dark text-decoration-none">Analytics</a>
                             <br />
                             <a class="text-dark text-decoration-none" style="text-align: left">Quick overview</a>
@@ -55,9 +55,9 @@
                     </tr>
                     @foreach (var request in Model.Requests) {
                         <tr>
-                            <td>@request.BookingId</td>
-                            <td>@request.User.Name</td>
-                            <td>@request.Category</td>
+                            <td><a asp-page="#" class="btn btn-dark btn-round">@request.BookingId</a></td>
+                            <td><a asp-page="#" class="text-dark text-decoration-none">@request.User.Name</a></td>
+                            <td><a asp-page="#" class="text-dark text-decoration-none">@request.Category</a></td>
                         </tr>
                     }
                     
@@ -71,9 +71,9 @@
                     @foreach (var booking in Model.Bookings)
                     {
                         <tr>
-                            <td>@booking.BookingId</td>
-                            <td>@booking.User.Name</td>
-                            <td>@booking.Date</td>
+                            <td><a asp-page="#" class="btn btn-dark btn-round">@booking.BookingId</a></td>
+                            <td><a asp-page="#" class="text-dark text-decoration-none">@booking.User.Name</a></td>
+                            <td><a asp-page="#" class="text-dark text-decoration-none">@booking.Date</a></td>
                         </tr>
                     }
                 </table>
@@ -86,23 +86,29 @@
                     @foreach (var user in Model.Users)
                     {
                         <tr>
-                            <td>@user.UserId</td>
-                            <td>@user.Name</td>
-                            <td>@user.Email</td>
+                            <td><a asp-page="#" class="btn btn-dark btn-round">@user.UserId</a></td>
+                            <td><a asp-page="#" class="text-dark text-decoration-none">@user.Name</a></td>
+                            <td><a asp-page="#" class="text-dark text-decoration-none">@user.Email</a></td>
                         </tr>
                     }
                 </table>
-                <div class="w-25 right-border top-border">
-                    <div class="">
-                        <div>
-
-                        </div>
-                        <h5 class="m-2" style="text-align: left">Total users: @Model.TotalUsers <i class="fa fa-users" aria-hidden="true" style="height: 25px"></i></h5>
-                        <h5 class="m-2" style="text-align: left">Bookings completed: ToDo <i class="fa fa-check-circle-o" aria-hidden="true" style="height: 25px"></i></h5>
-                        <h5 class="m-2" style="text-align: left">Total accepted bookings: @Model.TotalBookings <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i></h5>
-                        <h5 class="m-2" style="text-align: left">Accepted bookings last 30 days: @Model.BookingsThisMonth <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i></h5>
-                        
-                    </div>
+                <div class="w-25 right-border top-border d-flex flex-column justify-content-evenly">
+                    <h5 class="m-2" style="text-align: left">Total users: 
+                        <a class="text-dark">@Model.TotalUsers</a> 
+                        <i class="fa fa-users" aria-hidden="true" style="height: 25px"></i>
+                    </h5>
+                    <h5 class="m-2" style="text-align: left">Bookings completed: 
+                        <a class="text-dark">@Model.CompletedBookingsThisMonth</a>
+                        <i class="fa fa-check-circle-o" aria-hidden="true" style="height: 25px"></i>
+                    </h5>
+                    <h5 class="m-2" style="text-align: left">Total accepted bookings: 
+                        <a class="text-dark">@Model.TotalBookings</a>
+                        <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i>
+                    </h5>
+                    <h5 class="m-2" style="text-align: left">Accepted bookings last 30 days: 
+                        <a class="text-dark">@Model.BookingsThisMonth</a>
+                        <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i>
+                    </h5>
                 </div>
             </div>
             
@@ -149,5 +155,23 @@
 
     h5 {
         font-size: 1.1rem;
+    }
+
+    .btn-round {
+        border-radius: 50px;
+        transition: all .2s ease-in-out;
+    }
+
+    .btn-round:hover {
+        background-color: whitesmoke;
+        border: solid 1px whitesmoke;
+        color: black;
+    }
+
+    .number-contrast {
+        padding: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        border-radius: 100px;
     }
 </style>

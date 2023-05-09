@@ -46,11 +46,11 @@ namespace PhotographyBusiness.Services.MailService
             MimeMessage message = new MimeMessage();
             message.From.Add(new MailboxAddress("Jack Saunders Photography", _sender));
             message.To.Add(MailboxAddress.Parse(booking.User.Email));
-            message.Subject = $"Your booking has ben cancelled {booking.BookingId}";
+            message.Subject = $"Your booking has been cancelled {booking.BookingId}";
             message.Body = new TextPart("plain")
             { Text = $@"Dear {booking.User.Name},
-We are sorry to inform you that your booking ID: {booking.BookingId} on {booking.Date} has ben cancelled.
-Kind Regards, Jack Saunders Photography"
+            We are sorry to inform you that your booking ID: {booking.BookingId} on {booking.Date} has been cancelled.
+            Kind Regards, Jack Saunders Photography"
             };
                 
 
