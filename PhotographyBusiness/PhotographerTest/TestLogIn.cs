@@ -11,6 +11,7 @@ namespace PhotographerTest
     public class TestLogIn
     {
         private IUserService _userService;
+        //public User User { get; set; }
         //[TestMethod]
         //public void Login_Test_HappyPath_Retur_False()
         //{
@@ -60,18 +61,18 @@ namespace PhotographerTest
             //Arrange
             var userservicemock = new Mock<IUserService>();
             var model = new LogInPageModel(userservicemock.Object)
-            {             
-                Email = "Test@outlook.com",
-                Password = "123456789",
+            {
+                //= "Test@outlook.com",
+                //Password = "123456789",
 
             };
 
             var users = new List<User>()
             {
             new User()
-            { Name = "Test",
-             Password = "123456789",
-              Email = "Test@outlook.com"
+            {    Name = "Test",
+                Password = "123456789",
+                 Email = "Test@outlook.com"
             }
             };
 
@@ -99,8 +100,8 @@ namespace PhotographerTest
             var userservicemock = new Mock<IUserService>();
             var model = new LogInPageModel(userservicemock.Object)
             {
-                Email = null,               
-                Password = "1234567890"
+                //Email = null,
+                //Password = "1234567890"
             };
 
             var users = new List<User>()
