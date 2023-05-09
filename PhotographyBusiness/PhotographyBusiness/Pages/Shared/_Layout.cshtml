@@ -95,7 +95,11 @@
                                         <li><a class="dropdown-item text-dark" href="#">My Profile</a></li>
                                         <li><a class="dropdown-item text-dark" href="#">Booking</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-dark" href="/AccountPages/LogOutPage" >Log out</a></li>
+                                        <li><a class="dropdown-item text-dark" asp-page="/AccountPages/LogOutPage" >Logout</a></li>
+                                        @if (Context.User.Identity.Name == "admin")
+                                        {
+                                            <li><a class="dropdown-item text-dark" asp-page="/AdminPages/AdminDashboardPage">Admin dashboard</a></li>
+                                        }
                                     </ul>
                                 </li>
 
@@ -122,7 +126,7 @@
 <footer class="bg-white pb-1">
     <div class="d-flex justify-content-between container">
         <div class="pt-2">
-            <img src="~/media/logo.png" style="height: 20vh" class="pop-out" />
+            <img src="~/media/logo.png" style="height: 150px" class="pop-out" />
             <h5 style="font-size: 12px" class="pt-1">&copy2023 Copyright Jack Saunders Photography</h5>
         </div>
         <div class="pt-2">

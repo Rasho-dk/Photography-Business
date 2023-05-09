@@ -5,7 +5,7 @@
 
 <script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
 
-<div class="container d-flex flex-column">
+<div class="container d-flex flex-column pt-3">
     <h1 class="">Admin Dashboard</h1>
     <div class="" style="">
         <div class="text-center">
@@ -93,21 +93,25 @@
                     }
                 </table>
                 <div class="w-25 right-border top-border d-flex flex-column justify-content-evenly">
-                    <h5 class="m-2" style="text-align: left">Total users: 
-                        <a class="text-dark">@Model.TotalUsers</a> 
-                        <i class="fa fa-users" aria-hidden="true" style="height: 25px"></i>
+                    <h5 class="m-2" style="text-align: left">Accepted bookings last 30 days:
+                        <a class="text-dark">@Model.BookingsThisMonth</a>
+                        <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i>
+                    </h5>
+                    <h5 class="m-2" style="text-align: left">Pending bookings requests:
+                        <a class="text-dark">@Model.PendingRequests</a>
+                        <i class="fa fa-envelope-o" aria-hidden="true" style="height: 25px"></i>
+                    </h5>
+                    <h5 class="m-2" style="text-align: left">Total accepted bookings:
+                        <a class="text-dark">@Model.TotalBookings</a>
+                        <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i>
                     </h5>
                     <h5 class="m-2" style="text-align: left">Bookings completed: 
                         <a class="text-dark">@Model.CompletedBookingsThisMonth</a>
                         <i class="fa fa-check-circle-o" aria-hidden="true" style="height: 25px"></i>
                     </h5>
-                    <h5 class="m-2" style="text-align: left">Total accepted bookings: 
-                        <a class="text-dark">@Model.TotalBookings</a>
-                        <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i>
-                    </h5>
-                    <h5 class="m-2" style="text-align: left">Accepted bookings last 30 days: 
-                        <a class="text-dark">@Model.BookingsThisMonth</a>
-                        <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i>
+                    <h5 class="m-2" style="text-align: left">Total users:
+                        <a class="text-dark">@Model.TotalUsers</a>
+                        <i class="fa fa-users" aria-hidden="true" style="height: 25px"></i>
                     </h5>
                 </div>
             </div>
