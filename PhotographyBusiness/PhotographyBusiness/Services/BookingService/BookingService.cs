@@ -10,6 +10,8 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> Bookings { get; set; }
 
+        public int number { get; set; }
+
         public BookingService(GenericDbService<Booking> genericDbService)
         {
             _genericDbService = genericDbService;
@@ -104,6 +106,8 @@ namespace PhotographyBusiness.Services.BookingService
                                                     select booking;
             return filteredBookings.ToList();
         }
+
+        public async Task<List<Booking>> 
 
     }
 }
