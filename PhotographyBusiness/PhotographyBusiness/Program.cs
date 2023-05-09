@@ -36,7 +36,10 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 });
 
 builder.Services.AddMvc().AddRazorPagesOptions(options => {
+
     options.Conventions.AuthorizeFolder("/..");
+    options.Conventions.AllowAnonymousToFolder("/");    
+    options.Conventions.AllowAnonymousToPage("/");  
 
 }).SetCompatibilityVersion(CompatibilityVersion.Latest);
 
