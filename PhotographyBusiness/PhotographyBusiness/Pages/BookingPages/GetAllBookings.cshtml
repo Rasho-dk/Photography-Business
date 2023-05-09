@@ -8,24 +8,45 @@
 <br />
 
 <div class="d-flex justify-content-evenly">
-	<div class="col-4 w-25">
-		<form method="post" class="form-inline">
-			<div class="input-group mb-2">
-				<input asp-for="DateInput" class="form-control me-1" placeholder="Enter search term" />
-				<input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
-			</div>
-		</form>
-	</div>
+
+    <form method="post" class="form-inline">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Start Date</span>
+            </div>
+            <input asp-for="StartDate" class="form-control me-2" />
+            <div class="input-group-prepend">
+                <span class="input-group-text">End Date</span>
+            </div>
+            <input asp-for="EndDate" class="form-control me-2" />
+            <input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
+        </div>
+    </form>
 
     <div class="col-4 w-25">
         <form method="post" class="form-inline">
             <div class="input-group mb-2">
-                <input asp-for="SearchInput" class="form-control me-1" placeholder="Filter by Name, Last name or Email " />
+                <input asp-for="NameInput" class="form-control me-1" placeholder="Filter by Name, Last name or Email " />
                 <input type="submit" asp-page-handler="NameSearch" value="Search" class="btn btn-border-black" />
             </div>
         </form>
     </div>
-</div> 
+</div>
+<div class="d-flex justify-content-evenly">
+    <div>
+
+
+
+    </div>
+    <div class="col-4 w-25">
+        <form method="post" class="form-inline">
+            <div class="input-group mb-2">
+                <input asp-for="CategoryInput" class="form-control me-2" placeholder="Filter by Category " />
+                <input type="submit" asp-page-handler="CategoryFilter" value="Filter" class="btn btn-border-black" />
+            </div>
+        </form>
+    </div>
+</div>
 
 <div>
     <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black;">

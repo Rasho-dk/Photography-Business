@@ -76,20 +76,28 @@ namespace PhotographyBusiness.Services.BookingService
             return GetAllBookings().Where(b => b.IsAccepted == false).OrderBy(b => b.DateCreated).Take(5).ToList();
         }
 
-        public async Task<List<Booking>> FilterBookingsByDate(DateTime date)
+
+        public async Task<List<Booking>> FilterBookingsByDate(DateTime startdate, DateTime endDate)
         {
             IEnumerable<Booking> filteredBookings = from booking in Bookings
-                                                    where booking.Date >= date
+                                                    where booking.Date >= startdate && booking.Date <= endDate
                                                     select booking;
 
-            return filteredBookings.ToList();
 
+
+            //                                    from booking in Bookings
+            //                                    where booking.Date >= startdate && booking.Date <= endDate
+            //                                    select booking;
+
+
+
+            return filteredBookings.ToList();
         }
-        public async Task<List<Booking>>FilterBookingsByNameOrEmail(string searchinput)
+        public async Task<List<Booking>>FilterBookingsByNameOrEmail(string nameinput)
         {
             IEnumerable<Booking> filteredBookings =  from booking in Bookings 
-                                                     where booking.User.Name.Contains(searchinput)
-                                                     || booking.User.Email.Contains(searchinput)
+                                                     where booking.User.Name.Contains(nameinput)
+                                                     || booking.User.Email.Contains(nameinput)
                                                      select booking;
             return filteredBookings.ToList();
         }

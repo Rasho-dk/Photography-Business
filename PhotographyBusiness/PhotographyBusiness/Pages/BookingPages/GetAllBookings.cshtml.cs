@@ -11,12 +11,16 @@ namespace PhotographyBusiness.Pages.BookingPages
         private IBookingService bookingService;
         public List<Booking> bookings;
         [BindProperty]
-        public DateTime DateInput { get; set; } = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond)
-            .AddSeconds(-DateTime.Now.Second).AddMinutes(-DateTime.Now.Minute).AddHours(-DateTime.Now.Hour).AddHours(12); 
+        public DateTime StartDate { get; set; } = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond)
+            .AddSeconds(-DateTime.Now.Second).AddMinutes(-DateTime.Now.Minute).AddHours(-DateTime.Now.Hour).AddHours(12);
+        [BindProperty]
+        public DateTime EndDate { get; set; }
 
         [BindProperty]
-        public string SearchInput { get; set; }
+        public string NameInput { get; set; }
 
+        [BindProperty]
+        public string CategoryInput { get; set; }
        
 
         public GetAllBookingsModel(IBookingService bookingService)
@@ -30,23 +34,25 @@ namespace PhotographyBusiness.Pages.BookingPages
             return Page();  
         }
 
-        public IActionResult OnPostDateFilter()
+        public async Task <IActionResult> OnPostDateFilter()
         {
-            bookings = bookingService.FilterBookingsByDate(DateInput).ToList();
+            bookings = bookingService.FilterBookingsByDate(StartDate, EndDate).Result;
             return Page();
         }
 
-        public IActionResult OnpostNameSearch()
+        public async Task<IActionResult> OnPostCategoryFilter()
         {
-            bookings = bookingService.FilterBookingsByNameOrEmail(SearchInput).ToList();
+            bookings = bookingService.FilterBookingsByCategory(CategoryInput).Result;
+            return Page();
+
+        }
+
+        public async Task<IActionResult> OnpostNameSearch()
+        {
+            bookings = bookingService.FilterBookingsByNameOrEmail(NameInput).Result;
             return Page();
         }
 
-        public async Task<IActionResult> OnPostCateGorySearch()
-        {
-            bookings = bookingService.FilterBookingsByCategory(SearchInput).Result;
-            return Page();
-            
-        }
+
     }
 }
