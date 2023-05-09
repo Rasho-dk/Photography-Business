@@ -1,7 +1,37 @@
 ﻿@page
-@model PhotographyBusiness.Pages.BookingPages.GetAllBookingRequestsPageModel
+@model PhotographyBusiness.Pages.BookingPages.BookingRequestModalPageModel
 @{
 }
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><small class="text-muted">(Id: @Model.Booking.BookingId)</small> @Model.Booking.User.Email</h5>
+                <a type="button" class="close" asp-page="GetAllBookingRequestsPage">&times;</a>
+            </div>
+            <div class="modal-body">
+                <table class="w-100 no-border">
+                    <tr>
+                        <th class="w-50 border-right">
+                            <div>@Model.Booking.User.Name</div>
+                        </th>
+                        <th class="w-50 border-left">
+
+                        </th>
+                    </tr>
+                </table>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-danger" asp-page="GetAllBookingRequestsPage">Close</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
 
 
 <div class="container d-flex flex-column">
@@ -107,3 +137,19 @@
     }
 </style>
 
+
+
+
+
+@section Scripts 
+{
+    
+    <script>
+        $(document).ready(function ()
+        {
+            //$("#myModal").modal({backdrop: "static"});
+            $("#myModal").modal('show');
+        });
+    </script>
+
+}

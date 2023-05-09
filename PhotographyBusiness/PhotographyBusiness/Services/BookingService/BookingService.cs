@@ -22,6 +22,18 @@ namespace PhotographyBusiness.Services.BookingService
         {
             return Bookings;
         }
+        public List<Booking> GetAllBookingRequests()
+        {
+            List<Booking> bookingRequests = new List<Booking>();
+            foreach(Booking booking in Bookings)
+            {
+                if(booking.IsAccepted == false)
+                {
+                    bookingRequests.Add(booking);
+                }
+            }
+            return bookingRequests;
+        }
 
         public async Task<Booking> GetBookingById(int id)
         {
