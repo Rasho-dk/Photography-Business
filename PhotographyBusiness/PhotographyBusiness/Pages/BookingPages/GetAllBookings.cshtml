@@ -6,6 +6,17 @@
 <br />
 <h1 style="font-family:fantasy;">Bookings</h1>
 <br />
+
+<div class="d-flex justify-content-start">
+	<div class="col-4">
+		<form method="post" class="form-inline">
+			<div class="input-group mb-3">
+				<input asp-for="Date" class="form-control mr-1" placeholder="Enter search term" />
+				<input type="submit" asp-page-handler="DateFilter" value="#" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div> 
 <div>
     <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black;">
         <thead>

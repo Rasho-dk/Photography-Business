@@ -9,7 +9,11 @@ namespace PhotographyBusiness.Pages.BookingPages
     public class GetAllBookingsModel : PageModel
     {
         private IBookingService bookingService;
-        public List<Booking> bookings;   
+        public List<Booking> bookings;
+
+        public DateTime Date { get; set; }
+
+       
 
         public GetAllBookingsModel(IBookingService bookingService)
         {
@@ -20,6 +24,12 @@ namespace PhotographyBusiness.Pages.BookingPages
         {
            bookings = bookingService.GetAllBookings().Where(x => x.IsAccepted == true).ToList(); 
             return Page();  
+        }
+
+        public IActionResult OnPostDateFilter()
+        {
+            bookings = bookingService.FilterBookingsByDate(Date).ToList();
+            return Page();
         }
     }
 }
