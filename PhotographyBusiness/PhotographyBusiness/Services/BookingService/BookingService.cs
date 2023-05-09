@@ -81,5 +81,29 @@ namespace PhotographyBusiness.Services.BookingService
                                                      select booking;
             return filteredBookings.ToList();
         }
+        public async Task<List<Booking>> FilterBookingsByName(string name)
+        {
+            IEnumerable<Booking> filteredBookings = from booking in Bookings 
+                                                    where booking.User.Name.Contains(name)
+                                                    select booking;
+            return filteredBookings.ToList();
+        }
+
+        public async Task<List<Booking>> FilterBookingsByEmail(string Email)
+        {
+            IEnumerable<Booking> filteredBookings = from booking in Bookings
+                                                    where booking.User.Email.ToLower().Contains((Email))
+                                                    select booking;
+            return filteredBookings.ToList();
+        }
+
+        public async Task<List<Booking>> FilterBookingsByCategory(string Category)
+        {
+            IEnumerable<Booking> filteredBookings = from booking in Bookings
+                                                    where booking.Category.ToLower().Contains((Category))
+                                                    select booking;
+            return filteredBookings.ToList();
+        }
+
     }
 }
