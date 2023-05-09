@@ -33,18 +33,7 @@ namespace PhotographyBusiness.Services.BookingService
             
             return Bookings;
         }
-        public List<Booking> GetAllBookingRequests()
-        {
-            List<Booking> bookingRequests = new List<Booking>();
-            foreach(Booking booking in Bookings)
-            {
-                if(booking.IsAccepted == false)
-                {
-                    bookingRequests.Add(booking);
-                }
-            }
-            return bookingRequests;
-        }
+
 
         public Booking GetBookingById(int id)
         {
@@ -111,7 +100,7 @@ namespace PhotographyBusiness.Services.BookingService
             return GetAllBookings().Where(b => b.IsAccepted == false).OrderBy(b => b.DateCreated).Take(5).ToList();
         }
 
-        public List<Booking> GetAllLBookingsRequests()
+        public List<Booking> GetAllBookingRequests()
         {
             return GetAllBookings().Where(b => b.IsAccepted == false).ToList();
         }

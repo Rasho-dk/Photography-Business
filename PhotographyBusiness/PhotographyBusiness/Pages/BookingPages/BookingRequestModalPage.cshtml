@@ -29,12 +29,12 @@
                                     <input asp-for="@Model.Booking.Address" class="form-control" readonly />
                                 </div>
                                 <div>
-                                    <label asp-for="@Model.Booking.Price" class="control-label text-black">Price</label>
-                                    <input asp-for="@Model.Booking.Price" class="form-control"/>
+                                    <label asp-for="@Model.Price" class="control-label text-black">Price</label>
+                                    <input asp-for="@Model.Price" class="form-control"/>
                                 </div>
                                 <div>
-                                    <label asp-for="@Model.Booking.AdminNote" class="control-label text-black">Admin Note</label>
-                                    <textarea id="CustomerNote" name="Note" rows="6" cols="50" class="form-control textarea-input" style="resize:none"></textarea>
+                                    <label asp-for="@Model.AdminNote" class="control-label text-black">Admin Note</label>
+                                    <textarea asp-for="@Model.AdminNote" id="AdminNote" name="Note" rows="6" cols="50" class="form-control textarea-input" style="resize:none"></textarea>
                                 </div>
                             </div>
                         </th>
@@ -49,7 +49,7 @@
                             </div>
                             <div>
                                 <label asp-for="@Model.Booking.CustomerNote" class="control-label text-black">Customer Note</label>
-                                <textarea id="CustomerNote" name="Note" rows="6" cols="50" class="form-control textarea-input" style="resize:none" readonly></textarea>
+                                <textarea asp-for="@Model.Booking.CustomerNote" name="Note" rows="6" cols="50" class="form-control textarea-input" style="resize:none" readonly></textarea>
                             </div>
                         </th>
                     </tr>
@@ -57,7 +57,8 @@
                 
                 <div class="modal-footer">
                     <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw"
-                    asp-page="AcceptRequestPage" asp-route-id="@Model.Booking.BookingId">Accept</a>
+                    asp-page="AcceptRequestPage" asp-route-id="@Model.Booking.BookingId" 
+                    asp-route-price="@Model.Price" asp-route-note="@Model.AdminNote">Accept</a>
 
                     <a class="btn text-dark btn-border-black btn-square nav-link" style="border-radius: 0; min-width: 5vw; max-width: 15vw;" 
                     asp-page="GetAllBookingRequestsPage" asp-route-id="@Model.Booking.BookingId">Decline</a>

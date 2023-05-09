@@ -12,28 +12,33 @@ namespace PhotographyBusiness.Pages.BookingPages
 
 
         public Booking Booking { get; set; }
+        public double Price { get; set; }
+        public string AdminNote { get; set; }
 
         public AcceptRequestPageModel(IBookingService bookingService)
         {
             _bookingService = bookingService;
         }
 
-        public void OnGet(int id)
+        public void OnGet(int id, double price, string note)
         {
 
-            Booking = _bookingService.GetBookingById(id).Result;
-
+            Booking = _bookingService.GetBookingById(id);
+            Price = price;
+            AdminNote = note;
         }
 
-        public IActionResult OnPost(int id)
+        public IActionResult OnPost(int id, double price, string note)
         {
-            Booking = _bookingService.GetBookingById(id).Result;
+            Booking = _bookingService.GetBookingById(id);
 
             if(Booking != null)
             {
                 Booking.IsAccepted = true;
-                _bookingService.AcceptBooking(id);
-                return RedirectToPage("BookingPages/GetAllBookingRequests");
+                Booking.Price = price;
+                Booking.AdminNote = note;
+                _bookingService.AcceptBooking(Booking.BookingId);
+                return RedirectToPage("GetAllBookingRequestsPage");
             } 
             return RedirectToPage("NotFound");
         }

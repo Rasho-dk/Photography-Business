@@ -35,7 +35,7 @@ namespace PhotographyBusiness.Pages.AdminPages
             TotalBookings = _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).ToList().Count(); // Total bookings
             BookingsThisMonth = _bookingService.GetAllBookingsThisMonth().Count(); // Bookings last 30 days
             CompletedBookingsThisMonth = _bookingService.GetAllBookings().Where(b => b.Date < DateTime.Now && b.IsAccepted == true).ToList().Count(); // Completed bookings this month
-            PendingRequests = _bookingService.GetAllLBookingsRequests().Count();
+            PendingRequests = _bookingService.GetAllBookingRequests().Count();
         }
     }
 }
