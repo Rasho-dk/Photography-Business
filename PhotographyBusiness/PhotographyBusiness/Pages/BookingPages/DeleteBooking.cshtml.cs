@@ -18,7 +18,7 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         public IActionResult OnGet(int id)
         {
-            Booking = _bookingService.GetBookingById(id).Result;
+            Booking = _bookingService.GetBookingById(id);
             if(Booking == null)
             {
                 return RedirectToPage("/NotFound");
