@@ -2,9 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Services.BookingService;
 using PhotographyBusiness.Models;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace PhotographyBusiness.Pages.BookingPages
 {
+    [Authorize(Roles = "admin")]
     public class BookingRequestModalPageModel : PageModel
     {
 

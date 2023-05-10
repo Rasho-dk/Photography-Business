@@ -59,12 +59,12 @@ namespace PhotographyBusiness.Models
         /// <param name="customerNote"></param>
         /// <param name="dateFrom"></param>
         /// <param name="dateTo"></param>
-        public Booking(string category, string customerNote, string address, User user)
+        public Booking(string category, string customerNote, string address, User user, DateTime date)
         {
             User = user;
             Category = category;
             CustomerNote = customerNote;
-            //Date = date;
+            Date = date;
             DateCreated = DateTime.Now;
             Address = address;
             IsAccepted = false;

@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.BookingService;
+using System.Data;
 
 namespace PhotographyBusiness.Pages.BookingPages
 {
+    [Authorize(Roles = "admin")]
     public class AcceptRequestPageModel : PageModel
     {
 
@@ -20,12 +23,13 @@ namespace PhotographyBusiness.Pages.BookingPages
             _bookingService = bookingService;
         }
 
-        public void OnGet(int id, double price, string note)
+        public IActionResult OnGet(int id, double price, string note)
         {
 
             Booking = _bookingService.GetBookingById(id);
             Price = price;
             AdminNote = note;
+            return Page();
         }
 
         public IActionResult OnPost(int id, double price, string note)

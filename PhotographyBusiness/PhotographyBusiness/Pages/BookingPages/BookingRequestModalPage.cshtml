@@ -4,6 +4,7 @@
 }
 
 <div class="modal" id="myModal">
+
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -71,9 +72,10 @@
 
                 <div class="form-group p-2">
                     <div class="form-group m-2 d-flex justify-content-center">
-                        <input type="submit" value="Confirm" class="btn btn-dark" style="min-width: 6vw; border-radius: 0; margin-right: 40px;" />
+                        <a asp-page="/BookingPages/AcceptRequestPage" asp-route-id="@Model.Booking.BookingId" asp-route-note="@Model.AdminNote" asp-route-price="@Model.Price"
+                        class="btn btn-dark" style="min-width: 6vw; border-radius: 0; margin-right: 40px;">Confirm</a>
 
-                        <a asp-page="/GetAllBookingRequestsPage" class="btn btn-light btn-border-black" style="border-radius: 0; min-width: 6vw;">Decline</a>
+                        <a asp-page="/BookingPages/GetAllBookingRequestsPage" class="btn btn-light btn-border-black" style="border-radius: 0; min-width: 6vw;">Decline</a>
                     </div>
                 </div>
             </div>

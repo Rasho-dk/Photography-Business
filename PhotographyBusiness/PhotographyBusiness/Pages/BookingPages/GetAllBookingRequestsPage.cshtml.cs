@@ -1,11 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.BookingService;
 using PhotographyBusiness.Services.UserService;
+using System.Data;
 
 namespace PhotographyBusiness.Pages.BookingPages
 {
+    [Authorize(Roles = "admin")]
     public class GetAllBookingRequestsPageModel : PageModel
     {
 
