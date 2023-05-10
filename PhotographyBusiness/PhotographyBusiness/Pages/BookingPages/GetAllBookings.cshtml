@@ -7,12 +7,11 @@
 <h1 style="font-family:fantasy;">Bookings</h1>
 <br />
 
-<div class="d-flex justify-content-evenly">
-
+<div class="d-flex justify-content-around">
     <form method="post" class="form-inline">
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <span class="input-group-text">Start Date</span>
+                <span class="input-group-text btn-border-black bg-white" >Start Date</span>      @*btn-border-black til Start date eller grey ligesom i End Date*@
             </div>
             <input asp-for="StartDate" class="form-control me-2" />
             <div class="input-group-prepend">
@@ -21,6 +20,15 @@
             <input asp-for="EndDate" class="form-control me-2" />
             <input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
         </div>
+        <div class="btn btn-border-black">
+
+            <a class="text-dark" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
+                RESET FILTERS
+            </a>
+           
+        </div>
+
+        
     </form>
 
     <div class="col-4 w-25">
@@ -30,32 +38,38 @@
                 <input type="submit" asp-page-handler="NameSearch" value="Search" class="btn btn-border-black" />
             </div>
         </form>
-    </div>
-</div>
-<div class="d-flex justify-content-evenly">
-    <div>
 
-
-
-    </div>
-    <div class="col-4 w-25">
         <form method="post" class="form-inline">
             <div class="input-group mb-2">
-                <input asp-for="CategoryInput" class="form-control me-2" placeholder="Filter by Category " />
-                <input type="submit" asp-page-handler="CategoryFilter" value="Filter" class="btn btn-border-black" />
+                <input asp-for="CategoryInput" class="form-control me-1" placeholder="Filter by Category " />
+                <input type="submit" asp-page-handler="CategoryFilter" value="Filter &nbsp" class="btn btn-border-black" />
             </div>
         </form>
+
     </div>
 </div>
+
+<br />
 
 <div>
     <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black;">
         <thead>
             <tr class="table-light">
-                <th>Name</th>
-                <th>Email</th>
-                <th>Category</th>
-                <th>Date</th>
+                <th>Name 
+                    <a data-toggle="tooltip" title="Sort By Name" asp-page-handler="SortBookingByName"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
+                    </th>
+
+                <th>Email
+                    <a data-toggle="tooltip" title="Sort By Email" asp-page-handler="SortBookingByEmail"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
+                </th>
+                <th>
+                    Category 
+                    <a data-toggle="tooltip" title="Sort By Category" asp-page-handler="SortBookingByCategory"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
+                </th>
+                
+                <th>Date
+                    <a data-toggle="tooltip" title="Sort By Date" asp-page-handler="SortBookingByDate"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
+                </th>
             </tr>
         </thead>
         <tbody>

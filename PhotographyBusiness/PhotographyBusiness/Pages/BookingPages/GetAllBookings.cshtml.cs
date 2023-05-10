@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using MimeKit.Encodings;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.BookingService;
+using System.ComponentModel.DataAnnotations;
 
 namespace PhotographyBusiness.Pages.BookingPages
 {
@@ -10,11 +11,15 @@ namespace PhotographyBusiness.Pages.BookingPages
     {
         private IBookingService bookingService;
         public List<Booking> bookings;
-        [BindProperty]
+
+        public BookingService booking { get; set; } 
+
+        [BindProperty, DataType(DataType.Date)]
         public DateTime StartDate { get; set; } = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond)
             .AddSeconds(-DateTime.Now.Second).AddMinutes(-DateTime.Now.Minute).AddHours(-DateTime.Now.Hour).AddHours(12);
-        [BindProperty]
-        public DateTime EndDate { get; set; }
+        [BindProperty, DataType(DataType.Date)]
+        public DateTime EndDate { get; set; } = DateTime.Now.AddMilliseconds(-DateTime.Now.Millisecond)
+            .AddSeconds(-DateTime.Now.Second).AddMinutes(-DateTime.Now.Minute).AddHours(-DateTime.Now.Hour).AddHours(12).AddMonths(6);
 
         [BindProperty]
         public string NameInput { get; set; }
@@ -37,6 +42,24 @@ namespace PhotographyBusiness.Pages.BookingPages
         public async Task<IActionResult> OnGetSortBookingByCategory()
         {
             bookings = bookingService.SortBookingByCategory().Result;
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetSortBookingByDate()
+        {
+            bookings = bookingService.SortBookingByDate().Result;
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetSortBookingByName()
+        {
+            bookings = bookingService.SortBookingByName().Result;
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetSortBookingByEmail()
+        {
+            bookings = bookingService.SortBookingByEmail().Result;
             return Page();
         }
 
