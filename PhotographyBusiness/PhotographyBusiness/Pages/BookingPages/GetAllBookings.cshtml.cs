@@ -34,6 +34,12 @@ namespace PhotographyBusiness.Pages.BookingPages
             return Page();  
         }
 
+        public async Task<IActionResult> OnGetSortBookingByCategory()
+        {
+            bookings = bookingService.SortBookingByCategory().Result;
+            return Page();
+        }
+
         public async Task <IActionResult> OnPostDateFilter()
         {
             bookings = bookingService.FilterBookingsByDate(StartDate, EndDate).Result;

@@ -10,7 +10,7 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> Bookings { get; set; }
 
-        public int number { get; set; }
+        public int number { get; set; } = 1;
 
         public BookingService(GenericDbService<Booking> genericDbService)
         {
@@ -120,6 +120,33 @@ namespace PhotographyBusiness.Services.BookingService
             return filteredBookings.ToList();
         }
 
+
+        public async Task<List<Booking>> SortBookingByCategory()
+        {
+            if (number == 1)
+            {
+                number--;
+                IEnumerable<Booking> filteredBookingsdesc =
+                        
+                        from booking in Bookings
+                        orderby booking.Category descending
+                        select booking;
+
+                return filteredBookingsdesc.ToList();
+            }
+
+            number++;
+            IEnumerable<Booking> filteredBookingsasc =
+
+                        from booking in Bookings
+                        orderby booking.Category ascending
+                        select booking;
+
+            return filteredBookingsasc.ToList();
+
+
+
+        }
 
     }
 }
