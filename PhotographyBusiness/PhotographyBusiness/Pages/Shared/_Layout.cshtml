@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PhotographyBusiness.styles.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+
+
 
 </head>
 <body class="">
@@ -43,10 +47,13 @@
                         <li class="nav-item ms-3">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">About us</a>
                         </li>
-
-                        <li class="nav-item ms-3">
-                            <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/GetAllBookings">Bookings</a>
-                        </li>
+                        @if(Context.User.Identity.Name == "admin")
+                        {
+                            <li class="nav-item ms-3">
+                                <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/GetAllBookings">Bookings</a>
+                            </li>
+                        }
+                       
                
                         <li class="nav-item ms-3">
                             <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/CreateBookingRequestPage">Enquiry</a>
@@ -99,7 +106,11 @@
                                         <li><a class="dropdown-item text-dark" href="#">My Profile</a></li>
                                         <li><a class="dropdown-item text-dark" href="#">Booking</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-dark" href="/AccountPages/LogOutPage" >Log out</a></li>
+                                        <li><a class="dropdown-item text-dark" asp-page="/AccountPages/LogOutPage" >Logout</a></li>
+                                        @if (Context.User.Identity.Name == "admin")
+                                        {
+                                            <li><a class="dropdown-item text-dark" asp-page="/AdminPages/AdminDashboardPage">Admin dashboard</a></li>
+                                        }
                                     </ul>
                                 </li>
 
@@ -127,7 +138,7 @@
 <footer class="bg-white pb-1">
     <div class="d-flex justify-content-between container">
         <div class="pt-2">
-            <img src="~/media/logo.png" style="height: 20vh" class="pop-out" />
+            <img src="~/media/logo.png" style="height: 150px" class="pop-out" />
             <h5 style="font-size: 12px" class="pt-1">&copy2023 Copyright Jack Saunders Photography</h5>
         </div>
         <div class="pt-2">

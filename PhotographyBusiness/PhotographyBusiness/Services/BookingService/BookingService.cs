@@ -1,5 +1,7 @@
 ﻿using PhotographyBusiness.Models;
 using PhotographyBusiness.MockData;
+using PhotographyBusiness.EFDbContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace PhotographyBusiness.Services.BookingService
 {
@@ -13,17 +15,26 @@ namespace PhotographyBusiness.Services.BookingService
         public BookingService(GenericDbService<Booking> genericDbService)
         {
             _genericDbService = genericDbService;
-            //Bookings = _genericDbService.GetObjectsAsync().Result.ToList();
+            //Bookings = GetAllBookingsAsync().Result;
             Bookings = MockBookings.GetAllMockBookings();
         }
 
 
+        internal async Task<List<Booking>> GetAllBookingsAsync()
+        {
+            using (var context = new ObjectDbContext()) // Silas: vi skal også have useren med, når vi kalder på bookingen
+            {
+                return await context.Bookings.Include(b => b.User).AsNoTracking().ToListAsync();
+            }
+        }
+
         public List<Booking> GetAllBookings()
         {
+            
             return Bookings;
         }
 
-        public async Task<Booking> GetBookingById(int id)
+        public Booking GetBookingById(int id)
         {
             foreach(Booking booking in Bookings)
             {
@@ -34,23 +45,36 @@ namespace PhotographyBusiness.Services.BookingService
             }
             return null;
         }
+		public Booking GetBookingById_User(int id)
+		{
+			foreach (Booking booking in Bookings)
+			{
+				if (id == booking.User.UserId)
+				{
+					return booking;
+				}
+			}
+			return null;
+		}
 
-        public List<Booking> GetBookingsByUserId(int userId)
+		public List<Booking> GetBookingsByUserId(int userId)
         {
             IEnumerable<Booking> bookings = from booking in Bookings
-                                     where booking.UserId == userId
+                                     where booking.User.UserId == userId
                                      select booking;
 
             return bookings.ToList();
         }
 
-        public Task CreateBooking(Booking booking)
+        public async Task CreateBookingAsync(Booking booking)
         {
-            return _genericDbService.AddObjectAsync(booking);
+            Bookings.Add(booking);
+            await _genericDbService.AddObjectAsync(booking);
         }
 
         public Task DeleteBooking(int id)
         {
+            Bookings.Remove(GetBookingById(id));
             return _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
         }
 
@@ -59,19 +83,24 @@ namespace PhotographyBusiness.Services.BookingService
             return _genericDbService.UpdateObjectAsync(booking);
         }
 
-        public async Task<List<Booking>> GetAllBookingsThisMonth()
+        public List<Booking> GetAllBookingsThisMonth()
         {
             return GetAllBookings().Where(b => b.Date >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
         }
 
-        public async Task<List<Booking>> GetUpcomingBookings()
+        public List<Booking> GetUpcomingBookings()
         {
             return GetAllBookings().Where(b => b.IsAccepted == true && b.Date > DateTime.Now).ToList();
         }
 
-        public async Task<List<Booking>> GetMostRecentRequests()
+        public List<Booking> GetMostRecentRequests()
         {
             return GetAllBookings().Where(b => b.IsAccepted == false).OrderBy(b => b.DateCreated).Take(5).ToList();
+        }
+
+        public List<Booking> GetAllLBookingsRequests()
+        {
+            return GetAllBookings().Where(b => b.IsAccepted == false).ToList();
         }
     }
 }

@@ -4,7 +4,7 @@ namespace PhotographyBusiness.Services.UserService
 {
     public class UserService : IUserService
     {
-        public List<User> Users {  get; } 
+        public List<User> Users { get; set; } 
         private GenericDbService<User> _genericDbService;
         public UserService(GenericDbService<User> genericDbService)
         {
@@ -60,7 +60,7 @@ namespace PhotographyBusiness.Services.UserService
             {
                 if (user.Name.Equals(name))
                 {
-                    return user;
+                    return  user;
                 }
             }
             return null;
@@ -96,5 +96,6 @@ namespace PhotographyBusiness.Services.UserService
                 await _genericDbService.UpdateObjectAsync(user);
             }
         }
+        public User GetUserBystr(string str) => GetAllUsers().Find(user => user.Name.ToLower() == str.ToLower());
     }
 }

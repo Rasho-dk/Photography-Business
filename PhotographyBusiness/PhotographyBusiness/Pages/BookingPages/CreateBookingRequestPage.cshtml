@@ -12,33 +12,39 @@
                 <div class="form-group p-2">
                     <label asp-for="@Model.User.Email" class="control-label text-white">Email</label>
                     <input asp-for="@Model.User.Email" class="form-control" readonly />
+                    <span asp-validation-for="@Model.User.Email" class="text-danger"></span>
                 </div>
                 <div class="form-group p-2">
                     <label asp-for="@Model.User.Name" class="control-label text-white">Name</label>
                     <input asp-for="@Model.User.Name" class="form-control" readonly />
+                    <span asp-validation-for="@Model.User.Name" class="text-danger"></span>
                 </div>
                 <div class="form-group p-2 d-flex">
                     <div class="me-1">
                         <label asp-for="@Model.City" class="control-label text-white">City</label>
                         <input asp-for="@Model.City" class="form-control" />
+                        <span asp-validation-for="@Model.City" class="text-danger"></span>
                     </div>
                     <div class="ms-1">
                         <label asp-for="@Model.ZipCode" class="control-label text-white">Zip code</label>
                         <input asp-for="@Model.ZipCode" class="form-control" />
+                        <span asp-validation-for="@Model.ZipCode" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group p-2">
                     <label asp-for="@Model.Street" class="control-label text-white">Street</label>
                     <input asp-for="@Model.Street" class="form-control" />
+                    <span asp-validation-for="@Model.Street" class="text-danger"></span>
                 </div>
                 <div class="form-group p-2">
                     <label asp-for="@Model.Category" class="control-label text-white">Category</label>
                     <input asp-for="@Model.Category" class="form-control" />
+                    <span asp-validation-for="@Model.Category" class="text-danger"></span>
                 </div>
                 <div class="form-group p-2">
-                    <label asp-for="@Model.Booking.CustomerNote" class="control-label text-white">Note</label>
-                    <textarea id="CustomerNote" name="Note" rows="6" cols="50" class="form-control textarea-input" style="resize:none"></textarea>
-                    <span asp-validation-for="@Model.Booking.CustomerNote"></span>
+                    <label asp-for="@Model.CustomerNote" class="control-label text-white">Note</label>
+                    <textarea asp-for="@Model.CustomerNote" rows="6" cols="50" class="form-control textarea-input" style="resize:none"></textarea>
+                    <span asp-validation-for="@Model.CustomerNote" class="text-danger"></span>
                     @*<input asp-for="@Model.Booking.CustomerNote" class="control-label" />*@
                 </div>
                 <div class="form-group m-2 d-flex justify-content-between">
