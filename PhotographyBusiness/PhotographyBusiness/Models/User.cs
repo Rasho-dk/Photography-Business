@@ -47,6 +47,15 @@ namespace PhotographyBusiness.Models
             PhoneNumber = phoneNumber;
             DateCreated = DateTime.Now;
         }
+        public User(int id,string email, string password, string name, string phoneNumber)
+        {
+            UserId = id;
+            Email = email;
+            Password = password;
+            Name = name;
+            PhoneNumber = phoneNumber;
+            DateCreated = DateTime.Now;
+        }
         /// <summary>
         /// Defeault constructor for DB
         /// </summary>

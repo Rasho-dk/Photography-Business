@@ -60,7 +60,7 @@ namespace PhotographyBusiness.Services.UserService
             {
                 if (user.Name.Equals(name))
                 {
-                    return user;
+                    return  user;
                 }
             }
             return null;

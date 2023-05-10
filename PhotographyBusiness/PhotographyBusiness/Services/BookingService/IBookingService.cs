@@ -15,6 +15,8 @@ namespace PhotographyBusiness.Services.BookingService
         public List<Booking> GetUpcomingBookings();
         public List<Booking> GetMostRecentRequests();
         public List<Booking> GetAllLBookingsRequests();
+        Booking GetBookingById_User(int id);
 
-    }
+
+	}
 }

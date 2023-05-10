@@ -24,11 +24,11 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         public IActionResult OnGet()
         {
-            User = userService.GetUserBystr(HttpContext.User.Identity.Name);
-            
+            User = userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
             bookings = bookingService.GetAllBookings().Where(x => x.IsAccepted == true).ToList();
             return Page();
         }
+       
 
     }
 }
