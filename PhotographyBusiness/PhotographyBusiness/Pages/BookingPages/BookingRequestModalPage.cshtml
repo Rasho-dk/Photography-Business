@@ -7,67 +7,83 @@
     <div class="modal-dialog">
 
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><small class="text-muted">(Id: @Model.Booking.BookingId)</small> @Model.Booking.User.Email</h5>
-                <a type="button" class="close" asp-page="GetAllBookingRequestsPage">&times;</a>
+            <div class="modal-header justify-content-center">
+                <h5 class="modal-title">Booking Request no. @Model.Booking.BookingId</h5>
             </div>
             <div class="modal-body">
-                <table class="w-100 no-border">
-                    <tr>
-                        <th class="w-50 border-right align-top">
-                            <div class="d-grid">
-                                <div>
-                                    <label asp-for="@Model.Booking.Category" class="control-label text-black">Category</label>
-                                    <input asp-for="@Model.Booking.Category" class="form-control" readonly/>
-                                </div>
-                                <div>
-                                    <label asp-for = "@Model.Booking.Date" class="control-label text-black">Date</label>
-                                    <input asp-for="@Model.Booking.Date" class="form-control" readonly/>
-                                </div>
-                                <div>
-                                    <label asp-for = "@Model.Booking.Address" class="control-label text-black">Address</label>
-                                    <input asp-for="@Model.Booking.Address" class="form-control" readonly />
-                                </div>
-                                <div>
-                                    <label asp-for="@Model.Price" class="control-label text-black">Price</label>
-                                    <input asp-for="@Model.Price" class="form-control"/>
-                                </div>
-                                <div>
-                                    <label asp-for="@Model.AdminNote" class="control-label text-black">Admin Note</label>
-                                    <textarea asp-for="@Model.AdminNote" id="AdminNote" name="Note" rows="6" cols="50" class="form-control textarea-input" style="resize:none"></textarea>
-                                </div>
-                            </div>
-                        </th>
-                        <th class="w-50 border-left align-top">
-                            <div class="d-grid">
-                                <label asp-for = "@Model.Booking.User.Name" class="control-label text-black">Customer Name</label>
-                                <input asp-for="@Model.Booking.User.Name"  class="form-control" readonly/>
-                            </div>
-                            <div>
-                                <label asp-for="@Model.Booking.User.Email" class="control-label text-black">Customer Email</label>
-                                <input asp-for="@Model.Booking.User.Email" class="form-control" readonly />
-                            </div>
-                            <div>
-                                <label asp-for="@Model.Booking.CustomerNote" class="control-label text-black">Customer Note</label>
-                                <textarea asp-for="@Model.Booking.CustomerNote" name="Note" rows="6" cols="50" class="form-control textarea-input" style="resize:none" readonly></textarea>
-                            </div>
-                        </th>
-                    </tr>
-                </table>
-                
-                <div class="modal-footer">
-                    <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw"
-                    asp-page="AcceptRequestPage" asp-route-id="@Model.Booking.BookingId" 
-                    asp-route-price="@Model.Price" asp-route-note="@Model.AdminNote">Accept</a>
+                <div class="form-group p-2 d-flex justify-content-around">
+                    <div>
+                        <h5>
+                            Booking Information
+                        </h5>
+                    </div>
+                    
+                    <div>
+                        <h5>
+                            Customer Information
+                        </h5>
+                    </div>
+                </div>
+                <div class="form-group p-2 d-flex justify-content-around">
+                    <div class="me-1">
+                        <label asp-for="@Model.Booking.Category" class="control-label text-black">Category</label>
+                        <input asp-for="@Model.Booking.Category" class="form-control btn-border-black" readonly />
+                    </div>
+                    <div class="ms-1">
+                        <label asp-for="@Model.Booking.User.Name" class="control-label text-black">Customer Name</label>
+                        <input asp-for="@Model.Booking.User.Name" class="form-control btn-border-black" readonly />
+                    </div>
+                </div>
+                <div class="form-group p-2 d-flex justify-content-around">
+                    <div class="me-1">
+                        <label asp-for="@Model.Booking.Date" class="control-label text-black">Date</label>
+                        <input asp-for="@Model.Booking.Date" class="form-control btn-border-black" readonly />
+                    </div>
+                    <div class="ms-1">
+                        <label asp-for="@Model.Booking.User.Email" class="control-label text-black">Customer Email</label>
+                        <input asp-for="@Model.Booking.User.Email" class="form-control btn-border-black" readonly />
+                    </div>
+                </div>
+                <div class="form-group p-2 d-flex justify-content-around">
+                    <div class="me-1">
+                        
+                        <label asp-for="@Model.Booking.Address" class="control-label text-black">Address</label>
+                        <input asp-for="@Model.Booking.Address" class="form-control btn-border-black" readonly />
+                        <br style="margin-top: 10px;"/>
+                        <label asp-for="@Model.Price" class="control-label text-black">Price</label>
+                        <input asp-for="@Model.Price" class="form-control btn-border-black" />
+                    </div>
+                    
+                    <div class="ms-1 justify-content-center">
+                        <img src="~/media/logo.png" style="height: 150px;" />
+                    </div>
+                </div>
+                <div class="form-group p-2 d-flex justify-content-around">
+                    <div class="me-1">
+                        <label asp-for="@Model.AdminNote" class="control-label text-black">Admin Note</label>
+                        <textarea asp-for="@Model.AdminNote" name="Note" rows="6" cols="23" class="form-control textarea-input btn-border-black" style="resize:none"></textarea>
+                    </div>
+                    <div class="ms-1">
+                        <label asp-for="@Model.Booking.CustomerNote" class="control-label text-black">Customer Note</label>
+                        <textarea asp-for="@Model.Booking.CustomerNote" name="Note" rows="6" cols="23" class="form-control textarea-input btn-border-black" style="resize:none" readonly></textarea>
+                    </div>
+                </div>
 
-                    <a class="btn text-dark btn-border-black btn-square nav-link" style="border-radius: 0; min-width: 5vw; max-width: 15vw;" 
-                    asp-page="GetAllBookingRequestsPage" asp-route-id="@Model.Booking.BookingId">Decline</a>
+                <div class="form-group p-2">
+                    <div class="form-group m-2 d-flex justify-content-center">
+                        <input type="submit" value="Confirm" class="btn btn-dark" style="min-width: 6vw; border-radius: 0; margin-right: 40px;" />
+
+                        <a asp-page="/GetAllBookingRequestsPage" class="btn btn-light btn-border-black" style="border-radius: 0; min-width: 6vw;">Decline</a>
+                    </div>
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+
+
+
 
 
 
