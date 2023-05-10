@@ -8,7 +8,7 @@ using PhotographyBusiness.Services.UserService;
 
 namespace PhotographyBusiness.Pages.BookingPages
 {
-    [Authorize(Roles ="admin")]
+    [Authorize(Roles = "admin")]
     public class GetAllBookingsModel : PageModel
     {
         private IBookingService bookingService;

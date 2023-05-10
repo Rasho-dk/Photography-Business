@@ -6,13 +6,13 @@ using PhotographyBusiness.Services.UserService;
 
 namespace PhotographyBusiness.Pages.BookingPages
 {
-    public class EditBookingPageModel : PageModel
+    public class EditBookingPageTestModel : PageModel
     {
         private IBookingService bookingService;
         private IUserService userService;
         public User User { get; set; }  
         public Booking Booking { get; set; }    
-        public EditBookingPageModel(IBookingService bookingService, IUserService userService)
+        public EditBookingPageTestModel(IBookingService bookingService, IUserService userService)
         {
             this.bookingService = bookingService;   
             this.userService = userService;

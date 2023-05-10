@@ -55,7 +55,7 @@
                             @booking.Address
                         </td>*@
                         <td>
-                            <a class="btn btn-black" asp-page="/BookingPages/EditBookingPage" asp-route-id="@booking.User.UserId">
+                            <a class="btn btn-black" asp-page="" asp-route-id="@booking.User.UserId">
                                 <i class="fa fa-edit pop-out"></i></a>
                             <a class="btn btn-danger" asp-page="" asp-route-id="@booking.User.UserId">
                                 <i class="fa fa-trash pop-out"></i>
@@ -95,9 +95,9 @@
                         <div class="col-md-4"style="word-wrap: break-word;">
                             <!-- Admin information -->
                             <h5>Admin</h5>
-                            <p>Name: @Model.User.Name</p>
-                            <p>Email: @Model.User.Email</p>
-                            <p>Phone:@Model.User.PhoneNumber</p>
+                            @*<p>Name: @Model.User.Name</p>*@
+                            @*<p>Email: @Model.User.Email</p>
+                            <p>Phone:@Model.User.PhoneNumber</p>*@
                             <p>Note: <span id="adminNote" style="font-style:italic;"></span></p>
                             <p>Price: <span id="price" style="font-style:italic;"></span></p>
                         </div>
@@ -151,17 +151,17 @@
             //Display admin info. in modal
             adminNoteElement.textContent = adminNote 
             priceElement.textContent = price
-               })
+        })
 
                //Filtering
-        $(document).ready(function () {
-            $("#myInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
                 });
             });
-        });
 
     </script>
 }
