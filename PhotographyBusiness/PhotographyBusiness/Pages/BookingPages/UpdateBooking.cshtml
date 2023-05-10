@@ -1,0 +1,44 @@
+﻿@page
+@model PhotographyBusiness.Pages.BookingPages.UpdateBookingModel
+@{
+}
+
+<link rel="stylesheet" href="/css/styles.css" />
+
+<h1>Update booking</h1>
+<div class="transparent-black">
+    <div class="d-flex justify-content-center" style="">
+        <div class="d-flex flex-column m-4" style="min-width:30vw">
+            <form method="post" class="p-4" style="background-color: rgba(0,0,0,0.7)">
+                <div class="form-group p-2">
+                    <label asp-for="@Model.Booking.BookingId" class="control-label text-white">Id</label>
+                    <input asp-for="@Model.Booking.BookingId" class="form-control" readonly />
+                </div>
+                <div>
+                    <label asp-for="@Model.Booking.User.Name" class="control-label text-white">Customer name</label>
+                    <input asp-for="@Model.Booking.User.Name" class="form-control" readonly />
+                </div>
+                <div>
+                    <label asp-for="@Model.Booking.Category" class="control-label text-white">Category</label>
+                    <input asp-for="@Model.Booking.Category" class="form-control" />
+                </div>
+                <div>
+                    <label asp-for="@Model.Booking.Price" class="control-label text-white">Price</label>
+                    <input asp-for="@Model.Booking.Price" class="form-control" />
+                </div>
+                <div>
+                    <label asp-for="@Model.Booking.AdminNote" class="control-label text-white">Admin</label>
+                    <input asp-for="@Model.Booking.AdminNote" class="form-control" />
+                </div>
+                <div>
+                    <label asp-for="@Model.Booking.Date" class="control-label text-white">Date</label>
+                    <input asp-for="@Model.Booking.Date" class="form-control" />
+                </div>
+                <div>
+                    <label asp-for="@Model.Booking.Address" class="control-label text-white">Address</label>
+                    <input asp-for="@Model.Booking.Address" class="form-control" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
