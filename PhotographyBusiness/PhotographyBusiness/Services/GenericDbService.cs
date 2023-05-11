@@ -46,7 +46,7 @@ namespace PhotographyBusiness.Services
                 foreach(T obj in objects)
                 {
                     context.Set<T>().Add(obj);
-                    context.SaveChanges();
+                    await context.SaveChangesAsync();
                 }
                 context.SaveChanges();
             }
@@ -57,6 +57,7 @@ namespace PhotographyBusiness.Services
             using (var context = new ObjectDbContext())
             {
                 context.Set<T>().Update(obj);
+                await context.SaveChangesAsync();
             }
         }
     }
