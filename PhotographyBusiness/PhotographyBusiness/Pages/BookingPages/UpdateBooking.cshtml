@@ -19,8 +19,16 @@
                     <input asp-for="@Model.Booking.User.Name" class="form-control" readonly />
                 </div>
                 <div>
-                    <label asp-for="@Model.User.Email" class="control-label text-white">Customer email</label>
-                    <input asp-for="@Model.User.Email" class="form-control" readonly />
+                    <label asp-for="@Model.Booking.User.Email" class="control-label text-white">Customer email</label>
+                    <input asp-for="@Model.Booking.User.Email" class="form-control" readonly />
+                </div>
+                <div>
+                    <label asp-for="@Model.Booking.User.UserId" class="control-label text-white" hidden></label>
+                    <input asp-for="@Model.Booking.User.UserId" class="form-control" hidden readonly />
+                </div>
+                <div>
+                    <label asp-for="@Model.Booking.User.Password" class="control-label text-white" hidden></label>
+                    <input asp-for="@Model.Booking.User.Password" class="form-control" hidden readonly />
                 </div>
                 <div>
                     <label asp-for="@Model.Booking.Category" class="control-label text-white">Category</label>
@@ -42,6 +50,8 @@
                     <label asp-for="@Model.Booking.Address" class="control-label text-white">Address</label>
                     <input asp-for="@Model.Booking.Address" class="form-control" />
                 </div>
+              
+
                 <div class="form-group m-2 d-flex justify-content-between">
                     <a asp-page="/BookingPages/GetAllBookings" class="btn btn-dark btn-border-white" style="border-radius: 0; min-width: 6vw;">Go back</a>
                     <input type="submit" value="Update" class="btn btn-light" style="min-width: 6vw; border-radius: 0;" />

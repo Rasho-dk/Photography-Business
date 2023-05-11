@@ -37,7 +37,7 @@
                                 data-user-date="@booking.Date"
                                 data-admin-note="@booking.AdminNote"
                                 data-admin-price="@booking.Price"                           
-                                asp-route-id="@booking.User.UserId">
+                                asp-route-id="@booking.BookingId">
                                 @booking.User.Name <i class="fas fa-info-circle fa-beat fa-xs"></i>
                             </button>
                         </td>
@@ -51,11 +51,17 @@
                         <td>
                             @booking.Date
                         </td>
-                        @*<td>
+                        <td hidden>
                             @booking.Address
-                        </td>*@
+                        </td>
+                        <td hidden>
+                            @booking.Address
+                        </td>
+                        <td hidden>
+                            @booking.User.UserId
+                        </td>
                         <td>
-                            <a class="btn btn-black" asp-page="/BookingPages/UpdateBooking" asp-route-id="@booking.User.UserId">
+                            <a class="btn btn-black" asp-page="/BookingPages/UpdateBooking" asp-route-id="@booking.BookingId">
                                 <i class="fa fa-edit pop-out"></i></a>
                             <a class="btn btn-danger" asp-page="/BookingPages/DeleteBooking" asp-route-id="@booking.User.UserId">
                                 <i class="fa fa-trash pop-out"></i>
