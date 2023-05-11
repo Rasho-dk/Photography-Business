@@ -5,8 +5,8 @@
 
 <link rel="stylesheet" href="/css/styles.css" />
 
-<h1>Update booking</h1>
 <div class="transparent-black">
+    <h1 class="text-white">Update booking</h1>
     <div class="d-flex justify-content-center" style="">
         <div class="d-flex flex-column m-4" style="min-width:30vw">
             <form method="post" class="p-4" style="background-color: rgba(0,0,0,0.7)">
@@ -17,6 +17,10 @@
                 <div>
                     <label asp-for="@Model.Booking.User.Name" class="control-label text-white">Customer name</label>
                     <input asp-for="@Model.Booking.User.Name" class="form-control" readonly />
+                </div>
+                <div>
+                    <label asp-for="@Model.User.Email" class="control-label text-white">Customer email</label>
+                    <input asp-for="@Model.User.Email" class="form-control" readonly />
                 </div>
                 <div>
                     <label asp-for="@Model.Booking.Category" class="control-label text-white">Category</label>
@@ -37,6 +41,10 @@
                 <div>
                     <label asp-for="@Model.Booking.Address" class="control-label text-white">Address</label>
                     <input asp-for="@Model.Booking.Address" class="form-control" />
+                </div>
+                <div class="form-group m-2 d-flex justify-content-between">
+                    <a asp-page="/BookingPages/GetAllBookings" class="btn btn-dark btn-border-white" style="border-radius: 0; min-width: 6vw;">Go back</a>
+                    <input type="submit" value="Update" class="btn btn-light" style="min-width: 6vw; border-radius: 0;" />
                 </div>
             </form>
         </div>
