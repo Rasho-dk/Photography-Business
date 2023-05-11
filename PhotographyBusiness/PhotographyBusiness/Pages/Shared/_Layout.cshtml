@@ -50,13 +50,17 @@
                         @if (Context.User.Identity.Name == "admin")
                         {
                             <li class="nav-item ms-3">
-                                <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/GetAllBookings">Bookings</a>
+                                <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/AdminPages/AdminDashboardPage">Dashboard</a>
                             </li>
-                        }                 
-                                      
-                        <li class="nav-item ms-3">
-                            <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/CreateBookingRequestPage">Enquiry</a>
-                        </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ms-3">
+                                <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/CreateBookingRequestPage">Enquiry</a>
+                            </li>
+                        }
+
+                        
 
                        @{
                            if (Context.User.Identity.Name == null)
@@ -104,18 +108,19 @@
                                         <li><a class="dropdown-item text-dark" asp-page="/AccountPages/MyProfilePage">My Profile</a></li>
                                         @if (Context.User.Identity.Name != "admin")
                                         {
-                                            <li><a asp-page="/BookingPages/MyBookingPage" class="dropdown-item text-dark">Mybooking</a></li>
-
+                                            <li><a asp-page="/BookingPages/MyBookingPage" class="dropdown-item text-dark">My Bookings</a></li>
                                         }
-
-                                        
-
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-dark" asp-page="/AccountPages/LogOutPage" >Logout</a></li>
                                         @if (Context.User.Identity.Name == "admin")
                                         {
-                                            <li><a class="dropdown-item text-dark" asp-page="/AdminPages/AdminDashboardPage">Admin dashboard</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-dark" asp-page="/AdminPages/AdminDashboardPage">Booking Requests</a></li>
+                                            <li><a class="dropdown-item text-dark" asp-page="/BookingPages/GetAllBookings">Accepted Bookings</a></li>
+                                            <li><a class="dropdown-item text-dark" asp-page="/AccountPages/GetAllUsersPage">Users</a></li>
+                                            <li><a class="dropdown-item text-dark" asp-page="/AdminPages/AdminDashboardPage">Analytics</a></li>
                                         }
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item text-dark" asp-page="/AccountPages/LogOutPage" >Logout</a></li>
+                                        
                                     </ul>
                                 </li>
 
@@ -146,25 +151,34 @@
             <img src="~/media/logo.png" style="height: 150px" class="pop-out" />
             <h5 style="font-size: 12px" class="pt-1">&copy2023 Copyright Jack Saunders Photography</h5>
         </div>
+        
         <div class="pt-2">
-            <h5 style="">Follow us on</h5>
-            <div style="">
-                <i class="fa fa-brands fa-square-twitter fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+            <h5 class="text-center">Follow us on</h5>
+            <div class="d-flex">
+                <div class="my-4 me-5">
+                    <div>
+                        <i class="fa fa-brands fa-square-twitter fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
 								"> Twitter</a><br />
-            </div>
-            <div style="">
-                <i class="fa fa-brands fa-square-facebook fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+                    </div>
+                    <div>
+                        <i class="fa fa-brands fa-square-facebook fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
 								"> Facebook</a><br />
-            </div>
-            <div style="">
-                <i class="fa fa-brands fa-square-instagram fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+                    </div>
+                    
+                </div>
+
+                <div class="my-4">
+                    <div style="pt-2">
+                        <i class="fa fa-brands fa-square-instagram fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
 								"> Instagram</a><br />
-            </div>
-            <div style="">
-                <i class="fa fa-brands fa-square-youtube fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+                    </div>
+                    <div style="">
+                        <i class="fa fa-brands fa-square-youtube fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
 								"> Youtube</a><br />
+                    </div>
+                </div>
             </div>
-            <div style="">
+            <div class="text-center">
                 <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 12px;
 								"> Privacy Policy</a>
                 <a class="text-dark" style="font-size:12px">|</a>

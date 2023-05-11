@@ -4,6 +4,8 @@
     ViewData["Title"] = "Home page";
 }
 
+@using PhotographyBusiness.Pages.AccountPages
+
 <link rel="stylesheet" href="css/carousel.css" />
 
 <div class="wrapper">
@@ -25,9 +27,19 @@
     </div>
 </div>
 
-<div class="text-center">
-    <a class="btn btn-lg btn-dark m-3 btn-square pop-out" asp-area="" asp-page="/BookingPages/CreateBookingRequestPage">Enquiry</a>
-</div>
+@if (HttpContext.User.Identity.Name != "admin")
+{
+    <div class="text-center">
+        <a class="btn btn-lg btn-dark m-3 btn-square pop-out" asp-area="" asp-page="/BookingPages/CreateBookingRequestPage">Enquiry</a>
+    </div>
+
+}
+else
+{
+    <div class="text-center">
+        <a class="btn btn-lg btn-dark m-3 btn-square pop-out" asp-area="" asp-page="/AdminPages/AdminDashboardPage">Admin Dashboard</a>
+    </div>
+}
 
 <div class="w-100 text-center pt-4 pb-5" style="background-color: #000000">
     <h5 class="text-white m-2 pb-3">What people have to say about us...</h5>
