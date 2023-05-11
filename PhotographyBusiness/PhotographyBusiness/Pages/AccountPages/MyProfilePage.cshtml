@@ -70,15 +70,18 @@
                         <input type="text" class="form-control" placeholder="enter phone number" asp-for="@Model.User.PhoneNumber">
                             <span asp-validation-for="@Model.User.PhoneNumber" class="text-danger"></span>
                     </div>                                   
-                </div>
+                </div>                   
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button pop-out" type="submit">Save Profile</button></div>
+                <br />
+                    @if(Model.ConformUpdate != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @Model.ConformUpdate
+                        </div>
+
+                    }
 
                     
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button pop-out" type="submit">Save Profile</button></div>
-                    
-                    <div class="alert alert-success" role="alert">
-                        A simple success alert—check it out!
-                    </div>
-                  
             </div>
         </div>
        
