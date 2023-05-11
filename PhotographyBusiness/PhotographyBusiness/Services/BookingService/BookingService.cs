@@ -82,6 +82,19 @@ namespace PhotographyBusiness.Services.BookingService
 
         public Task UpdateBooking(Booking booking)
         {
+            foreach(Booking b in Bookings)
+            {
+                if(b.BookingId == booking.BookingId)
+                {
+                    b.AdminNote = booking.AdminNote;
+                    b.Category = booking.Category;
+                    b.Date = booking.Date;
+                    b.Address = booking.Address;
+                    b.Price = booking.Price;
+                    break;
+                }
+            }
+
             return _genericDbService.UpdateObjectAsync(booking);
         }
 
