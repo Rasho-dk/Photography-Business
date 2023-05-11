@@ -56,9 +56,8 @@
         <thead>
             <tr class="table-light">
                 <th>Name 
-                    <a data-toggle="tooltip" title="Sort By Name" asp-page-handler="SortBookingByName"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
+                    <a data-toggle="tooltip" title="Sort By Name" asp-page-handler="SortBookingByName"><i onclick="myFunction(this)" class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
                     </th>
-
                 <th>Email
                     <a data-toggle="tooltip" title="Sort By Email" asp-page-handler="SortBookingByEmail"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
                 </th>
@@ -188,6 +187,11 @@
 
 @section scripts{
     <script>
+
+        function myFunction(x) {
+            x.classList.toggle("fa fa-light fa-arrow-down-z-a");
+        }
+
         var myModal = document.getElementById('myModal')
         var myInput = document.getElementById('myInput')
 
