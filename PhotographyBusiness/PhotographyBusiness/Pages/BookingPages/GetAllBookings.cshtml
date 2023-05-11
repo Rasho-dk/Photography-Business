@@ -28,6 +28,16 @@
            
         </div>
 
+        <form method="post" class="form-inline">
+            <label for="CategoryInput">Choose a category:</label>
+            <select asp-for="CategoryInput">
+                <option value="Marriage">Marriage</option>
+                <option value="Family">Family</option>
+                <option value="Portrait">Portrait</option>
+                <input type="submit" asp-page-handler="CategoryFilter" value="Filter &nbsp" class="btn btn-border-black" />
+            </select>
+        </form>
+
         
     </form>
 
@@ -39,12 +49,7 @@
             </div>
         </form>
 
-        <form method="post" class="form-inline">
-            <div class="input-group mb-2">
-                <input asp-for="CategoryInput" class="form-control me-1" placeholder="Filter by Category " />
-                <input type="submit" asp-page-handler="CategoryFilter" value="Filter &nbsp" class="btn btn-border-black" />
-            </div>
-        </form>
+
 
     </div>
 </div>
