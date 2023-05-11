@@ -81,7 +81,7 @@ namespace PhotographyBusiness.Services.BookingService
         }
 
         public Task UpdateBooking(Booking booking)
-        {
+        {   
             return _genericDbService.UpdateObjectAsync(booking);
         }
 
