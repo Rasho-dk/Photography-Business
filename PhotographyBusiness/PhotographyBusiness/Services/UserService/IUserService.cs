@@ -10,7 +10,9 @@ namespace PhotographyBusiness.Services.UserService
         Task<User> GetUserByNameAsync(string name);
         Task<User> DeleteUserAsyn(int id); 
         Task CreateUserAsyn(User user); 
-        Task UpdateUserAsyn(User user); 
+        Task UpdateUserAsyn(User user);
+        User GetUserBystr(string str);
+
 
     }
 }

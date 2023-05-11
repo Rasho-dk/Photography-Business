@@ -45,8 +45,19 @@ namespace PhotographyBusiness.Services.BookingService
             }
             return null;
         }
+		public Booking GetBookingById_User(int id)
+		{
+			foreach (Booking booking in Bookings)
+			{
+				if (id == booking.User.UserId)
+				{
+					return booking;
+				}
+			}
+			return null;
+		}
 
-        public List<Booking> GetBookingsByUserId(int userId)
+		public List<Booking> GetBookingsByUserId(int userId)
         {
             IEnumerable<Booking> bookings = from booking in Bookings
                                      where booking.User.UserId == userId
