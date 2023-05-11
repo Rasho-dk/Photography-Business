@@ -29,7 +29,7 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         public IActionResult OnGet(int id)
         {
-            BookingRequests = _bookingService.GetAllBookingRequests();
+            BookingRequests = _bookingService.GetAllBookingsRequests();
             Booking = _bookingService.GetBookingById(id);
             return Page();
         }

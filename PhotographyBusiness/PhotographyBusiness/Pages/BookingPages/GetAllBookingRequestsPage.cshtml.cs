@@ -25,7 +25,7 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         public void OnGet()
         {
-            BookingRequests = _bookingService.GetAllBookingRequests();
+            BookingRequests = _bookingService.GetAllBookingsRequests();
         }
     }
 }
