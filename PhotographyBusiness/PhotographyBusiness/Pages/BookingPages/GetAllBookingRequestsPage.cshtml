@@ -1,0 +1,109 @@
+﻿@page
+@model PhotographyBusiness.Pages.BookingPages.GetAllBookingRequestsPageModel
+@{
+}
+
+
+<div class="container d-flex flex-column">
+    <div class="text-center">
+        <br />
+        <h1>Booking Requests</h1>
+        <br />
+        <div class="d-flex justify-content-around">
+            <table class="w-100 right-border left-border">
+                <thead>
+                    <tr class="">
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Category</th>
+                        <th>Address</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (@Model.BookingRequests != null)
+                    {
+                        foreach (var booking in Model.BookingRequests)
+                        {
+                            <tr class="">
+                                <td><a class="btn btn-dark btn-round" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.BookingId</a></td>
+                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.Date</a></td>
+                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.User.Name</a></td>
+                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.User.Email</a></td>
+                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.Category</a></td>
+                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.Address</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <a asp-page="/AdminPages/AdminDashboardPage">Back to dashboard</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    .no-border {
+        border: none;
+    }
+
+    th {
+        border: none;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    table {
+        border-top: solid 2px black;
+        border-bottom: solid 2px black;
+    }
+
+    .right-border {
+        border-right: solid 2px black;
+    }
+
+    .top-border {
+        border-top: solid 2px black;
+        border-bottom: solid 2px black;
+    }
+
+    .left-border {
+        border-left: solid 2px black;
+    }
+
+    td {
+        border: solid 1px black;
+    }
+
+    h5 {
+        font-size: 1.1rem;
+    }
+
+    .btn-round {
+        border-radius: 50px;
+        transition: all .2s ease-in-out;
+    }
+
+        .btn-round:hover {
+            background-color: whitesmoke;
+            border: solid 1px whitesmoke;
+            color: black;
+        }
+
+    .number-contrast {
+        padding: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        border-radius: 100px;
+    }
+</style>
+

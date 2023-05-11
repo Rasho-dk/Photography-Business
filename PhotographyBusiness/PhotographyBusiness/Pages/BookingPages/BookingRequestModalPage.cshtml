@@ -1,0 +1,212 @@
+﻿@page
+@model PhotographyBusiness.Pages.BookingPages.BookingRequestModalPageModel
+@{
+}
+
+<div class="modal" id="myModal">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                <h5 class="modal-title">Booking Request no. @Model.Booking.BookingId</h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-group p-2 d-flex justify-content-around">
+                    <div>
+                        <h5>
+                            Booking Information
+                        </h5>
+                    </div>
+                    
+                    <div>
+                        <h5>
+                            Customer Information
+                        </h5>
+                    </div>
+                </div>
+                <div class="form-group p-2 d-flex justify-content-around">
+                    <div class="me-1">
+                        <label asp-for="@Model.Booking.Category" class="control-label text-black">Category</label>
+                        <input asp-for="@Model.Booking.Category" class="form-control btn-border-black" readonly />
+                    </div>
+                    <div class="ms-1">
+                        <label asp-for="@Model.Booking.User.Name" class="control-label text-black">Customer Name</label>
+                        <input asp-for="@Model.Booking.User.Name" class="form-control btn-border-black" readonly />
+                    </div>
+                </div>
+                <div class="form-group p-2 d-flex justify-content-around">
+                    <div class="me-1">
+                        <label asp-for="@Model.Booking.Date" class="control-label text-black">Date</label>
+                        <input asp-for="@Model.Booking.Date" class="form-control btn-border-black" readonly />
+                    </div>
+                    <div class="ms-1">
+                        <label asp-for="@Model.Booking.User.Email" class="control-label text-black">Customer Email</label>
+                        <input asp-for="@Model.Booking.User.Email" class="form-control btn-border-black" readonly />
+                    </div>
+                </div>
+                <div class="form-group p-2 d-flex justify-content-around">
+                    <div class="me-1">
+                        
+                        <label asp-for="@Model.Booking.Address" class="control-label text-black">Address</label>
+                        <input asp-for="@Model.Booking.Address" class="form-control btn-border-black" readonly />
+
+                        <img src="~/media/logo.png" style="height: 130px; margin-left: 25px; margin-top: 10px;" class="pop-out" />
+                    </div>
+                    
+                    <div class="ms-1 justify-content-center">
+                        <label asp-for="@Model.Booking.CustomerNote" class="control-label text-black">Customer Note</label>
+                        <textarea asp-for="@Model.Booking.CustomerNote" name="Note" rows="6" cols="23" 
+                        class="form-control textarea-input btn-border-black" style="resize:none" readonly></textarea>
+                    </div>
+                </div>
+                <div class="form-group p-2 d-flex justify-content-around">
+                    <div class="me-1">
+                        
+                    </div>
+                    <div class="ms-1">
+
+                    </div>
+                </div>
+                <form method="post">
+                    <div class="form-group p-2">
+                        <div class="form-group m-2 d-flex justify-content-center">
+                            <input type="submit" value="Confirm" class="btn btn-dark" style="min-width: 6vw; border-radius: 0; margin-right: 40px;"
+                            asp-route-id="@Model.Booking.BookingId" asp-route-note="@Model.AdminNote" asp-route-price="@Model.Price" />
+
+                            <a asp-page="/BookingPages/GetAllBookingRequestsPage" class="btn btn-light btn-border-black" style="border-radius: 0; min-width: 6vw;">Decline</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+<div class="container d-flex flex-column">
+    <div class="text-center">
+        <br />
+        <h1>Booking Requests</h1>
+        <br />
+        <div class="d-flex justify-content-around">
+            <table class="w-100 right-border left-border">
+                <thead>
+                    <tr class="">
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Category</th>
+                        <th>Address</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (@Model.BookingRequests != null)
+                    {
+                        foreach (var booking in Model.BookingRequests)
+                        {
+                            <tr class="">
+                                <td><a class="btn btn-dark btn-round" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.BookingId</a></td>
+                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.Date</a></td>
+                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.User.Name</a></td>
+                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.User.Email</a></td>
+                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.Category</a></td>
+                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.Address</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <a asp-page="/AdminPages/AdminDashboardPage">Back to dashboard</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+
+
+    .no-border {
+        border: none;
+    }
+
+    th {
+        border: none;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    table {
+        border-top: solid 2px black;
+        border-bottom: solid 2px black;
+    }
+
+    .right-border {
+        border-right: solid 2px black;
+    }
+
+    .top-border {
+        border-top: solid 2px black;
+        border-bottom: solid 2px black;
+    }
+
+    .left-border {
+        border-left: solid 2px black;
+    }
+
+    td {
+        border: solid 1px black;
+    }
+
+    h5 {
+        font-size: 1.1rem;
+    }
+
+    .btn-round {
+        border-radius: 50px;
+        transition: all .2s ease-in-out;
+    }
+
+        .btn-round:hover {
+            background-color: whitesmoke;
+            border: solid 1px whitesmoke;
+            color: black;
+        }
+
+    .number-contrast {
+        padding: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        border-radius: 100px;
+    }
+</style>
+
+
+
+
+
+@section Scripts 
+{
+    
+    <script>
+        $(document).ready(function ()
+        {
+            //$("#myModal").modal({backdrop: "static"});
+            $("#myModal").modal('show');
+        });
+    </script>
+
+}
