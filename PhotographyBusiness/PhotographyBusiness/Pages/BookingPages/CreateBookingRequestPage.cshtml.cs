@@ -64,6 +64,7 @@ namespace PhotographyBusiness.Pages.BookingPages
             Booking.Address = $"{Street}, {City} {ZipCode}";
             Booking.UserId = User.UserId;
             Booking.IsAccepted = false;
+            Booking.DateCreated = DateTime.Now;
 
             await _bookingService.CreateBookingAsync(Booking);
             return RedirectToPage("../Index");

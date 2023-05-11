@@ -14,7 +14,7 @@ namespace PhotographyBusiness.Services.BookingService
         public List<Booking> GetAllBookingsThisMonth();
         public List<Booking> GetUpcomingBookings();
         public List<Booking> GetMostRecentRequests();
-        public List<Booking> GetAllLBookingsRequests();
+        public List<Booking> GetAllBookingsRequests();
         Booking GetBookingById_User(int id);
 
 

@@ -2,21 +2,23 @@
 using PhotographyBusiness.MockData;
 using PhotographyBusiness.EFDbContext;
 using Microsoft.EntityFrameworkCore;
+using PhotographyBusiness.Services.UserService;
 
 namespace PhotographyBusiness.Services.BookingService
 {
     public class BookingService : IBookingService
     {
-
+        private IUserService _userService;
         private GenericDbService<Booking> _genericDbService;
 
         public List<Booking> Bookings { get; set; }
 
-        public BookingService(GenericDbService<Booking> genericDbService)
+        public BookingService(GenericDbService<Booking> genericDbService, IUserService userService)
         {
             _genericDbService = genericDbService;
-            //Bookings = GetAllBookingsAsync().Result;
-            Bookings = MockBookings.GetAllMockBookings();
+            _userService = userService;
+            Bookings = GetAllBookingsAsync().Result;
+            //Bookings = MockBookings.GetAllMockBookings();
         }
 
 
@@ -30,7 +32,6 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> GetAllBookings()
         {
-            
             return Bookings;
         }
 
@@ -68,8 +69,9 @@ namespace PhotographyBusiness.Services.BookingService
 
         public async Task CreateBookingAsync(Booking booking)
         {
-            Bookings.Add(booking);
             await _genericDbService.AddObjectAsync(booking);
+            booking.User = _userService.GetUserByIdAsyn(Convert.ToInt32(booking.UserId)).Result; // Manually add the User object (Identity_Insert is set to off in the DB)
+            Bookings.Add(booking);
         }
 
         public Task DeleteBooking(int id)
@@ -95,10 +97,10 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> GetMostRecentRequests()
         {
-            return GetAllBookings().Where(b => b.IsAccepted == false).OrderBy(b => b.DateCreated).Take(5).ToList();
+            return GetAllBookingsRequests().OrderByDescending(b => b.DateCreated).Take(5).ToList();
         }
 
-        public List<Booking> GetAllLBookingsRequests()
+        public List<Booking> GetAllBookingsRequests()
         {
             return GetAllBookings().Where(b => b.IsAccepted == false).ToList();
         }
