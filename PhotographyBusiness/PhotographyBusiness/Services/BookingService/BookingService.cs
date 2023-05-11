@@ -39,7 +39,7 @@ namespace PhotographyBusiness.Services.BookingService
         {
             foreach(Booking booking in Bookings)
             {
-                if(id == booking.BookingId && booking.IsAccepted is true)
+                if(id == booking.BookingId)
                 {
                     return booking;
                 }

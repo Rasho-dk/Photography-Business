@@ -57,9 +57,9 @@
                     </tr>
                     @foreach (var request in Model.Requests) {
                         <tr>
-                            <td><a asp-page="#" asp-route-id="@request.BookingId" class="btn btn-dark btn-round">@request.BookingId</a></td>
-                            <td><a asp-page="#" asp-route-id="@request.BookingId" class="text-dark text-decoration-none">@request.User.Name</a></td>
-                            <td><a asp-page="#" asp-route-id="@request.BookingId" class="text-dark text-decoration-none">@request.Category</a></td>
+                            <td><a asp-page="../BookingPages/AcceptRequestPage/" asp-route-id="@request.BookingId" class="btn btn-dark btn-round">@request.BookingId</a></td>
+                            <td><a asp-page="../BookingPages/AcceptRequestPage/" asp-route-id="@request.BookingId" class="text-dark text-decoration-none">@request.User.Name</a></td>
+                            <td><a asp-page="../BookingPages/AcceptRequestPage/" asp-route-id="@request.BookingId" class="text-dark text-decoration-none">@request.Category</a></td>
                         </tr>
                     }
                     
