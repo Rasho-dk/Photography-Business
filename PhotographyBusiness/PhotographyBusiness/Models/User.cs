@@ -31,8 +31,6 @@ namespace PhotographyBusiness.Models
         public DateTime DateCreated { get; set; }
         public ICollection<Booking> Bookings { get; set; }
 
-        //Kun for test Shero
-        public DateTime? FirstVisti { get; set; }
 
         /// <summary>
         /// The full constructor
