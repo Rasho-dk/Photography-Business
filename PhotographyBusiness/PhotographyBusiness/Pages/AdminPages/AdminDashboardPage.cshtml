@@ -74,9 +74,49 @@
                     @foreach (var booking in Model.Bookings)
                     {
                         <tr>
-                            <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="btn btn-dark btn-round">@booking.BookingId</a></td>
+                            <td><button type="button" data-bs-toggle="modal" data-bs-target="#bookingModal" class="btn btn-dark btn-round">@booking.BookingId</button>
+                                <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-center" id="deleteModalLabel">Booking information (@booking.BookingId)</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-6" style="text-align: left">
+                                                            <h5>Customer information</h5>
+                                                            <p>Name: @booking.User.Name</p>
+                                                            <p>Email: @booking.User.Email</p>
+                                                            <p>Phone: @booking.User.PhoneNumber</p>
+                                                            <p>Category: @booking.Category</p>
+                                                            <p>Note: @booking.CustomerNote</p>
+                                                        </div>
+                                                        <div class="col-md-6" style="text-align: left">
+                                                            <h5>Admin information</h5>
+                                                            <p>Event address: @booking.Address</p>
+                                                            <p>Event date: @booking.Date</p>
+                                                            <p>Price: @booking.Price</p>
+                                                            <p>Admin note: @booking.AdminNote</p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="modal-footer d-flex justify-content-center">
+                                                <button type="button" class="btn btn-light btn-outline-dark btn-square me-4" data-bs-dismiss="modal">Close</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                             <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.User.Name</a></td>
                             <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.Date</a></td>
+
+                            
                         </tr>
                     }
                 </table>
@@ -90,7 +130,36 @@
                     @foreach (var user in Model.Users)
                     {
                         <tr >
-                            <td><a asp-page="#" asp-route-id="@user.UserId" class="btn btn-dark btn-round">@user.UserId</a></td>
+                            <td>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#userModal" class="btn btn-dark btn-round">@user.UserId</button>
+                                <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-center" id="deleteModalLabel">User information (@user.UserId)</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container">
+                                                    <div class="" style="text-align: center">
+                                                        <h5>User profile</h5>
+                                                        <p>User ID: @user.UserId</p>
+                                                        <p>Name: @user.Name</p>
+                                                        <p>Email: @user.Email</p>
+                                                        <p>Phone: @user.PhoneNumber</p>
+                                                        <p>Dated joined: @user.DateCreated</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="modal-footer d-flex justify-content-center">
+                                                <button type="button" class="btn btn-light btn-outline-dark btn-square me-4" data-bs-dismiss="modal">Close</button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                             <td><a asp-page="#" asp-route-id="@user.UserId" class="text-dark text-decoration-none">@user.Name</a></td>
                             <td><a asp-page="#" asp-route-id="@user.UserId" class="text-dark text-decoration-none">@user.Email</a></td>
                         </tr>
@@ -185,3 +254,18 @@
         border-radius: 100px;
     }
 </style>
+
+@section scripts {
+    <script>
+        var bookingModal = document.getElementById("bookingModal")
+        var userModal = document.getElementById("userModal")
+
+        bookingModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+        }
+
+        userModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+        }
+    </script>
+}
