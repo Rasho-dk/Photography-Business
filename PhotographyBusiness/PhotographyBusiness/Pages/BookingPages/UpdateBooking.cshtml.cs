@@ -11,8 +11,8 @@ namespace PhotographyBusiness.Pages.BookingPages
         private IBookingService _bookingService;
         private IUserService _userService;
 
-        public Booking Booking { get; set; }
-        public User User { get; set; }
+        [BindProperty] public Booking Booking { get; set; }
+        [BindProperty] public User User { get; set; }
 
         public UpdateBookingModel(IBookingService bookingService, IUserService userService)
         {

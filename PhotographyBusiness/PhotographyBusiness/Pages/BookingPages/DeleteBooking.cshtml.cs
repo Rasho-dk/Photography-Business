@@ -32,12 +32,12 @@ namespace PhotographyBusiness.Pages.BookingPages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync()
         {
-            if(_bookingService.GetBookingById(id) != null)
+            if(_bookingService.GetBookingById(Booking.BookingId) != null)
             {
-                _bookingService.DeleteBooking(id);
-                return RedirectToPage("/GetAllBookings");
+                _bookingService.DeleteBooking(Booking.BookingId);
+                return RedirectToPage("GetAllBookings");
             }
             return RedirectToPage("/NotFound");
         }
