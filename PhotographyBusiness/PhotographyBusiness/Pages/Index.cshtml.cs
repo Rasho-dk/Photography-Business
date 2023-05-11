@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Pages.AccountPages;
+using PhotographyBusiness.Services.UserService;
 
 namespace PhotographyBusiness.Pages
 {
@@ -10,7 +11,7 @@ namespace PhotographyBusiness.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger )
         {
             _logger = logger;
         }
@@ -23,5 +24,8 @@ namespace PhotographyBusiness.Pages
             //}
 
         }
+
+
+       
     }
 }

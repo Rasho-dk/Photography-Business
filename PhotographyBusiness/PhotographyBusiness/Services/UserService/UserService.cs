@@ -9,14 +9,11 @@ namespace PhotographyBusiness.Services.UserService
         public UserService(GenericDbService<User> genericDbService)
         {
             _genericDbService = genericDbService;
-            Users = genericDbService.GetObjectsAsync().Result.ToList(); 
-            //Users = MockData.MockUsers.GetMockUsers();
+            //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
+            Users = MockData.MockUsers.GetMockUsers();
 
         }
-        public UserService()
-        {
-            
-        }
+     
         public async Task CreateUserAsyn(User user)
         {
             Users.Add(user);    
@@ -87,15 +84,14 @@ namespace PhotographyBusiness.Services.UserService
             {
                 foreach(var us in Users)
                 {
-                    if (us.UserId.Equals(user.UserId))
+                    if (us.Name.Equals(user.Name))
                     {
                         //TODO Update User
-
+                        us.PhoneNumber = user.PhoneNumber;
                     }
                 }
                 await _genericDbService.UpdateObjectAsync(user);
             }
         }
-        public User GetUserBystr(string str) => GetAllUsers().Find(user => user.Name.ToLower() == str.ToLower());
     }
 }

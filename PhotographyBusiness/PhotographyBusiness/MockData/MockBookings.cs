@@ -20,10 +20,10 @@ namespace PhotographyBusiness.MockData
 
         };
 
-    public static List<Booking> GetAllMockBookings()
-    {
-        return Bookings;
-    }
+        public static List<Booking> GetAllMockBookings()
+        {
+            return Bookings;
+        }
 
     }
 }
