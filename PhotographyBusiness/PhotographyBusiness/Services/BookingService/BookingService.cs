@@ -80,10 +80,7 @@ namespace PhotographyBusiness.Services.BookingService
             return _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
         }
 
-        public Task UpdateBooking(Booking booking)
-<<<<<<< HEAD
-        {   
-=======
+        public Task UpdateBooking(Booking booking) 
         {
             foreach(Booking b in Bookings)
             {
@@ -98,7 +95,6 @@ namespace PhotographyBusiness.Services.BookingService
                 }
             }
 
->>>>>>> main
             return _genericDbService.UpdateObjectAsync(booking);
         }
 
