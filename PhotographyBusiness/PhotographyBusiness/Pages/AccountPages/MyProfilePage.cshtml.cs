@@ -30,7 +30,7 @@ namespace PhotographyBusiness.Pages.AccountPages
                 return Page();
             }
             await userService.UpdateUserAsyn(User);
-            ConformUpdate = "Yor profile is updated";
+            ConformUpdate = "profile is updated";
             return Page();  
 
         }
