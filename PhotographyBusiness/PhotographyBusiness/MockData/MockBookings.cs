@@ -14,8 +14,8 @@ namespace PhotographyBusiness.MockData
             new Booking("Portrait", 400, "Give me photos", "Ok", new DateTime(2023,06,15), new DateTime (2023,04,18), true, "Mock Address", new User(4,"mock@email.com", "password", "Mock User", "12345678"), 1),
             new Booking("Portrait", 500, "Give me photos", "Ok", new DateTime(2023,06,27), new DateTime (2023,04,18), true, "Mock Addressasdasdsaaaaaaaaadasdasdasdasdasdasdasdasdsadasdasdasdasdasd", new User(5, "mock@email.com", "password", "Mock User", "12345678"), 1),
             // Arun: understående er Bookings requests
-            new Booking("Marriage", "pls take pics", "Mock Address", new User("mock@email.com", "password", "Mock User 1", "12345678"), new DateTime(2023, 10, 10)),
-            new Booking("Marriage", "pls again", "Mock Address", new User("mock@email.com", "password", "Mock User 2", "12345678"), new DateTime(2023, 10, 10))
+            new Booking("Marriage", "pls take pics", "Mock Address", new User("mock@email.com", "password", "Mock User 1", "12345678"), new DateTime(2023, 10, 10)) { BookingId = 123},
+            new Booking("Marriage", "pls again", "Mock Address", new User("mock@email.com", "password", "Mock User 2", "12345678"), new DateTime(2023, 10, 10)) { BookingId = 321}
 
 
         };
