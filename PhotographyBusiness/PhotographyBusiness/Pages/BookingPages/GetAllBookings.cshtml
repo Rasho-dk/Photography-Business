@@ -2,13 +2,15 @@
 @model PhotographyBusiness.Pages.BookingPages.GetAllBookingsModel
 @{
 }
-
+<div class="container">
 <br />
 <h1 class="pop-out m-3" style="font-family:fantasy; float:left;">Bookings</h1>
-<br />
+
+@*Shero's Kode må ikke sletes'
+*@<br />
     <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:30%;">
 <br>
-<div>
+
     <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black; word-wrap: break-word;">
         <thead>
             <tr class="table-light">
@@ -19,9 +21,9 @@
             </tr>
         </thead>
         <tbody id="myTable">
-            @if (@Model.bookings != null)
+            @if (@Model.Bookings != null)
             {
-                foreach (var booking in Model.bookings)
+                foreach (var booking in Model.Bookings)
                 {
                     <tr class="table-light">
                         <td>                           
@@ -52,7 +54,7 @@
                             @booking.Date
                         </td>
                         @*<td>
-                            @booking.Address
+                            @booking.Address // Shero Den giver ikke mening at have address fordi den fylder col- for meget
                         </td>*@
                         <td>
                             <a class="btn btn-black" asp-page="" asp-route-id="@booking.User.UserId">
@@ -95,9 +97,9 @@
                         <div class="col-md-4"style="word-wrap: break-word;">
                             <!-- Admin information -->
                             <h5>Admin</h5>
-                            @*<p>Name: @Model.User.Name</p>*@
-                            @*<p>Email: @Model.User.Email</p>
-                            <p>Phone:@Model.User.PhoneNumber</p>*@
+                            <p>Name: @Model.User.Name</p>
+                            <p>Email: @Model.User.Email</p>
+                            <p>Phone:@Model.User.PhoneNumber</p>
                             <p>Note: <span id="adminNote" style="font-style:italic;"></span></p>
                             <p>Price: <span id="price" style="font-style:italic;"></span></p>
                         </div>
@@ -107,6 +109,9 @@
         </div>
     </div>
 </div>
+@*<li>
+    <a asp-page="/AdminPages/NewVisiters">XX</a>
+</li>*@
 
 @section scripts{
     <script>

@@ -13,7 +13,7 @@ namespace PhotographyBusiness.Pages.BookingPages
     {
         private IBookingService bookingService;
         private IUserService userService;
-        public List<Booking> bookings;   
+        public List<Booking> Bookings { get; set; }   
         public User User { get; set; }
 
         public GetAllBookingsModel(IBookingService bookingService,IUserService userService)
@@ -25,7 +25,7 @@ namespace PhotographyBusiness.Pages.BookingPages
         public IActionResult OnGet()
         {
             User = userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
-            bookings = bookingService.GetAllBookings().Where(x => x.IsAccepted == true).ToList();
+            Bookings = bookingService.GetAllBookings().Where(x => x.IsAccepted == true).ToList();
             return Page();
         }
        
