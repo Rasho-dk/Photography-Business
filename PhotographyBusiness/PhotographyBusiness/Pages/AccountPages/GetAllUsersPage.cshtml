@@ -33,6 +33,7 @@
                                     data-user-email="@user.Email"
                                     data-user-phone="@user.PhoneNumber"
                                     data-user-created="@user.DateCreated"
+                                    data-user-id="@user.UserId"
                             asp-route-id="@user.UserId">
                                 @user.Name <i class="fas fa-info-circle fa-xs"></i>
                             </button>
@@ -45,9 +46,30 @@
                             @user.PhoneNumber
                         </td>
                         <td>
-                            <a class="btn btn-danger" asp-page="" asp-route-id="@user.UserId">
+                            <button data-user-id2="@user.UserId" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" asp-route-id="@user.UserId">
                                 <i class="fa fa-trash pop-out"></i>
-                            </a>
+                            </button>
+
+                            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-center" id="deleteModalLabel">Delete user (<span id="userId2" class="fw-bold"></span>)</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Are you sure you want to delete this user?</p>
+                                        </div>
+                                        <form asp-page-handler="delete" method="post">
+                                            <div class="modal-footer d-flex justify-content-center">
+                                                <button type="button" class="btn btn-light btn-outline-dark btn-square me-4" data-bs-dismiss="modal">No</button>
+                                                <button type="submit" asp-page-handler="delete" asp-route-id="@user.UserId" class="btn btn-danger btn-square ms-4">Yes</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 }
@@ -55,6 +77,9 @@
         </tbody>
     </table>
 </div>
+
+
+<!-- Delete Modal -->
 
 
 <!-- Modal -->
@@ -71,6 +96,7 @@
                         <div class="col-md-6" style="word-wrap:break-word;">
                             <!-- Customer information -->
                             <h5>User profile</h5>
+                            <p>User ID: <span id="userId" style="font-style: italic;"></span></p>
                             <p>Name: <span id="userName" style="font-style:italic;"></span></p>
                             <p>Email: <span id="userEmail" style="font-style:italic;"></span></p>
                             <p>Phone: <span id="userPhone" style="font-style:italic;"></span></p>
@@ -94,6 +120,8 @@
         var userEmailElement = document.getElementById("userEmail")
         var userPhoneElement = document.getElementById("userPhone")
         var userCreatedElement = document.getElementById("userCreated")
+        var userIdElement = document.getElementById("userId")
+        
 
         // Button that triggered the modal
         myModal.addEventListener('show.bs.modal', function (event) {
@@ -105,12 +133,28 @@
             var userEmail = button.getAttribute('data-user-email')
             var userPhone = button.getAttribute('data-user-phone')
             var userCreated = button.getAttribute('data-user-created')
+            var userId = button.getAttribute('data-user-id')
+            
 
             // Display user info. in modal
             userNameElement.textContent = userName
             userEmailElement.textContent = userEmail
             userPhoneElement.textContent = userPhone
             userCreatedElement.textContent = userCreated
+            userIdElement.textContent = userId
+            
+        })
+
+        // Delete modal
+        var deleteModal = document.getElementById("deleteModal")
+        var userId2Element = document.getElementById("userId2")
+
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+
+            var userId2 = button.getAttribute('data-user-id2')
+
+            userId2Element.textContent = userId2
         })
 
         //Filtering
