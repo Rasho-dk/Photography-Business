@@ -26,15 +26,6 @@
                 RESET FILTERS
             </a>
 
-            <form method="post">
-                <label for="CategoryInput">Choose a category:</label>
-                <select asp-for="CategoryInput">
-                    <option clic value="Marriage">Marriage</option>
-                    <option value="Family">Family</option>
-                    <option value="Portrait">Portrait</option>
-                    <input type="submit" asp-page-handler="CategoryFilter" value="Filter &nbsp" class="btn btn-border-black" />
-                </select>
-            </form>
 
         </div>
 
@@ -50,6 +41,16 @@
             </div>
         </form>
 
+        <form method="post">
+            <label for="CategoryInput"></label>
+            <select asp-for="CategoryInput">
+                <option select disabled value="Select Category">Select Category</option>
+                <option value="Marriage">Marriage</option>
+                <option value="Family">Family</option>
+                <option value="Portrait">Portrait</option>
+                <input type="submit" asp-page-handler="CategoryFilter" value="Filter &nbsp" class="btn btn-border-black" />
+            </select>
+        </form>
 
 
     </div>
