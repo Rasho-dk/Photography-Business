@@ -41,16 +41,18 @@
             </div>
         </form>
 
-        <form method="post">
-            <label for="CategoryInput"></label>
-            <select asp-for="CategoryInput">
-                <option select disabled value="Select Category">Select Category</option>
-                <option value="Marriage">Marriage</option>
-                <option value="Family">Family</option>
-                <option value="Portrait">Portrait</option>
-                <input type="submit" asp-page-handler="CategoryFilter" value="Filter &nbsp" class="btn btn-border-black" />
-            </select>
-        </form>
+                    <form method="post">
+            <div class="input-group mb-2 ms-5 px-5">
+                <label for="CategoryInput"></label>
+                <select asp-for="CategoryInput">
+                    <option select disabled value="Select Category"> Select Category &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </option>
+                    <option value="Marriage">Marriage</option>
+                    <option value="Family">Family</option>
+                    <option value="Portrait">Portrait</option>
+                    <input type="submit" asp-page-handler="CategoryFilter" value="Filter &nbsp" class="btn btn-border-black" />
+                </select>
+                </div>
+            </form>
 
 
     </div>
