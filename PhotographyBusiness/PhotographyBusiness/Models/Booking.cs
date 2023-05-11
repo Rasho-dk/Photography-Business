@@ -23,7 +23,7 @@ namespace PhotographyBusiness.Models
         public bool IsAccepted { get; set; }
         [Required]
         public string Address { get; set; }
-        public int? UserId { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
 
         /// <summary>

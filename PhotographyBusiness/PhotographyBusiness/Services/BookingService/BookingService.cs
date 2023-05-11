@@ -94,8 +94,9 @@ namespace PhotographyBusiness.Services.BookingService
                     break;
                 }
             }
+            //_genericDbService.UpdateObjectAsync(booking);
 
-            return _genericDbService.UpdateObjectAsync(booking);
+            return null;
         }
 
         public List<Booking> GetAllBookingsThisMonth()

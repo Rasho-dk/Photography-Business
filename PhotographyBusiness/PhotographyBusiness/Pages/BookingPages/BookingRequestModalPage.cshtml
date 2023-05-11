@@ -70,11 +70,10 @@
                 </div>
                 <form method="post">
                     <div class="form-group p-2">
-                        <div class="form-group m-2 d-flex justify-content-center">
-                            <input type="submit" value="Confirm" class="btn btn-dark" style="min-width: 6vw; border-radius: 0; margin-right: 40px;"
-                            asp-route-id="@Model.Booking.BookingId" asp-route-note="@Model.AdminNote" asp-route-price="@Model.Price" />
+                        <div class="form-group text-center">
+                            <a class="btn btn-dark" style="min-width: 6vw; border-radius: 0;" asp-page="/BookingPages/AcceptRequestPage" asp-route-id="@Model.Booking.BookingId">Go to request</a>
 
-                            <a asp-page="/BookingPages/GetAllBookingRequestsPage" class="btn btn-light btn-border-black" style="border-radius: 0; min-width: 6vw;">Decline</a>
+                            
                         </div>
                     </div>
                 </form>
