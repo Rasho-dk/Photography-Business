@@ -5,11 +5,12 @@
 
 <script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
 
+
 <div class="container d-flex flex-column pt-3">
     <h1 class="">Admin Dashboard</h1>
     <div class="" style="">
         <div class="text-center">
-            <table class="w-100 no-border">
+            <table class="w-100 no-border table-bordered table-bordered ">
                 <tr>
                     <th class="w-25 no-border">
                         <div class="d-grid">
@@ -22,8 +23,8 @@
                     </th >
                     <th class="w-25 no-border">
                         <div class="d-grid">
-                            <a asp-page="#"><i class="fa fa-calendar-check-o fa-5x text-dark pop-out" aria-hidden="true"></i></a>
-                            <a asp-page="#" class="text-dark text-decoration-none">Bookings</a>
+                            <a asp-page="../BookingPages/GetAllBookings"><i class="fa fa-calendar-check-o fa-5x text-dark pop-out" aria-hidden="true"></i></a>
+                            <a asp-page="../BookingPages/GetAllBookings" class="text-dark text-decoration-none">Bookings</a>
                             <br />
                             <a class="text-dark text-decoration-none" style="text-align: left">Upcoming</a>
                         </div>
@@ -47,7 +48,8 @@
                 </tr>
             </table>
             <div class="d-flex justify-content-around">
-                <table class="w-25 left-border">
+               
+                <table class="w-25 left-border table table-bordered table-hover table-striped" style="border:1px solid black; word-wrap:break-word;">
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
@@ -62,7 +64,8 @@
                     }
                     
                 </table>
-                <table class="w-25 right-border left-border">
+               
+                <table class="w-25 right-border left-border table table-bordered table-hover table-striped" style="border:1px solid black; word-wrap: break-word;">
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
@@ -71,13 +74,14 @@
                     @foreach (var booking in Model.Bookings)
                     {
                         <tr>
-                            <td><a asp-page="#" asp-route-id="@booking.BookingId" class="btn btn-dark btn-round">@booking.BookingId</a></td>
-                            <td><a asp-page="#" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.User.Name</a></td>
-                            <td><a asp-page="#" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.Date</a></td>
+                            <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="btn btn-dark btn-round">@booking.BookingId</a></td>
+                            <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.User.Name</a></td>
+                            <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.Date</a></td>
                         </tr>
                     }
                 </table>
-                <table class="w-25 right-border">
+               
+                <table class="w-25 right-border table table-bordered table-hover table-striped" style="border:1px solid black; word-wrap: break-word;">
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
@@ -85,14 +89,16 @@
                     </tr>
                     @foreach (var user in Model.Users)
                     {
-                        <tr>
+                        <tr >
                             <td><a asp-page="#" asp-route-id="@user.UserId" class="btn btn-dark btn-round">@user.UserId</a></td>
                             <td><a asp-page="#" asp-route-id="@user.UserId" class="text-dark text-decoration-none">@user.Name</a></td>
                             <td><a asp-page="#" asp-route-id="@user.UserId" class="text-dark text-decoration-none">@user.Email</a></td>
                         </tr>
                     }
                 </table>
-                <div class="w-25 right-border top-border d-flex flex-column justify-content-evenly">
+
+            
+                <div class="w-25 right-border top-border d-flex flex-column justify-content-evenly table table-bordered" style="border:1px solid black; word-wrap: break-word;">
                     <h5 class="m-2" style="text-align: left">Accepted bookings last 30 days:
                         <a class="text-dark">@Model.BookingsThisMonth</a>
                         <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i>

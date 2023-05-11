@@ -31,6 +31,9 @@ namespace PhotographyBusiness.Models
         public DateTime DateCreated { get; set; }
         public ICollection<Booking> Bookings { get; set; }
 
+        //Kun for test Shero
+        public DateTime? FirstVisti { get; set; }
+
         /// <summary>
         /// The full constructor
         /// </summary>
@@ -41,6 +44,15 @@ namespace PhotographyBusiness.Models
 
         public User(string email, string password, string name, string phoneNumber)
         {
+            Email = email;
+            Password = password;
+            Name = name;
+            PhoneNumber = phoneNumber;
+            DateCreated = DateTime.Now;
+        }
+        public User(int id,string email, string password, string name, string phoneNumber)
+        {
+            UserId = id;
             Email = email;
             Password = password;
             Name = name;

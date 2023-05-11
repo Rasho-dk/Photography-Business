@@ -2,19 +2,21 @@
 using PhotographyBusiness.MockData;
 using PhotographyBusiness.EFDbContext;
 using Microsoft.EntityFrameworkCore;
+using PhotographyBusiness.Services.UserService;
 
 namespace PhotographyBusiness.Services.BookingService
 {
     public class BookingService : IBookingService
     {
-
+        private IUserService _userService;
         private GenericDbService<Booking> _genericDbService;
 
         public List<Booking> Bookings { get; set; }
 
-        public BookingService(GenericDbService<Booking> genericDbService)
+        public BookingService(GenericDbService<Booking> genericDbService, IUserService userService)
         {
             _genericDbService = genericDbService;
+            _userService = userService;
             //Bookings = GetAllBookingsAsync().Result;
             Bookings = MockBookings.GetAllMockBookings();
         }
@@ -30,10 +32,8 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> GetAllBookings()
         {
-            
             return Bookings;
         }
-
 
         public Booking GetBookingById(int id)
         {
@@ -46,8 +46,19 @@ namespace PhotographyBusiness.Services.BookingService
             }
             return null;
         }
+		public Booking GetBookingById_User(int id)
+		{
+            foreach (Booking booking in Bookings)
+            {
+                if (id == booking.User.UserId)
+                {
+                    return booking;
+                }
+            }
+            return null;
+        }
 
-        public List<Booking> GetBookingsByUserId(int userId)
+		public List<Booking> GetBookingsByUserId(int userId)
         {
             IEnumerable<Booking> bookings = from booking in Bookings
                                      where booking.User.UserId == userId
@@ -58,8 +69,9 @@ namespace PhotographyBusiness.Services.BookingService
 
         public async Task CreateBookingAsync(Booking booking)
         {
-            Bookings.Add(booking);
             await _genericDbService.AddObjectAsync(booking);
+            booking.User = _userService.GetUserByIdAsyn(Convert.ToInt32(booking.UserId)).Result; // Manually add the User object (Identity_Insert is set to off in the DB)
+            Bookings.Add(booking);
         }
 
         public Task DeleteBooking(int id)
@@ -71,18 +83,6 @@ namespace PhotographyBusiness.Services.BookingService
         public Task UpdateBooking(Booking booking)
         {
             return _genericDbService.UpdateObjectAsync(booking);
-        }
-        public Task AcceptBooking(int id)
-        {
-            foreach(Booking booking in Bookings)
-            {
-                if(booking.BookingId == id)
-                {
-                    booking.IsAccepted = true;
-                    return _genericDbService.SaveObjects(Bookings);
-                }
-            }
-            return null;
         }
 
         public List<Booking> GetAllBookingsThisMonth()
@@ -97,10 +97,10 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> GetMostRecentRequests()
         {
-            return GetAllBookings().Where(b => b.IsAccepted == false).OrderBy(b => b.DateCreated).Take(5).ToList();
+            return GetAllBookingsRequests().OrderByDescending(b => b.DateCreated).Take(5).ToList();
         }
 
-        public List<Booking> GetAllBookingRequests()
+        public List<Booking> GetAllBookingsRequests()
         {
             return GetAllBookings().Where(b => b.IsAccepted == false).ToList();
         }

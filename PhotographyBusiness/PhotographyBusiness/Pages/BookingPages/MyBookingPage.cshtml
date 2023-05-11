@@ -1,16 +1,13 @@
-﻿@page 
-@model PhotographyBusiness.Pages.BookingPages.GetAllBookingsModel
+﻿@page
+@model PhotographyBusiness.Pages.BookingPages.MyBookingPageModel
 @{
 }
-<div class="container">
 <br />
 <h1 class="pop-out m-3" style="font-family:fantasy; float:left;">Bookings</h1>
-
-@*Shero's Kode må ikke sletes'
-*@<br />
-    <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:30%;">
+<br />
+<input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:30%;">
 <br>
-
+<div class="container">
     <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black; word-wrap: break-word;">
         <thead>
             <tr class="table-light">
@@ -26,52 +23,40 @@
                 foreach (var booking in Model.Bookings)
                 {
                     <tr class="table-light">
-                        <td>                           
+                        <td>
                             @*<a asp-page="/BookingPages/BookingInfoPage" asp-route-id="@booking.User.UserId">@booking.User.Name</a>*@
-                            
+
                             <!-- Button trigger modal -->
                             <button type="button" class="btn  pop-out" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                data-user-name="@booking.User.Name"
-                                data-user-email="@booking.User.Email"
-                                data-user-address="@booking.Address"
-                                data-user-note="@booking.CustomerNote"
-                                data-user-category="@booking.Category"
-                                data-user-date="@booking.Date"
-                                data-admin-note="@booking.AdminNote"
-                                data-admin-price="@booking.Price"                           
-                                asp-route-id="@booking.User.UserId">
+                                    data-user-name="@booking.User.Name"
+                                    data-user-email="@booking.User.Email"
+                                    data-user-address="@booking.Address"
+                                    data-user-note="@booking.CustomerNote"
+                                    data-user-category="@booking.Category"
+                                    data-user-date="@booking.Date"
+                                    data-admin-note="@booking.AdminNote"
+                                    data-admin-price="@booking.Price"
+                            asp-route-id="@booking.User.UserId">
                                 @booking.User.Name <i class="fas fa-info-circle fa-beat fa-xs"></i>
                             </button>
                         </td>
                         <td>
                             @booking.User.Email
-                        </td>   
+                        </td>
 
                         <td>
                             @booking.Category
-                        </td>   
+                        </td>
                         <td>
                             @booking.Date
                         </td>
-                        @*<td>
-                            @booking.Address // Shero Den giver ikke mening at have address fordi den fylder col- for meget
-                        </td>*@
-                        <td>
-                            <a class="btn btn-black" asp-page="" asp-route-id="@booking.User.UserId">
-                                <i class="fa fa-edit pop-out"></i></a>
-                            <a class="btn btn-danger" asp-page="" asp-route-id="@booking.User.UserId">
-                                <i class="fa fa-trash pop-out"></i>
-                            </a>
-                        </td>
-                      
-                       
                     </tr>
                 }
             }
         </tbody>
     </table>
 </div>
- 
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -83,8 +68,8 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-6" style="word-wrap:break-word;">
+                    <div class="">
+                        <div class="" style="word-wrap:break-word;">
                             <!-- Customer information -->
                             <h5>Customer</h5>
                             <p>Name: <span id="userName" style="font-style:italic;"></span></p>
@@ -94,24 +79,12 @@
                             <p>Category: <span id="userCategory" style="font-style:italic;"></span></p>
                             <p>Events date: <span id="userDateOfEvent" style="font-style:italic;"></span></p>
                         </div>
-                        <div class="col-md-4"style="word-wrap: break-word;">
-                            <!-- Admin information -->
-                            <h5>Admin</h5>
-                            <p>Name: @Model.User.Name</p>
-                            <p>Email: @Model.User.Email</p>
-                            <p>Phone:@Model.User.PhoneNumber</p>
-                            <p>Note: <span id="adminNote" style="font-style:italic;"></span></p>
-                            <p>Price: <span id="price" style="font-style:italic;"></span></p>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@*<li>
-    <a asp-page="/AdminPages/NewVisiters">XX</a>
-</li>*@
 
 @section scripts{
     <script>
@@ -131,11 +104,11 @@
 
         // Button that triggered the modal
         myModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget 
+            var button = event.relatedTarget
 
             // Extract info from data-* attributes
             //User
-            var userName = button.getAttribute('data-user-name') 
+            var userName = button.getAttribute('data-user-name')
             var userEmail = button.getAttribute('data-user-email')
             var userAddress = button.getAttribute('data-user-address')
             var userNote = button.getAttribute('data-user-note')
@@ -146,7 +119,7 @@
             var price = button.getAttribute("data-admin-price")
 
             // Display user info. in modal
-            userNameElement.textContent = userName 
+            userNameElement.textContent = userName
             userEmailElement.textContent = userEmail
             userAddressElement.textContent = userAddress
             userNoteElement.textContent = userNote
@@ -154,19 +127,20 @@
             userDateOfEventElement.textContent = userDateOfEvent
 
             //Display admin info. in modal
-            adminNoteElement.textContent = adminNote 
+            adminNoteElement.textContent = adminNote
             priceElement.textContent = price
         })
 
-               //Filtering
-            $(document).ready(function () {
-                $("#myInput").on("keyup", function () {
-                    var value = $(this).val().toLowerCase();
-                    $("#myTable tr").filter(function () {
-                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                    });
+        //Filtering
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
+        });
 
     </script>
 }
+

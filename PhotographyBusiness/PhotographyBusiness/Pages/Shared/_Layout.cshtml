@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PhotographyBusiness.styles.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+
+
 
 </head>
 <body class="">
@@ -43,18 +47,16 @@
                         <li class="nav-item ms-3">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">About us</a>
                         </li>
-                        @if(Context.User.Identity.Name == "admin")
+                        @if (Context.User.Identity.Name == "admin")
                         {
                             <li class="nav-item ms-3">
                                 <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/GetAllBookings">Bookings</a>
                             </li>
-                        }
-                       
-               
+                        }                 
+                                      
                         <li class="nav-item ms-3">
                             <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/CreateBookingRequestPage">Enquiry</a>
                         </li>
-
 
                        @{
                            if (Context.User.Identity.Name == null)
@@ -99,8 +101,15 @@
                                         <i class="fa-regular fa-user pop-out"></i>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item text-dark" href="#">My Profile</a></li>
-                                        <li><a class="dropdown-item text-dark" href="#">Booking</a></li>
+                                        <li><a class="dropdown-item text-dark" asp-page="/AccountPages/MyProfilePage">My Profile</a></li>
+                                        @if (Context.User.Identity.Name != "admin")
+                                        {
+                                            <li><a asp-page="/BookingPages/MyBookingPage" class="dropdown-item text-dark">Mybooking</a></li>
+
+                                        }
+
+                                        
+
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item text-dark" asp-page="/AccountPages/LogOutPage" >Logout</a></li>
                                         @if (Context.User.Identity.Name == "admin")
@@ -169,5 +178,3 @@
 </footer>
 </html>
 
-
- 

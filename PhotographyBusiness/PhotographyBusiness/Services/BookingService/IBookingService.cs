@@ -11,13 +11,12 @@ namespace PhotographyBusiness.Services.BookingService
         public Task DeleteBooking(int id);
         public Task CreateBookingAsync(Booking booking);
         public Task UpdateBooking(Booking booking);
-        public Task AcceptBooking(int id);
         public List<Booking> GetAllBookingsThisMonth();
         public List<Booking> GetUpcomingBookings();
         public List<Booking> GetMostRecentRequests();
-        public List<Booking> GetAllBookingRequests();
+        public List<Booking> GetAllBookingsRequests();
+        Booking GetBookingById_User(int id);
 
 
-
-    }
+	}
 }
