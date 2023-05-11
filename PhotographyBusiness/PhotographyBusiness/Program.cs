@@ -33,15 +33,25 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 }); builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(cookieOptions =>
 {
     cookieOptions.LoginPath = "/AccountPages/LogInPage";
+    cookieOptions.AccessDeniedPath = "/AccountPages/AccessDeniedPage";   
+});
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Administrator", policy =>
+           policy.RequireClaim(ClaimTypes.Role, "admin"));
 });
 
-builder.Services.AddMvc().AddRazorPagesOptions(options => {
 
-    options.Conventions.AuthorizeFolder("/..");
-    options.Conventions.AllowAnonymousToFolder("/");    
-    options.Conventions.AllowAnonymousToPage("/");  
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/BookingPages");
+    options.Conventions.AuthorizeFolder("/...");
+    options.Conventions.AllowAnonymousToPage("/..");
+});
 
-}).SetCompatibilityVersion(CompatibilityVersion.Latest);
+
+
 
 
 
@@ -63,7 +73,7 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
-app.UseAuthentication();
+//app.UseAuthentication();
 
 app.MapRazorPages();
 
