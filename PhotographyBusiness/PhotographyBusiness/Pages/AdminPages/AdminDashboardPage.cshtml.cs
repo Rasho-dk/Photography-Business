@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Models;
@@ -6,6 +7,7 @@ using PhotographyBusiness.Services.UserService;
 
 namespace PhotographyBusiness.Pages.AdminPages
 {
+    [Authorize(Roles = "admin")]
     public class AdminDashboardPageModel : PageModel
     {
         private IUserService _userService;
