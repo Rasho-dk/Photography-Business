@@ -43,7 +43,50 @@ namespace PhotographyBusiness.Pages.BookingPages
             Bookings = bookingService.GetAllBookings().Where(x => x.IsAccepted == true).ToList();
             return Page();
         }
-       
+
+        public async Task<IActionResult> OnGetSortBookingByCategory()
+        {
+            Bookings = bookingService.SortBookingByCategory().Result;
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetSortBookingByDate()
+        {
+            Bookings = bookingService.SortBookingByDate().Result;
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetSortBookingByName()
+        {
+            Bookings = bookingService.SortBookingByName().Result;
+            return Page();
+        }
+
+        public async Task<IActionResult> OnGetSortBookingByEmail()
+        {
+            Bookings = bookingService.SortBookingByEmail().Result;
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostDateFilter()
+        {
+            Bookings = bookingService.FilterBookingsByDate(StartDate, EndDate).Result;
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostCategoryFilter()
+        {
+            Bookings = bookingService.FilterBookingsByCategory(CategoryInput).Result;
+            return Page();
+
+        }
+
+        public async Task<IActionResult> OnpostNameSearch()
+        {
+            Bookings = bookingService.FilterBookingsByNameOrEmail(NameInput).Result;
+            return Page();
+        }
+
 
     }
 }
