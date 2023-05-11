@@ -50,13 +50,17 @@
                         @if (Context.User.Identity.Name == "admin")
                         {
                             <li class="nav-item ms-3">
-                                <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/GetAllBookings">Bookings</a>
+                                <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/AdminPages/AdminDashboardPage">Dashboard</a>
                             </li>
-                        }                 
-                                      
-                        <li class="nav-item ms-3">
-                            <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/CreateBookingRequestPage">Enquiry</a>
-                        </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ms-3">
+                                <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/CreateBookingRequestPage">Enquiry</a>
+                            </li>
+                        }
+
+                        
 
                        @{
                            if (Context.User.Identity.Name == null)
@@ -104,18 +108,19 @@
                                         <li><a class="dropdown-item text-dark" asp-page="/AccountPages/MyProfilePage">My Profile</a></li>
                                         @if (Context.User.Identity.Name != "admin")
                                         {
-                                            <li><a asp-page="/BookingPages/MyBookingPage" class="dropdown-item text-dark">Mybooking</a></li>
-
+                                            <li><a asp-page="/BookingPages/MyBookingPage" class="dropdown-item text-dark">My Bookings</a></li>
                                         }
-
-                                        
-
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item text-dark" asp-page="/AccountPages/LogOutPage" >Logout</a></li>
                                         @if (Context.User.Identity.Name == "admin")
                                         {
-                                            <li><a class="dropdown-item text-dark" asp-page="/AdminPages/AdminDashboardPage">Admin dashboard</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item text-dark" asp-page="/AdminPages/AdminDashboardPage">Booking Requests</a></li>
+                                            <li><a class="dropdown-item text-dark" asp-page="/BookingPages/GetAllBookings">Accepted Bookings</a></li>
+                                            <li><a class="dropdown-item text-dark" asp-page="/AccountPages/GetAllUsersPage">Users</a></li>
+                                            <li><a class="dropdown-item text-dark" asp-page="/AdminPages/AdminDashboardPage">Analytics</a></li>
                                         }
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item text-dark" asp-page="/AccountPages/LogOutPage" >Logout</a></li>
+                                        
                                     </ul>
                                 </li>
 

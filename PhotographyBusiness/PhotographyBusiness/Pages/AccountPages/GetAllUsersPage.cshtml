@@ -1,0 +1,127 @@
+﻿@page
+@model PhotographyBusiness.Pages.AccountPages.GetAllUsersPageModel
+@{
+}
+
+<div class="container">
+    <br />
+    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Users</h1>
+
+    @*Shero's Kode må ikke sletes'
+    *@<br />
+    <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:30%;">
+    <br>
+
+    <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black; word-wrap: break-word;">
+        <thead>
+            <tr class="table-light">
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @if (@Model.Users != null)
+            {
+                foreach (var user in Model.Users)
+                {
+                    <tr class="table-light">
+                        <td>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn  pop-out" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                    data-user-name="@user.Name"
+                                    data-user-email="@user.Email"
+                                    data-user-phone="@user.PhoneNumber"
+                                    data-user-created="@user.DateCreated"
+                            asp-route-id="@user.UserId">
+                                @user.Name <i class="fas fa-info-circle fa-xs"></i>
+                            </button>
+                        </td>
+                        <td>
+                            @user.Email
+                        </td>
+
+                        <td>
+                            @user.PhoneNumber
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" asp-page="" asp-route-id="@user.UserId">
+                                <i class="fa fa-trash pop-out"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6" style="word-wrap:break-word;">
+                            <!-- Customer information -->
+                            <h5>User profile</h5>
+                            <p>Name: <span id="userName" style="font-style:italic;"></span></p>
+                            <p>Email: <span id="userEmail" style="font-style:italic;"></span></p>
+                            <p>Phone: <span id="userPhone" style="font-style:italic;"></span></p>
+                            <p>Date joined: <span id="userCreated" style="font-style:italic;"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<li>
+    <a asp-page="/AdminPages/NewVisiters">XX</a>
+</li>*@
+
+@section scripts{
+    <script>
+        //User info.
+        var myModal = document.getElementById("exampleModal")
+        var userNameElement = document.getElementById("userName")
+        var userEmailElement = document.getElementById("userEmail")
+        var userPhoneElement = document.getElementById("userPhone")
+        var userCreatedElement = document.getElementById("userCreated")
+
+        // Button that triggered the modal
+        myModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+
+            // Extract info from data-* attributes
+            //User
+            var userName = button.getAttribute('data-user-name')
+            var userEmail = button.getAttribute('data-user-email')
+            var userPhone = button.getAttribute('data-user-phone')
+            var userCreated = button.getAttribute('data-user-created')
+
+            // Display user info. in modal
+            userNameElement.textContent = userName
+            userEmailElement.textContent = userEmail
+            userPhoneElement.textContent = userPhone
+            userCreatedElement.textContent = userCreated
+        })
+
+        //Filtering
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+    </script>
+}
