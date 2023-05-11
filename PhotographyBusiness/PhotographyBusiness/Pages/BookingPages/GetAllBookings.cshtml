@@ -20,23 +20,24 @@
             <input asp-for="EndDate" class="form-control me-2" />
             <input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
         </div>
-        <div class="btn btn-border-black">
+        <div>
 
-            <a class="text-dark" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
+            <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
                 RESET FILTERS
             </a>
-           
+
+            <form method="post">
+                <label for="CategoryInput">Choose a category:</label>
+                <select asp-for="CategoryInput">
+                    <option clic value="Marriage">Marriage</option>
+                    <option value="Family">Family</option>
+                    <option value="Portrait">Portrait</option>
+                    <input type="submit" asp-page-handler="CategoryFilter" value="Filter &nbsp" class="btn btn-border-black" />
+                </select>
+            </form>
+
         </div>
 
-        <form method="post" class="form-inline">
-            <label for="CategoryInput">Choose a category:</label>
-            <select asp-for="CategoryInput">
-                <option value="Marriage">Marriage</option>
-                <option value="Family">Family</option>
-                <option value="Portrait">Portrait</option>
-                <input type="submit" asp-page-handler="CategoryFilter" value="Filter &nbsp" class="btn btn-border-black" />
-            </select>
-        </form>
 
         
     </form>
