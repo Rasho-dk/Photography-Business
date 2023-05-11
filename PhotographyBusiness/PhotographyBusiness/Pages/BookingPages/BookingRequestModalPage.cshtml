@@ -50,34 +50,34 @@
                         
                         <label asp-for="@Model.Booking.Address" class="control-label text-black">Address</label>
                         <input asp-for="@Model.Booking.Address" class="form-control btn-border-black" readonly />
-                        <br style="margin-top: 10px;"/>
-                        <label asp-for="@Model.Price" class="control-label text-black">Price</label>
-                        <input asp-for="@Model.Price" class="form-control btn-border-black" />
+
+                        <img src="~/media/logo.png" style="height: 130px; margin-left: 25px; margin-top: 10px;" class="pop-out" />
                     </div>
                     
                     <div class="ms-1 justify-content-center">
-                        <img src="~/media/logo.png" style="height: 150px;" />
+                        <label asp-for="@Model.Booking.CustomerNote" class="control-label text-black">Customer Note</label>
+                        <textarea asp-for="@Model.Booking.CustomerNote" name="Note" rows="6" cols="23" 
+                        class="form-control textarea-input btn-border-black" style="resize:none" readonly></textarea>
                     </div>
                 </div>
                 <div class="form-group p-2 d-flex justify-content-around">
                     <div class="me-1">
-                        <label asp-for="@Model.AdminNote" class="control-label text-black">Admin Note</label>
-                        <textarea asp-for="@Model.AdminNote" name="Note" rows="6" cols="23" class="form-control textarea-input btn-border-black" style="resize:none"></textarea>
+                        
                     </div>
                     <div class="ms-1">
-                        <label asp-for="@Model.Booking.CustomerNote" class="control-label text-black">Customer Note</label>
-                        <textarea asp-for="@Model.Booking.CustomerNote" name="Note" rows="6" cols="23" class="form-control textarea-input btn-border-black" style="resize:none" readonly></textarea>
+
                     </div>
                 </div>
+                <form method="post">
+                    <div class="form-group p-2">
+                        <div class="form-group m-2 d-flex justify-content-center">
+                            <input type="submit" value="Confirm" class="btn btn-dark" style="min-width: 6vw; border-radius: 0; margin-right: 40px;"
+                            asp-route-id="@Model.Booking.BookingId" asp-route-note="@Model.AdminNote" asp-route-price="@Model.Price" />
 
-                <div class="form-group p-2">
-                    <div class="form-group m-2 d-flex justify-content-center">
-                        <a asp-page="/BookingPages/AcceptRequestPage" asp-route-id="@Model.Booking.BookingId" asp-route-note="@Model.AdminNote" asp-route-price="@Model.Price"
-                        class="btn btn-dark" style="min-width: 6vw; border-radius: 0; margin-right: 40px;">Confirm</a>
-
-                        <a asp-page="/BookingPages/GetAllBookingRequestsPage" class="btn btn-light btn-border-black" style="border-radius: 0; min-width: 6vw;">Decline</a>
+                            <a asp-page="/BookingPages/GetAllBookingRequestsPage" class="btn btn-light btn-border-black" style="border-radius: 0; min-width: 6vw;">Decline</a>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 

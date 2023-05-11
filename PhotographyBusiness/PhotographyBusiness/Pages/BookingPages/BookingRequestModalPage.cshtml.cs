@@ -15,20 +15,31 @@ namespace PhotographyBusiness.Pages.BookingPages
         
         public List<Booking> BookingRequests { get; set; }
         [BindProperty] public Booking Booking { get; set; }
-        [BindProperty] public double Price { get; set; }
+        [BindProperty] public double Price { get; set; }    
         [BindProperty] public string AdminNote { get; set; }
 
-        // asp-route virker ikke i HTML. Paramtere bliver ikke routet videre til Acceptrequest.
+        // asp-route virker ikke i HTML. Input bliver ikke bundet til property.
+
+
 
         public BookingRequestModalPageModel(IBookingService bookingService)
         {
             _bookingService = bookingService;
         }
 
-        public void OnGet(int id)
+        public IActionResult OnGet(int id)
         {
             BookingRequests = _bookingService.GetAllBookingRequests();
             Booking = _bookingService.GetBookingById(id);
+            return Page();
         }
+
+        public IActionResult OnPost()
+        {
+            
+            return RedirectToPage("/BookingPages/AcceptRequestPage");
+        }
+
+        
     }
 }
