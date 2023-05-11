@@ -57,6 +57,7 @@ namespace PhotographyBusiness.Services
             using (var context = new ObjectDbContext())
             {
                 context.Set<T>().Update(obj);
+                context.SaveChanges();
             }
         }
     }

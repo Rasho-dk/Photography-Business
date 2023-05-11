@@ -34,7 +34,7 @@ namespace PhotographyBusiness.Pages.BookingPages
         /// <summary>
         /// Onpost metode til update booking 
         /// </summary>
-        /// <returns>Sender tilbage til listen over alle bookings</returns>
+        /// <returns>Sender tilbage til listen over alle bookings. NotFound siden er ikke lavet og bare skrevet som default</returns>
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -43,7 +43,7 @@ namespace PhotographyBusiness.Pages.BookingPages
             }
 
             await _bookingService.UpdateBooking(Booking);
-            return RedirectToPage("/GetAllBookings");
+            return RedirectToPage("GetAllBookings");
         }
     }
 }
