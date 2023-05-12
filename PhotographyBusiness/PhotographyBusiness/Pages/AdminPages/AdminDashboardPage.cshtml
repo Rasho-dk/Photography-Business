@@ -50,13 +50,13 @@
             <div class="d-flex justify-content-around">
                
                 <table class="w-25 left-border table table-bordered table-hover table-striped" style="border:1px solid black; word-wrap:break-word;">
-                    <tr>
+                    <tr class="table-light">
                         <th>ID</th>
                         <th>Name</th>
                         <th>Category</th>
                     </tr>
                     @foreach (var request in Model.Requests) {
-                        <tr>
+                        <tr class="table-light">
                             <td><a asp-page="../BookingPages/AcceptRequestPage/" asp-route-id="@request.BookingId" class="btn btn-dark btn-round">@request.BookingId</a></td>
                             <td><a asp-page="../BookingPages/AcceptRequestPage/" asp-route-id="@request.BookingId" class="text-dark text-decoration-none">@request.User.Name</a></td>
                             <td><a asp-page="../BookingPages/AcceptRequestPage/" asp-route-id="@request.BookingId" class="text-dark text-decoration-none">@request.Category</a></td>
@@ -66,14 +66,14 @@
                 </table>
                
                 <table class="w-25 right-border left-border table table-bordered table-hover table-striped" style="border:1px solid black; word-wrap: break-word;">
-                    <tr>
+                    <tr class="table-light">
                         <th>ID</th>
                         <th>Name</th>
                         <th>Date</th>
                     </tr>
                     @foreach (var booking in Model.Bookings)
                     {
-                        <tr>
+                        <tr class="table-light">
                             <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="btn btn-dark btn-round">@booking.BookingId</a></td>
                             <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.User.Name</a></td>
                             <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.Date</a></td>
@@ -82,14 +82,14 @@
                 </table>
                
                 <table class="w-25 right-border table table-bordered table-hover table-striped" style="border:1px solid black; word-wrap: break-word;">
-                    <tr>
+                    <tr class="table-light">
                         <th>ID</th>
                         <th>Name</th>
                         <th>Email</th>
                     </tr>
                     @foreach (var user in Model.Users)
                     {
-                        <tr >
+                        <tr class="table-light">
                             <td><a asp-page="#" asp-route-id="@user.UserId" class="btn btn-dark btn-round">@user.UserId</a></td>
                             <td><a asp-page="#" asp-route-id="@user.UserId" class="text-dark text-decoration-none">@user.Name</a></td>
                             <td><a asp-page="#" asp-route-id="@user.UserId" class="text-dark text-decoration-none">@user.Email</a></td>
@@ -98,7 +98,7 @@
                 </table>
 
             
-                <div class="w-25 right-border top-border d-flex flex-column justify-content-evenly table table-bordered" style="border:1px solid black; word-wrap: break-word;">
+                <div class="w-25 right-border top-border d-flex flex-column justify-content-evenly table table-bordered table-light" style="border:1px solid black; word-wrap: break-word;">
                     <h5 class="m-2" style="text-align: left">Accepted bookings last 30 days:
                         <a class="text-dark">@Model.BookingsThisMonth</a>
                         <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i>

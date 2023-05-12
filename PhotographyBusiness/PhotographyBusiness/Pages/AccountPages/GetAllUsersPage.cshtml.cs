@@ -23,6 +23,6 @@ namespace PhotographyBusiness.Pages.AccountPages
         {
             Users = _userService.GetAllUsers();
             return Page();
-        }
+            }
     }
 }
