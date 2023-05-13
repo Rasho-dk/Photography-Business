@@ -118,5 +118,7 @@ namespace PhotographyBusiness.Services.BookingService
         {
             return GetAllBookings().Where(b => b.IsAccepted == false).ToList();
         }
+
+        
     }
 }
