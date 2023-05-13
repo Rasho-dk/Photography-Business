@@ -137,6 +137,12 @@
                                     <input type="text" class="form-control" asp-for="@Model.User.Email" placeholder="Email" readonly>
                                     <span asp-validation-for="@Model.User.Email" class="text-danger"></span>
                                 </div>
+                                <div class="col-md-6">
+                                    <label class="labels" asp-for="User.UserId" hidden></label>
+                                    <input type="text" class="form-control" asp-for="@Model.User.UserId" hidden readonly>
+                                    <span asp-validation-for="@Model.User.UserId" class="text-danger" hidden></span>
+                                </div>
+
 
                                 <div class="col-md-6">
                                     <label class="labels" asp-for="User.Password" hidden></label>

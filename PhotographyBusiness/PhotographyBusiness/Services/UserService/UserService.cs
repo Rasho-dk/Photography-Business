@@ -83,17 +83,15 @@ namespace PhotographyBusiness.Services.UserService
         {
             if(user is not null)
             {
-               //string userId = Convert.ToString(user.UserId);   
                 foreach(var us in Users)
                 {
                     if (us.UserId.Equals(user.UserId))
                     {
-                        us.Name  = user.Name;   
                         us.Email = user.Email;  
                         us.PhoneNumber = user.PhoneNumber;
                     }
                 }
-                await _genericDbService.UpdateObjectAsync(user);
+               // await _genericDbService.UpdateObjectAsync(user);
             }
         }
     }
