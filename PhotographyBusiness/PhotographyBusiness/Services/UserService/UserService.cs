@@ -4,13 +4,14 @@ namespace PhotographyBusiness.Services.UserService
 {
     public class UserService : IUserService
     {
-        public List<User> Users { get; set; } 
-        private GenericDbService<User> _genericDbService;
+        public List<User> Users { get; set; }
+        private GenericDbService<User> _genericDbService; 
         public UserService(GenericDbService<User> genericDbService)
         {
             _genericDbService = genericDbService;
             //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
-            Users = MockData.MockUsers.GetMockUsers();
+           Users = MockData.MockUsers.GetMockUsers();
+            //_genericDbService.SaveObjects(Users);
 
         }
      
@@ -82,11 +83,13 @@ namespace PhotographyBusiness.Services.UserService
         {
             if(user is not null)
             {
+               //string userId = Convert.ToString(user.UserId);   
                 foreach(var us in Users)
                 {
-                    if (us.Name.Equals(user.Name))
+                    if (us.UserId.Equals(user.UserId))
                     {
-                        //TODO Update User
+                        us.Name  = user.Name;   
+                        us.Email = user.Email;  
                         us.PhoneNumber = user.PhoneNumber;
                     }
                 }
