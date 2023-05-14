@@ -140,6 +140,8 @@ namespace PhotographyBusiness.Services.BookingService
         }
         public async Task<List<Booking>> FilterBookingsByNameOrEmail(string nameinput)
         {
+            if (string.IsNullOrEmpty(nameinput)) return GetAllBookings().Where(b => b.IsAccepted == true).ToList();
+
             IEnumerable<Booking> filteredBookings = from booking in Bookings
                                                     where booking.User.Name.Contains(nameinput) && booking.IsAccepted is true
                                                     || booking.User.Email.Contains(nameinput) && booking.IsAccepted is true
