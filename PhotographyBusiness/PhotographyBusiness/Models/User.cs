@@ -29,7 +29,7 @@ namespace PhotographyBusiness.Models
         public string PhoneNumber { get; set; }
         
         public DateTime DateCreated { get; set; }
-        public ICollection<Booking> Bookings { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
 
 
         /// <summary>

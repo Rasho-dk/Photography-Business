@@ -49,6 +49,7 @@ builder.Services.AddRazorPages(options =>
     options.Conventions.AuthorizeFolder("/...");
     options.Conventions.AllowAnonymousToPage("/..");
 });
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 
 

@@ -16,21 +16,23 @@ namespace PhotographyBusiness.Pages.AccountPages
         {
             this.userService = userService;
         }
-
-        public IActionResult OnGet()
+        
+        public async Task<IActionResult> OnGetAsync()
         {
             User = userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
-            // = userService.GetUserByNameAsync(User.Name).Result;
             return Page();
         }
         public async Task<IActionResult> OnPost()
         {
+       
             if (!ModelState.IsValid)
             {
                 return Page();
             }
+            //User = userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
+
             await userService.UpdateUserAsyn(User);
-            ConformUpdate = "profile is updated";
+            ConformUpdate = "Profile is updated";
             return Page();  
 
         }

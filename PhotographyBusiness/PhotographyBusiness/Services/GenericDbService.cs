@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PhotographyBusiness.EFDbContext;
+using PhotographyBusiness.Models;
 
 namespace PhotographyBusiness.Services
 {
@@ -46,7 +47,7 @@ namespace PhotographyBusiness.Services
                 foreach(T obj in objects)
                 {
                     context.Set<T>().Add(obj);
-                    await context.SaveChangesAsync();
+                     context.SaveChanges();
                 }
                 context.SaveChanges();
             }
@@ -60,5 +61,7 @@ namespace PhotographyBusiness.Services
                 await context.SaveChangesAsync();
             }
         }
+
+      
     }
 }
