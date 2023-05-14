@@ -4,7 +4,7 @@
 }
 <div class="container">
     <br />
-    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Bookings</h1>
+    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;"><i class="fa fa-calendar-check-o fa-2x text-dark pop-out" aria-hidden="true"></i></h1>
 
     <div class="d-flex justify-content-around">
         <form method="post" class="form-inline">
@@ -18,15 +18,17 @@
                 </div>
                 <input asp-for="EndDate" class="form-control me-2" />
                 <input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
+
+                <div class="ps-3">
+
+                    <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
+                        RESET FILTERS
+                    </a>
+
+
+                </div>
             </div>
-            <div>
 
-                <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
-                    RESET FILTERS
-                </a>
-
-
-            </div>
 
 
 
@@ -167,7 +169,7 @@
                             <!-- Admin information -->
                             <h5>Admin</h5>
                             @*  <p>Name: @Model.User.Name</p>*@
-                            @*                            <p>Email: @Model.User.Email</p>
+                            @*  <p>Email: @Model.User.Email</p>
                             <p>Phone:@Model.User.PhoneNumber</p>*@
                             <p>Note: <span id="adminNote" style="font-style:italic;"></span></p>
                             <p>Price: <span id="price" style="font-style:italic;"></span></p>
