@@ -70,10 +70,23 @@
     <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black; word-wrap: break-word;">
         <thead>
             <tr class="table-light">
-                <th>Name</th>
-                <th>Eamil</th>
-                <th>Category</th>
-                <th>Date</th>
+                <th>
+                    Name
+                    <a data-toggle="tooltip" title="Sort By Name" asp-page-handler="SortBookingByName"><i onclick="myFunction(this)" class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
+                </th>
+                <th>
+                    Email
+                    <a data-toggle="tooltip" title="Sort By Email" asp-page-handler="SortBookingByEmail"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
+                </th>
+                <th>
+                    Category
+                    <a data-toggle="tooltip" title="Sort By Category" asp-page-handler="SortBookingByCategory"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
+                </th>
+
+                <th>
+                    Date
+                    <a data-toggle="tooltip" title="Sort By Date" asp-page-handler="SortBookingByDate"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
+                </th>
             </tr>
         </thead>
         <tbody id="myTable">
