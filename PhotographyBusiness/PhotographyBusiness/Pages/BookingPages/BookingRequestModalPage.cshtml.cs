@@ -12,6 +12,7 @@ namespace PhotographyBusiness.Pages.BookingPages
     {
 
         private IBookingService _bookingService;
+        public AcceptRequestPageModel _acceptRequest { get; set; }  
         
         public List<Booking> BookingRequests { get; set; }
         [BindProperty] public Booking Booking { get; set; }
@@ -34,10 +35,11 @@ namespace PhotographyBusiness.Pages.BookingPages
             return Page();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(int id)
         {
+
             
-            return RedirectToPage("/BookingPages/AcceptRequestPage");
+            return RedirectToPage("/BookingPages/AcceptRequestPage",id);
         }
 
         

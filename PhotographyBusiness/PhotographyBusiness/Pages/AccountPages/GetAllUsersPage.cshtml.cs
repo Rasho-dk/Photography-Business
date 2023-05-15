@@ -24,5 +24,11 @@ namespace PhotographyBusiness.Pages.AccountPages
             Users = _userService.GetAllUsers();
             return Page();
         }
+
+        public IActionResult OnPostDelete(int id) 
+        {
+            _userService.DeleteUserAsyn(id);
+            return RedirectToPage("../AccountPages/GetAllUsersPage");
+        }
     }
 }

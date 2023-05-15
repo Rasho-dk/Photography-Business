@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PhotographyBusiness.styles.css" asp-append-version="true" />
+
     <script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
-    
+
 
 
 
@@ -113,7 +114,7 @@
                                         @if (Context.User.Identity.Name == "admin")
                                         {
                                             <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item text-dark" asp-page="/AdminPages/AdminDashboardPage">Booking Requests</a></li>
+                                            <li><a class="dropdown-item text-dark" asp-page="/BookingPages/GetAllBookingRequestsPage">Booking Requests</a></li>
                                             <li><a class="dropdown-item text-dark" asp-page="/BookingPages/GetAllBookings">Accepted Bookings</a></li>
                                             <li><a class="dropdown-item text-dark" asp-page="/AccountPages/GetAllUsersPage">Users</a></li>
                                             <li><a class="dropdown-item text-dark" asp-page="/AdminPages/AdminDashboardPage">Analytics</a></li>
@@ -126,17 +127,12 @@
 
                           }
                         }
-
-                     
-
-                        
-                      
-
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     @RenderBody()
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -145,10 +141,12 @@
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 <footer class="bg-white pb-1">
     <div class="d-flex justify-content-between container">
         <div class="pt-2">
             <img src="~/media/logo.png" style="height: 150px" class="pop-out" />
+            <hr />
             <h5 style="font-size: 12px" class="pt-1">&copy2023 Copyright Jack Saunders Photography</h5>
         </div>
         
@@ -178,11 +176,12 @@
                     </div>
                 </div>
             </div>
+            <hr />
+
             <div class="text-center">
                 <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 12px;
 								"> Privacy Policy</a>
                 <a class="text-dark" style="font-size:12px">|</a>
-
                 <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 12px;">
                     Terms & Conditions
                 </a>
@@ -190,5 +189,7 @@
         </div>
     </div>
 </footer>
-</html>
 
+
+
+</html>
