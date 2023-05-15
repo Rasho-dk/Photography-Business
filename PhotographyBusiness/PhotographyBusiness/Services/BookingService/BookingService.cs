@@ -13,6 +13,8 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> Bookings { get; set; }
 
+        public int number { get; set; } // Arun: til sort, så den både kan sortere asc og desc med samme klik. 
+
         public BookingService(GenericDbService<Booking> genericDbService, IUserService userService)
         {
             _genericDbService = genericDbService;
@@ -118,5 +120,170 @@ namespace PhotographyBusiness.Services.BookingService
         {
             return GetAllBookings().Where(b => b.IsAccepted == false).ToList();
         }
+
+        public async Task<List<Booking>> FilterBookingsByDate(DateTime startdate, DateTime endDate)
+        {
+            IEnumerable<Booking> filteredBookings = from booking in Bookings
+                                                    where booking.Date >= startdate && booking.Date <= endDate
+                                                    && booking.IsAccepted is true
+                                                    select booking;
+
+
+
+            //                                    from booking in Bookings
+            //                                    where booking.Date >= startdate && booking.Date <= endDate
+            //                                    select booking;
+
+
+
+            return filteredBookings.ToList();
+        }
+        public async Task<List<Booking>> FilterBookingsByNameOrEmail(string nameinput)
+        {
+            if (string.IsNullOrEmpty(nameinput)) return GetAllBookings().Where(b => b.IsAccepted == true).ToList();
+
+            IEnumerable<Booking> filteredBookings = from booking in Bookings
+                                                    where booking.User.Name.Contains(nameinput) && booking.IsAccepted is true
+                                                    || booking.User.Email.Contains(nameinput) && booking.IsAccepted is true
+                                                    select booking;
+            return filteredBookings.ToList();
+        }
+
+        // REDUNDANT EMAIL SEARCHING IMPLEMENTED IN NAME SEARCH
+
+        //public async Task<List<Booking>> FilterBookingsByEmail(string Email)         
+        //{
+        //    IEnumerable<Booking> filteredBookings = from booking in Bookings
+        //                                            where booking.User.Email.ToLower().Contains((Email))
+        //                                            select booking;
+        //    return filteredBookings.ToList();
+        //}
+
+        public async Task<List<Booking>> FilterBookingsByCategory(string Category)
+        {
+            IEnumerable<Booking> filteredBookings = from booking in Bookings
+                                                    where booking.Category.Contains((Category))
+                                                    && booking.IsAccepted is true
+                                                    select booking;
+            return filteredBookings.ToList();
+        }
+
+
+        public async Task<List<Booking>> SortBookingByCategory()
+        {
+            if (number == 1)
+            {
+                number--;
+                IEnumerable<Booking> filteredBookingsdesc =
+
+                        from booking in Bookings
+                        where booking.IsAccepted is true
+                        orderby booking.Category descending
+                        select booking;
+
+                return filteredBookingsdesc.ToList();
+            }
+
+            number++;
+            IEnumerable<Booking> filteredBookingsasc =
+
+                        from booking in Bookings
+                        where booking.IsAccepted is true
+                        orderby booking.Category ascending
+                        select booking;
+
+            return filteredBookingsasc.ToList();
+
+
+
+        }
+
+        public async Task<List<Booking>> SortBookingByDate()
+        {
+            if (number == 1)
+            {
+                number--;
+                IEnumerable<Booking> filteredBookingsdesc =
+
+                        from booking in Bookings
+                        where booking.IsAccepted is true
+                        orderby booking.Date descending
+                        select booking;
+
+                return filteredBookingsdesc.ToList();
+            }
+
+            number++;
+            IEnumerable<Booking> filteredBookingsasc =
+
+                        from booking in Bookings
+                        where booking.IsAccepted is true
+                        orderby booking.Date ascending
+                        select booking;
+
+            return filteredBookingsasc.ToList();
+
+
+
+        }
+
+        public async Task<List<Booking>> SortBookingByName()
+        {
+            if (number == 1)
+            {
+                number--;
+                IEnumerable<Booking> filteredBookingsdesc =
+
+                        from booking in Bookings
+                        where booking.IsAccepted is true
+                        orderby booking.User.Name descending
+                        select booking;
+
+                return filteredBookingsdesc.ToList();
+            }
+
+            number++;
+            IEnumerable<Booking> filteredBookingsasc =
+
+                        from booking in Bookings
+                        where booking.IsAccepted is true
+                        orderby booking.User.Name ascending
+                        select booking;
+
+            return filteredBookingsasc.ToList();
+
+
+
+        }
+
+        public async Task<List<Booking>> SortBookingByEmail()
+        {
+            if (number == 1)
+            {
+                number--;
+                IEnumerable<Booking> filteredBookingsdesc =
+
+                        from booking in Bookings
+                        where booking.IsAccepted is true
+                        orderby booking.User.Email descending
+                        select booking;
+
+                return filteredBookingsdesc.ToList();
+            }
+
+            number++;
+            IEnumerable<Booking> filteredBookingsasc =
+
+                        from booking in Bookings
+                        where booking.IsAccepted is true
+                        orderby booking.User.Email ascending
+                        select booking;
+
+            return filteredBookingsasc.ToList();
+
+
+
+        }
+
     }
 }

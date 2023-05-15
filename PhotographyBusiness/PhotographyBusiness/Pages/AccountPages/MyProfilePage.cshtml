@@ -4,18 +4,18 @@
 }
 <link href="~/css/myprofilestyle.css" rel="stylesheet" />
 
-<form method="post">
-<div class="container rounded bg-white mt-5 mb-5">
+
+<div style="display:block" class="container rounded bg-white mt-5 mb-5" id="myProfile">
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class ="rounded-circle mt-5 pop-out" width="60%" accesskey=" " src="~/media/icon/person.jpg" />
+                <img class="rounded-circle mt-5 pop-out" width="60%" accesskey=" " src="~/media/icon/person.jpg" />
 
-                    <span class="font-weight-bold pop-out">@Model.User.Name</span>
-                    <span class="text-black-50 pop-out">@Model.User.Email</span>
-                    <span>
-                    </span>
-                    </div>
+                <span class="font-weight-bold pop-out">@Model.User.Name</span>
+                <span class="text-black-50 pop-out">@Model.User.Email</span>
+                <span>
+                </span>
+            </div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -23,81 +23,183 @@
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
                 <div class="row mt-2">
-                        @if(HttpContext.User.Identity.Name == "admin")
-                        {
-                            <div class="col-md-6">
-                                <label class="labels" asp-for="User.Name"></label>
-                                <input type="text" class="form-control" placeholder="first name"  asp-for="@Model.User.Name">
-                                <span asp-validation-for="@Model.User.Name" class="text-danger"></span>
-                            </div>
+                   
+                        <div class="col-md-6">
+                            <label class="labels" asp-for="User.Name"></label>
+                            <input type="text" class="form-control" placeholder="FullName" asp-for="@Model.User.Name" readonly>
+                            <span asp-validation-for="@Model.User.Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels" asp-for="User.Email"></label>
+                            <input type="text" class="form-control" asp-for="@Model.User.Email" placeholder="Email" readonly>
+                            <span asp-validation-for="@Model.User.Email" class="text-danger"></span>
+                        </div>
 
-                            <div class="col-md-6">
-                                <label class="labels" asp-for="User.Email"></label>
-                                <input type="text" class="form-control" placeholder="Email" asp-for="@Model.User.Email">
-                                <span asp-validation-for="@Model.User.Email" class="text-danger"></span>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="labels" asp-for="User.Password" hidden></label>
-                                <input type="text" class="form-control" placeholder="Email" asp-for="@Model.User.Password" hidden>
-                                <span asp-validation-for="@Model.User.Password" class="text-danger" hidden></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="labels" asp-for="User.Bookings" hidden></label>
-                                <input type="text" class="form-control" placeholder="Email" asp-for="@Model.User.Bookings" hidden>
-                                <span asp-validation-for="@Model.User.Bookings" class="text-danger" hidden></span>
-                            </div>
-
-                           
-                        }
-                        else
-                        {
-                            <div class="col-md-6">
-                                <label class="labels" asp-for="User.Name"></label>
-                                <input type="text" class="form-control" placeholder="FullName" asp-for="@Model.User.Name" readonly >
-                                <span asp-validation-for="@Model.User.Name" class="text-danger"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="labels" asp-for="User.Email"></label>
-                                <input type="text" class="form-control" asp-for="@Model.User.Email" placeholder="Email" readonly >
-                                <span asp-validation-for="@Model.User.Email" class="text-danger"></span>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="labels" asp-for="User.Password" hidden></label>
-                                <input type="text" class="form-control" placeholder="Email" asp-for="@Model.User.Password" hidden>
-                                <span asp-validation-for="@Model.User.Password" class="text-danger" hidden></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="labels" asp-for="User.Bookings" hidden></label>
-                                <input type="text" class="form-control" placeholder="Email" asp-for="@Model.User.Bookings" hidden>
-                                <span asp-validation-for="@Model.User.Bookings" class="text-danger" hidden></span>
-                            </div>
-                        }
+                        <div class="col-md-6">
+                            <label class="labels" asp-for="User.Password" hidden></label>
+                            <input type="text" class="form-control" placeholder="Email" asp-for="@Model.User.Password" hidden readonly>
+                            <span asp-validation-for="@Model.User.Password" class="text-danger" hidden></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labels" asp-for="User.Bookings" hidden></label>
+                            <input type="text" class="form-control" placeholder="Email" asp-for="@Model.User.Bookings" hidden readonly>
+                            <span asp-validation-for="@Model.User.Bookings" class="text-danger" hidden></span>
+                        </div>            
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <label class="labels" asp-for="User.PhoneNumber"></label>
-                        <input type="text" class="form-control" placeholder="enter phone number" asp-for="@Model.User.PhoneNumber">
-                            <span asp-validation-for="@Model.User.PhoneNumber" class="text-danger"></span>
-                    </div>                                   
-                </div>                   
-                <div class="mt-5 text-center"><button class="btn btn-primary profile-button pop-out" type="submit">Save Profile</button></div>
-                <br />
-                    @if(Model.ConformUpdate != null)
-                    {
-                        <div class="alert alert-success" role="alert">
-                            @Model.ConformUpdate
-                        </div>
+                        <input type="text" class="form-control" placeholder="enter phone number" asp-for="@Model.User.PhoneNumber" readonly>
+                        <span asp-validation-for="@Model.User.PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
 
-                    }
+                <div class="mt-5 text-center">
+                    <button class="btn btn-primary profile-button pop-out" type="button" onclick="editProfile()">Edit profile</button>
+                </div>
 
-                    
             </div>
+
+         
+            @if (Model.ConformUpdate != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @Model.ConformUpdate
+                </div>
+
+            }
         </div>
-       
+
     </div>
 </div>
-</form>
+
+<div style="display:none;" id="editProfile">
+    <form method="post">
+        <div class="container rounded bg-white mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-3 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img class="rounded-circle mt-5 pop-out" width="60%" accesskey=" " src="~/media/icon/person.jpg" />
+
+                        <span class="font-weight-bold pop-out">@Model.User.Name</span>
+                        <span class="text-black-50 pop-out">@Model.User.Email</span>
+                        <span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-5 border-right">
+                    <div class="p-3 py-5">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Profile Settings</h4>
+                        </div>
+                        <div class="row mt-2">
+                            @if (HttpContext.User.Identity.Name == "admin")
+                            {
+                                <div class="col-md-6">
+                                    <label class="labels" asp-for="User.Name"></label>
+                                    <input type="text" class="form-control" placeholder="name" asp-for="@Model.User.Name" readonly>
+                                    <span asp-validation-for="@Model.User.Name" class="text-danger"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="labels" asp-for="User.Email"></label>
+                                    <input type="text" class="form-control" placeholder="Email" asp-for="@Model.User.Email">
+                                    <span asp-validation-for="@Model.User.Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels" asp-for="User.UserId" hidden></label>
+                                    <input type="text" class="form-control" asp-for="@Model.User.UserId" hidden readonly>
+                                    <span asp-validation-for="@Model.User.UserId" class="text-danger" hidden></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="labels" asp-for="User.Password" hidden></label>
+                                    <input type="text" class="form-control" asp-for="@Model.User.Password" hidden readonly>
+                                    <span asp-validation-for="@Model.User.Password" class="text-danger" hidden></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels" asp-for="User.Bookings" hidden></label>
+                                    <input type="text" class="form-control" placeholder="Email" asp-for="@Model.User.Bookings" hidden>
+                                    <span asp-validation-for="@Model.User.Bookings" class="text-danger" hidden></span>
+                                </div>
 
 
+                            }
+                            else
+                            {
+                                <div class="col-md-6">
+                                    <label class="labels" asp-for="User.Name"></label>
+                                    <input type="text" class="form-control" placeholder="FullName" asp-for="@Model.User.Name" readonly>
+                                    <span asp-validation-for="@Model.User.Name" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels" asp-for="User.Email"></label>
+                                    <input type="text" class="form-control" asp-for="@Model.User.Email" placeholder="Email" readonly>
+                                    <span asp-validation-for="@Model.User.Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels" asp-for="User.UserId" hidden></label>
+                                    <input type="text" class="form-control" asp-for="@Model.User.UserId" hidden readonly>
+                                    <span asp-validation-for="@Model.User.UserId" class="text-danger" hidden></span>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <label class="labels" asp-for="User.Password" hidden></label>
+                                    <input type="text" class="form-control" placeholder="Email" asp-for="@Model.User.Password" hidden>
+                                    <span asp-validation-for="@Model.User.Password" class="text-danger" hidden></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels" asp-for="User.Bookings" hidden></label>
+                                    <input type="text" class="form-control" placeholder="Email" asp-for="@Model.User.Bookings" hidden>
+                                    <span asp-validation-for="@Model.User.Bookings" class="text-danger" hidden></span>
+                                </div>
+                            }
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <label class="labels" asp-for="User.PhoneNumber"></label>
+                                <input type="text" class="form-control" placeholder="enter phone number" asp-for="@Model.User.PhoneNumber">
+                                <span asp-validation-for="@Model.User.PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="mt-5 text-center"><button class="btn btn-primary profile-button pop-out" type="submit">Save Profile</button></div>
+                            <br />
+                            <div class="mt-5 text-center"><button class="btn btn-dark  pop-out" type="button" onclick="cancelEdit()">Cancel</button></div>
+                        </div>                       
+                   </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script>
+
+        function editProfile() {
+            var x = document.getElementById("editProfile");
+            if (x.style.display == "none") {
+                x.style.display = "block";
+            }
+            var a = document.getElementById("myProfile");
+            if(a.style.display == "block"){
+                a.style.display ="none";
+            }
+        }
+
+        function cancelEdit() {
+            var canc = document.getElementById("editProfile");
+            if(canc.style.display == "block"){
+                canc.style.display = "none";
+            }
+            var showMyProfile = document.getElementById("myProfile");
+            if(showMyProfile.style.display == "none"){
+                showMyProfile.style.display = "block" ;
+            }
+        }
+
+    </script>
+}
