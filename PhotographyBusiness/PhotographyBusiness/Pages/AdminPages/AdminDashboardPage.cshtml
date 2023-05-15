@@ -108,25 +108,34 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-6" style="text-align: left">
-                                                            <h5>Customer information</h5>
-                                                            <p>Name: <span id="customerName"></span></p>
-                                                            <p>Email: <span id="customerEmail"></span></p>
-                                                            <p>Phone: <span id="customerPhone"></span></p>
-                                                            <p>Category: <span id="bookingCategory"></span></p>
-                                                            <p>Note: <span id="customerNote"></span></p>
-                                                        </div>
-                                                        <div class="col-md-6" style="text-align: left">
-                                                            <h5>Admin information</h5>
-                                                            <p>Event address: <span id="bookingAddress"></span></p>
-                                                            <p>Event date: <span id="bookingDate"></span></p>
-                                                            <p>Price: <span id="bookingPrice"></span></p>
-                                                            <p>Admin note: <span id="bookingAdminNote"></span></p>
-                                                        </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr><th>Customer information</th></tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr><td><p style="text-align: left">Name: <span id="customerName"></span></p></td></tr>
+                                                                <tr><td><p style="text-align: left">Email: <span id="customerEmail"></span></p></td></tr>
+                                                                <tr><td><p style="text-align: left">Phone: <span id="customerPhone"></span></p></td></tr>
+                                                                <tr><td><p style="text-align: left">Category: <span id="bookingCategory"></span></p></td></tr>
+                                                                <tr><td><p style="text-align: left">Note: <span id="customerNote"></span></p></td></tr>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
-
+                                                    <div class="col-md-6">
+                                                        <table class="table table-striped">
+                                                            <thead>
+                                                                <tr><th>Admin information</th></tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr><td><p style="text-align: left">Event address: <span id="bookingAddress"></span></p></td></tr>
+                                                                <tr><td><p style="text-align: left">Event date: <span id="bookingDate"></span></p></td></tr>
+                                                                <tr><td><p style="text-align: left">Price: <span id="bookingPrice"></span></p></td></tr>
+                                                                <tr><td><p style="text-align: left">Admin note: <span id="bookingAdminNote"></span></p></td></tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div> 
                                             <div class="modal-footer d-flex justify-content-center">
@@ -173,17 +182,18 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="container">
-                                                    <div class="" style="text-align: center">
-                                                        <!-- Customer information -->
-                                                        <h5>User profile</h5>
-                                                        <p>User ID: <span id="userId" style="font-style: italic;"></span></p>
-                                                        <p>Name: <span id="userName" style="font-style:italic;"></span></p>
-                                                        <p>Email: <span id="userEmail" style="font-style:italic;"></span></p>
-                                                        <p>Phone: <span id="userPhone" style="font-style:italic;"></span></p>
-                                                        <p>Date joined: <span id="userCreated" style="font-style:italic;"></span></p>
-                                                    </div>
-                                                </div>
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr><th>User profile</th></tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr><td><p>User ID: <span id="userId" style="font-style: italic;"></span></p></td></tr>
+                                                        <tr><td><p>Name: <span id="userName" style="font-style:italic;"></span></p></td></tr>
+                                                        <tr><td><p>Email: <span id="userEmail" style="font-style:italic;"></span></p></td></tr>
+                                                        <tr><td><p>Phone: <span id="userPhone" style="font-style:italic;"></span></p></td></tr>
+                                                        <tr><td><p>Date joined: <span id="userCreated" style="font-style:italic;"></span></p></td></tr>
+                                                    </tbody>
+                                                </table>
                                             </div>
 
                                             <div class="modal-footer d-flex justify-content-center">
@@ -206,9 +216,8 @@
 <div class="bg-dark p-5 mt-3 mb-3">
     <div class="d-grid text-center">
         <a asp-page="#"><i class="fa fa-bar-chart text-white fa-5x pop-out" aria-hidden="true"></i></a>
-        <a asp-page="#" class="text-white text-decoration-none">Analytics</a>
-        <br />
-        <a class="text-white text-decoration-none text-center">Quick overview</a>
+        <h5 asp-page="#" class="text-white text-decoration-none">Analytics</h5>
+        <a class="text-white text-decoration-none text-center mt-3">Quick overview</a>
     </div>
 
     <div class="d-grid">
