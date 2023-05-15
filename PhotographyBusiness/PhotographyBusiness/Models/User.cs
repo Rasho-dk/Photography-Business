@@ -29,6 +29,8 @@ namespace PhotographyBusiness.Models
         public string PhoneNumber { get; set; }
         
         public DateTime DateCreated { get; set; }
+        public virtual ICollection<Booking> Bookings { get; set; }
+
 
         /// <summary>
         /// The full constructor
@@ -40,6 +42,15 @@ namespace PhotographyBusiness.Models
 
         public User(string email, string password, string name, string phoneNumber)
         {
+            Email = email;
+            Password = password;
+            Name = name;
+            PhoneNumber = phoneNumber;
+            DateCreated = DateTime.Now;
+        }
+        public User(int id,string email, string password, string name, string phoneNumber)
+        {
+            UserId = id;
             Email = email;
             Password = password;
             Name = name;

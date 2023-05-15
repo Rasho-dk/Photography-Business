@@ -13,14 +13,19 @@ namespace PhotographyBusiness.Pages.BookingPages
         private IBookingService _bookingService;
         private IUserService _userService;
 
-        [BindProperty] public string City { get; set; }
-        [BindProperty] public string ZipCode { get; set; }
-        [BindProperty] public string Street { get; set; }
-        [BindProperty] public string CustomerNote { get; set; }
-        [BindProperty] public string Category { get; set; }
+        [BindProperty] 
+        public string City { get; set; }
+        [BindProperty] 
+        public string ZipCode { get; set; }
+        [BindProperty] 
+        public string Street { get; set; }
+        [BindProperty] 
+        public string CustomerNote { get; set; }
+        [BindProperty] 
+        public string Category { get; set; }
 
         public string FullAddress { get; set; }
-        public Booking Booking { get; set; }
+        public Booking Booking { get; set; } = new Booking();
         public User User { get; set; }
 
         public CreateBookingRequestPageModel(IBookingService bookingService, IUserService userService)
@@ -53,16 +58,16 @@ namespace PhotographyBusiness.Pages.BookingPages
                 return Page();
             }
 
-            Booking = new Booking();
-            User = _userService.GetUserByEmailAsync(HttpContext.User.Identity.Name).Result;
-
-            Booking.UserId = User.UserId;
-            Booking.User = User;
-            Booking.Address = City + ZipCode + Street;
-            Booking.CustomerNote = CustomerNote;
+            User = _userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
             Booking.Category = Category;
-            await _bookingService.CreateBooking(Booking);
-            return RedirectToPage("Index");
+            Booking.CustomerNote = CustomerNote;
+            Booking.Address = $"{Street}, {City} {ZipCode}";
+            Booking.UserId = User.UserId;
+            Booking.IsAccepted = false;
+            Booking.DateCreated = DateTime.Now;
+
+            await _bookingService.CreateBookingAsync(Booking);
+            return RedirectToPage("../Index");
         }
     }
 }

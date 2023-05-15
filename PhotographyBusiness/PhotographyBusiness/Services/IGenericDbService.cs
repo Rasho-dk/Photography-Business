@@ -8,5 +8,6 @@
         public Task UpdateObjectAsync(T obj);
         public Task<T> GetObjectByIdAsync(int id);
         public Task SaveObjects(List<T> objects);
+
     }
 }

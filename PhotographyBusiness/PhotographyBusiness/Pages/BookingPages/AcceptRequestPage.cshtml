@@ -1,0 +1,219 @@
+﻿@page "{id}"
+@model PhotographyBusiness.Pages.BookingPages.AcceptRequestPageModel
+@{
+}
+
+<div class="d-flex justify-content-center" style="">
+
+    <div class="d-flex flex-column m-4" style="min-width: 30vw">
+
+
+            <div>
+
+                <h2 class="text-decoration-underline">Please specify a price and a note</h2>
+                
+                <br />
+
+                <div class="form-group p-2 d-flex justify-content-around">
+                    <div class="me-1">
+
+                        <h5>
+                            Booking Information
+                        </h5>
+
+                        <br />
+
+                        <label asp-for="@Model.Booking.Category" class="control-label text-black">Category</label>
+                        <input asp-for="@Model.Booking.Category" class="form-control btn-border-black" readonly />
+
+                        <label asp-for="@Model.Booking.Date" class="control-label text-black">Date</label>
+                        <input asp-for="@Model.Booking.Date" class="form-control btn-border-black" readonly />  
+
+                        <label asp-for="@Model.Booking.Address" class="control-label text-black">Address</label>
+                        <input asp-for="@Model.Booking.Address" class="form-control btn-border-black" readonly />
+
+                        <label asp-for="@Model.Price" class="control-label text-black">Price</label>
+                        <input asp-for="@Model.Price" class="form-control btn-border-black" />
+
+                        <label asp-for="@Model.AdminNote" class="control-label text-black">Admin Note</label>
+                        <textarea asp-for="@Model.AdminNote" name="Note" rows="6" cols="23"
+                              class="form-control textarea-input btn-border-black" style="resize:none"></textarea>
+
+                        
+                    </div>
+
+                    <div class="ms-1 justify-content-center">
+
+                        <h5>
+                            Customer Information
+                        </h5>
+                        <br />
+
+                        <label asp-for="@Model.Booking.User.Name" class="control-label text-black">Customer Name</label>
+                        <input asp-for="@Model.Booking.User.Name" class="form-control btn-border-black" readonly />
+
+                        <label asp-for="@Model.Booking.User.Email" class="control-label text-black">Customer Email</label>
+                        <input asp-for="@Model.Booking.User.Email" class="form-control btn-border-black" readonly />
+                        <div>
+                            <img src="~/media/logo.png" style="height: 113px; margin-left: 40px; margin-top: 10px;" />
+
+                        </div>
+
+                        <label asp-for="@Model.Booking.CustomerNote" class="control-label text-black">Customer Note</label>
+                        <textarea asp-for="@Model.Booking.CustomerNote" name="Note" rows="6" cols="23"
+                                  class="form-control textarea-input btn-border-black" style="resize:none" readonly></textarea>
+                    </div>
+                </div>
+
+
+                <form method="post">
+                    <div class="form-group p-2">
+                        <div class="form-group m-2 d-flex justify-content-center">
+
+                            <input type="submit" value="Confirm" class="btn btn-dark" style="min-width: 6vw; border-radius: 0; margin-right: 40px;"
+                                   asp-route-id="@Model.Booking.BookingId" asp-route-note="@Model.AdminNote" asp-route-price="@Model.Price" />
+
+                            <a asp-page="/BookingPages/GetAllBookingRequestsPage" class="btn btn-light btn-border-black" style="border-radius: 0; min-width: 6vw;">Decline</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+@*                            <div class="d-grid">
+                                <div>
+                                    <label asp-for="@Model.Booking.Category" class="control-label text-black">Category</label>
+                                    <input asp-for="@Model.Booking.Category" class="form-control" readonly />
+                                </div>
+                                <div>
+                                    <label asp-for="@Model.Booking.Date" class="control-label text-black">Date</label>
+                                    <input asp-for="@Model.Booking.Date" class="form-control" readonly />
+                                </div>
+                                <div>
+                                    <label asp-for="@Model.Booking.Address" class="control-label text-black">Address</label>
+                                    <input asp-for="@Model.Booking.Address" class="form-control" readonly />
+                                </div>
+                                <div>
+                                    <label asp-for="@Model.Price" class="control-label text-black">Price</label>
+                                    <input asp-for="@Model.Price" class="form-control" readonly/>
+                                </div>
+                                <div>
+                                    <label asp-for="@Model.AdminNote" class="control-label text-black">Admin Note</label>
+                                    <textarea asp-for="@Model.AdminNote" name="Note" rows="6" cols="50" class="form-control textarea-input" style="resize:none" readonly></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="d-grid">
+                                <label asp-for="@Model.Booking.User.Name" class="control-label text-black">Customer Name</label>
+                                <input asp-for="@Model.Booking.User.Name" class="form-control" readonly />
+                            </div>
+                            <div>
+                                <label asp-for="@Model.Booking.User.Email" class="control-label text-black">Customer Email</label>
+                                <input asp-for="@Model.Booking.User.Email" class="form-control" readonly />
+                            </div>
+                            <div>
+                                <label asp-for="@Model.Booking.CustomerNote" class="control-label text-black">Customer Note</label>
+                                <textarea asp-for="@Model.Booking.CustomerNote" name="Note" rows="6" cols="50" class="form-control textarea-input" style="resize:none" readonly></textarea>
+                            </div>
+
+
+                <form method="post">
+                    <div class="align-middle">
+
+                        <table class="no-border " style="margin: 0 auto;" cellpadding="20px">
+                            <tr>
+                                <th>
+                                    <input type="submit" value="Yes" class="b tn btn-dark nav-link text-dark text-white"
+                                           style="border-radius: 0; min-width: 5vw; max-width: 15vw" />
+                                </th>
+                                <th>
+                                    <a class="btn text-dark btn-border-black btn-square nav-link" style="border-radius: 0; min-width: 5vw; max-width: 15vw;"
+                                       asp-page="GetAllBookingRequestsPage" asp-route-id="">No</a>
+                                </th>
+                            </tr>
+                        </table>
+
+                    </div>
+                </form>*@
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+
+
+    .no-border {
+        border: none;
+    }
+
+    th {
+        border: none;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    table {
+        border-top: solid 2px black;
+        border-bottom: solid 2px black;
+    }
+
+    .right-border {
+        border-right: solid 2px black;
+    }
+
+    .top-border {
+        border-top: solid 2px black;
+        border-bottom: solid 2px black;
+    }
+
+    .left-border {
+        border-left: solid 2px black;
+    }
+
+    td {
+        border: solid 1px black;
+    }
+
+    h5 {
+        font-size: 1.1rem;
+    }
+
+    .btn-round {
+        border-radius: 50px;
+        transition: all .2s ease-in-out;
+    }
+
+        .btn-round:hover {
+            background-color: whitesmoke;
+            border: solid 1px whitesmoke;
+            color: black;
+        }
+
+    .number-contrast {
+        padding: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        border-radius: 100px;
+    }
+</style>

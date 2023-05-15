@@ -4,19 +4,17 @@ namespace PhotographyBusiness.Services.UserService
 {
     public class UserService : IUserService
     {
-        public List<User> Users {  get; } 
-        private GenericDbService<User> _genericDbService;
+        public List<User> Users { get; set; }
+        private GenericDbService<User> _genericDbService; 
         public UserService(GenericDbService<User> genericDbService)
         {
             _genericDbService = genericDbService;
             //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
-            Users = MockData.MockUsers.GetMockUsers();
+           Users = MockData.MockUsers.GetMockUsers();
+            //_genericDbService.SaveObjects(Users);
 
         }
-        public UserService()
-        {
-            
-        }
+     
         public async Task CreateUserAsyn(User user)
         {
             Users.Add(user);    
@@ -60,7 +58,7 @@ namespace PhotographyBusiness.Services.UserService
             {
                 if (user.Name.Equals(name))
                 {
-                    return user;
+                    return  user;
                 }
             }
             return null;
@@ -89,11 +87,11 @@ namespace PhotographyBusiness.Services.UserService
                 {
                     if (us.UserId.Equals(user.UserId))
                     {
-                        //TODO Update User
-
+                        us.Email = user.Email;  
+                        us.PhoneNumber = user.PhoneNumber;
                     }
                 }
-                await _genericDbService.UpdateObjectAsync(user);
+               // await _genericDbService.UpdateObjectAsync(user);
             }
         }
     }

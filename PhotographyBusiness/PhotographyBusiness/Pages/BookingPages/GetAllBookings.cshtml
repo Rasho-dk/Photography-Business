@@ -1,95 +1,116 @@
-﻿@page "id:int"
+﻿@page
 @model PhotographyBusiness.Pages.BookingPages.GetAllBookingsModel
 @{
 }
+<div class="container">
+    <br />
+    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;"><i class="fa fa-calendar-check-o fa-2x text-dark pop-out" aria-hidden="true"></i></h1>
 
-<br />
-<h1 style="font-family:fantasy;">Bookings</h1>
-<br />
-
-<div class="d-flex justify-content-around">
-    <form method="post" class="form-inline">
-        <div class="input-group mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text btn-border-black bg-white" >Start Date</span>      @*btn-border-black til Start date eller grey ligesom i End Date*@
-            </div>
-            <input asp-for="StartDate" class="form-control me-2" />
-            <div class="input-group-prepend">
-                <span class="input-group-text">End Date</span>
-            </div>
-            <input asp-for="EndDate" class="form-control me-2" />
-            <input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
-        </div>
-        <div>
-
-            <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
-                RESET FILTERS
-            </a>
-
-
-        </div>
-
-
-        
-    </form>
-
-    <div class="col-4 w-25">
+    <div class="d-flex justify-content-around">
         <form method="post" class="form-inline">
-            <div class="input-group mb-2">
-                <input asp-for="NameInput" class="form-control me-1" placeholder="Filter by Name, Last name or Email " />
-                <input type="submit" asp-page-handler="NameSearch" value="Search" class="btn btn-border-black" />
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text btn-border-black bg-white">Start Date</span>      @*btn-border-black til Start date eller grey ligesom i End Date*@
+                </div>
+                <input asp-for="StartDate" class="form-control me-2" />
+                <div class="input-group-prepend">
+                    <span class="input-group-text">End Date</span>
+                </div>
+                <input asp-for="EndDate" class="form-control me-2" />
+                <input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
+
+                <div class="ps-3">
+
+                    <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
+                        RESET FILTERS
+                    </a>
+
+
+                </div>
             </div>
+
+
+
+
         </form>
 
-                    <form method="post">
-            <div class="input-group mb-2 ms-5 px-5">
-                <label for="CategoryInput"></label>
-                <select asp-for="CategoryInput">
-                    <option select disabled value="Select Category"> Select Category &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </option>
-                    <option value="Marriage">Marriage</option>
-                    <option value="Family">Family</option>
-                    <option value="Portrait">Portrait</option>
-                    <input type="submit" asp-page-handler="CategoryFilter" value="Filter &nbsp" class="btn btn-border-black" />
-                </select>
+        <div class="col-4 w-25">
+            <form method="post" class="form-inline">
+                <div class="input-group mb-2">
+                    <input asp-for="NameInput" class="form-control me-1" placeholder="Filter by Name, Last name or Email " />
+                    <input type="submit" asp-page-handler="NameSearch" value="Search" class="btn btn-border-black btn-even" />
                 </div>
             </form>
 
+            <form method="post">
+                <div class="input-group mb-2">
+                    <label for="CategoryInput"></label>
+                    <select aria-label="Filter select" class="form-select me-1" asp-for="CategoryInput">
+                        <option select disabled value="Select Category"> Select Category; </option>
+                        <option value="Marriage">Marriage</option>
+                        <option value="Family">Family</option>
+                        <option value="Portrait">Portrait</option>
+                        <input type="submit" asp-page-handler="CategoryFilter" value="Filter" class="btn btn-border-black btn-even" />
+                    </select>
+                </div>
+            </form>
 
+        </div>
     </div>
-</div>
 
-<br />
 
-<div>
-    <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black;">
+
+    @*Shero's Kode må ikke sletes'
+    *@
+    
+@*    <br />
+    <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:30%;">
+    <br>*@
+
+    <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black; word-wrap: break-word;">
         <thead>
             <tr class="table-light">
-                <th>Name 
+                <th>
+                    Name
                     <a data-toggle="tooltip" title="Sort By Name" asp-page-handler="SortBookingByName"><i onclick="myFunction(this)" class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
-                    </th>
-                <th>Email
+                </th>
+                <th>
+                    Email
                     <a data-toggle="tooltip" title="Sort By Email" asp-page-handler="SortBookingByEmail"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
                 </th>
                 <th>
-                    Category 
+                    Category
                     <a data-toggle="tooltip" title="Sort By Category" asp-page-handler="SortBookingByCategory"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
                 </th>
-                
-                <th>Date
+
+                <th>
+                    Date
                     <a data-toggle="tooltip" title="Sort By Date" asp-page-handler="SortBookingByDate"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
                 </th>
             </tr>
         </thead>
-        <tbody>
-            @if (@Model.bookings != null)
+        <tbody id="myTable">
+            @if (@Model.Bookings != null)
             {
-                foreach (var booking in Model.bookings)
+                foreach (var booking in Model.Bookings)
                 {
                     <tr class="table-light">
                         <td>
-
-                            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#exampleModal">@booking.User.Name</button>
                             @*<a asp-page="/BookingPages/BookingInfoPage" asp-route-id="@booking.User.UserId">@booking.User.Name</a>*@
+
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn  pop-out" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            data-user-name="@booking.User.Name"
+                            data-user-email="@booking.User.Email"
+                            data-user-address="@booking.Address"
+                            data-user-note="@booking.CustomerNote"
+                            data-user-category="@booking.Category"
+                            data-user-date="@booking.Date"
+                            data-admin-note="@booking.AdminNote"
+                            data-admin-price="@booking.Price"
+                            asp-route-id="@booking.BookingId">
+                                @booking.User.Name <i class="fas fa-info-circle fa-beat fa-xs"></i>
+                            </button>
                         </td>
                         <td>
                             @booking.User.Email
@@ -97,11 +118,37 @@
 
                         <td>
                             @booking.Category
-                        </td>   
+                        </td>
                         <td>
                             @booking.Date
                         </td>
-                       
+
+                        @*<td>
+                @booking.Address // Shero Den giver ikke mening at have address fordi den fylder col- for meget
+                </td>*@
+                        <td>
+                            <a class="btn btn-black" asp-page="" asp-route-id="@booking.User.UserId"></a>
+
+                        <td hidden>
+                                @booking.Address
+                        </td>
+                        <td hidden>
+                                @booking.Address
+                        </td>
+                        <td hidden>
+                                @booking.User.UserId
+                        </td>
+                        <td>
+                            <a class="btn btn-black" asp-page="/BookingPages/UpdateBooking" asp-route-id="@booking.BookingId">
+
+                                <i class="fa fa-edit pop-out"></i>
+                            </a>
+                            <a class="btn btn-danger" asp-page="/BookingPages/DeleteBooking" asp-route-id="@booking.User.UserId">
+                                <i class="fa fa-trash pop-out"></i>
+                            </a>
+                        </td>
+
+
                     </tr>
                 }
             }
@@ -109,105 +156,129 @@
     </table>
 </div>
 
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <!-- kunde information -->
-                            <div>Admin</div>
-
-
-                        </div>
-                        <div class="col-md-4">
-                            <!-- admin information -->
-                            <div>Customer</div>
-                            <div>
-                                <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black;">
-                                    <thead>
-                                        <tr class="table-light">
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Category</th>
-                                            <th>Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @if (@Model.bookings != null)
-                                        {
-                                            foreach (var booking in Model.bookings)
-                                            {
-                                                <tr class="table-light">
-                                                    <td>
-                                                        @booking.User.Name
-                                                    </td>
-                                                    <td>
-                                                        @booking.User.Email
-                                                    </td>
-
-                                                    <td>
-                                                        @booking.Category
-                                                    </td>
-                                                    <td>
-                                                        @booking.Date
-                                                    </td>
-
-                                                </tr>
-                                            }
-                                        }
-                                    </tbody>
-                                </table>
+    <div class="modal-dialog modal-lg">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-10">
+                    <h5>Customer</h5>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header justify-content-center">
+                                <h5 class="modal-title">Customer Information</h5>
                             </div>
+                            <div class="modal-body">
+                                <div class="ms-1 justify-content-center">
+                                    <p>Name:<span id="userName" class="input-group-text">Name:< style="font-style:italic;"</span></></p>
+                                </div>
+                                <div class="ms-1 justify-content-center">
+                                    <p>Email:<span id="userEmail" class="input-group-text">Email:< style="font-style:italic;"</span></></p>
+                                </div>
+                                <div class="ms-1 justify-content-center">
+                                    <p> Customer Note: <textarea class="width-machine" readonly id="userNote" class="input-group-text" rows="6" cols="30">User note:< style="font-style:italic;"</textarea></></p>
+                                </div>
+                                <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem;" class="pop-out" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5" ;">
+                <!-- Booking information -->
+                <h5>Booking</h5>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header justify-content-center">
+                            <h5 class="modal-title">Booking Information</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="ms-1 justify-content-center">
+                                <p> Address: <textarea readonly id="userAddress" class="input-group-text" rows="6" cols="30">User Adress:< style="font-style:italic;"</textarea></></p>
+                            </div>
+                            <div class="ms-1 justify-content-center">
 
-                            
+                                <p>Category:<span id="userCategory" class="input-group-text">Category:< style="font-style:italic;"</span></></p>
+                            </div>
+                            <div class="ms-1 justify-content-center">
 
+                                <p>Event date:<span id="userDateOfEvent" class="input-group-text">Event date:< style="font-style:italic;"</span></></p>
+                            </div>
+                            <div class="ms-1 justify-content-center">
 
+                                <p>Price:<span id="price" class="input-group-text">Price:< style="font-style:italic;"</span></></p>
+                            </div>
+                            <div class="ms-1 justify-content-center">
+                                <p>Admin note:<span id="adminNote" class="input-group-text">Admin note:< style="font-style:italic;"</span></></p>
+                            </div>
+                            <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem; margin-top: 10px;" class="pop-out" />
                         </div>
                     </div>
                 </div>
 
-
-
             </div>
-            <div class="modal-footer">
-                <button asp-page="#" type="button" class="btn btn-light" data-bs-dismiss="modal">Edit</button>
-                <button  asp-page="#" type="button" class="btn btn-danger">Delete</button>
-                <button asp-page="#" type="button" class="btn btn-border-black">Save</button>
-            </div>
-        </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
+</div>
+@*<li>
+    <a asp-page="/AdminPages/NewVisiters">XX</a>
+</li>*@
 
 @section scripts{
     <script>
+        //User info.
+        var myModal = document.getElementById("exampleModal")
+        var userNameElement = document.getElementById("userName")
+        var userEmailElement = document.getElementById("userEmail")
+        var userAddressElement = document.getElementById("userAddress")
+        var userNoteElement = document.getElementById("userNote")
+        var userCategoryElement = document.getElementById("userCategory")
+        var userDateOfEventElement = document.getElementById("userDateOfEvent")
 
-        function myFunction(x) {
-            x.classList.toggle("fa fa-light fa-arrow-down-z-a");
-        }
+        //admin info.
+        var adminNoteElement = document.getElementById("adminNote")
+        var priceElement = document.getElementById("price")
 
-        var myModal = document.getElementById('myModal')
-        var myInput = document.getElementById('myInput')
 
-        myModal.addEventListener('shown.bs.modal', function () {
-            myInput.focus()
+        // Button that triggered the modal
+        myModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget
+
+            // Extract info from data-* attributes
+            //User
+            var userName = button.getAttribute('data-user-name')
+            var userEmail = button.getAttribute('data-user-email')
+            var userAddress = button.getAttribute('data-user-address')
+            var userNote = button.getAttribute('data-user-note')
+            var userCategory = button.getAttribute('data-user-category')
+            var userDateOfEvent = button.getAttribute('data-user-date')
+            //Admin
+            var adminNote = button.getAttribute('data-admin-note')
+            var price = button.getAttribute("data-admin-price")
+
+            // Display user info. in modal
+            userNameElement.textContent = userName
+            userEmailElement.textContent = userEmail
+            userAddressElement.textContent = userAddress
+            userNoteElement.textContent = userNote
+            userCategoryElement.textContent = userCategory
+            userDateOfEventElement.textContent = userDateOfEvent
+
+            //Display admin info. in modal
+            adminNoteElement.textContent = adminNote
+            priceElement.textContent = price
         })
+
+        //Filtering
+        //$(document).ready(function () {
+        //    $("#myInput").on("keyup", function () {
+        //        var value = $(this).val().toLowerCase();
+        //        $("#myTable tr").filter(function () {
+        //            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        //        });
+        //    });
+        //});
+
     </script>
-
 }
-
