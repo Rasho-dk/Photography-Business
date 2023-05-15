@@ -4,7 +4,7 @@
 }
 <div class="container">
     <br />
-    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Bookings</h1>
+    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;"><i class="fa fa-calendar-check-o fa-2x text-dark pop-out" aria-hidden="true"></i></h1>
 
     <div class="d-flex justify-content-around">
         <form method="post" class="form-inline">
@@ -18,15 +18,17 @@
                 </div>
                 <input asp-for="EndDate" class="form-control me-2" />
                 <input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
+
+                <div class="ps-3">
+
+                    <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
+                        RESET FILTERS
+                    </a>
+
+
+                </div>
             </div>
-            <div>
 
-                <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
-                    RESET FILTERS
-                </a>
-
-
-            </div>
 
 
 
@@ -60,8 +62,8 @@
 
     @*Shero's Kode må ikke sletes'
     *@
-    
-@*    <br />
+
+    @*    <br />
     <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:30%;">
     <br>*@
 
@@ -98,14 +100,14 @@
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn  pop-out" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            data-user-name="@booking.User.Name"
-                            data-user-email="@booking.User.Email"
-                            data-user-address="@booking.Address"
-                            data-user-note="@booking.CustomerNote"
-                            data-user-category="@booking.Category"
-                            data-user-date="@booking.Date"
-                            data-admin-note="@booking.AdminNote"
-                            data-admin-price="@booking.Price"
+                                    data-user-name="@booking.User.Name"
+                                    data-user-email="@booking.User.Email"
+                                    data-user-address="@booking.Address"
+                                    data-user-note="@booking.CustomerNote"
+                                    data-user-category="@booking.Category"
+                                    data-user-date="@booking.Date"
+                                    data-admin-note="@booking.AdminNote"
+                                    data-admin-price="@booking.Price"
                             asp-route-id="@booking.BookingId">
                                 @booking.User.Name <i class="fas fa-info-circle fa-beat fa-xs"></i>
                             </button>
@@ -179,32 +181,6 @@
                                 </div>
                                 <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem;" class="pop-out" />
                             </div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">User information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6" style="word-wrap:break-word;">
-                            <!-- Customer information -->
-                            <h5>Customer</h5>
-                            <p>Name: <span id="userName" style="font-style:italic;"></span></p>
-                            <p>Email: <span id="userEmail" style="font-style:italic;"></span></p>
-                            <p>Address: <span id="userAddress" style="font-style:italic;"></span></p>
-                            <p>Note: <span id="userNote" style="font-style:italic;"></span></p>
-                            <p>Category: <span id="userCategory" style="font-style:italic;"></span></p>
-                            <p>Events date: <span id="userDateOfEvent" style="font-style:italic;"></span></p>
-                        </div>
-                        <div class="col-md-4" style="word-wrap: break-word;">
-                            <!-- Admin information -->
-                            <h5>Admin</h5>
-                            @*  <p>Name: @Model.User.Name</p>*@
-                            @*                            <p>Email: @Model.User.Email</p>
-                            <p>Phone:@Model.User.PhoneNumber</p>*@
-                            <p>Note: <span id="adminNote" style="font-style:italic;"></span></p>
-                            <p>Price: <span id="price" style="font-style:italic;"></span></p>
                         </div>
                     </div>
                 </div>
@@ -242,13 +218,8 @@
                 </div>
 
             </div>
+        </div>
     </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>
 @*<li>
     <a asp-page="/AdminPages/NewVisiters">XX</a>
@@ -299,15 +270,15 @@
             priceElement.textContent = price
         })
 
-        //Filtering
-        //$(document).ready(function () {
-        //    $("#myInput").on("keyup", function () {
-        //        var value = $(this).val().toLowerCase();
-        //        $("#myTable tr").filter(function () {
-        //            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        //        });
-        //    });
-        //});
+                //Filtering
+                //$(document).ready(function () {
+                //    $("#myInput").on("keyup", function () {
+                //        var value = $(this).val().toLowerCase();
+                //        $("#myTable tr").filter(function () {
+                //            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                //        });
+                //    });
+                //});
 
     </script>
 }
