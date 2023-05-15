@@ -10,10 +10,11 @@
     <h1 class="">Admin Dashboard</h1>
     <div class="" style="">
         <div class="text-center">
-            <table class="w-100 no-border table-bordered table-bordered ">
+            <!-- Mid-page navigation -->
+            <table class="w-100 no-border table-bordered table-bordered">
                 <tr>
                     <th class="w-25 no-border">
-                        <div class="d-grid">
+                        <div class="d-grid mt-3">
                             <a asp-page="/BookingPages/GetAllBookingRequestsPage"><i class="fa fa-envelope-o fa-5x text-dark pop-out" aria-hidden="true"></i></a>
                             <a asp-page="/BookingPages/GetAllBookingRequestsPage" class="text-dark text-decoration-none">Requests</a>
                             <br />
@@ -22,59 +23,82 @@
                         </div>
                     </th >
                     <th class="w-25 no-border">
-                        <div class="d-grid">
+                        <div class="d-grid mt-3">
                             <a asp-page="../BookingPages/GetAllBookings"><i class="fa fa-calendar-check-o fa-5x text-dark pop-out" aria-hidden="true"></i></a>
                             <a asp-page="../BookingPages/GetAllBookings" class="text-dark text-decoration-none">Bookings</a>
                             <br />
-                            <a class="text-dark text-decoration-none" style="text-align: left">Upcoming</a>
+                            <a class="text-dark text-decoration-none ms-1" style="text-align: left">Upcoming</a>
                         </div>
                     </th>
                     <th class="w-25 no-border">
-                        <div class="d-grid">
+                        <div class="d-grid mt-3">
                             <a asp-page="../AccountPages/GetAllUsersPage"><i class="fa fa-users fa-5x text-dark pop-out" aria-hidden="true"></i></a>
                             <a asp-page="../AccountPages/GetAllUsersPage" class="text-dark text-decoration-none">Users</a>
                             <br />
-                            <a class="text-dark text-decoration-none" style="text-align: left">Recently joined</a>
-                        </div>
-                    </th>
-                    <th class="w-25 no-border">
-                        <div class="d-grid">
-                            <a asp-page="#"><i class="fa fa-bar-chart fa-5x text-dark pop-out" aria-hidden="true"></i></img></a>
-                            <a asp-page="#" class="text-dark text-decoration-none">Analytics</a>
-                            <br />
-                            <a class="text-dark text-decoration-none" style="text-align: left">Quick overview</a>
+                            <a class="text-dark text-decoration-none ms-2" style="text-align: left">Recently joined</a>
                         </div>
                     </th>
                 </tr>
             </table>
+
+            <!-- Booking requests -->
+
             <div class="d-flex justify-content-around">
-               
-                <table class="w-25 left-border table table-bordered table-hover table-striped" style="border:1px solid black; word-wrap:break-word;">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Category</th>
-                    </tr>
-                    @foreach (var request in Model.Requests) {
+
+                <table class="table table-bordered table-hover table-striped me-2" style="word-wrap:break-word;">
+                    <thead>
                         <tr>
-                            <td><a asp-page="../BookingPages/AcceptRequestPage/" asp-route-id="@request.BookingId" class="btn btn-dark btn-round">@request.BookingId</a></td>
-                            <td><a asp-page="../BookingPages/AcceptRequestPage/" asp-route-id="@request.BookingId" class="text-dark text-decoration-none">@request.User.Name</a></td>
-                            <td><a asp-page="../BookingPages/AcceptRequestPage/" asp-route-id="@request.BookingId" class="text-dark text-decoration-none">@request.Category</a></td>
+                            <th>Name</th>
+                            <th>Category</th>
+                        </tr>
+                    </thead>
+                    
+                    @foreach (var request in Model.Requests)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-page="../BookingPages/AcceptRequestPage/" asp-route-id="@request.BookingId" class="text-dark text-decoration-none">
+                                    @request.User.Name <i class="fa fa-info-circle"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-page="../BookingPages/AcceptRequestPage/" asp-route-id="@request.BookingId" class="text-dark text-decoration-none">
+                                    @request.Category
+                                </a>
+                            </td>
                         </tr>
                     }
-                    
+
                 </table>
+                
                
-                <table class="w-25 right-border left-border table table-bordered table-hover table-striped" style="border:1px solid black; word-wrap: break-word;">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Date</th>
-                    </tr>
+                <!-- Accepted booking -->
+
+                <table class="table table-bordered table-hover table-striped mx-2" style="word-wrap: break-word;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
                     @foreach (var booking in Model.Bookings)
                     {
                         <tr>
-                            <td><button type="button" data-bs-toggle="modal" data-bs-target="#bookingModal" class="btn btn-dark btn-round">@booking.BookingId</button>
+                            <td>
+                                <button 
+                                data-booking-customer-name="@booking.User.Name"
+                                data-booking-customer-email="@booking.User.Email"
+                                data-booking-customer-phone="@booking.User.PhoneNumber"
+                                data-booking-category="@booking.Category"
+                                data-booking-customer-note="@booking.CustomerNote"
+                                data-booking-address="@booking.Address"
+                                data-booking-date="@booking.Date"
+                                data-booking-price="@booking.Price"
+                                data-booking-admin-note="@booking.AdminNote"
+                                type="button" data-bs-toggle="modal" data-bs-target="#bookingModal" class="btn">
+                                    @booking.User.Name 
+                                    <i class="fa fa-info-circle pop-out"></i>
+                                </button>
                                 <!-- Booking information modal -->
                                 <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -88,51 +112,58 @@
                                                     <div class="row">
                                                         <div class="col-md-6" style="text-align: left">
                                                             <h5>Customer information</h5>
-                                                            <p>Name: @booking.User.Name</p>
-                                                            <p>Email: @booking.User.Email</p>
-                                                            <p>Phone: @booking.User.PhoneNumber</p>
-                                                            <p>Category: @booking.Category</p>
-                                                            <p>Note: @booking.CustomerNote</p>
+                                                            <p>Name: <span id="customerName"></span></p>
+                                                            <p>Email: <span id="customerEmail"></span></p>
+                                                            <p>Phone: <span id="customerPhone"></span></p>
+                                                            <p>Category: <span id="bookingCategory"></span></p>
+                                                            <p>Note: <span id="customerNote"></span></p>
                                                         </div>
                                                         <div class="col-md-6" style="text-align: left">
                                                             <h5>Admin information</h5>
-                                                            <p>Event address: @booking.Address</p>
-                                                            <p>Event date: @booking.Date</p>
-                                                            <p>Price: @booking.Price</p>
-                                                            <p>Admin note: @booking.AdminNote</p>
+                                                            <p>Event address: <span id="bookingAddress"></span></p>
+                                                            <p>Event date: <span id="bookingDate"></span></p>
+                                                            <p>Price: <span id="bookingPrice"></span></p>
+                                                            <p>Admin note: <span id="bookingAdminNote"></span></p>
                                                         </div>
                                                     </div>
 
                                                 </div>
-                                            </div>
-                                                
+                                            </div> 
                                             <div class="modal-footer d-flex justify-content-center">
                                                 <button type="button" class="btn btn-light btn-outline-dark btn-square me-4" data-bs-dismiss="modal">Close</button>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.User.Name</a></td>
                             <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.Date</a></td>
-
-                            
                         </tr>
                     }
                 </table>
                
-                <table class="w-25 right-border table table-bordered table-hover table-striped" style="border:1px solid black; word-wrap: break-word;">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
+                <!-- Users -->
+
+                <table class="table table-bordered table-hover table-striped ms-2" style="word-wrap: break-word;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    
                     @foreach (var user in Model.Users)
                     {
                         <tr >
                             <td>
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#userModal" class="btn btn-dark btn-round">@user.UserId</button>
+                                <button 
+                                    data-user-name="@user.Name"
+                                    data-user-email="@user.Email"
+                                    data-user-phone="@user.PhoneNumber"
+                                    data-user-created="@user.DateCreated"
+                                    data-user-id="@user.UserId"
+                                    type="button" data-bs-toggle="modal" data-bs-target="#userModal" class="btn">
+                                    @user.Name <i class="fa fa-info-circle pop-out"></i>
+                                </button>
                                 <!-- User information modal -->
                                 <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -144,58 +175,81 @@
                                             <div class="modal-body">
                                                 <div class="container">
                                                     <div class="" style="text-align: center">
+                                                        <!-- Customer information -->
                                                         <h5>User profile</h5>
-                                                        <p>User ID: @user.UserId</p>
-                                                        <p>Name: @user.Name</p>
-                                                        <p>Email: @user.Email</p>
-                                                        <p>Phone: @user.PhoneNumber</p>
-                                                        <p>Dated joined: @user.DateCreated</p>
+                                                        <p>User ID: <span id="userId" style="font-style: italic;"></span></p>
+                                                        <p>Name: <span id="userName" style="font-style:italic;"></span></p>
+                                                        <p>Email: <span id="userEmail" style="font-style:italic;"></span></p>
+                                                        <p>Phone: <span id="userPhone" style="font-style:italic;"></span></p>
+                                                        <p>Date joined: <span id="userCreated" style="font-style:italic;"></span></p>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="modal-footer d-flex justify-content-center">
-                                                <button type="button" class="btn btn-light btn-outline-dark btn-square me-4" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-light btn-outline-dark btn-square" data-bs-dismiss="modal">Close</button>
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
                             </td>
-                            <td><a asp-page="#" asp-route-id="@user.UserId" class="text-dark text-decoration-none">@user.Name</a></td>
                             <td><a asp-page="#" asp-route-id="@user.UserId" class="text-dark text-decoration-none">@user.Email</a></td>
                         </tr>
                     }
                 </table>
-
-            
-                <div class="w-25 right-border top-border d-flex flex-column justify-content-evenly table table-bordered" style="border:1px solid black; word-wrap: break-word;">
-                    <h5 class="m-2" style="text-align: left">Accepted bookings last 30 days:
-                        <a class="text-dark">@Model.BookingsThisMonth</a>
-                        <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i>
-                    </h5>
-                    <h5 class="m-2" style="text-align: left">Pending bookings requests:
-                        <a class="text-dark">@Model.PendingRequests</a>
-                        <i class="fa fa-envelope-o" aria-hidden="true" style="height: 25px"></i>
-                    </h5>
-                    <h5 class="m-2" style="text-align: left">Total accepted bookings:
-                        <a class="text-dark">@Model.TotalBookings</a>
-                        <i class="fa fa-calendar-check-o" aria-hidden="true" style="height: 25px"></i>
-                    </h5>
-                    <h5 class="m-2" style="text-align: left">Bookings completed: 
-                        <a class="text-dark">@Model.CompletedBookingsThisMonth</a>
-                        <i class="fa fa-check-circle-o" aria-hidden="true" style="height: 25px"></i>
-                    </h5>
-                    <h5 class="m-2" style="text-align: left">Total users:
-                        <a class="text-dark">@Model.TotalUsers</a>
-                        <i class="fa fa-users" aria-hidden="true" style="height: 25px"></i>
-                    </h5>
-                </div>
             </div>
-            
         </div>
     </div>
 </div>
+
+<div class="bg-dark p-5 mt-3 mb-3">
+    <div class="d-grid text-center">
+        <a asp-page="#"><i class="fa fa-bar-chart text-white fa-5x pop-out" aria-hidden="true"></i></a>
+        <a asp-page="#" class="text-white text-decoration-none">Analytics</a>
+        <br />
+        <a class="text-white text-decoration-none text-center">Quick overview</a>
+    </div>
+
+    <div class="d-grid">
+        <div class="d-flex justify-content-center">
+            <h5 class="m-2 text-white">
+                Accepted bookings last 30 days:
+                <a class="text-white">@Model.BookingsThisMonth</a>
+                <i class="fa fa-calendar-check-o text-white" aria-hidden="true" style="height: 25px"></i>
+            </h5>
+            <h5 class="m-2 text-white">|</h5>
+            <h5 class="m-2 text-white">
+                Pending bookings requests:
+                <a class="text-white">@Model.PendingRequests</a>
+                <i class="fa fa-envelope-o text-white" aria-hidden="true" style="height: 25px"></i>
+            </h5>
+        </div>
+        <div class="d-flex justify-content-center">
+            <h5 class="m-2 text-white">
+                Total accepted bookings:
+                <a class="text-white">@Model.TotalBookings</a>
+                <i class="fa fa-calendar-check-o text-white" aria-hidden="true" style="height: 25px"></i>
+            </h5>
+            <h5 class="m-2 text-white">|</h5>
+            <h5 class="m-2 text-white">
+                Bookings completed:
+                <a class="text-white">@Model.CompletedBookingsThisMonth</a>
+                <i class="fa fa-check-circle-o text-white" aria-hidden="true" style="height: 25px"></i>
+            </h5>
+        </div>
+        <div class="d-flex justify-content-center">
+            <h5 class="m-2 text-white">
+                Total users:
+                <a class="text-white">@Model.TotalUsers</a>
+                <i class="fa fa-users text-white" aria-hidden="true" style="height: 25px"></i>
+            </h5>
+        </div>
+
+    </div>
+</div>
+
+
 
 <style>
     table {
@@ -206,54 +260,8 @@
         border: none;
     }
 
-    th {
-        border: none;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
-
-    table {
-        border-top: solid 2px black;
-        border-bottom: solid 2px black;
-    }
-
-    .right-border {
-        border-right: solid 2px black;
-    }
-
-    .top-border {
-        border-top: solid 2px black;
-        border-bottom: solid 2px black;
-    }
-
-    .left-border {
-        border-left: solid 2px black;
-    }
-
-    td {
-        border: solid 1px black;
-    }
-
     h5 {
         font-size: 1.1rem;
-    }
-
-    .btn-round {
-        border-radius: 50px;
-        transition: all .2s ease-in-out;
-    }
-
-    .btn-round:hover {
-        background-color: whitesmoke;
-        border: solid 1px whitesmoke;
-        color: black;
-    }
-
-    .number-contrast {
-        padding: 5px;
-        padding-right: 10px;
-        padding-left: 10px;
-        border-radius: 100px;
     }
 </style>
 
@@ -262,12 +270,72 @@
         var bookingModal = document.getElementById("bookingModal")
         var userModal = document.getElementById("userModal")
 
+        // Booking modal variables
+        //var bookingIdElement = document.getElementById("bookingId")
+        var bookingCustomerNameElement = document.getElementById("customerName")
+        var bookingCustomerEmailElement = document.getElementById("customerEmail")
+        var bookingCustomerPhoneElement = document.getElementById("customerPhone")
+        var bookingCategoryElement = document.getElementById("bookingCategory")
+        var bookingCustomerNoteElement = document.getElementById("customerNote")
+        
+        var bookingAddressElement = document.getElementById("bookingAddress")
+        var bookingDateElement = document.getElementById("bookingDate")
+        var bookingPriceElement = document.getElementById("bookingPrice")
+        var bookingAdminNoteElement = document.getElementById("bookingAdminNote")
+
         bookingModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget
-        }
+
+            // Extract info from data-* attributes
+
+            var bookingCustomerName = button.getAttribute('data-booking-customer-name')
+            var bookingCustomerEmail = button.getAttribute('data-booking-customer-email')
+            var bookingCustomerPhone = button.getAttribute('data-booking-customer-phone')
+            var bookingCategory = button.getAttribute('data-booking-category')
+            var bookingCustomerNote = button.getAttribute('data-booking-customer-note')
+            var bookingAddress = button.getAttribute('data-booking-address')
+            var bookingDate = button.getAttribute('data-booking-date')
+            var bookingPrice = button.getAttribute('data-booking-price')
+            var bookingAdminNote = button.getAttribute('data-booking-admin-note')
+
+            bookingCustomerNameElement.textContent = bookingCustomerName
+            bookingCustomerEmailElement.textContent = bookingCustomerEmail
+            bookingCustomerPhoneElement.textContent = bookingCustomerPhone
+            bookingCategoryElement.textContent = bookingCategory
+            bookingCustomerNoteElement.textContent = bookingCustomerNote
+            bookingAddressElement.textContent = bookingAddress
+            bookingDateElement.textContent = bookingDate
+            bookingPriceElement.textContent = bookingPrice
+            bookingAdminNoteElement.textContent = bookingAdminNote
+        })
+
+
+        // User modal variables
+        var userNameElement = document.getElementById("userName")
+        var userEmailElement = document.getElementById("userEmail")
+        var userPhoneElement = document.getElementById("userPhone")
+        var userCreatedElement = document.getElementById("userCreated")
+        var userIdElement = document.getElementById("userId")
 
         userModal.addEventListener('show.bs.modal', function (event) {
             var button = event.relatedTarget
-        }
+
+            // Extract info from data-* attributes
+            //User
+            var userName = button.getAttribute('data-user-name')
+            var userEmail = button.getAttribute('data-user-email')
+            var userPhone = button.getAttribute('data-user-phone')
+            var userCreated = button.getAttribute('data-user-created')
+            var userId = button.getAttribute('data-user-id')
+
+
+            // Display user info. in modal
+            userNameElement.textContent = userName
+            userEmailElement.textContent = userEmail
+            userPhoneElement.textContent = userPhone
+            userCreatedElement.textContent = userCreated
+            userIdElement.textContent = userId
+
+        })
     </script>
 }
