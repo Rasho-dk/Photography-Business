@@ -31,7 +31,7 @@ namespace PhotographyBusiness.Pages.AccountPages
             }
             //User = userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
 
-            await userService.UpdateUserAsyn(User);
+            await userService.UpdateUserAsync(User);
             ConformUpdate = "Profile is updated";
             return Page();  
 

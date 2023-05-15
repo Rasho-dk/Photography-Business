@@ -2,10 +2,13 @@
 @model PhotographyBusiness.Pages.AccountPages.MyProfilePageModel
 @{
 }
-<link href="~/css/myprofilestyle.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="/css/myprofile.css" />
 
 
-<div style="display:block" class="container rounded bg-white mt-5 mb-5" id="myProfile">
+@*<div style="display:block" class="container rounded bg-white mt-5 mb-5" id="myProfile">
+*@<div style="display:block;" class="container  boxshadow mt-5 mb-5" id="myProfile">
+
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -59,7 +62,6 @@
                 </div>
 
             </div>
-
          
             @if (Model.ConformUpdate != null)
             {
@@ -71,11 +73,14 @@
         </div>
 
     </div>
+    <br />
+    <hr />
 </div>
+
 
 <div style="display:none;" id="editProfile">
     <form method="post">
-        <div class="container rounded bg-white mt-5 mb-5">
+        <div class="container boxshadow bg-white mt-5 mb-5">
             <div class="row">
                 <div class="col-md-3 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -174,7 +179,10 @@
             </div>
         </div>
     </form>
+    <br />
+    <hr />
 </div>
+
 
 @section scripts{
     <script>
