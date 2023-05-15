@@ -12,48 +12,9 @@ namespace PhotographerTest
     {
         private IUserService _userService;
         //public User User { get; set; }
-        //[TestMethod]
-        //public void Login_Test_HappyPath_Retur_False()
-        //{
-        //    var userservicemock = new Mock<IUserService>();
-        //    var model = new LogInPageModel(userservicemock.Object)
-        //    {
-        //        Email = "Test@outlook.com",
-        //        Password = "123456789"
-        //    };
-        //    var users = new List<User>()
-        //    {
-        //        new User() {Name = "Test",Password="123456789",Email="Test@outlook.com"},
-        //        //new User(){Name = "admin",Password ="admin123",Email="admin@admin.dk"}
-        //    };
+        //private static PasswordHasher<string> _passwordHasher = new PasswordHasher<string>();
 
-        //    userservicemock.Setup(x => x.GetAllUsers()).Returns(users);
-        //    var result = model.Login(model.Email, model.Password);
-        //    Assert.IsNotNull(result);
-        //    Assert.AreEqual(true, result);
-        //}
-        //[TestMethod]
-        //public void Login_Test_UnHappyPath_Return_True()
-        //{
-        //    var userservicemock = new Mock<IUserService>();
-        //    var model = new LogInPageModel(userservicemock.Object)
-        //    {
-        //        Email = "Test@outlook.com",
-        //        Password = "123456"
-        //    };
-        //    var users = new List<User>()
-        //    {
-        //        new User() {Name = "Test",Password="123456789",Email="Test@outlook.com"},
-        //        //new User(){Name = "admin",Password ="admin123",Email="admin@admin.dk"}
-        //    };
-
-        //    userservicemock.Setup(x => x.GetAllUsers()).Returns(users);
-        //    var result = model.Login(model.Email, model.Password);
-        //    Assert.IsNotNull(result);
-        //    Assert.AreEqual(false, result);
-        //}
-        private static PasswordHasher<string> _passwordHasher = new PasswordHasher<string>();
-
+ 
         [TestMethod]
         public async Task Login_OnPostTest_HappyPath_()
         {
@@ -62,18 +23,13 @@ namespace PhotographerTest
             var userservicemock = new Mock<IUserService>();
             var model = new LogInPageModel(userservicemock.Object)
             {
-                //= "Test@outlook.com",
-                //Password = "123456789",
-
+              Email= "test@outlook.com",
+              Password= "123456789"
             };
 
             var users = new List<User>()
             {
-            new User()
-            {    Name = "Test",
-                Password = "123456789",
-                 Email = "Test@outlook.com"
-            }
+                new User() { Name = "Test", Password = "123456789", Email = "test@outlook.com"}
             };
 
             //Act

@@ -14,14 +14,19 @@ namespace PhotographyBusiness.Services.UserService
             //_genericDbService.SaveObjects(Users);
 
         }
-     
-        public async Task CreateUserAsyn(User user)
+        //Shero: This for Unittest
+        public UserService()
         {
-            Users.Add(user);    
-            await _genericDbService.AddObjectAsync(user);
+            Users = new List<User>();
         }
 
-        public async Task<User> DeleteUserAsyn(int id)
+        public async Task CreateUserAsync(User user)
+        {
+            Users.Add(user);    
+           // await _genericDbService.AddObjectAsync(user);
+        }
+
+        public async Task<User> DeleteUserAsync(int id)
         {
             User userToBeDeleted = null;
             foreach(var user in Users)
@@ -34,7 +39,7 @@ namespace PhotographyBusiness.Services.UserService
             if(userToBeDeleted != null)
             {
                 Users.Remove(userToBeDeleted);
-                await _genericDbService.DeleteObjectAsync(userToBeDeleted); 
+                //await _genericDbService.DeleteObjectAsync(userToBeDeleted); 
             }
             return userToBeDeleted;
         }
@@ -69,7 +74,7 @@ namespace PhotographyBusiness.Services.UserService
             return Users; 
 
         }
-        public async Task<User> GetUserByIdAsyn(int id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
             foreach(var user in Users)
             {
@@ -79,20 +84,21 @@ namespace PhotographyBusiness.Services.UserService
             return null;
         }
 
-        public async Task UpdateUserAsyn(User user)
-        {
-            if(user is not null)
+        public async Task<User> UpdateUserAsync(User user)
+        {          
+            if (user is not null)
             {
-                foreach(var us in Users)
+                foreach (var us in Users)
                 {
                     if (us.UserId.Equals(user.UserId))
                     {
-                        us.Email = user.Email;  
+                        us.Email = user.Email;
                         us.PhoneNumber = user.PhoneNumber;
                     }
                 }
-               // await _genericDbService.UpdateObjectAsync(user);
+                // await _genericDbService.UpdateObjectAsync(user);
             }
+            return null;
         }
     }
 }

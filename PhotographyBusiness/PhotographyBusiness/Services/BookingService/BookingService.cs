@@ -1,7 +1,7 @@
-﻿using PhotographyBusiness.Models;
-using PhotographyBusiness.MockData;
+﻿using Microsoft.EntityFrameworkCore;
 using PhotographyBusiness.EFDbContext;
-using Microsoft.EntityFrameworkCore;
+using PhotographyBusiness.MockData;
+using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.UserService;
 
 namespace PhotographyBusiness.Services.BookingService
@@ -22,6 +22,11 @@ namespace PhotographyBusiness.Services.BookingService
             //Bookings = GetAllBookingsAsync().Result;
             Bookings = MockBookings.GetAllMockBookings();
         }
+        //Shero : Til unit test
+        public BookingService()
+        {
+            Bookings = new List<Booking>();
+        }
 
 
         internal async Task<List<Booking>> GetAllBookingsAsync()
@@ -30,6 +35,7 @@ namespace PhotographyBusiness.Services.BookingService
             {
                 return await context.Bookings.Include(b => b.User).AsNoTracking().ToListAsync();
             }
+
         }
 
         public List<Booking> GetAllBookings()
@@ -39,17 +45,17 @@ namespace PhotographyBusiness.Services.BookingService
 
         public Booking GetBookingById(int id)
         {
-            foreach(Booking booking in Bookings)
+            foreach (Booking booking in Bookings)
             {
-                if(id == booking.BookingId)
+                if (id == booking.BookingId)
                 {
                     return booking;
                 }
             }
             return null;
         }
-		public Booking GetBookingById_User(int id)
-		{
+        public Booking GetBookingById_User(int id)
+        {
             foreach (Booking booking in Bookings)
             {
                 if (id == booking.User.UserId)
@@ -60,33 +66,45 @@ namespace PhotographyBusiness.Services.BookingService
             return null;
         }
 
-		public List<Booking> GetBookingsByUserId(int userId)
+        public List<Booking> GetBookingsByUserId(int userId)
         {
             IEnumerable<Booking> bookings = from booking in Bookings
-                                     where booking.User.UserId == userId
-                                     select booking;
+                                            where booking.User.UserId == userId
+                                            select booking;
 
             return bookings.ToList();
         }
 
         public async Task CreateBookingAsync(Booking booking)
         {
-            await _genericDbService.AddObjectAsync(booking);
-            booking.User = _userService.GetUserByIdAsyn(Convert.ToInt32(booking.UserId)).Result; // Manually add the User object (Identity_Insert is set to off in the DB)
-            Bookings.Add(booking);
-        }
-
-        public Task DeleteBooking(int id)
-        {
-            Bookings.Remove(GetBookingById(id));
-            return _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
-        }
-
-        public Task UpdateBooking(Booking booking) 
-        {
-            foreach(Booking b in Bookings)
+            //Jeg har kommmentere den fordi pga. unittest
+            //await _genericDbService.AddObjectAsync(booking);
+            //booking.User = _userService.GetUserByIdAsync(Convert.ToInt32(booking.UserId)).Result; // Manually add the User object (Identity_Insert is set to off in the DB)
+            if (booking != null)
             {
-                if(b.BookingId == booking.BookingId)
+                Bookings.Add(booking);
+
+            }
+            if(booking == null)
+            {
+                throw new ArgumentNullException("Booing may not be null");
+            }
+        }
+
+        public async Task DeleteBooking(int id)
+        {
+             Bookings.Remove(GetBookingById(id));
+
+          // await _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
+
+
+        }
+
+        public Task UpdateBooking(Booking booking)
+        {
+            foreach (Booking b in Bookings)
+            {
+                if (b.BookingId == booking.BookingId)
                 {
                     b.AdminNote = booking.AdminNote;
                     b.Category = booking.Category;
