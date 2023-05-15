@@ -4,7 +4,7 @@
 }
 <div class="container">
     <br />
-    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;"><i class="fa fa-calendar-check-o fa-2x text-dark pop-out" aria-hidden="true"></i></h1>
+    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Bookings</h1>
 
     <div class="d-flex justify-content-around">
         <form method="post" class="form-inline">
@@ -18,17 +18,15 @@
                 </div>
                 <input asp-for="EndDate" class="form-control me-2" />
                 <input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
-
-                <div class="ps-3">
-
-                    <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
-                        RESET FILTERS
-                    </a>
-
-
-                </div>
             </div>
+            <div>
 
+                <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
+                    RESET FILTERS
+                </a>
+
+
+            </div>
 
 
 
@@ -62,31 +60,18 @@
 
     @*Shero's Kode må ikke sletes'
     *@
-    
-@*    <br />
+
+    @*    <br />
     <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:30%;">
     <br>*@
 
     <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black; word-wrap: break-word;">
         <thead>
             <tr class="table-light">
-                <th>
-                    Name
-                    <a data-toggle="tooltip" title="Sort By Name" asp-page-handler="SortBookingByName"><i onclick="myFunction(this)" class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
-                </th>
-                <th>
-                    Email
-                    <a data-toggle="tooltip" title="Sort By Email" asp-page-handler="SortBookingByEmail"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
-                </th>
-                <th>
-                    Category
-                    <a data-toggle="tooltip" title="Sort By Category" asp-page-handler="SortBookingByCategory"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
-                </th>
-
-                <th>
-                    Date
-                    <a data-toggle="tooltip" title="Sort By Date" asp-page-handler="SortBookingByDate"><i class="text-dark fa fa-light fa-arrow-down-a-z"></i></a>
-                </th>
+                <th>Name</th>
+                <th>Eamil</th>
+                <th>Category</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -160,66 +145,77 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="col-md-10">
-                    <h5>Customer</h5>
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header justify-content-center">
-                                <h5 class="modal-title">Customer Information</h5>
-                            </div>
-                            <div class="modal-body">
-                                <div class="ms-1 justify-content-center">
-                                    <p>Name:<span id="userName" class="input-group-text">Name:< style="font-style:italic;"</span></></p>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <!-- Booking information -->
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-content-center">
+                                        <h5 class="modal-title">Booking Information</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="ms-1 justify-content-center">
+                                            <p> Address: <textarea readonly id="userAddress" class="input-group-text" rows="6" cols="30">User Adress:< style="font-style:italic;"</textarea></></p>
+                                        </div>
+                                        <div class="ms-1 justify-content-center">
+
+                                            <p>Category:<span id="userCategory" class="input-group-text">Category:< style="font-style:italic;"</span></></p>
+                                        </div>
+                                        <div class="ms-1 justify-content-center">
+
+                                            <p>Event date:<span id="userDateOfEvent" class="input-group-text">Event date:< style="font-style:italic;"</span></></p>
+                                        </div>
+                                        <div class="ms-1 justify-content-center">
+
+                                            <p>Price:<span id="price" class="input-group-text">Price:< style="font-style:italic;"</span></></p>
+                                        </div>
+                                        <div class="ms-1 justify-content-center">
+                                            <p>Admin note:<span id="adminNote" class="input-group-text">Admin note:< style="font-style:italic;"</span></></p>
+                                        </div>
+                                        <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem; margin-top: 10px;" class="pop-out" />
+                                    </div>
                                 </div>
-                                <div class="ms-1 justify-content-center">
-                                    <p>Email:<span id="userEmail" class="input-group-text">Email:< style="font-style:italic;"</span></></p>
-                                </div>
-                                <div class="ms-1 justify-content-center">
-                                    <p> Customer Note: <textarea class="width-machine" readonly id="userNote" class="input-group-text" rows="6" cols="30">User note:< style="font-style:italic;"</textarea></></p>
-                                </div>
-                                <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem;" class="pop-out" />
                             </div>
                         </div>
-                    </div>
+                        <div class="col-md-6">
+                            <div class="col-md-10">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header justify-content-center">
+                                            <h5 class="modal-title">Customer Information</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="ms-1 justify-content-center">
+                                                <p>Name:<span id="userName" class="input-group-text">Name:< style="font-style:italic;"</span></></p>
+                                            </div>
+                                            <div class="ms-1 justify-content-center">
+                                                <p>Email:<span id="userEmail" class="input-group-text">Email:< style="font-style:italic;"</span></></p>
+                                            </div>
+                                            <div class="ms-1 justify-content-center">
+                                                <p> Customer Note: <textarea class="width-machine" readonly id="userNote" class="input-group-text" rows="6" cols="30">User note:< style="font-style:italic;"</textarea></></p>
+                                            </div>
+                                            <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem;" class="pop-out" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+ 
                 </div>
             </div>
-            <div class="col-md-5" ;">
-                <!-- Booking information -->
-                <h5>Booking</h5>
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header justify-content-center">
-                            <h5 class="modal-title">Booking Information</h5>
-                        </div>
-                        <div class="modal-body">
-                            <div class="ms-1 justify-content-center">
-                                <p> Address: <textarea readonly id="userAddress" class="input-group-text" rows="6" cols="30">User Adress:< style="font-style:italic;"</textarea></></p>
-                            </div>
-                            <div class="ms-1 justify-content-center">
-
-                                <p>Category:<span id="userCategory" class="input-group-text">Category:< style="font-style:italic;"</span></></p>
-                            </div>
-                            <div class="ms-1 justify-content-center">
-
-                                <p>Event date:<span id="userDateOfEvent" class="input-group-text">Event date:< style="font-style:italic;"</span></></p>
-                            </div>
-                            <div class="ms-1 justify-content-center">
-
-                                <p>Price:<span id="price" class="input-group-text">Price:< style="font-style:italic;"</span></></p>
-                            </div>
-                            <div class="ms-1 justify-content-center">
-                                <p>Admin note:<span id="adminNote" class="input-group-text">Admin note:< style="font-style:italic;"</span></></p>
-                            </div>
-                            <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem; margin-top: 10px;" class="pop-out" />
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        </div>
     </div>
 </div>
+
 </div>
 @*<li>
     <a asp-page="/AdminPages/NewVisiters">XX</a>
@@ -270,15 +266,15 @@
             priceElement.textContent = price
         })
 
-        //Filtering
-        //$(document).ready(function () {
-        //    $("#myInput").on("keyup", function () {
-        //        var value = $(this).val().toLowerCase();
-        //        $("#myTable tr").filter(function () {
-        //            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        //        });
-        //    });
-        //});
+                //Filtering
+                //$(document).ready(function () {
+                //    $("#myInput").on("keyup", function () {
+                //        var value = $(this).val().toLowerCase();
+                //        $("#myTable tr").filter(function () {
+                //            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                //        });
+                //    });
+                //});
 
     </script>
 }
