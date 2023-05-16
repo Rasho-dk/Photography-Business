@@ -36,10 +36,17 @@
                     <input asp-for="@Model.Street" class="form-control" />
                     <span asp-validation-for="@Model.Street" class="text-danger"></span>
                 </div>
-                <div class="form-group p-2">
-                    <label asp-for="@Model.Category" class="control-label text-white">Category</label>
-                    <input asp-for="@Model.Category" class="form-control" />
-                    <span asp-validation-for="@Model.Category" class="text-danger"></span>
+                <div class="form-group p-2 d-flex">
+                    <div class="me-1">
+                        <label asp-for="@Model.Date" class="control-label text-white">Date</label>
+                        <input asp-for="@Model.Date" class="form-control" />
+                        <span asp-validation-for="@Model.Date" class="text-danger"></span>
+                    </div>
+                    <div class="ms-1">
+                        <label asp-for="@Model.Category" class="control-label text-white">Category</label>
+                        <input asp-for="@Model.Category" class="form-control" />
+                        <span asp-validation-for="@Model.Category" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="form-group p-2">
                     <label asp-for="@Model.CustomerNote" class="control-label text-white">Note</label>
