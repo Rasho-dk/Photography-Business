@@ -9,15 +9,12 @@ namespace PhotographyBusiness.Pages.BookingPages
     public class DeleteBookingModel : PageModel
     {
         private IBookingService _bookingService;
-        private IUserService _userService;
 
         [BindProperty] public Booking Booking { get; set; }
-        [BindProperty] public User User { get; set; }
 
-        public DeleteBookingModel(IBookingService bookingService, IUserService userService)
+        public DeleteBookingModel(IBookingService bookingService)
         {
             this._bookingService = bookingService;
-            this._userService = userService;
         }
 
         public IActionResult OnGet(int id)
