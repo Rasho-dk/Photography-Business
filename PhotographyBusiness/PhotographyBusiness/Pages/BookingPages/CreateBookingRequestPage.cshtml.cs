@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.BookingService;
 using PhotographyBusiness.Services.UserService;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace PhotographyBusiness.Pages.BookingPages
 {
@@ -23,7 +23,8 @@ namespace PhotographyBusiness.Pages.BookingPages
         public string CustomerNote { get; set; }
         [BindProperty] 
         public string Category { get; set; }
-
+        [BindProperty, DataType(DataType.DateTime)]
+        public DateTime Date { get; set; }
         public string FullAddress { get; set; }
         public Booking Booking { get; set; } = new Booking();
         public User User { get; set; }
@@ -64,6 +65,7 @@ namespace PhotographyBusiness.Pages.BookingPages
             Booking.Address = $"{Street}, {City} {ZipCode}";
             Booking.UserId = User.UserId;
             Booking.IsAccepted = false;
+            Booking.Date = Date;
             Booking.DateCreated = DateTime.Now;
 
             await _bookingService.CreateBookingAsync(Booking);
