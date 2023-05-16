@@ -75,5 +75,5 @@ html {
     margin-top: calc(var(--bs-gutter-y) * -1) !important;
     margin-right: calc(var(--bs-gutter-x) * -.5) !important;
     margin-left: calc(var(--bs-gutter-x) * -.5) !important;
-    justify-content: space-between !important;
+    justify-content: space-around !important;
 }
