@@ -17,6 +17,7 @@ namespace PhotographyBusiness.Models
         [AllowNull]
         public string? AdminNote { get; set; }
         [Required, DataType(DataType.DateTime)]
+        [Range(typeof(DateTime), "16/05/2023", "31/12/2099", ErrorMessage = "Date has to be after todays date")]
         public DateTime Date { get; set; }
         [Required, DataType(DataType.DateTime)]
         public DateTime DateCreated { get; set; }
