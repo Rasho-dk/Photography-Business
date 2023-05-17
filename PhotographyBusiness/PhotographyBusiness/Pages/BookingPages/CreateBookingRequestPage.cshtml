@@ -39,7 +39,7 @@
                 <div class="form-group p-2 d-flex">
                     <div class="me-1">
                         <label asp-for="@Model.Date" class="control-label text-white">Date</label>
-                        <input asp-for="@Model.Date" class="form-control" />
+                        <input asp-for="@Model.Date" class="form-control" value="@DateTime.Now"/>
                         <span asp-validation-for="@Model.Date" class="text-danger"></span>
                     </div>
                     <div class="ms-1">
