@@ -1,0 +1,133 @@
+﻿@page
+@model PhotographyBusiness.Pages.AccountPages.CreateBookingAndUserModel
+@{
+}
+
+<link rel="stylesheet" href="~/css/styles.css" />
+
+
+
+        <div class="transparent-black">
+            <div class="d-flex justify-content-center">
+                <div class="d-flex flex-column m-4" style="min-width: 30vw">
+                    <form method="post" class="p-4" style="background-color: rgba(0,0,0,0.7)">
+
+
+                                                  <!--Grid col 1-->
+                <div class="container">
+                    <div class="row ms-4">
+                        <div class="col-md-6" style="word-wrap:break-word;">
+                            <div class="form-group p-2">
+                                <label asp-for="@Model.User.Email" class="control-lable text-white">Email</label>
+                                <input asp-for="@Model.User.Email" class="form-control" />
+                                <span asp-validation-for="@Model.User.Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group p-2 d-flex">
+                                <div class="me-1">
+                                    <label asp-for="@Model.FirstName" class="control-lable text-white">First name</label>
+                                    <input asp-for="@Model.FirstName" class="form-control" />
+                                    <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+                                </div>
+                                <div class="ms-1">
+                                    <label asp-for="@Model.LastName" class="control-lable text-white">Last name</label>
+                                    <input asp-for="@Model.LastName" class="form-control" />
+                                    <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group p-2">
+                                <label asp-for="@Model.User.PhoneNumber" class="control-lable text-white">Phone</label>
+                                <input asp-for="@Model.User.PhoneNumber" class="form-control" />
+                                <span asp-validation-for="@Model.User.PhoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group p-2">
+                                <label asp-for="@Model.Password" class="control-lable text-white"></label>
+                                <input asp-for="@Model.Password" class="form-control" />
+                                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group p-2">
+                                <label asp-for="@Model.RepeatPassword" class="control-lable text-white">Repeat password</label>
+                                <input asp-for="@Model.RepeatPassword" class="form-control" />
+                                <span asp-validation-for="@Model.RepeatPassword" class="text-danger"></span>
+                            </div>
+                            <div class="form-group p-2">
+                                <label asp-for="@Model.DateOfEvent" class="control-lable text-white">Event Date</label>
+                                <input asp-for="@Model.DateOfEvent" class="form-control" />
+                                <span asp-validation-for="@Model.DateOfEvent" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group ms- d-flex justify-content-around-between">
+                                <input class="form-check-input" type="checkbox" name="remember" required>
+                                <label class="form-check-label text-white" for="myCheck">&nbsp I agree on the <a href="/Privacy" class="text-white"> Terms & Conditions</a></label>
+                                <div class="valid-feedback">Valid.</div>
+                                <div class="invalid-feedback">You must agree to the Terms of Service</div>
+                            
+                            </div>
+                            <div class="form-group m-2 d-flex justify-content-between">
+                                <a asp-page="../Index/" class="btn btn-dark btn-border-white" style="border-radius: 0; min-width: 6vw;">Go back</a>
+                            </div>
+
+                        </div>
+                                                                 <!--Grid col 2-->
+                        <div class="col-md-6" style="word-wrap: break-word;">
+                           @* <div class="form-group p-2">
+                                <label asp-for="@Model.DateTo" class="control-lable text-white"></label>
+                                <input asp-for="@Model.DateTo" class="form-control" />
+                                <span asp-validation-for="@Model.DateTo" class="text-danger"></span>
+                            </div>*@
+                            <div class="form-group p-2">
+                                <label asp-for="@Model.Category" class="control-lable text-white"></label>
+                                <input asp-for="@Model.Category" class="form-control" />
+                                <span asp-validation-for="@Model.Category" class="text-danger"></span>
+                            </div>
+                            <div class="form-group p-2">
+                                <label asp-for="@Model.CustomerNote" class="control-lable text-white"></label>
+                                <input asp-for="@Model.CustomerNote" class="form-control" />
+                                <span asp-validation-for="@Model.CustomerNote" class="text-danger"></span>
+                            </div>
+                            <div class="form-group p-2">
+                                <label asp-for="@Model.Street" class="control-lable text-white"></label>
+                                <input asp-for="@Model.Street" class="form-control" />
+                                <span asp-validation-for="@Model.Street" class="text-danger"></span>
+                            </div>
+                            <div class="form-group p-2">
+                                <label asp-for="@Model.City" class="control-lable text-white"></label>
+                                <input asp-for="@Model.City" class="form-control" />
+                                <span asp-validation-for="@Model.City" class="text-danger"></span>
+                            </div>
+                            <div class="form-group p-2">
+                                <label asp-for="@Model.ZipCode" class="control-lable text-white"></label>
+                                <input asp-for="@Model.ZipCode" class="form-control" />
+                                <span asp-validation-for="@Model.ZipCode" class="text-danger"></span>
+                            </div>
+                            <br />
+                            <div class="form-group m-2 d-flex justify-content-between">
+                                <input type="submit" value="Create" class="btn btn-light" style="min-width: 6vw; border-radius: 0;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                       
+                       
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .bg-img {
+        background-image: url(../../wwwroot/media/img3.jpg);
+    }
+</style>

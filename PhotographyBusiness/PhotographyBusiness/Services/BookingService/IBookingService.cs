@@ -23,6 +23,8 @@ namespace PhotographyBusiness.Services.BookingService
         public Task<List<Booking>> SortBookingByDate();
         public Task<List<Booking>> SortBookingByName();
         public Task<List<Booking>> SortBookingByEmail();
+        List<Booking> GetBookingById_User_(int id);
+
 
 
     }

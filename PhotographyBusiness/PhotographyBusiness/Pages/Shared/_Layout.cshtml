@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="~/PhotographyBusiness.styles.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
 
+    <!--Goolge font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+
 
 
 
@@ -52,16 +57,21 @@
                             <li class="nav-item ms-3">
                                 <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/AdminPages/AdminDashboardPage">Dashboard</a>
                             </li>
-                            <li class="nav-item ms-3">
-                                <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/AdminPages/DashbordAdmin">Dashboard</a>
-                            </li>
-
+                          
                         }
-                        else
+                        @if (Context.User.Identity.Name != "admin" && Context.User.Identity.Name != null)
                         {
                             <li class="nav-item ms-3">
                                 <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/CreateBookingRequestPage">Enquiry</a>
                             </li>
+                        }
+                        @if (Context.User.Identity.Name == null)
+                        {
+                            
+                            <li class="nav-item ms-3">
+                                <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/AccountPages/CreateBookingAndUser">Enquiry</a>
+                            </li>
+                          
                         }
 
                         

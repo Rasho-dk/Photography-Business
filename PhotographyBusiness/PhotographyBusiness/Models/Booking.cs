@@ -17,12 +17,14 @@ namespace PhotographyBusiness.Models
         [AllowNull]
         public string? AdminNote { get; set; }
         [Required, DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
         [Required, DataType(DataType.DateTime)]
         public DateTime DateCreated { get; set; }
         public bool IsAccepted { get; set; }
         [Required]
         public string Address { get; set; }
+        [Required]
         public int UserId { get; set; }
         public User User { get; set; }
 
@@ -75,6 +77,5 @@ namespace PhotographyBusiness.Models
         /// </summary>
         public Booking() {  }
 
-        
     }
 }

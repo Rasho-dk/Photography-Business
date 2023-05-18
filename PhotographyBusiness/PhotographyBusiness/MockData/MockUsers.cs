@@ -14,8 +14,6 @@ namespace PhotographyBusiness.MockData
             new User(3,"Silas@outlook.com", _passwordHasher.HashPassword(null, "123"), "Silas Silas", "42791451"),
             new User(6,"Sil@outlopk.com", _passwordHasher.HashPassword(null, "123"), "Sil sil", "42791451"),
            new User(8,"Peter@outlopk.com", _passwordHasher.HashPassword(null, "123"), "Peter", "123211")
-
-
         };
 
         public static List<User> GetMockUsers()

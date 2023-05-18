@@ -82,7 +82,10 @@ namespace PhotographyBusiness.Pages.AccountPages
                             {
                                 //LoggedInUser = user;
                                 var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) };
-                                if (user.Name.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));
+                                if(user.Name.Equals("admin")) 
+                                {
+                                    claims.Add(new Claim(ClaimTypes.Role, "admin"));
+                                }
 
                                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 

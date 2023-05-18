@@ -1,0 +1,127 @@
+﻿@page "{id:int}"
+@model PhotographyBusiness.Pages.BookingPages.PlaceHolderModel
+@{
+}
+<div class="card mx-auto mt-4" style="background-color:#191918; width:65%;">
+    <div class="card-body mx-4">
+
+        <div class="container mb-3 mx-4">
+            <br />
+            <h1 style="color:#593d16; font-family: 'Amatic SC', cursive; font-size:5em;">INVOICE</h1>
+            <br />
+            <div class="row" style="color:white;">
+                <div class="col col-md-3" style="line-height:0.5em">
+                    <h5>BILLED TO:</h5>
+                    <p>@Model.User.Name</p>
+                </div>
+                <div class="col col-sm-1" style="border-left:4px solid #593d16; height:5em;">
+
+                </div>
+                <div class="col col-md-4" >
+                    <h5>@Model.User.Email</h5>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="container  mb-sm-auto mx-4" style="color:white;">
+            <div class="row">
+                <div class="col col-md-4">
+                    <h5>Description</h5>
+                </div>
+                <div class="col col-md-4">
+                    <h5>Deposit</h5>
+
+                </div>
+                <div class="col col-md-4">
+                    <h5>Remaining</h5>
+                    <p>Balance</p>
+                </div>
+            </div>
+        </div>
+        <div class="mb-5" style="border-bottom:4px solid #593d16; height:1em;"></div>
+
+        <div class="container  mb-sm-auto mx-4" style="color:#593d16;">
+            <div class="row">
+                <div class="col col-md-4" style="color:white; word-break; ">
+                    <h5 style="width:80%;">@Model.Booking.AdminNote</h5>
+                </div>
+                <div class="col col-md-4">
+                    @if(Model.Deposit == null)
+                    {
+                        <h5>£00.00</h5>
+
+                    }
+                    else
+                    {
+                        <h5>£@Model.Deposit</h5>
+                    }
+                </div>
+                <div class="col col-md-4">
+                    @if (Model.Remaining == null)
+                    {
+                        <h5>£00.00</h5>
+
+                    }
+                    else
+                    {
+                        <h5>£@Model.Remaining</h5>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="mb-5" style="border-bottom:4px solid #593d16; height:4em;"></div>
+
+        <div class="container  mb-sm-auto mx-4" style="color:#593d16;">
+            <div class="row">
+                <div class="col col-md-4" style="color:white; word-break; ">
+                </div>
+                <div class="col col-md-4">
+                    <h5>TOTAL</h5>
+
+                </div>
+                <div class="col col-md-4">
+                    @if(Model.Booking.Price == null)
+                    {
+                        <h5>£00.00</h5>
+                    }
+                    else
+                    {
+                        <h5>£@Model.Booking.Price</h5>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="mb-5" style="border-bottom:4px dotted #593d16; height:4em;"></div>
+
+        <div class="container  mb-sm-auto mx-4" style="color:#593d16;">
+            <div class="row">
+                <div class="col col-md-4" style="color:white; line-height:0.3em;">
+                    <h5 style="width:80%;">Bank Information</h5>
+                    <p>Jack Saunders</p>
+                    <p>04-00-04</p>
+                    <p>80570545</p>
+                </div>
+                <div class="col col-md-4">
+                </div>
+                <div class="col col-md-4" style="color:white; line-height:0.3em;">
+                    <h5>Total balance due</h5>
+                    <h6>@Model.Booking.DateCreated.ToShortDateString()</h6>
+                </div>
+            </div>
+        </div>
+        <div class="mb-5" style="border-bottom:4px dotted #593d16; height:4em;"></div>
+
+
+        <div class="mx-auto mb-5" style="color:white; text-align:center; font-family: 'Amatic SC', cursive;">
+            <h2 style="font-size:4em; color:#593d16;">THANK YOU !</h2>
+        </div>
+    </div>
+</div>
+<hr class="mb-5 mt-5"/>
+
+2
+@section scripts{
+    <script>
+        document.getElementById()
+    </script>
+}

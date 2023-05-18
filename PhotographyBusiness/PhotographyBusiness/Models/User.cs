@@ -48,9 +48,9 @@ namespace PhotographyBusiness.Models
             PhoneNumber = phoneNumber;
             DateCreated = DateTime.Now;
         }
-        public User(int id,string email, string password, string name, string phoneNumber)
+        public User(int id ,string email, string password, string name, string phoneNumber)
         {
-            UserId = id;
+            UserId = id ;
             Email = email;
             Password = password;
             Name = name;

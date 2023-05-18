@@ -1,62 +1,107 @@
 ﻿using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.BookingService;
 using PhotographyBusiness.Services.UserService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhotographerTest
 {
     [TestClass]
     public class BookingTest
     {
-        public IBookingService BookingService { get; set; }
-        public IUserService UserService { get; set; }
-        public User User { get; set; }
-        public Booking Booking { get; set; }
-        [TestInitialize] 
-        public void Initialize() 
+        private IBookingService _bookingService;
+        public IUserService _userService { get; set; }
+       
+        [TestInitialize]
+        public void Initialize()
         {
-            Booking = new Booking("Marriage", 100, "Please give me photos :3", "Yaaaah :3",
-                new DateTime(2023, 03, 12, 14, 15, 00), new DateTime(2023, 03, 13), true,
-                "Mrs Rasho 71 Cherry Court SOUTHAMPTON SO53 5PD UK",
-                User = new User(4, "RashoRasho@hotmail.com", "123", "Rasho Rash", "Rasho123"), 1) { BookingId = 1 };
-
-            BookingService = new BookingService();
-
-            UserService = new UserService();    
-            User = new User();
-
-        }
-        [TestMethod]
-        public async Task Test_CreateBooking()
-        {
-             await BookingService.CreateBookingAsync(Booking);
-        }
-        [TestMethod]
-        public async Task Test_createBooking_InvalidInfor()
-        {
-           Booking = null;
-            Assert.ThrowsExceptionAsync<Exception>(() => BookingService.CreateBookingAsync(Booking));
-        }
-        [TestMethod]
-        public async Task Test_BookingDelete()
-        {
-           await Test_CreateBooking();
-            var validBookingId = BookingService.GetBookingById(Booking.BookingId);  
-           await  BookingService.DeleteBooking(validBookingId.BookingId);
-        }
-        [TestMethod]
-        public async Task Test_GetBookingById_Valid()
-        {
-            BookingService.GetBookingById(Booking.BookingId);
+            _bookingService = new BookingService();
+            _userService = new UserService();
         }
         [TestMethod]
         public void TestGetAllBookings()
         {
-            BookingService.GetAllBookings();
+            _bookingService.GetAllBookings();
         }
+
+        [TestMethod]
+        public void Test_CreateBooking()
+        {
+            //Arannge
+            Booking newBooking = new Booking("Party", "pls take pics", "Mrs Bo 300 Cherry Court SOUTHAMPTON SO53 5PD UK",
+                   new User("Bo@email.com", "123", "Bo Bo", "12345678"),
+                   new DateTime(2023, 10, 10, 12, 30, 00))
+            { BookingId = 123 };
+            newBooking.IsAccepted = true;
+            var actual_firstCount = _bookingService.GetAllBookings().Count;
+
+            //Act
+            _bookingService.CreateBookingAsync(newBooking);
+            var expected_SecCount = _bookingService.GetAllBookings().Count;
+
+            //Assert
+            Assert.AreEqual(expected_SecCount, ++actual_firstCount);
+
+        }
+        [TestMethod]
+        public void Test_CreateBooking_InvalidInfor()
+        {
+            Booking booking = null;
+
+            Assert.ThrowsExceptionAsync<Exception>(() => _bookingService.CreateBookingAsync(booking));
+        }
+        [TestMethod]
+        public void Test_DeleteBookingById_ValidId()
+        {
+            //Arrange
+            var actual_fistCount = _bookingService.GetAllBookings().Count();
+
+            var BookingId = _bookingService.GetAllBookings()[0];
+
+            //Act
+            var result = _bookingService.DeleteBooking(BookingId.BookingId);
+
+            var expected = _bookingService.GetAllBookings().Count;
+
+            //Assert
+            Assert.AreNotEqual(expected, actual_fistCount);
+        }
+        [TestMethod]
+        public void Test_DeleteBookingById_InValidId()
+        {
+            //Arrange
+            int invalidBookingId = 012;
+
+            //Act
+            var result = _bookingService.DeleteBooking(invalidBookingId);
+            var resultOFDeleteBooking = _bookingService.GetBookingById(invalidBookingId);
+
+            //Assert
+            Assert.IsNull(resultOFDeleteBooking);
+        }
+        [TestMethod]
+        public async Task Test_GetBookingById_Valid()
+        {
+
+        }
+        [TestMethod]
+        public void Test_GetBookingById_User_ValindUserId()
+        {
+            //Arrange
+            int userId = 4;
+
+            //Act
+
+            //Asset
+        }
+        [TestMethod]
+        public void Test_GetBookingById_User_InvalidUserId()
+        {
+            //Arrange
+
+            //Act
+
+
+            //Asset
+        }
+
     }
 }

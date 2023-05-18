@@ -1,154 +1,203 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PhotographyBusiness.Models;
-using PhotographyBusiness.Services;
+﻿using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.UserService;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PhotographerTest
 {
     [TestClass]
     public class UserServiceTest
     {
-        public IUserService ServiceUser { get; set; }
-        public User? User { get; set; } 
-        //public List<User> Users { get; set; }
-
+        private IUserService userService;
+        private User user;
+        /// <summary>
+        /// Initializere userService for at få fat i metoder i userService da den er ikke statiske 
+        /// I UserService-Klasse har vi en konstrutør, der initializere en list af brugere fra Mockdata.
+        /// Mock data bliver brugt til hver enkelt metod uafhængige af andre metoder. 
+        /// </summary>
         [TestInitialize]
         public void Initialize()
         {
             //Arrange
-            User = new User(1, "test@outlook.com", "test", "test123", "312312");
-            ServiceUser = new UserService(); 
-            //Users = new List<User>();
-
-            //Act
-            ServiceUser.CreateUserAsync(User);
+            userService = new UserService();
         }
+        /// <summary>
+        /// Tjekker om listen er ikke null og der objekter er i listen
+        /// </summary>
         [TestMethod]
-        public async Task TestCreateUser()
+        public void Test_GetAllUser()
         {
-            //Arrange
-             User = new User(1,"test@outlook.com", "test123", "test", "312312");
+            //Act : Tjekke om Listen indholder objekter
+            var result = userService.GetAllUsers();
 
-            //Act & Assert
-             _ = ServiceUser.CreateUserAsync(User);       
-           
-            //Assert
-            Assert.AreEqual("test",User.Name);
-        }
-        [TestMethod]
-        public async Task Test_DeleteUserSuccessfully_ValidUserId()
-        {
-            //Arrange : Opretter en User Obj i Initialize metode
-            
-            //Act : User er blevet dannet i INitialize metode
-            await ServiceUser.DeleteUserAsync(User.UserId);
-            //Tjekke om der er user ind i Users(list of User) 
-            User deletedUserFromListOfUser = await ServiceUser.GetUserByIdAsync(User.UserId);
-
-            //Assert
-            Assert.IsNull(deletedUserFromListOfUser);
-        }
-        [TestMethod]
-        public async Task TestDeleteUserWithUInvaildUserId()
-        {
-            //Arrange
-            User = null;
-            int Invalid = 99;
-
-            //Act : User er blevet dannet i INitialize metode
-            var result = await ServiceUser.DeleteUserAsync(Invalid);
-
-            //Assert
-            Assert.IsNull(result);           
-        }
-        [TestMethod]
-        public async Task TestGetUserByEmail()
-        {
-            //Arrange
-            User = new User(88,"test@outlook.com","test123", "test", "312312");
-
-            //Act
-            _ = ServiceUser.CreateUserAsync(User);
-            var result = await ServiceUser.GetUserByEmailAsync(User.Email);
-            //Assert
+            //Assert :: Tjekker om listen er ikke null og listen er objekter i sig selv
             Assert.IsNotNull(result);
         }
+
+        /// <summary>
+        /// Opret en obj User 
+        /// tjekker om bruger er tilført i listen.
+        /// </summary>
         [TestMethod]
-        public async Task TestGetUserByInvalidEamil()
+        public void Test_CreateUser()
+        {
+            //Arrange
+            var newUser = new User(1, "test@outlook.com", "test123", "test", "312312");
+            //Antal af brugere i listen inden af tilføresle en brugere til listen 
+            int firstCount = userService.GetAllUsers().Count;
+
+            //Act 
+            userService.CreateUserAsync(newUser); // Tilføre en bruger til listen
+
+            //Assert         
+            Assert.AreEqual(++firstCount, userService.GetAllUsers().Count);
+        }
+
+        /// <summary>
+        /// Den metod tjekker om en bruger kan slettes med en gyldig brugere id.       
+        /// </summary>
+        [TestMethod]
+        public void Test_DeleteUserSuccessfully_ValidUserId()
+        {
+            //Arrange
+            var newUser = new User(1, "test@outlook.com", "test123", "test", "312312");
+            userService.CreateUserAsync(newUser);
+            int deleteOneUserFromList = userService.GetAllUsers().Count;
+
+            //Act
+            var toBeDeleted = userService.DeleteUserAsync(1);
+            //Assert
+            Assert.AreEqual(--deleteOneUserFromList, userService.GetAllUsers().Count);
+        }
+
+
+        /// <summary>
+        /// slet en brugere med ugyldig id nummer
+        /// </summary>
+        /// <Assert>Tjekker antal af obj i listen før og efter.</Assert>
+        [TestMethod]
+        public void Test_DeleteUser_With_InvaildUserId()
+        {
+            //Arrange
+            int InvalidUSerId = 99;
+            //Se om hvor mange bruger er i listen før den sletter.
+            int actual_CountUserBefore_delete = userService.GetAllUsers().Count;
+
+            //Act
+            var toBeDeleted = userService.DeleteUserAsync(InvalidUSerId);
+
+            var expected_CountUserAfter_delete = userService.GetAllUsers().Count;
+
+            //Assert
+            Assert.AreEqual(expected_CountUserAfter_delete, actual_CountUserBefore_delete);
+            //Tjek om metoden returere null hvis der ingen brugere id passer med user_list
+            Assert.IsNull(toBeDeleted.Result); 
+        }
+        /// <summary>
+        /// Henter all burgerer i Mock data ved at henvende sig i spesifike index i listen og tjekker om det passer
+        /// --> med hinaden.
+        /// </summary>
+        [TestMethod]
+        public void Test_GetUserByEmail()
+        {
+            //Arrange
+            var actual_getUser = userService.GetAllUsers()[0];
+
+            //Act
+            var expected_User = userService.GetUserByEmailAsync(actual_getUser.Email);
+
+            //Assert
+            Assert.AreEqual(expected_User.Result.Email, actual_getUser.Email);
+        }
+
+        /// <summary>
+        /// Prøver at klade på metoden med en ugyldig email og det skal returen null 
+        /// </summary>
+        [TestMethod]
+        public void Test_GetUserByInvalidEamil()
         {
             //Arrange
             string InvaildEmail = "Invalid@hotmail.dk";
 
             //Act
-            var result = await ServiceUser.GetUserByEmailAsync(InvaildEmail); 
+            var resultOfInvalidEmail = userService.GetUserByEmailAsync(InvaildEmail);
             //Assert
-            Assert.IsNull(result);
+            Assert.IsNull(resultOfInvalidEmail.Result);
         }
         [TestMethod]
-        public async Task TestGetUserByName()
+        public void Test_GetUserByName()
         {
             //Arrange
-            User.Name = "test";
+            var getUserName_From_Index = userService.GetAllUsers()[0];
 
             //Act
-            //_ = ServiceUser.CreateUserAsyn(User);           
-            var result = await ServiceUser.GetUserByNameAsync(User.Name);
+            var resultOfGetUserByName = userService.GetUserByNameAsync(getUserName_From_Index.Name);
 
             //Assert
-            Assert.AreEqual("test", result.Name); 
+            Assert.AreEqual(resultOfGetUserByName.Result.Name, getUserName_From_Index.Name);
         }
         [TestMethod]
-        public async Task TestGetUserNameInvalid()
+        public void Test_GetUserName_Invalid()
         {
             //Arrange
             var InvaildName = "Invalid Name";
 
             //Act
-           _ = ServiceUser.CreateUserAsync(User);
-            var result = await ServiceUser.GetUserByNameAsync(InvaildName);
+            var resultOfGetUserByName = userService.GetUserByNameAsync(InvaildName);
 
             //Assert
-            Assert.IsNull(result);
+            Assert.IsNull(resultOfGetUserByName.Result);
         }
         [TestMethod]
-        public async Task TestGetUsetById_ValidId()
-        {
-            //Act
-            var result = await ServiceUser.GetUserByIdAsync(User.UserId);
-            //Assert
-              Assert.IsNotNull(result);
-        }
-        [TestMethod]
-        public async Task TestUpdateUserInfo()
+        public void TestGetUsetById_ValidId()
         {
             //Arrange
-            var email = "Change";
-            var tel = "1234566787";
+            var GetUserByIndex = userService.GetAllUsers()[0];
 
             //Act
-           await ServiceUser.UpdateUserAsync(User);
+            var resultOFGetUserById = userService.GetUserByIdAsync(GetUserByIndex.UserId);
+
+            //Asssert
+            Assert.AreEqual(GetUserByIndex.UserId, resultOFGetUserById.Result.UserId);
+
         }
         [TestMethod]
-        public async Task TestUpdateUserIfo_UserIsNull()
+        public void TestGetUsetById_InValidId()
+        {
+            //Arrange
+            var Invalid_UserId = 22;
+
+            //Act
+            var resultOFGetUserById = userService.GetUserByIdAsync(Invalid_UserId);
+
+            //Asssert
+            Assert.IsNull(resultOFGetUserById.Result);
+        }
+        [TestMethod]
+        public void TestUpdateUserInfo()
+        {
+            //Arrange : Klader på metod GetAllUsers Og på en specifik index og opdatere inholdet.
+            var actual = userService.GetAllUsers()[0];
+            actual.Name = "Foo";
+            actual.PhoneNumber = "222312123";
+            //Act
+            userService.UpdateUserAsync(actual); // Her hvor man opdatte brugeres info.
+
+            //ved hjælp af den metod indsater man parameterene som kommer fra GetAllUsers() metod og vælger man Name.
+            //for at hente alle oplysninger når navnet passer med hinaden. 
+            var expected = userService.GetUserByNameAsync(actual.Name);
+            //Assert: Her tjekker man om
+            Assert.AreEqual(expected.Result.Name, actual.Name);
+            Assert.AreEqual(expected.Result.PhoneNumber, actual.PhoneNumber);
+        }
+        [TestMethod]
+        public void TestUpdateUserIfo_UserIsNull()
         {
             //Arrange 
-            User = null;
-
-            //Act
-            var result = await ServiceUser.UpdateUserAsync(User);
+            User user = null;
+            // Act
+           var result =  userService.UpdateUserAsync(user);
 
             //Assert
-            Assert.IsNull(result);
-        }
-        [TestMethod]
-        public void TestGetAllUser()
-        {
-            ServiceUser.GetAllUsers();
-        }
+            Assert.IsNull(result.Result);
+        }       
     }
 }
