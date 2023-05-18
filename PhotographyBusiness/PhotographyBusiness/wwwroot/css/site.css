@@ -77,3 +77,10 @@ html {
     margin-left: calc(var(--bs-gutter-x) * -.5) !important;
     justify-content: space-around !important;
 }
+
+.footer {
+/*    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;*/
+}
