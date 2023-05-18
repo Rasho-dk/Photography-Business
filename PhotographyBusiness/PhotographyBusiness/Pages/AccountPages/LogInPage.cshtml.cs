@@ -17,32 +17,18 @@ namespace PhotographyBusiness.Pages.AccountPages
         //public static User LoggedInUser { get; set; } = null;
         [BindProperty]
         public User User { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
+       
         public string DisplayMessage { get; set; }
         public LogInPageModel(IUserService userService)
         {
             this.userService = userService;
         }
-        #region
+
         /// <summary>
-        /// Used for Unit test
-        ///This is for log in a user with a given email og password
+        /// til unit test
         /// </summary>
-        /// <param name="email">Email of the user to log in</param>
-        /// <param name="password">Password of the user to log in</param>
-        /// <returns>True if the user successfully logged in, false otherwise</returns>
-        //public bool Login(string email, string password)
-        //{
-        //    List<User> users = userService.GetAllUsers();
-        //    foreach(var user in users) 
-        //    {
-        //        if(user.Email == email && user.Password == Password)
-        //            return true;
-        //    }
-        //    return false;
-        //}
-        #endregion
+        public string Password { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// This method must first retrieve the list of the Users via _userService and check whether the user with (Eamil,Password) exists in the liit

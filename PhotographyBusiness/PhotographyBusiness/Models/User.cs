@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -27,9 +28,18 @@ namespace PhotographyBusiness.Models
         [Required]
         [StringLength(12)]
         public string PhoneNumber { get; set; }
-        
+
+        [NotMapped]
         public DateTime DateCreated { get; set; }
+
         public virtual ICollection<Booking> Bookings { get; set; }
+        //Shero::
+        [DataType(DataType.Password), DisplayName("repeat password")]
+        [Compare("Password", ErrorMessage = "The passwords do not match.")]
+
+        //Den taler entity framwor at den ikk indkludere i databasen
+        [NotMapped]
+        public string RepeatPassword { get; set; }
 
 
         /// <summary>
@@ -48,6 +58,7 @@ namespace PhotographyBusiness.Models
             PhoneNumber = phoneNumber;
             DateCreated = DateTime.Now;
         }
+
         public User(int id ,string email, string password, string name, string phoneNumber)
         {
             UserId = id ;

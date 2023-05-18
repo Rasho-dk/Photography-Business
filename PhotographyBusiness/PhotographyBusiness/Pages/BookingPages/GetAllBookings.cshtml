@@ -6,8 +6,64 @@
 <br />
 <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Bookings</h1>
 
-@*Shero's Kode må ikke sletes'
-*@<br />
+    <div class="d-flex justify-content-around">
+        <form method="post" class="form-inline">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Start Date</span>      @*btn-border-black til Start date eller grey ligesom i End Date*@
+                </div>
+                <input asp-for="StartDate" class="form-control me-2" />
+                <div class="input-group-prepend">
+                    <span class="input-group-text">End Date</span>
+                </div>
+                <input asp-for="EndDate" class="form-control me-2" />
+                <input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
+
+                <div class="ps-3">
+
+                    <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
+                        RESET FILTERS
+                    </a>
+
+
+                </div>
+            </div>
+
+
+
+
+        </form>
+
+        <div class="col-4 w-25">
+            <form method="post" class="form-inline">
+                <div class="input-group mb-2">
+                    <input asp-for="NameInput" class="form-control me-1" placeholder="Filter by Name, Last name or Email " />
+                    <input type="submit" asp-page-handler="NameSearch" value="Search" class="btn btn-border-black btn-even" />
+                </div>
+            </form>
+
+            <form method="post">
+                <div class="input-group mb-2">
+                    <label for="CategoryInput"></label>
+                    <select aria-label="Filter select" class="form-select me-1" asp-for="CategoryInput">
+                        <option select disabled value="Select Category"> Select Category; </option>
+                        <option value="Marriage">Marriage</option>
+                        <option value="Family">Family</option>
+                        <option value="Portrait">Portrait</option>
+                        <input type="submit" asp-page-handler="CategoryFilter" value="Filter" class="btn btn-border-black btn-even" />
+                    </select>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+
+    @*Shero's Kode må ikke sletes'
+    *@
+
+        <br />
     <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:30%;">
 <br>
 
@@ -27,8 +83,8 @@
                 {
                     <tr class="table-light">
                         <td>                           
-                            @*<a asp-page="/BookingPages/BookingInfoPage" asp-route-id="@booking.User.UserId">@booking.User.Name</a>*@
-                            
+@*                            <a asp-page="/BookingPages/BookingInfoPage" asp-route-id="@booking.User.UserId">@booking.User.Name</a>
+*@                            
                             <!-- Button trigger modal -->
                             <button type="button" class="btn  pop-out" data-bs-toggle="modal" data-bs-target="#exampleModal"
                                 data-user-name="@booking.User.Name"
@@ -91,42 +147,70 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">User information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6" style="word-wrap:break-word;">
-                            <!-- Customer information -->
-                            <h5>Customer</h5>
-                            <p> <strong>Name : </strong><span id="userName" style="font-style:italic;"></span></p>
-                            <p><strong>Email : </strong><span id="userEmail" style="font-style:italic;"></span></p>
-                            <p><strong>Phone : </strong><span id="userPhoneTel" style="font-style:italic;"></span></p>
-                            <p><strong>Address : </strong><span id="userAddress" style="font-style:italic;"></span></p>
-                            <p><strong>Note : </strong><span id="userNote" style="font-style:italic;"></span></p>
-                            <p><strong>Category : </strong><span id="userCategory" style="font-style:italic;"></span></p>
-                            <p><strong>Events date : </strong><span id="userDateOfEvent" style="font-style:italic;"></span></p>
-                        </div>
-                        <div class="col-md-4"style="word-wrap: break-word;">
-                            <!-- Admin information -->
-                            <h5>Admin</h5>
-                            <p><strong>Name : </strong>@Model.User.Name</p>
-                            <p><strong>Email : </strong>@Model.User.Email</p>
-                            <p><strong>Phone : </strong>@Model.User.PhoneNumber</p>
-                            <p><strong>Note : </strong><span id="adminNote" style="font-style:italic;"></span></p>
-                            <p><strong>Price : </strong><span id="price" style="font-style:italic;"></span></p>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-10">
+                    <h5>Customer</h5>
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header justify-content-center">
+                                <h5 class="modal-title">Customer Information</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="ms-1 justify-content-center">
+                                    <p>Name:<span id="userName" class="input-group-text">Name:< style="font-style:italic;"</span></></p>
+                                </div>
+                                <div class="ms-1 justify-content-center">
+                                    <p>Email:<span id="userEmail" class="input-group-text">Email:< style="font-style:italic;"</span></></p>
+                                </div>
+                                <div class="ms-1 justify-content-center">
+                                    <p> Customer Note: <textarea readonly class="input-group-text" id="userNote" rows="6" cols="30">User note:< style="font-style:italic;"</textarea></></p>
+                                </div>
+                                <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem;" class="pop-out" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-md-5">
+                <!-- Booking information -->
+                <h5>Booking</h5>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header justify-content-center">
+                            <h5 class="modal-title">Booking Information</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="ms-1 justify-content-center">
+                                <p> Address: <textarea readonly id="userAddress" class="input-group-text" rows="6" cols="30">User Adress:< style="font-style:italic;"</textarea></></p>
+                            </div>
+                            <div class="ms-1 justify-content-center">
+
+                                <p>Category:<span id="userCategory" class="input-group-text">Category:< style="font-style:italic;"</span></></p>
+                            </div>
+                            <div class="ms-1 justify-content-center">
+
+                                <p>Event date:<span id="userDateOfEvent" class="input-group-text">Event date:< style="font-style:italic;"</span></></p>
+                            </div>
+                            <div class="ms-1 justify-content-center">
+
+                                <p>Price:<span id="price" class="input-group-text">Price:< style="font-style:italic;"</span></></p>
+                            </div>
+                            <div class="ms-1 justify-content-center">
+                                <p>Admin note:<span id="adminNote" class="input-group-text">Admin note:< style="font-style:italic;"</span></></p>
+                            </div>
+                            <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem; margin-top: 10px;" class="pop-out" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>
-
-
+@*<li>
+    <a asp-page="/AdminPages/NewVisiters">XX</a>
+</li>*@
 
 @section scripts{
     <script>

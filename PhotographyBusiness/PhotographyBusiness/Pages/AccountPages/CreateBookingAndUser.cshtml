@@ -33,6 +33,12 @@
                                     <input asp-for="@Model.LastName" class="form-control" />
                                     <span asp-validation-for="@Model.LastName" class="text-danger"></span>
                                 </div>
+                                <!--Til at ModelStat være valid-->
+                                <div class="ms-1">
+                                    <label asp-for="@Model.User.Name" class="control-lable text-white" hidde></label>
+                                    <input asp-for="@Model.User.Name" class="form-control" hidden readonly />
+                                    <span asp-validation-for="@Model.User.Name" class="text-danger" hidden></span>
+                                </div>
                             </div>
                             <div class="form-group p-2">
                                 <label asp-for="@Model.User.PhoneNumber" class="control-lable text-white">Phone</label>
@@ -40,14 +46,14 @@
                                 <span asp-validation-for="@Model.User.PhoneNumber" class="text-danger"></span>
                             </div>
                             <div class="form-group p-2">
-                                <label asp-for="@Model.Password" class="control-lable text-white"></label>
-                                <input asp-for="@Model.Password" class="form-control" />
-                                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                                <label asp-for="@Model.User.Password" class="control-lable text-white"></label>
+                                <input asp-for="@Model.User.Password" class="form-control" />
+                                <span asp-validation-for="@Model.User.Password" class="text-danger"></span>
                             </div>
                             <div class="form-group p-2">
-                                <label asp-for="@Model.RepeatPassword" class="control-lable text-white">Repeat password</label>
-                                <input asp-for="@Model.RepeatPassword" class="form-control" />
-                                <span asp-validation-for="@Model.RepeatPassword" class="text-danger"></span>
+                                <label asp-for="@Model.User.RepeatPassword" class="control-lable text-white">Repeat password</label>
+                                <input asp-for="@Model.User.RepeatPassword" class="form-control" />
+                                <span asp-validation-for="@Model.User.RepeatPassword" class="text-danger"></span>
                             </div>
                             <div class="form-group p-2">
                                 <label asp-for="@Model.DateOfEvent" class="control-lable text-white">Event Date</label>
@@ -69,19 +75,22 @@
                         </div>
                                                                  <!--Grid col 2-->
                         <div class="col-md-6" style="word-wrap: break-word;">
-                           @* <div class="form-group p-2">
-                                <label asp-for="@Model.DateTo" class="control-lable text-white"></label>
-                                <input asp-for="@Model.DateTo" class="form-control" />
-                                <span asp-validation-for="@Model.DateTo" class="text-danger"></span>
-                            </div>*@
+                          
                             <div class="form-group p-2">
-                                <label asp-for="@Model.Category" class="control-lable text-white"></label>
-                                <input asp-for="@Model.Category" class="form-control" />
-                                <span asp-validation-for="@Model.Category" class="text-danger"></span>
+                                <label for="Category" asp-for="@Model.Category" class="control-lable text-white"></label>
+                                <select name="Category" id="Category" class="form-select" asp-for="@Model.Category">
+                                        <option value="" disabled selected>Select an category</option>
+                                        <option value="Weddings">Weddinges</option>
+                                        <option value="Portraits">Portraits</option>
+                                        <option value="Events">Events</option>
+                                </select>      
+@*                                <input asp-for="@Model.Category" class="form-control"/>
+*@                                <span asp-validation-for="@Model.Category" class="text-danger"></span>
                             </div>
                             <div class="form-group p-2">
                                 <label asp-for="@Model.CustomerNote" class="control-lable text-white"></label>
-                                <input asp-for="@Model.CustomerNote" class="form-control" />
+                                <textarea asp-for="@Model.CustomerNote" class="form-control" rows="5"
+                                style="font-size:15px; vertical-align:top; max-height:115px;"></textarea>
                                 <span asp-validation-for="@Model.CustomerNote" class="text-danger"></span>
                             </div>
                             <div class="form-group p-2">
@@ -99,9 +108,16 @@
                                 <input asp-for="@Model.ZipCode" class="form-control" />
                                 <span asp-validation-for="@Model.ZipCode" class="text-danger"></span>
                             </div>
+                            <!--Til at Model Stat være valid --> 
+                            <div class="form-group p-2">
+                                <label asp-for="@Model.Booking.Address" class="control-lable text-white" hidden></label>
+                                <input asp-for="@Model.Booking.Address" class="form-control" hidden readonly />
+                                <span asp-validation-for="@Model.Booking.Address" class="text-danger" hidden></span>
+                            </div>                          
+                      
                             <br />
                             <div class="form-group m-2 d-flex justify-content-between">
-                                <input type="submit" value="Create" class="btn btn-light" style="min-width: 6vw; border-radius: 0;" />
+                                <input type="submit" value="Create" class="btn btn-light btn-border-black" style="min-width: 6vw;" />
                             </div>
                         </div>
                     </div>

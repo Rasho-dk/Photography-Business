@@ -24,6 +24,7 @@ namespace PhotographyBusiness.Pages.BookingPages
         {
             User = _userService.GetUserByIdAsync(id).Result;
             Booking = _bookingService.GetBookingById_User(User.UserId);
+            Booking = _bookingService.GetBookingById(id);
 
             if (Booking == null)
             {

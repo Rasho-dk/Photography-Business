@@ -23,8 +23,8 @@ namespace PhotographyBusiness.Services.BookingService
         {
             _genericDbService = genericDbService;
             _userService = userService;
-            _bookings = GetAllBookingsAsync().Result;
-            //_bookings = MockBookings.GetAllMockBookings();
+            //_bookings = GetAllBookingsAsync().Result;
+            _bookings = MockBookings.GetAllMockBookings();
            //_genericDbService.SaveObjects(_bookings);
 
         }

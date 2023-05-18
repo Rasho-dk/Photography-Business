@@ -35,11 +35,11 @@ namespace PhotographyBusiness.Pages.AccountPages
         public string CustomerNote { get; set; }
         [BindProperty]
         public string Category { get; set; }
-        [BindProperty, DataType(DataType.Password), DisplayName("password")]
-        public string Password { get; set; }
-        [BindProperty, DataType(DataType.Password), DisplayName("repeat password")]
-        [Compare("Password", ErrorMessage = "The passwords do not match.")]
-        public string RepeatPassword { get; set; }
+        //[BindProperty, DataType(DataType.Password), DisplayName("password")]
+        //public string Password { get; set; }
+        //[BindProperty, DataType(DataType.Password), DisplayName("repeat password")]
+        //[Compare("Password", ErrorMessage = "The passwords do not match.")]
+        //public string RepeatPassword { get; set; }
         [BindProperty,DataType(DataType.DateTime)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfEvent { get; set; }
@@ -57,32 +57,33 @@ namespace PhotographyBusiness.Pages.AccountPages
         }
         public async Task<IActionResult> OnPostAsync()
         {
-            if(Password == RepeatPassword)
+            if(User.Password == User.RepeatPassword && User.Password != null)
             {
-                //if (!ModelState.IsValid)
-                //{
-                //    return Page();
-                //}
+              
 
-               //User.UserId++;
-               
+                //User.UserId++;
+
 
                User.Name = $"{FirstName} {LastName}";
-               User.Password = passwordHasher.HashPassword(null, Password)  ;
+               User.Password = passwordHasher.HashPassword(null, User.Password)  ;
                await userService.CreateUserAsync(User);
 
-                Booking = new Booking();
                 //Booking.BookingId++;
+                Booking = new Booking();
                 Booking.UserId = User.UserId;
                 Booking.Category = Category;
                 Booking.CustomerNote = CustomerNote;
                 Booking.Address = $"{Street}, {City} ,{ZipCode}";
                 Booking.IsAccepted = false;
-                Booking.DateCreated = DateTime.Now;
                 Booking.Date = DateOfEvent;
-                Booking.Date = DateTime.Now;
-                await bookingService.CreateBookingAsync(Booking);
+                Booking.DateCreated = DateTime.Now;
 
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+                await bookingService.CreateBookingAsync(Booking);
+              
                 return RedirectToPage("../Index");  
             }                        
             return Page();
