@@ -46,10 +46,13 @@ namespace PhotographyBusiness.Services
                 foreach (T obj in objects)
                 {
                     context.Set<T>().Add(obj);
+<<<<<<< HEAD
                     //context.SaveChanges();
+=======
+>>>>>>> 25d0797589aaed7be139298f6e1d80a81ffd3f9b
                     await context.SaveChangesAsync();
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
