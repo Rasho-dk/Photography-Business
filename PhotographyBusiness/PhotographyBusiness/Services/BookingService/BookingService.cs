@@ -32,10 +32,10 @@ namespace PhotographyBusiness.Services.BookingService
         /// konsturtøren bliver brugt til unit test.
         /// MockData bliver brug ift. CRUD unittest. 
         /// </summary>
-        public BookingService()
-        {
-            _bookings = MockBookings.GetAllMockBookings();
-        }
+        //public BookingService()
+        //{
+        //    _bookings = MockBookings.GetAllMockBookings();
+        //}
         internal async Task<List<Booking>> GetAllBookingsAsync()
         {
             using (var context = new ObjectDbContext()) // Silas: vi skal også have useren med, når vi kalder på bookingen

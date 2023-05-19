@@ -5,12 +5,12 @@ namespace PhotographyBusiness.Services.UserService
     public class UserService : IUserService
     {
         private List<User> users; 
-        private GenericDbService<User> _genericDbService; 
+        private GenericDbService<User> _genericDbService;
         public UserService(GenericDbService<User> genericDbService)
         {
             _genericDbService = genericDbService;
-           users = genericDbService.GetObjectsAsync().Result.ToList(); 
-           //users = MockData.MockUsers.GetMockUsers();
+            users = genericDbService.GetObjectsAsync().Result.ToList();
+            //users = MockData.MockUsers.GetMockUsers();
             //_genericDbService.SaveObjects(users);
 
         }
@@ -18,10 +18,10 @@ namespace PhotographyBusiness.Services.UserService
         /// konsturtøren bliver brugt til unit test.
         /// MockData bliver brug ift. CRUD unittest. 
         /// </summary>
-        public UserService()
-        {
-            users = MockData.MockUsers.GetMockUsers();
-        }
+        //public UserService()
+        //{
+        //    users = MockData.MockUsers.GetMockUsers();
+        //}
 
         public async Task CreateUserAsync(User user)
         {
@@ -43,7 +43,7 @@ namespace PhotographyBusiness.Services.UserService
             if(userToBeDeleted != null)
             {
                 users.Remove(userToBeDeleted);
-                //await _genericDbService.DeleteObjectAsync(userToBeDeleted); 
+                await _genericDbService.DeleteObjectAsync(userToBeDeleted); 
             }
             return userToBeDeleted;
         }
@@ -99,7 +99,7 @@ namespace PhotographyBusiness.Services.UserService
                         us.PhoneNumber = user.PhoneNumber;
                     }
                 }
-                // await _genericDbService.UpdateObjectAsync(user);
+                 await _genericDbService.UpdateObjectAsync(user);
             }
             return null;
         }
