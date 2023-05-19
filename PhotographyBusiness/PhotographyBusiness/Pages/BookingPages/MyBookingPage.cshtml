@@ -39,7 +39,7 @@
                                     data-user-address="@booking.Address"
                                     data-user-note="@booking.CustomerNote"
                                     data-user-category="@booking.Category"
-                                    data-user-date="@booking.Date"
+                                    data-user-date="@booking.DateTimeOfEvent"
                                     data-admin-note="@booking.AdminNote"
                                     data-admin-price="@booking.Price"
                             asp-route-id="@booking.User.UserId">
@@ -54,7 +54,7 @@
                             @booking.Category
                         </td>
                         <td>
-                            @booking.Date
+                            @booking.DateTimeOfEvent
                         </td>
                         <td style="text-align:center; width:10%;">
                             @if(booking.IsAccepted is true)
@@ -68,7 +68,7 @@
                             }
                         </td>
                         <td>
-                            <a asp-page="/BookingPages/InvoicePage" asp-route-id="@booking.BookingId">
+                            <a asp-page="/BookingPages/InvoicePage" asp-route-id="@booking.UserId">
                                 <i class="far fa-file-pdf pop-out" style="color: #2a2b2d;"></i>
                             </a>
                         </td>

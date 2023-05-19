@@ -23,8 +23,8 @@ namespace PhotographyBusiness.Services.BookingService
         {
             _genericDbService = genericDbService;
             _userService = userService;
-            //_bookings = GetAllBookingsAsync().Result;
-            _bookings = MockBookings.GetAllMockBookings();
+            _bookings = GetAllBookingsAsync().Result;
+            //_bookings = MockBookings.GetAllMockBookings();
            //_genericDbService.SaveObjects(_bookings);
 
         }
@@ -131,25 +131,25 @@ namespace PhotographyBusiness.Services.BookingService
                 {
                     b.AdminNote = booking.AdminNote;
                     b.Category = booking.Category;
-                    b.Date = booking.Date;
+                    b.DateTimeOfEvent = booking.DateTimeOfEvent;
                     b.Address = booking.Address;
                     b.Price = booking.Price;
                     break;
                 }
             }
-            //_genericDbService.UpdateObjectAsync(booking);
+            _genericDbService.UpdateObjectAsync(booking);
 
             return null;
         }
 
         public List<Booking> GetAllBookingsThisMonth()
         {
-            return GetAllBookings().Where(b => b.Date >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
+            return GetAllBookings().Where(b => b.DateTimeOfEvent >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
         }
 
         public List<Booking> GetUpcomingBookings()
         {
-            return GetAllBookings().Where(b => b.IsAccepted == true && b.Date > DateTime.Now).ToList();
+            return GetAllBookings().Where(b => b.IsAccepted == true && b.DateTimeOfEvent > DateTime.Now).ToList();
         }
 
         public List<Booking> GetMostRecentRequests()
@@ -165,7 +165,7 @@ namespace PhotographyBusiness.Services.BookingService
         public async Task<List<Booking>> FilterBookingsByDate(DateTime startdate, DateTime endDate)
         {
             IEnumerable<Booking> filteredBookings = from booking in _bookings
-                                                    where booking.Date >= startdate && booking.Date <= endDate
+                                                    where booking.DateTimeOfEvent >= startdate && booking.DateTimeOfEvent <= endDate
                                                     && booking.IsAccepted is true
                                                     select booking;
 
@@ -248,7 +248,7 @@ namespace PhotographyBusiness.Services.BookingService
 
                         from booking in _bookings
                         where booking.IsAccepted is true
-                        orderby booking.Date descending
+                        orderby booking.DateTimeOfEvent descending
                         select booking;
 
                 return filteredBookingsdesc.ToList();
@@ -259,7 +259,7 @@ namespace PhotographyBusiness.Services.BookingService
 
                         from booking in _bookings
                         where booking.IsAccepted is true
-                        orderby booking.Date ascending
+                        orderby booking.DateTimeOfEvent ascending
                         select booking;
 
             return filteredBookingsasc.ToList();
