@@ -75,7 +75,21 @@ html {
     margin-top: calc(var(--bs-gutter-y) * -1) !important;
     margin-right: calc(var(--bs-gutter-x) * -.5) !important;
     margin-left: calc(var(--bs-gutter-x) * -.5) !important;
-    justify-content: space-around !important;
+    justify-content: flex-end !important;
+}
+.input-group-text {
+    display: flex !important;
+    align-items: center !important;
+    padding: .375rem .75rem !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: #212529 !important;
+    text-align: center !important;
+    white-space: pre-line !important;
+    background-color: #e9ecef !important;
+    border: 1px solid #ced4da !important;
+    border-radius: .25rem !important;
 }
 
 .footer {
