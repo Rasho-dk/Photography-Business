@@ -147,63 +147,69 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="col-md-10">
-                    <h5>Customer</h5>
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header justify-content-center">
-                                <h5 class="modal-title">Customer Information</h5>
-                            </div>
-                            <div class="modal-body">
-                                <div class="ms-1 justify-content-center">
-                                    <p>Name:<span id="userName" class="input-group-text">Name:< style="font-style:italic;"</span></></p>
-                                </div>
-                                <div class="ms-1 justify-content-center">
-                                    <p>Email:<span id="userEmail" class="input-group-text">Email:< style="font-style:italic;"</span></></p>
-                                </div>
-                                <div class="ms-1 justify-content-center">
-                                    <p> Customer Note: <textarea readonly class="input-group-text" id="userNote" rows="6" cols="30">User note:< style="font-style:italic;"</textarea></></p>
-                                </div>
-                                <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem;" class="pop-out" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">User information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="col-md-5">
-                <!-- Booking information -->
-                <h5>Booking</h5>
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header justify-content-center">
-                            <h5 class="modal-title">Booking Information</h5>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <!-- Booking information -->
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header justify-content-center">
+                                        <h5 class="modal-title">Booking Information</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="ms-1 justify-content-center">
+                                            <p> Address: <textarea readonly id="userAddress" class="input-group-text" rows="6" cols="30">User Adress:< style="font-style:italic;"</textarea></></p>
+                                        </div>
+                                        <div class="ms-1 justify-content-center">
+                                            <p>Category:<span id="userCategory" class="input-group-text">Category:< style="font-style:italic;"</span></></p>
+                                        </div>
+                                        <div class="ms-1 justify-content-center">
+
+                                            <p>Event date:<span id="userDateOfEvent" class="input-group-text">Event date:< style="font-style:italic;"</span></></p>
+                                        </div>
+                                        <div class="ms-1 justify-content-center">
+
+                                            <p>Price:<span id="price" class="input-group-text">Price:< style="font-style:italic;"</span></></p>
+                                        </div>
+                                        <div class="ms-1 justify-content-center">
+                                            <p>Admin note:<span id="adminNote" class="input-group-text">Admin note:< style="font-style:italic;"</span></></p>
+                                        </div>
+                                        <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem; margin-top: 10px;" class="pop-out" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <div class="ms-1 justify-content-center">
-                                <p> Address: <textarea readonly id="userAddress" class="input-group-text" rows="6" cols="30">User Adress:< style="font-style:italic;"</textarea></></p>
+                        <div class="col-md-6">
+                            <div class="col-md-10">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header justify-content-center">
+                                            <h5 class="modal-title">Customer Information</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="ms-1 justify-content-center">
+                                                <p>Name:<span id="userName" class="input-group-text">Name:< style="font-style:italic;"</span></></p>
+                                            </div>
+                                            <div class="ms-1 justify-content-center">
+                                                <p>Email:<span id="userEmail" class="input-group-text">Email:< style="font-style:italic;"</span></></p>
+                                            </div>
+                                            <div class="ms-1 justify-content-center">
+                                                <p> Customer Note: <textarea class="width-machine" readonly id="userNote" class="input-group-text" rows="6" cols="30">User note:< style="font-style:italic;"</textarea></></p>
+                                            </div>
+                                            <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem;" class="pop-out" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="ms-1 justify-content-center">
-
-                                <p>Category:<span id="userCategory" class="input-group-text">Category:< style="font-style:italic;"</span></></p>
-                            </div>
-                            <div class="ms-1 justify-content-center">
-
-                                <p>Event date:<span id="userDateOfEvent" class="input-group-text">Event date:< style="font-style:italic;"</span></></p>
-                            </div>
-                            <div class="ms-1 justify-content-center">
-
-                                <p>Price:<span id="price" class="input-group-text">Price:< style="font-style:italic;"</span></></p>
-                            </div>
-                            <div class="ms-1 justify-content-center">
-                                <p>Admin note:<span id="adminNote" class="input-group-text">Admin note:< style="font-style:italic;"</span></></p>
-                            </div>
-                            <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem; margin-top: 10px;" class="pop-out" />
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
