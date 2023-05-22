@@ -38,7 +38,7 @@ namespace PhotographerTest
             try
             {
                 User CallBackUser = null;
-                userservicemock.Setup(x => x.CreateUserAsyn(It.IsAny<User>())).Throws(new Exception("User cant be created"));
+                userservicemock.Setup(x => x.CreateUserAsync(It.IsAny<User>())).Throws(new Exception("User cant be created"));
                 }
             catch (Exception ex)
             {
@@ -63,16 +63,16 @@ namespace PhotographerTest
             var model = new CreateUserPageModel(userservicemock.Object, mailservicemock.Object)
             {
                 Email = "Test@hotmail.com",
+                PhoneNumber = "123456789012",
                 Password = "123456789",
                 RepeatPassword = "123456789",
                 FirstName = "SILAS",
-                LastName ="Hello",
-                PhoneNumber = "123456789012"
+                LastName ="Hello"
             };
 
             User CallBackUser = null;
             userservicemock
-                .Setup(x => x.CreateUserAsyn(It.IsAny<User>()))
+                .Setup(x => x.CreateUserAsync(It.IsAny<User>()))
                 .Callback<User>(u => CallBackUser = u);
 
             //Act 

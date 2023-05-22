@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/PhotographyBusiness.styles.css" asp-append-version="true" />
-
     <script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
+
+    <!--Goolge font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
 
 
 
@@ -38,7 +42,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item text-dark" href="@Url.Page("PortfolioPages/PortfolioWeddingPage")">Weddings</a></li>
                                 <li><a class="dropdown-item text-dark" href="#">Portraits</a></li>
-                                <li><a class="dropdown-item text-dark" href="#">Automotive</a></li>
+                                <li><a class="dropdown-item text-dark" href="#">Events</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item text-dark" href="#">Miscellaneous</a></li>
                             </ul>
@@ -52,12 +56,21 @@
                             <li class="nav-item ms-3">
                                 <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/AdminPages/AdminDashboardPage">Dashboard</a>
                             </li>
+                          
                         }
-                        else
+                        @if (Context.User.Identity.Name != "admin" && Context.User.Identity.Name != null)
                         {
                             <li class="nav-item ms-3">
                                 <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/BookingPages/CreateBookingRequestPage">Enquiry</a>
                             </li>
+                        }
+                        @if (Context.User.Identity.Name == null)
+                        {
+                            
+                            <li class="nav-item ms-3">
+                                <a class="btn btn-dark nav-link text-dark text-white" style="border-radius: 0; min-width: 5vw; max-width: 15vw" asp-area="" asp-page="/AccountPages/CreateBookingAndUser">Enquiry</a>
+                            </li>
+                          
                         }
 
                         
@@ -141,8 +154,8 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 
-<footer class="bg-white pb-1">
-    <div class="d-flex justify-content-between container">
+<footer class="bg-white pb-1 footer pt-2">
+    <div class="d-flex justify-content-evenly container">
         <div class="pt-2">
             <img src="~/media/logo.png" style="height: 150px" class="pop-out" />
             <hr />
@@ -151,31 +164,27 @@
         
         <div class="pt-2">
             <h5 class="text-center">Follow us on</h5>
-            <div class="d-flex">
-                <div class="my-4 me-5">
-                    <div>
-                        <i class="fa fa-brands fa-square-twitter fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
-								"> Twitter</a><br />
+            <div class="">
+                <div class="mt-5 d-flex">
+                    <div class="mx-3">
+                        <a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								"><i class="fa fa-brands fa-square-google-plus fa-2xl"></i> Google Business</a><br />
                     </div>
-                    <div>
-                        <i class="fa fa-brands fa-square-facebook fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
-								"> Facebook</a><br />
+                    <div class="mx-3">
+                        <a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								"><i class="fa fa-brands fa-square-facebook fa-2xl"></i> Facebook</a><br />
                     </div>
-                    
-                </div>
-
-                <div class="my-4">
-                    <div style="pt-2">
-                        <i class="fa fa-brands fa-square-instagram fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
-								"> Instagram</a><br />
+                    <div class="mx-3">
+                        <a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								"><i class="fa fa-brands fa-square-instagram fa-2xl"></i> Instagram</a><br />
                     </div>
-                    <div style="">
-                        <i class="fa fa-brands fa-square-youtube fa-2xl"></i><a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
-								"> Youtube</a><br />
+                    <div class="mx-3">
+                        <a class="text-dark" href="#" target="_blank" style="text-decoration: none;	font-size: 20px;
+								"><i class="fa fa-brands fa-square-youtube fa-2xl"></i> Youtube</a><br />
                     </div>
                 </div>
             </div>
-            <hr />
+            <hr class="" style="margin-top: 4em" />
 
             <div class="text-center">
                 <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 12px;

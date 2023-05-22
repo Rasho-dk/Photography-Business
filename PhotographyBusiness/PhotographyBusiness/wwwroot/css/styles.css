@@ -1,6 +1,7 @@
 ﻿body {
-    background-image: url(../media/img2.jpg);
-    background-size: auto 100vh;
+    background-image: url(../media/bgimg.jpg);
+    background-size: cover;
+
 }
 
 .bg-img {
@@ -17,7 +18,8 @@
 }
 
 .transparent-black {
-    background-color: rgba(0,0,0,0.6)
+    background-color: rgba(0,0,0,0.6);
+    min-height: 75.2vh
 }
 
 

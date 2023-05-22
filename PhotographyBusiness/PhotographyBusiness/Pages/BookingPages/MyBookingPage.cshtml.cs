@@ -23,6 +23,7 @@ namespace PhotographyBusiness.Pages.BookingPages
         {
             User = userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
             Bookings = bookingService.GetBookingsByUserId(User.UserId);
+
             return Page();
         }
 
