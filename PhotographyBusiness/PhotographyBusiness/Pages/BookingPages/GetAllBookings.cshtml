@@ -115,18 +115,15 @@
                         @*<td>
                             @booking.Address // Shero Den giver ikke mening at have address fordi den fylder col- for meget
                         </td>*@
-                        <td>
+@*                        <td>
                             <a class="btn btn-black" asp-page="" asp-route-id="@booking.User.UserId"></a>
 
-                        <td hidden>
-                            @booking.Address
-                        </td>
-                        <td hidden>
+@*                        <td hidden>
                             @booking.Address
                         </td>
                         <td hidden>
                             @booking.User.UserId
-                        </td>
+                        </td>*@
                         <td>
                             <a class="btn btn-black" asp-page="/BookingPages/UpdateBooking" asp-route-id="@booking.BookingId">
 
