@@ -17,8 +17,7 @@ namespace PhotographyBusiness.Pages.AccountPages
         private IBookingService bookingService;
         private PasswordHasher<string> passwordHasher;
 
-        private string _today = DateTime.Now.Date.ToString("yyyy-MM-dd");
-        public string date { get; set; } = "2";  
+       
         public Models.User User { get; set; }
         public Booking Booking { get; set; }
 
