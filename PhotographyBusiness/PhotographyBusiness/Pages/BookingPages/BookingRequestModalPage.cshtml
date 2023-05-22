@@ -103,16 +103,14 @@
         <h1>Booking Requests</h1>
         <br />
         <div class="d-flex justify-content-around">
-            <table class="w-100 right-border left-border">
-                <thead>
-                    <tr class="">
-                        <th>Id</th>
-                        <th>Date</th>
+                    <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black; word-wrap: break-word;">
+                 <thead>
+                    <tr class="table-light">
                         <th>Name</th>
                         <th>Email</th>
                         <th>Category</th>
+                        <th>Date</th>
                         <th>Address</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -121,11 +119,10 @@
                         foreach (var booking in Model.BookingRequests)
                         {
                             <tr class="">
-                                <td><a class="btn btn-dark btn-round" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.BookingId</a></td>
-                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.Date</a></td>
                                 <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.User.Name</a></td>
                                 <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.User.Email</a></td>
                                 <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.Category</a></td>
+                                <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.Date</a></td>
                                 <td><a class="text-dark text-decoration-none" asp-page="BookingRequestModalPage" asp-route-id="@booking.BookingId">@booking.Address</a></td>
                             </tr>
                         }
@@ -135,7 +132,7 @@
         </div>
 
         <div>
-            <a class="btn btn-dark" style="min-width: 6vw; border-radius: 0;" asp-page="/AdminPages/AdminDashboardPage">Back To dashboard</a>
+            <a class="btn btn-dark" style="min-width: 6vw; border-radius: 0;" asp-page="/AdminPages/AdminDashboardPage" >Back to dashboard</a>
         </div>
     </div>
 </div>
