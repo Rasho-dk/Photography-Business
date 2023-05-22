@@ -1,16 +1,16 @@
-﻿@page
+﻿@page 
 @model PhotographyBusiness.Pages.BookingPages.GetAllBookingsModel
 @{
 }
 <div class="container">
-    <br />
-    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Bookings</h1>
+<br />
+<h1 class="me-2" style="font-family:fantasy; float:left;">Bookings</h1>
 
     <div class="d-flex justify-content-around">
         <form method="post" class="form-inline">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text btn-border-black bg-white">Start Date</span>      @*btn-border-black til Start date eller grey ligesom i End Date*@
+                    <span class="input-group-text">Start Date</span>      @*btn-border-black til Start date eller grey ligesom i End Date*@
                 </div>
                 <input asp-for="StartDate" class="form-control me-2" />
                 <div class="input-group-prepend">
@@ -18,15 +18,17 @@
                 </div>
                 <input asp-for="EndDate" class="form-control me-2" />
                 <input type="submit" asp-page-handler="DateFilter" value="Filter" class="btn btn-border-black" />
+
+                <div class="ps-3">
+
+                    <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
+                        RESET FILTERS
+                    </a>
+
+
+                </div>
             </div>
-            <div>
 
-                <a class="btn btn-border-black px-6" asp-page="/BookingPages/GetAllBookings" style="text-decoration: none;">
-                    RESET FILTERS
-                </a>
-
-
-            </div>
 
 
 
@@ -61,15 +63,15 @@
     @*Shero's Kode må ikke sletes'
     *@
 
-    @*    <br />
+        <br />
     <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:30%;">
-    <br>*@
+<br>
 
     <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black; word-wrap: break-word;">
         <thead>
             <tr class="table-light">
                 <th>Name</th>
-                <th>Eamil</th>
+                <th>Email</th>
                 <th>Category</th>
                 <th>Date</th>
             </tr>
@@ -80,67 +82,67 @@
                 foreach (var booking in Model.Bookings)
                 {
                     <tr class="table-light">
-                        <td>
-                            @*<a asp-page="/BookingPages/BookingInfoPage" asp-route-id="@booking.User.UserId">@booking.User.Name</a>*@
-
+                        <td>                           
+@*                            <a asp-page="/BookingPages/BookingInfoPage" asp-route-id="@booking.User.UserId">@booking.User.Name</a>
+*@                            
                             <!-- Button trigger modal -->
                             <button type="button" class="btn  pop-out" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            data-user-name="@booking.User.Name"
-                            data-user-email="@booking.User.Email"
-                            data-user-address="@booking.Address"
-                            data-user-note="@booking.CustomerNote"
-                            data-user-category="@booking.Category"
-                            data-user-date="@booking.Date"
-                            data-admin-note="@booking.AdminNote"
-                            data-admin-price="@booking.Price"
-                            asp-route-id="@booking.BookingId">
+                                data-user-name="@booking.User.Name"
+                                data-user-email="@booking.User.Email"
+                                data-user-phone="@booking.User.PhoneNumber"
+                                data-user-address="@booking.Address"
+                                data-user-note="@booking.CustomerNote"
+                                data-user-category="@booking.Category"
+                                data-user-date="@booking.Date"
+                                data-admin-note="@booking.AdminNote"
+                                data-admin-price="@booking.Price"                           
+                                asp-route-id="@booking.BookingId">
                                 @booking.User.Name <i class="fas fa-info-circle fa-beat fa-xs"></i>
                             </button>
                         </td>
                         <td>
                             @booking.User.Email
-                        </td>
+                        </td>   
 
                         <td>
                             @booking.Category
-                        </td>
+                        </td>   
                         <td>
                             @booking.Date
                         </td>
 
                         @*<td>
-                @booking.Address // Shero Den giver ikke mening at have address fordi den fylder col- for meget
-                </td>*@
+                            @booking.Address // Shero Den giver ikke mening at have address fordi den fylder col- for meget
+                        </td>*@
                         <td>
                             <a class="btn btn-black" asp-page="" asp-route-id="@booking.User.UserId"></a>
 
                         <td hidden>
-                                @booking.Address
+                            @booking.Address
                         </td>
                         <td hidden>
-                                @booking.Address
+                            @booking.Address
                         </td>
                         <td hidden>
-                                @booking.User.UserId
+                            @booking.User.UserId
                         </td>
                         <td>
                             <a class="btn btn-black" asp-page="/BookingPages/UpdateBooking" asp-route-id="@booking.BookingId">
 
-                                <i class="fa fa-edit pop-out"></i>
-                            </a>
+                                <i class="fa fa-edit pop-out"></i></a>
                             <a class="btn btn-danger" asp-page="/BookingPages/DeleteBooking" asp-route-id="@booking.User.UserId">
                                 <i class="fa fa-trash pop-out"></i>
                             </a>
                         </td>
-
-
+                      
+                       
                     </tr>
                 }
             }
         </tbody>
     </table>
 </div>
-
+ 
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -162,10 +164,9 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="ms-1 justify-content-center">
-                                            <p> Address: <textarea readonly id="userAddress" class="input-group-text" rows="6" cols="30">User Adress:< style="font-style:italic;"</textarea></></p>
+                                            <p> Address: <textarea readonly id="userAddress" class="input-group-text" rows="4" cols="30">User Adress:< style="font-style:italic;"</textarea></></p>
                                         </div>
                                         <div class="ms-1 justify-content-center">
-
                                             <p>Category:<span id="userCategory" class="input-group-text">Category:< style="font-style:italic;"</span></></p>
                                         </div>
                                         <div class="ms-1 justify-content-center">
@@ -199,23 +200,20 @@
                                                 <p>Email:<span id="userEmail" class="input-group-text">Email:< style="font-style:italic;"</span></></p>
                                             </div>
                                             <div class="ms-1 justify-content-center">
-                                                <p> Customer Note: <textarea class="width-machine" readonly id="userNote" class="input-group-text" rows="6" cols="30">User note:< style="font-style:italic;"</textarea></></p>
+                                                <p>Customer Number:<span id="userPhoneTel" class="input-group-text">Customer phone number:< style="font-style:italic;"</span></></p>
                                             </div>
-                                            <img src="~/media/logo.png" style="height: 130px; margin-left: 3.5rem;" class="pop-out" />
+                                            <div class="ms-1 justify-content-center">
+                                                <p> Customer Note: <textarea readonly id="userNote" class="input-group-text" rows="6" cols="30">User note:< style="font-style:italic;"</textarea></></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
- 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
 </div>
 @*<li>
     <a asp-page="/AdminPages/NewVisiters">XX</a>
@@ -227,6 +225,7 @@
         var myModal = document.getElementById("exampleModal")
         var userNameElement = document.getElementById("userName")
         var userEmailElement = document.getElementById("userEmail")
+        var userPhoneElement = document.getElementById("userPhoneTel")
         var userAddressElement = document.getElementById("userAddress")
         var userNoteElement = document.getElementById("userNote")
         var userCategoryElement = document.getElementById("userCategory")
@@ -239,12 +238,13 @@
 
         // Button that triggered the modal
         myModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget
+            var button = event.relatedTarget 
 
             // Extract info from data-* attributes
             //User
-            var userName = button.getAttribute('data-user-name')
+            var userName = button.getAttribute('data-user-name') 
             var userEmail = button.getAttribute('data-user-email')
+            var userPhoneTel = button.getAttribute('data-user-phone')
             var userAddress = button.getAttribute('data-user-address')
             var userNote = button.getAttribute('data-user-note')
             var userCategory = button.getAttribute('data-user-category')
@@ -254,27 +254,28 @@
             var price = button.getAttribute("data-admin-price")
 
             // Display user info. in modal
-            userNameElement.textContent = userName
+            userNameElement.textContent = userName 
             userEmailElement.textContent = userEmail
+            userPhoneElement.textContent = userPhoneTel
             userAddressElement.textContent = userAddress
             userNoteElement.textContent = userNote
             userCategoryElement.textContent = userCategory
             userDateOfEventElement.textContent = userDateOfEvent
 
             //Display admin info. in modal
-            adminNoteElement.textContent = adminNote
+            adminNoteElement.textContent = adminNote 
             priceElement.textContent = price
         })
 
-                //Filtering
-                //$(document).ready(function () {
-                //    $("#myInput").on("keyup", function () {
-                //        var value = $(this).val().toLowerCase();
-                //        $("#myTable tr").filter(function () {
-                //            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                //        });
-                //    });
-                //});
+               //Filtering
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+            });
 
     </script>
 }
