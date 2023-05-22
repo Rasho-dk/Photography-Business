@@ -14,11 +14,11 @@ namespace PhotographyBusiness.Models
 
         [Required(ErrorMessage = "Please enter your email address.")]
         [StringLength(100, ErrorMessage = "The email address must be no more than {1} characters long.")]
-        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Please enter a valid email address. exampel@exampel.com")]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Please enter a valid email address. example@example.com")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please enter your password.")]
-        [StringLength(100, MinimumLength = 8, ErrorMessage = "The password must be between 8 and 20 characters long.")]
+        [StringLength(100, MinimumLength = 2, ErrorMessage = "The password must be between 8 and 20 characters long.")]
         public string Password { get; set; }
 
         [Required]

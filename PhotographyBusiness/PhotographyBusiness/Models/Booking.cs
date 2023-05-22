@@ -7,23 +7,27 @@ namespace PhotographyBusiness.Models
 {
     public class Booking
     {
+
+
         [Required, Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BookingId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Booking must have an assigned category")]
         public string Category { get; set; }
         [DataType(DataType.Currency), AllowNull]
+        [Range(typeof(double), minimum: "0", maximum: "100000", ErrorMessage = "Price must be between {1} and {2}")]
         public double? Price { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Booking must have a customer note")]
+        [StringLength(200, ErrorMessage = "Customer note must be less than 200 characters long")]
         public string CustomerNote { get; set; }
         [AllowNull]
+        [StringLength(200, ErrorMessage = "Admin note must be less than 200 characters long")]
         public string? AdminNote { get; set; }
-        [Required, DataType(DataType.DateTime)]
-        [Range(typeof(DateTime), "16/05/2023", "31/12/2099", ErrorMessage = "Date has to be after todays date")]
+        [Required(ErrorMessage = "Booking must have an event date"), DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
         [Required, DataType(DataType.DateTime)]
         public DateTime DateCreated { get; set; }
         public bool IsAccepted { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Booking must have an address")]
         public string Address { get; set; }
         [Required]
         public int UserId { get; set; }

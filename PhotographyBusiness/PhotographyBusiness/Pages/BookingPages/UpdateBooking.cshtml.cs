@@ -10,25 +10,21 @@ namespace PhotographyBusiness.Pages.BookingPages
     public class UpdateBookingModel : PageModel
     {
         private IBookingService _bookingService;
-        private IUserService _userService;
 
         [BindProperty] public Booking Booking { get; set; }
-        [BindProperty] public User User { get; set; }
 
-        public UpdateBookingModel(IBookingService bookingService, IUserService userService)
+
+        public UpdateBookingModel(IBookingService bookingService)
         {
-            this._bookingService = bookingService;
-            this._userService = userService;
+            _bookingService = bookingService;
         }
 
         public IActionResult OnGet(int id)
         {
-            User = _userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
 
             Booking = _bookingService.GetBookingById(id);
+            Booking.UserId = Booking.User.UserId;
 
-            //User = _userService.GetUserByIdAsyn(Booking.UserId).Result;
-            
             if (Booking == null)
             {
                 return RedirectToPage("/NotFound");
@@ -40,12 +36,18 @@ namespace PhotographyBusiness.Pages.BookingPages
         /// Onpost metode til update booking 
         /// </summary>
         /// <returns>Sender tilbage til listen over alle bookings</returns>
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
+
+            Booking = _bookingService.GetBookingById(id);
+            Booking.UserId = Booking.User.UserId;
+
             //if (!ModelState.IsValid)
             //{
             //    return Page();
             //}
+
+
             _bookingService.UpdateBooking(Booking);
             return RedirectToPage("GetAllBookings");
         }

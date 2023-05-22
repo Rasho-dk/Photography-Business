@@ -14,7 +14,7 @@ namespace PhotographyBusiness.Pages.BookingPages
         private IBookingService _bookingService;
 
 
-        public Booking Booking { get; set; }
+        public Booking Booking { get; set; } 
         public double Price { get; set; }
         public string AdminNote { get; set; }
 
