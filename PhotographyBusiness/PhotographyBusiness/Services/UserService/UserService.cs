@@ -18,10 +18,10 @@ namespace PhotographyBusiness.Services.UserService
         /// konsturtøren bliver brugt til unit test.
         /// MockData bliver brug ift. CRUD unittest. 
         /// </summary>
-        //public UserService()
-        //{
-        //    users = MockData.MockUsers.GetMockUsers();
-        //}
+        public UserService()
+        {
+            users = MockData.MockUsers.GetMockUsers();
+        }
 
         public async Task CreateUserAsync(User user)
         {
