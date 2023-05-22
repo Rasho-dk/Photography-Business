@@ -4,44 +4,53 @@ namespace PhotographyBusiness.Services.UserService
 {
     public class UserService : IUserService
     {
-        public List<User> Users { get; set; }
+        private List<User> users; 
         private GenericDbService<User> _genericDbService; 
         public UserService(GenericDbService<User> genericDbService)
         {
             _genericDbService = genericDbService;
-            //Users = genericDbService.GetObjectsAsync().Result.ToList(); 
-           Users = MockData.MockUsers.GetMockUsers();
-            //_genericDbService.SaveObjects(Users);
+           //users = genericDbService.GetObjectsAsync().Result.ToList(); 
+           users = MockData.MockUsers.GetMockUsers();
+           // _genericDbService.SaveObjects(users);
 
         }
-     
-        public async Task CreateUserAsyn(User user)
+        /// <summary>
+        /// konsturtøren bliver brugt til unit test.
+        /// MockData bliver brug ift. CRUD unittest. 
+        /// </summary>
+        public UserService()
         {
-            Users.Add(user);    
+            users = MockData.MockUsers.GetMockUsers();
+        }
+
+        public async Task CreateUserAsync(User user)
+        {
+            users.Add(user);    
             await _genericDbService.AddObjectAsync(user);
         }
 
-        public async Task<User> DeleteUserAsyn(int id)
+        public async Task<User> DeleteUserAsync(int id)
         {
             User userToBeDeleted = null;
-            foreach(var user in Users)
+            foreach(var user in users)
             {
                 if(user.UserId.Equals(id))
                 {
                     userToBeDeleted = user;
+                    break;
                 }
             }
             if(userToBeDeleted != null)
             {
-                Users.Remove(userToBeDeleted);
-                await _genericDbService.DeleteObjectAsync(userToBeDeleted); 
+                users.Remove(userToBeDeleted);
+                //await _genericDbService.DeleteObjectAsync(userToBeDeleted); 
             }
             return userToBeDeleted;
         }
 
         public async Task<User> GetUserByEmailAsync(string email)
         {
-            foreach(var user in Users)
+            foreach(var user in users)
             {
                 if (user.Email.Equals(email)) 
                 {
@@ -54,7 +63,7 @@ namespace PhotographyBusiness.Services.UserService
 
         public async Task<User> GetUserByNameAsync(string name)
         {
-            foreach(var user in Users)
+            foreach(var user in users)
             {
                 if (user.Name.Equals(name))
                 {
@@ -66,12 +75,11 @@ namespace PhotographyBusiness.Services.UserService
 
         public List<User> GetAllUsers()
         {
-            return Users; 
-
+            return users;
         }
-        public async Task<User> GetUserByIdAsyn(int id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
-            foreach(var user in Users)
+            foreach(var user in users)
             {
                 if(user.UserId.Equals(id))
                     return user;
@@ -79,20 +87,21 @@ namespace PhotographyBusiness.Services.UserService
             return null;
         }
 
-        public async Task UpdateUserAsyn(User user)
-        {
-            if(user is not null)
+        public async Task<User> UpdateUserAsync(User user)
+        {          
+            if (user is not null)
             {
-                foreach(var us in Users)
+                foreach (var us in users)
                 {
                     if (us.UserId.Equals(user.UserId))
                     {
-                        us.Email = user.Email;  
+                        us.Email = user.Email;
                         us.PhoneNumber = user.PhoneNumber;
                     }
                 }
-               // await _genericDbService.UpdateObjectAsync(user);
+                // await _genericDbService.UpdateObjectAsync(user);
             }
+            return null;
         }
     }
 }

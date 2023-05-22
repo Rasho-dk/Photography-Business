@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace PhotographyBusiness.Pages.BookingPages
+namespace PhotographyBusiness.Pages.Portfolio
 {
-    public class PlaceHolderModel : PageModel
+    public class PortofolioWeddingModel : PageModel
     {
         public void OnGet()
         {

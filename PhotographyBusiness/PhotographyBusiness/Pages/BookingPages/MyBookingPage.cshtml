@@ -7,7 +7,7 @@
 
 <div class="container">
     <br />
-    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Bookings</h1>
+    <h1 class="pop-out mt-3 me-3" style="font-family:fantasy; float:left;">Bookings</h1>
     <br />
     <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:30%;">
     <br>
@@ -15,9 +15,11 @@
         <thead>
             <tr class="table-light">
                 <th>Name</th>
-                <th>Eamil</th>
+                <th>Email</th>
                 <th>Category</th>
                 <th>Date</th>
+                <th>Status</th>
+                <th>Invoice</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -29,8 +31,6 @@
                         <td>
                             @*<a asp-page="/BookingPages/BookingInfoPage" asp-route-id="@booking.User.UserId">@booking.User.Name</a>*@
 
-
-                                                                                 <!-- SHERO:  MÅ ikke ændres på kode struktur og design. -->
 
                             <!-- Button trigger modal -->
                             <button type="button" class="btn  pop-out" data-bs-toggle="modal" data-bs-target="#exampleModal"
@@ -56,6 +56,22 @@
                         <td>
                             @booking.Date
                         </td>
+                        <td style="text-align:center; width:10%;">
+                            @if(booking.IsAccepted is true)
+                            {
+                                <i class="fas fa-check-circle fa-lg" style="color: #25c137;"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-times-circle fa-lg" style="color: #b92222;"></i>
+
+                            }
+                        </td>
+                        <td>
+                            <a asp-page="/BookingPages/InvoicePage" asp-route-id="@booking.BookingId">
+                                <i class="far fa-file-pdf pop-out" style="color: #2a2b2d;"></i>
+                            </a>
+                        </td>
                     </tr>
                 }
             }
@@ -63,10 +79,9 @@
     </table>
 </div>
 
-                                                                        <!-- SHERO:  MÅ ikke ændres på kode struktur og design. -->
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-ls">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">User information</h5>
@@ -78,12 +93,12 @@
                         <div class="" style="word-wrap:break-word;">
                             <!-- Customer information -->
                             <h5>Customer</h5>
-                            <p>Name: <span id="userName" style="font-style:italic;"></span></p>
-                            <p>Email: <span id="userEmail" style="font-style:italic;"></span></p>
-                            <p>Address: <span id="userAddress" style="font-style:italic;"></span></p>
-                            <p>Note: <span id="userNote" style="font-style:italic;"></span></p>
-                            <p>Category: <span id="userCategory" style="font-style:italic;"></span></p>
-                            <p>Events date: <span id="userDateOfEvent" style="font-style:italic;"></span></p>
+                            <p><strong>Name: </strong> <span id="userName" style="font-style:italic;"></span></p>
+                            <p><strong>Email: </strong><span id="userEmail" style="font-style:italic;"></span></p>
+                            <p><strong>Address: </strong><span id="userAddress" style="font-style:italic;"></span></p>
+                            <p><strong>Note: </strong><span id="userNote" style="font-style:italic;"></span></p>
+                            <p><strong>Category: </strong><span id="userCategory" style="font-style:italic;"></span></p>
+                            <p><strong>Events date: </strong><span id="userDateOfEvent" style="font-style:italic;"></span></p>
                         </div>
                     </div>
                 </div>
@@ -91,6 +106,7 @@
         </div>
     </div>
 </div>
+<hr class="mt-5 mb-5"/>
 
 @section scripts{
     <script>

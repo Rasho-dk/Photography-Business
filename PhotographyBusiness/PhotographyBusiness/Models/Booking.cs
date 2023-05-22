@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
@@ -17,13 +18,17 @@ namespace PhotographyBusiness.Models
         [AllowNull]
         public string? AdminNote { get; set; }
         [Required, DataType(DataType.DateTime)]
+        [Range(typeof(DateTime), "16/05/2023", "31/12/2099", ErrorMessage = "Date has to be after todays date")]
         public DateTime Date { get; set; }
         [Required, DataType(DataType.DateTime)]
         public DateTime DateCreated { get; set; }
         public bool IsAccepted { get; set; }
         [Required]
         public string Address { get; set; }
+        [Required]
         public int UserId { get; set; }
+
+        [NotMapped]
         public User User { get; set; }
 
         /// <summary>
@@ -75,6 +80,5 @@ namespace PhotographyBusiness.Models
         /// </summary>
         public Booking() {  }
 
-        
     }
 }

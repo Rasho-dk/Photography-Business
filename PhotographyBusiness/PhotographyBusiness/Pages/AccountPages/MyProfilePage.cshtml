@@ -2,14 +2,17 @@
 @model PhotographyBusiness.Pages.AccountPages.MyProfilePageModel
 @{
 }
-<link href="~/css/myprofilestyle.css" rel="stylesheet" />
+
+<link rel="stylesheet" href="/css/myprofile.css" />
 
 
-<div style="display:block" class="container rounded bg-white mt-5 mb-5" id="myProfile">
+@*<div style="display:block" class="container rounded bg-white mt-5 mb-5" id="myProfile">
+*@<div style="display:block;" class="container  boxshadow mt-5 mb-5" id="myProfile">
+
     <div class="row">
-        <div class="col-md-3 border-right">
+        <div class="col col-sm-3 border-right" style="margin-left:2em;">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <img class="rounded-circle mt-5 pop-out" width="60%" accesskey=" " src="~/media/icon/person.jpg" />
+                <img class="rounded-circle mt-5 pop-out" width="60%" src="~/media/person.jpg" />
 
                 <span class="font-weight-bold pop-out">@Model.User.Name</span>
                 <span class="text-black-50 pop-out">@Model.User.Email</span>
@@ -17,14 +20,14 @@
                 </span>
             </div>
         </div>
-        <div class="col-md-5 border-right">
+        <div class="col-md-5 border-right" style="margin-right:6em;">
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
                 <div class="row mt-2">
                    
-                        <div class="col-md-6">
+                        <div class="col col-md-6">
                             <label class="labels" asp-for="User.Name"></label>
                             <input type="text" class="form-control" placeholder="FullName" asp-for="@Model.User.Name" readonly>
                             <span asp-validation-for="@Model.User.Name" class="text-danger"></span>
@@ -59,7 +62,6 @@
                 </div>
 
             </div>
-
          
             @if (Model.ConformUpdate != null)
             {
@@ -73,13 +75,15 @@
     </div>
 </div>
 
+
 <div style="display:none;" id="editProfile">
     <form method="post">
-        <div class="container rounded bg-white mt-5 mb-5">
+        <div class="container boxshadow bg-white mt-5 mb-5">
             <div class="row">
-                <div class="col-md-3 border-right">
+                <div class="col-md-3 border-right" style="margin-left:2em;">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                        <img class="rounded-circle mt-5 pop-out" width="60%" accesskey=" " src="~/media/icon/person.jpg" />
+
+                        <img class="rounded-circle mt-5 pop-out" width="60%" src="~/media/person.jpg" />
 
                         <span class="font-weight-bold pop-out">@Model.User.Name</span>
                         <span class="text-black-50 pop-out">@Model.User.Email</span>
@@ -87,7 +91,7 @@
                         </span>
                     </div>
                 </div>
-                <div class="col-md-5 border-right">
+                <div class="col-md-5 border-right" style="margin-right:6em;">
                     <div class="p-3 py-5">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="text-right">Profile Settings</h4>
@@ -175,7 +179,7 @@
         </div>
     </form>
 </div>
-
+<hr class="mb-5 mt-5" />
 @section scripts{
     <script>
 

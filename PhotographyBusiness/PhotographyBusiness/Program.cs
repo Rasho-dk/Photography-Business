@@ -14,7 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddTransient<GenericDbService<User>>();
-builder.Services.AddSingleton<GenericDbService<Booking>>();
+//builder.Services.AddSingleton<GenericDbService<Booking>>();
+builder.Services.AddTransient<GenericDbService<Booking>>();
+
 builder.Services.AddSingleton<IBookingService, BookingService>();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IMailService, MailService>();
@@ -47,7 +49,7 @@ builder.Services.AddRazorPages(options =>
 {
     options.Conventions.AuthorizeFolder("/BookingPages");
     options.Conventions.AuthorizeFolder("/...");
-    options.Conventions.AllowAnonymousToPage("/..");
+    options.Conventions.AllowAnonymousToPage("/BookingPages/InvoicePage");
 });
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 

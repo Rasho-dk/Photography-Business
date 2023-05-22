@@ -22,8 +22,9 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         public IActionResult OnGet(int id)
         {
-            User = _userService.GetUserByIdAsyn(id).Result;
+            User = _userService.GetUserByIdAsync(id).Result;
             Booking = _bookingService.GetBookingById_User(User.UserId);
+            Booking = _bookingService.GetBookingById(id);
 
             if (Booking == null)
             {

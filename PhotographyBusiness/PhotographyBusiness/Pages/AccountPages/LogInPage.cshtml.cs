@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.IdentityModel.Tokens;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.UserService;
-using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 
 namespace PhotographyBusiness.Pages.AccountPages
@@ -17,31 +16,19 @@ namespace PhotographyBusiness.Pages.AccountPages
         //Kun en bruger i brug
         //public static User LoggedInUser { get; set; } = null;
         [BindProperty]
-        public User Userr { get; set; }    
+        public User User { get; set; }
+       
         public string DisplayMessage { get; set; }
         public LogInPageModel(IUserService userService)
         {
             this.userService = userService;
         }
-        #region
+
         /// <summary>
-        /// Used for Unit test
-        ///This is for log in a user with a given email og password
+        /// til unit test
         /// </summary>
-        /// <param name="email">Email of the user to log in</param>
-        /// <param name="password">Password of the user to log in</param>
-        /// <returns>True if the user successfully logged in, false otherwise</returns>
-        //public bool Login(string email, string password)
-        //{
-        //    List<User> users = userService.GetAllUsers();
-        //    foreach(var user in users) 
-        //    {
-        //        if(user.Email == email && user.Password == Password)
-        //            return true;
-        //    }
-        //    return false;
-        //}
-        #endregion
+        public string Password { get; set; }
+        public string Email { get; set; }
 
         /// <summary>
         /// This method must first retrieve the list of the Users via _userService and check whether the user with (Eamil,Password) exists in the liit
@@ -56,25 +43,35 @@ namespace PhotographyBusiness.Pages.AccountPages
             List<User> users = userService.GetAllUsers();
             foreach (var user in users)
             {
-                if (Userr.Email.IsNullOrEmpty())
+                if (User.Email.IsNullOrEmpty())
+
+                //Tilunit test
+                //if (Email.IsNullOrEmpty())
+
                 {
                     DisplayMessage = "Invalid email or password.Please try again";
 
                 }
                 else
                 {
-                    if (Userr.Email.ToLower() == user.Email.ToLower()) // Hvis man ville bruge email til Claim
+                    if (User.Email.ToLower() == user.Email.ToLower()) // Hvis man ville bruge email til Claim
+                    //if (Email.ToLower() == user.Email.ToLower())
                     {
                         var passwordHasher = new PasswordHasher<string>();
 
                         try
                         {
-                            if (passwordHasher.VerifyHashedPassword(null, user.Password, Userr.Password) == PasswordVerificationResult.Success)
-                            //if (user.Password.Equals(User.Password))
+                            if (passwordHasher.VerifyHashedPassword(null, user.Password, User.Password) == PasswordVerificationResult.Success)
+
+                            //Til UnitTest
+                            //if (user.Password.Equals(Password))
                             {
                                 //LoggedInUser = user;
-                                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) }; 
-                                if (user.Name.Equals("admin")) claims.Add(new Claim(ClaimTypes.Role, "admin"));  
+                                var claims = new List<Claim> { new Claim(ClaimTypes.Name, user.Name) };
+                                if(user.Name.Equals("admin")) 
+                                {
+                                    claims.Add(new Claim(ClaimTypes.Role, "admin"));
+                                }
 
                                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -95,6 +92,6 @@ namespace PhotographyBusiness.Pages.AccountPages
 
             return Page();
         }
-            }
     }
+}
 

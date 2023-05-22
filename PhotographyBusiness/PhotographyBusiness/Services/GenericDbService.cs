@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿    using Microsoft.EntityFrameworkCore;
 using PhotographyBusiness.EFDbContext;
-using PhotographyBusiness.Models;
 
 namespace PhotographyBusiness.Services
 {
@@ -8,7 +7,7 @@ namespace PhotographyBusiness.Services
     {
         public async Task AddObjectAsync(T obj)
         {
-            using(var context = new ObjectDbContext())
+            using (var context = new ObjectDbContext())
             {
                 context.Set<T>().Add(obj);
                 await context.SaveChangesAsync();
@@ -26,7 +25,7 @@ namespace PhotographyBusiness.Services
 
         public async Task<T> GetObjectByIdAsync(int id)
         {
-            using(var context = new ObjectDbContext())
+            using (var context = new ObjectDbContext())
             {
                 return await context.Set<T>().FindAsync(id);
             }
@@ -34,7 +33,7 @@ namespace PhotographyBusiness.Services
 
         public async Task<IEnumerable<T>> GetObjectsAsync()
         {
-            using(var context = new ObjectDbContext())
+            using (var context = new ObjectDbContext())
             {
                 return await context.Set<T>().AsNoTracking().ToListAsync();
             }
@@ -44,12 +43,13 @@ namespace PhotographyBusiness.Services
         {
             using (var context = new ObjectDbContext())
             {
-                foreach(T obj in objects)
+                foreach (T obj in objects)
                 {
                     context.Set<T>().Add(obj);
-                     context.SaveChanges();
+                    //context.SaveChanges();
+                    await context.SaveChangesAsync();
                 }
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
@@ -62,6 +62,6 @@ namespace PhotographyBusiness.Services
             }
         }
 
-      
+
     }
 }
