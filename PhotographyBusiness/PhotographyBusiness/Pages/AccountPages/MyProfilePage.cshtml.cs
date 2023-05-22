@@ -24,7 +24,9 @@ namespace PhotographyBusiness.Pages.AccountPages
         }
         public async Task<IActionResult> OnPost()
         {
-       
+            //Her siger jeg til Modelstate at fejner User.Bookings for at ikke være en del i validation. 
+            //fordi vi bruger  public virutal  ICollection<Booking> Bookings { get; set; }  til at definere navigationfelt mellem entiteter i en relation database
+            ModelState.Remove("User.Bookings");
             if (!ModelState.IsValid)
             {
                 return Page();

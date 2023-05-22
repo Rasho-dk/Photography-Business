@@ -42,6 +42,7 @@ namespace PhotographyBusiness.Pages.BookingPages
                 Booking.AdminNote = AdminNote;
                 _bookingService.UpdateBooking(Booking);
                 return RedirectToPage("GetAllBookingRequestsPage");
+
             } 
             return RedirectToPage("NotFound");
         }

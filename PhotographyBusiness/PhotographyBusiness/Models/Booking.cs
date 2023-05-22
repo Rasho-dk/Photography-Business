@@ -11,7 +11,7 @@ namespace PhotographyBusiness.Models
         public int BookingId { get; set; }
         [Required]
         public string Category { get; set; }
-        [DataType(DataType.Currency), AllowNull]
+        [DataType(DataType.Currency),AllowNull]
         public double? Price { get; set; }
         [Required]
         public string CustomerNote { get; set; }
@@ -19,17 +19,24 @@ namespace PhotographyBusiness.Models
         public string? AdminNote { get; set; }
         [Required, DataType(DataType.DateTime)]
         [Range(typeof(DateTime), "16/05/2023", "31/12/2099", ErrorMessage = "Date has to be after todays date")]
-        public DateTime Date { get; set; }
-        [Required, DataType(DataType.DateTime)]
-        public DateTime DateCreated { get; set; }
+        public DateTime DateTimeOfEvent { get; set; }
+
+        //[Required, DataType(DataType.Date)]
+        [NotMapped] //Shero: Jeg syens at det var ikke noget krav at admin skal se hvornår er kunden er oprettet.
+        public DateTime DateCreated { get; set; }//Hvor vigtgit er den data for virksomhed og Husk at reducer omkostninger
+        [Required]
         public bool IsAccepted { get; set; }
         [Required]
         public string Address { get; set; }
-        [Required]
-        public int UserId { get; set; }
 
-        [NotMapped]
-        public User User { get; set; }
+        // Shero: Det angiver, at der er en relation til User-klassen.Den fortæller EF at UserId er FK,
+        //Og den FK peger på User tabellen i Databasen
+        [ForeignKey(nameof(User))]
+        public int UserId { get; set; }
+        // Navigation property mellem Bookng klasse og User( Som er UserId)
+        //Den fortæller at den er One-to-many realation
+        public virtual User User { get; set; } 
+
 
         /// <summary>
         /// The full constructor
@@ -48,7 +55,7 @@ namespace PhotographyBusiness.Models
             Price = price;
             CustomerNote = customerNote;
             AdminNote = adminNote;
-            Date = date;
+            DateTimeOfEvent = date;
             DateCreated = dateCreated;
             IsAccepted = isAccepted;
             Address = address;
@@ -69,7 +76,7 @@ namespace PhotographyBusiness.Models
             User = user;
             Category = category;
             CustomerNote = customerNote;
-            Date = date;
+            DateTimeOfEvent = date;
             DateCreated = DateTime.Now;
             Address = address;
             IsAccepted = false;
@@ -79,6 +86,21 @@ namespace PhotographyBusiness.Models
         /// The default constructor used for DB
         /// </summary>
         public Booking() {  }
+        //shero 
+        /// <summary>
+        /// Vi bruger den constructor for at kunne kommunikere med Db. 
+        /// Dvs. at disse input bliver brugt til bruger input og gemmer disse værdig i disse kolonne. 
+        /// </summary>
+        public Booking(string category, double price, string customerNote, string adminNote, DateTime dateCreated, bool isAccepted, string address, int userId)
+        {
+            Category = category;
+            Price = price;
+            CustomerNote = customerNote;
+            AdminNote = adminNote;
+            DateCreated = dateCreated;
+            IsAccepted = isAccepted;
+            Address = address;
+        }
 
     }
 }

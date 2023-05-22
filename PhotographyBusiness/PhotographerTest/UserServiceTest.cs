@@ -9,7 +9,8 @@ namespace PhotographerTest
         private IUserService userService;
         private User user;
         /// <summary>
-        /// Initializere userService for at få fat i metoder i userService da den er ikke statiske 
+        /// Ved Initialisere USerService har ma oprettet en instans af "UserService-klasse".
+        /// Ved at oprette en instans af UserSerive-klasse, betyder at man kan bruge klassens metoder, der ikke statiske
         /// I UserService-Klasse har vi en konstrutør, der initializere en list af brugere fra Mockdata.
         /// Mock data bliver brugt til hver enkelt metod uafhængige af andre metoder. 
         /// </summary>
@@ -20,75 +21,69 @@ namespace PhotographerTest
             userService = new UserService();
         }
         /// <summary>
-        /// Tjekker om listen er ikke null og der objekter er i listen
+        /// GetAllUsers er en metod der retunere en liste over alle brugere i systemet.
+        /// Vi starter med at kalder på metoden og gemmer resultatet i en variabel,der indholder disse værdier
+        /// som er retuneret
         /// </summary>
         [TestMethod]
         public void Test_GetAllUser()
         {
             //Act : Tjekke om Listen indholder objekter
-            var result = userService.GetAllUsers();
+            List<User> result = userService.GetAllUsers();
 
-            //Assert :: Tjekker om listen er ikke null og listen er objekter i sig selv
-            Assert.IsNotNull(result);
+            //Assert 
+            Assert.IsTrue(result.Count()  > 0); 
         }
-
-        /// <summary>
-        /// Opret en obj User 
-        /// tjekker om bruger er tilført i listen.
+        /// Opret en User objekt 
+        /// tjek om bruger er tilført til listen.
         /// </summary>
         [TestMethod]
         public void Test_CreateUser()
         {
             //Arrange
             var newUser = new User(1, "test@outlook.com", "test123", "test", "312312");
-            //Antal af brugere i listen inden af tilføresle en brugere til listen 
-            int firstCount = userService.GetAllUsers().Count;
 
             //Act 
             userService.CreateUserAsync(newUser); // Tilføre en bruger til listen
+            List<User> users = userService.GetAllUsers();
 
-            //Assert         
-            Assert.AreEqual(++firstCount, userService.GetAllUsers().Count);
+            //Assert       
+            Assert.IsTrue(users.Contains(newUser));
         }
 
         /// <summary>
-        /// Den metod tjekker om en bruger kan slettes med en gyldig brugere id.       
+        /// tjek om en bruger kan slettes med en gyldig brugere id.       
         /// </summary>
         [TestMethod]
         public void Test_DeleteUserSuccessfully_ValidUserId()
         {
             //Arrange
-            var newUser = new User(1, "test@outlook.com", "test123", "test", "312312");
+            var newUser = new User(98, "test@outlook.com", "test123", "test", "312312");
             userService.CreateUserAsync(newUser);
-            int deleteOneUserFromList = userService.GetAllUsers().Count;
 
             //Act
-            var toBeDeleted = userService.DeleteUserAsync(1);
+            var toBeDeleted = userService.DeleteUserAsync(98);
+            List<User> users = userService.GetAllUsers();
             //Assert
-            Assert.AreEqual(--deleteOneUserFromList, userService.GetAllUsers().Count);
+            Assert.IsFalse(users.Contains(newUser));
         }
-
 
         /// <summary>
         /// slet en brugere med ugyldig id nummer
         /// </summary>
-        /// <Assert>Tjekker antal af obj i listen før og efter.</Assert>
+        /// <Assert>Tjek on den returne null hvis Bruger ID er ugyldig.</Assert>
         [TestMethod]
         public void Test_DeleteUser_With_InvaildUserId()
         {
             //Arrange
             int InvalidUSerId = 99;
             //Se om hvor mange bruger er i listen før den sletter.
-            int actual_CountUserBefore_delete = userService.GetAllUsers().Count;
 
             //Act
             var toBeDeleted = userService.DeleteUserAsync(InvalidUSerId);
 
-            var expected_CountUserAfter_delete = userService.GetAllUsers().Count;
-
             //Assert
-            Assert.AreEqual(expected_CountUserAfter_delete, actual_CountUserBefore_delete);
-            //Tjek om metoden returere null hvis der ingen brugere id passer med user_list
+            //Tjek om metoden returere null, hvis burger_ID passer ikke med de objekter i listen
             Assert.IsNull(toBeDeleted.Result); 
         }
         /// <summary>

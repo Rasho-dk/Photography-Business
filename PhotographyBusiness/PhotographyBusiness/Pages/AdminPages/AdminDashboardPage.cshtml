@@ -92,7 +92,7 @@
                                 data-booking-category="@booking.Category"
                                 data-booking-customer-note="@booking.CustomerNote"
                                 data-booking-address="@booking.Address"
-                                data-booking-date="@booking.Date"
+                                data-booking-date="@booking.DateTimeOfEvent"
                                 data-booking-price="@booking.Price"
                                 data-booking-admin-note="@booking.AdminNote"
                                 type="button" data-bs-toggle="modal" data-bs-target="#bookingModal" class="btn">
@@ -145,7 +145,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.Date</a></td>
+                            <td><a asp-page="../BookingPages/GetAllBookings" asp-route-id="@booking.BookingId" class="text-dark text-decoration-none">@booking.DateTimeOfEvent</a></td>
                         </tr>
                     }
                 </table>

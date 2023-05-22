@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,33 +14,29 @@ namespace PhotographyBusiness.Models
         public int UserId { get; set; }
 
         [Required(ErrorMessage = "Please enter your email address.")]
-        [StringLength(100, ErrorMessage = "The email address must be no more than {1} characters long.")]
+        [StringLength(40, ErrorMessage = "The email address must be no more than {1} characters long.")]
         [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Please enter a valid email address. exampel@exampel.com")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Please enter your password.")]
-        [StringLength(100, MinimumLength = 8, ErrorMessage = "The password must be between 8 and 20 characters long.")]
         public string Password { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(20, MinimumLength = 5, ErrorMessage = "The Name must be between 5 and 12 characters long.")]
         public string Name { get; set; }
 
         [Required]
         [StringLength(12)]
         public string PhoneNumber { get; set; }
-
+        //Den siger til EF at ikke oprette en kolonne i databasen.
         [NotMapped]
         public DateTime DateCreated { get; set; }
 
-        public virtual ICollection<Booking> Bookings { get; set; }
-        //Shero::
-        [DataType(DataType.Password), DisplayName("repeat password")]
-        [Compare("Password", ErrorMessage = "The passwords do not match.")]
-
-        //Den taler entity framwor at den ikk indkludere i databasen
         [NotMapped]
-        public string RepeatPassword { get; set; }
+        [BindNever]
+        // den representere one-to-many relationship mellem "User" entity og "Booking" entity.
+        // Den tillader at få fat a den collection af "Booking" entities som har relation med "Booking"
+        public virtual ICollection<Booking> Bookings { get; set; }  // Navigation property
 
 
         /// <summary>

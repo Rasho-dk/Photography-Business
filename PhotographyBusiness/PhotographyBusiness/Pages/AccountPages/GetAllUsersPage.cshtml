@@ -17,6 +17,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Functionality</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -31,8 +32,8 @@
                                     data-user-name="@user.Name"
                                     data-user-email="@user.Email"
                                     data-user-phone="@user.PhoneNumber"
-                                    data-user-created="@user.DateCreated"
-                                    data-user-id="@user.UserId"
+@*                                    data-user-created="@user.DateCreated"
+*@                                    data-user-id="@user.UserId"
                             asp-route-id="@user.UserId">
                                 @user.Name <i class="fas fa-info-circle fa-xs"></i>
                             </button>
@@ -90,26 +91,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-striped">
-                    <thead>
-                        <tr><th>User profile</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><p>User ID: <span id="userId" style="font-style: italic;"></span></p></td></tr>
-                        <tr><td><p>Name: <span id="userName" style="font-style:italic;"></span></p></td></tr>
-                        <tr><td><p>Email: <span id="userEmail" style="font-style:italic;"></span></p></td></tr>
-                        <tr><td><p>Phone: <span id="userPhone" style="font-style:italic;"></span></p></td></tr>
-                        <tr><td><p>Date joined: <span id="userCreated" style="font-style:italic;"></span></p></td></tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="modal-footer d-flex justify-content-center">
-                <button type="button" class="btn btn-light btn-outline-dark btn-square" data-bs-dismiss="modal">Close</button>
+                <div class="container">
+                    <div class="row">
+                        <div class="" style="word-wrap:break-word;">
+                            <!-- Customer information -->
+                            <h5>User profile</h5>
+                            <p><strong>Name : </strong><span id="userName" style="font-style:italic;"></span></p>
+                            <p><strong>Email : </strong><span id="userEmail" style="font-style:italic;"></span></p>
+                            <p><strong>Phone : </strong><span id="userPhone" style="font-style:italic;"></span></p>
+@*                            <p><strong>Date joined : </strong><span id="userCreated" style="font-style:italic;"></span></p>
+*@                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<hr class="mb-5 mt-5" />
 
 
 @section scripts{
