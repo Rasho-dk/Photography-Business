@@ -1,13 +1,13 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.BookingService;
 using PhotographyBusiness.Services.UserService;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 
 namespace PhotographyBusiness.Pages.AccountPages
 {
@@ -17,7 +17,8 @@ namespace PhotographyBusiness.Pages.AccountPages
         private IBookingService bookingService;
         private PasswordHasher<string> passwordHasher;
 
-
+        private string _today = DateTime.Now.Date.ToString("yyyy-MM-dd");
+        public string date { get; set; } = "2";  
         public Models.User User { get; set; }
         public Booking Booking { get; set; }
 
@@ -32,7 +33,7 @@ namespace PhotographyBusiness.Pages.AccountPages
         [BindProperty]
         [Required(ErrorMessage = "Please enter your password.")]
         [StringLength(12, MinimumLength = 8, ErrorMessage = "The password must be between 8 and 20 characters long.")]
-        [DataType(DataType.Password)]   
+        [DataType(DataType.Password)]
         public string Password { get; set; }
         [BindProperty, DataType(DataType.Password), DisplayName("Repeat password")]
         [Compare("Password", ErrorMessage = "The passwords do not match.")]
@@ -50,7 +51,7 @@ namespace PhotographyBusiness.Pages.AccountPages
         /// Part 2 To create Booking
         /// </summary>
         [BindProperty]
-        [DataType(DataType.Currency), NotMapped]
+        [DataType(DataType.Currency)]
         public double? Price { get; set; }
         [Required(ErrorMessage = "Please enter your City.")]
         [BindProperty]
@@ -67,8 +68,8 @@ namespace PhotographyBusiness.Pages.AccountPages
         [BindProperty]
         [Required(ErrorMessage = "Please choose one of the following category.")]
         public string Category { get; set; }
-        [BindProperty, DataType(DataType.DateTime)]
         [Required(ErrorMessage = "Please enter date of the event.")]
+        [BindProperty]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfEvent { get; set; }
 
@@ -76,9 +77,7 @@ namespace PhotographyBusiness.Pages.AccountPages
         public string DisplayAlert { get; set; }
         public string DisplayConfirm { get; set; }
 
-
-
-        public CreateBookingAndUserModel(IBookingService bookingService,IUserService userService)
+        public CreateBookingAndUserModel(IBookingService bookingService, IUserService userService)
         {
             this.bookingService = bookingService;
             this.userService = userService;
@@ -89,9 +88,17 @@ namespace PhotographyBusiness.Pages.AccountPages
         {
 
         }
+        /// <summary>
+        /// 1.th Checkes om koden passer med reapeatPassword
+        /// 2.th Check om Email eksistere allered i systemet, hvis ja : returnere en fejlmeddelelse.
+        /// 3.th  check om dato er bestilt fra dagsdato hvsi nej returnere en fejlmeddelelse.
+        /// 4.th Hvis all overstår er korrket opret en User og en booking request og returnere en succes meddelelse 
+        /// </summary>
+        /// <returns>Hvis der optået fejl fremvises en fejlmeddelelse ellers fortsætter til 
+        /// at oprette User og en booking request</returns>
         public async Task<IActionResult> OnPostAsync()
-       {
-       
+        {
+
             if (Password == RepeatPassword && Password != null)
             {
                 foreach (var user in userService.GetAllUsers())
@@ -102,21 +109,26 @@ namespace PhotographyBusiness.Pages.AccountPages
                         return Page();
 
                     }
+                    DateTime currentDate = DateTime.Now.Date;
+                    if(currentDate > DateOfEvent)
+                    {
+                        ModelState.AddModelError("DateOfEvent", "The date must be from today onwards.");
+                    }
                     if (!ModelState.IsValid)
                     {
                         return Page();
                     }
 
                 }
-           
+
                 //User.UserId++;
                 await userService.CreateUserAsync
-                    (new Models.User(Email, 
-                    passwordHasher.HashPassword(null,Password),
+                    (new Models.User(Email,
+                    passwordHasher.HashPassword(null, Password),
                     $"{FirstName} {LastName}", PhoneNumber));
 
                 var user1 = userService.GetUserByEmailAsync(Email);
-              
+
 
                 //Booking.BookingId++;
                 Booking = new Booking();
@@ -127,15 +139,15 @@ namespace PhotographyBusiness.Pages.AccountPages
                 Booking.IsAccepted = false;
                 Booking.DateTimeOfEvent = DateOfEvent;
                 await bookingService.CreateBookingAsync(Booking);
-              if(Booking is not null)
-              {
+                if (Booking is not null)
+                {
                     DisplayConfirm = "Your booking request has been successfully sent!";
                     return Page();
-              }
+                }
 
-               // return RedirectToPage("../Index");  
-            }   
-            
+                // return RedirectToPage("../Index");  
+            }
+
             return Page();
         }
     }

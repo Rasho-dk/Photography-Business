@@ -18,24 +18,25 @@ namespace PhotographyBusiness.Models
         [AllowNull]
         public string? AdminNote { get; set; }
         [Required, DataType(DataType.DateTime)]
-        //[Range(typeof(DateTime), "16/05/2023", "31/12/2099", ErrorMessage = "Date has to be after todays date")]
-        [Range(typeof(DateTime), "2023-05-16T00:00:00",
-            "2099-12-31T23:59:59",
-            ErrorMessage = "Date and time should be within the specified range")]
+        [Range(typeof(DateTime), "16/05/2023", "31/12/2099", ErrorMessage = "Date has to be after todays date")]
         public DateTime DateTimeOfEvent { get; set; }
 
         //[Required, DataType(DataType.Date)]
         [NotMapped] //Shero: Jeg syens at det var ikke noget krav at admin skal se hvornår er kunden er oprettet.
-        public DateTime DateCreated { get; set; }
+        public DateTime DateCreated { get; set; }//Hvor vigtgit er den data for virksomhed og Husk at reducer omkostninger
         [Required]
         public bool IsAccepted { get; set; }
         [Required]
         public string Address { get; set; }
 
-        // Shero: Der skal tilføre en foreignKey til at få af user. 
+        // Shero: Det angiver, at der er en relation til User-klassen.Den fortæller EF at UserId er FK,
+        //Og den FK peger på User tabellen i Databasen
         [ForeignKey(nameof(User))]
         public int UserId { get; set; }
-        public User User { get; set; }
+        // Navigation property mellem Bookng klasse og User( Som er UserId)
+        //Den fortæller at den er One-to-many realation
+        public virtual User User { get; set; } 
+
 
         /// <summary>
         /// The full constructor
@@ -85,6 +86,11 @@ namespace PhotographyBusiness.Models
         /// The default constructor used for DB
         /// </summary>
         public Booking() {  }
+        //shero 
+        /// <summary>
+        /// Vi bruger den constructor for at kunne kommunikere med Db. 
+        /// Dvs. at disse input bliver brugt til bruger input og gemmer disse værdig i disse kolonne. 
+        /// </summary>
         public Booking(string category, double price, string customerNote, string adminNote, DateTime dateCreated, bool isAccepted, string address, int userId)
         {
             Category = category;

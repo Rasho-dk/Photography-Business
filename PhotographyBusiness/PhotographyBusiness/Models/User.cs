@@ -28,14 +28,17 @@ namespace PhotographyBusiness.Models
         [Required]
         [StringLength(12)]
         public string PhoneNumber { get; set; }
-
+        //Den siger til EF at ikke oprette en kolonne i databasen.
         [NotMapped]
         public DateTime DateCreated { get; set; }
 
         [NotMapped]
         [BindNever]
-        public virtual ICollection<Booking> Bookings { get; set; }
- 
+        // den representere one-to-many relationship mellem "User" entity og "Booking" entity.
+        // Den tillader at få fat a den collection af "Booking" entities som har relation med "Booking"
+        public virtual ICollection<Booking> Bookings { get; set; }  // Navigation property
+
+
         /// <summary>
         /// The full constructor
         /// </summary>
