@@ -24,9 +24,7 @@ namespace PhotographyBusiness.Pages.BookingPages
         [BindProperty] 
         public string Category { get; set; }
         [BindProperty, DataType(DataType.DateTime)]
-        [Range(typeof(DateTime), "16/05/2023", "31/12/2099", ErrorMessage = "Date has to be after todays date")]
         public DateTime Date { get; set; }
-        public string FullAddress { get; set; }
         public Booking Booking { get; set; } = new Booking();
         public User User { get; set; }
 

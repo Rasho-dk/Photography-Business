@@ -32,15 +32,8 @@ namespace PhotographyBusiness.Models
         [NotMapped]
         public DateTime DateCreated { get; set; }
 
-        public virtual ICollection<Booking> Bookings { get; set; }
-        //Shero::
-        [DataType(DataType.Password), DisplayName("repeat password")]
-        [Compare("Password", ErrorMessage = "The passwords do not match.")]
-
-        //Den taler entity framwor at den ikk indkludere i databasen
         [NotMapped]
-        public string RepeatPassword { get; set; }
-
+        public virtual ICollection<Booking> Bookings { get; set; }
 
         /// <summary>
         /// The full constructor
