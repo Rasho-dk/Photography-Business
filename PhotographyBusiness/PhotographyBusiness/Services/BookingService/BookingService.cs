@@ -169,14 +169,6 @@ namespace PhotographyBusiness.Services.BookingService
                                                     && booking.IsAccepted is true
                                                     select booking;
 
-
-
-            //                                    from booking in Bookings
-            //                                    where booking.Date >= startdate && booking.Date <= endDate
-            //                                    select booking;
-
-
-
             return filteredBookings.ToList();
         }
         public async Task<List<Booking>> FilterBookingsByNameOrEmail(string nameinput)
@@ -190,15 +182,6 @@ namespace PhotographyBusiness.Services.BookingService
             return filteredBookings.ToList();
         }
 
-        // REDUNDANT EMAIL SEARCHING IMPLEMENTED IN NAME SEARCH
-
-        //public async Task<List<Booking>> FilterBookingsByEmail(string Email)         
-        //{
-        //    IEnumerable<Booking> filteredBookings = from booking in Bookings
-        //                                            where booking.User.Email.ToLower().Contains((Email))
-        //                                            select booking;
-        //    return filteredBookings.ToList();
-        //}
 
         public async Task<List<Booking>> FilterBookingsByCategory(string Category)
         {
