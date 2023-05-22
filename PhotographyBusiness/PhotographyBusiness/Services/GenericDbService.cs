@@ -5,6 +5,8 @@ namespace PhotographyBusiness.Services
 {
     public class GenericDbService<T> : IGenericDbService<T> where T : class
     {
+        //Metoden tilføje et nyt objekt til DbContext
+        //SaveChangesAsync(): gemmer ændring i databasen
         public async Task AddObjectAsync(T obj)
         {
             using (var context = new ObjectDbContext())
