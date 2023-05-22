@@ -9,8 +9,8 @@ namespace PhotographyBusiness.Services.UserService
         public UserService(GenericDbService<User> genericDbService)
         {
             _genericDbService = genericDbService;
-           //users = genericDbService.GetObjectsAsync().Result.ToList(); 
-           users = MockData.MockUsers.GetMockUsers();
+           users = genericDbService.GetObjectsAsync().Result.ToList(); 
+           //users = MockData.MockUsers.GetMockUsers();
            // _genericDbService.SaveObjects(users);
 
         }
@@ -26,7 +26,7 @@ namespace PhotographyBusiness.Services.UserService
         public async Task CreateUserAsync(User user)
         {
             users.Add(user);    
-            //await _genericDbService.AddObjectAsync(user);
+            await _genericDbService.AddObjectAsync(user);
         }
 
         public async Task<User> DeleteUserAsync(int id)
@@ -43,7 +43,7 @@ namespace PhotographyBusiness.Services.UserService
             if(userToBeDeleted != null)
             {
                 users.Remove(userToBeDeleted);
-                //await _genericDbService.DeleteObjectAsync(userToBeDeleted); 
+                await _genericDbService.DeleteObjectAsync(userToBeDeleted); 
             }
             return userToBeDeleted;
         }
@@ -99,7 +99,7 @@ namespace PhotographyBusiness.Services.UserService
                         us.PhoneNumber = user.PhoneNumber;
                     }
                 }
-                // await _genericDbService.UpdateObjectAsync(user);
+                await _genericDbService.UpdateObjectAsync(user);
             }
             return null;
         }

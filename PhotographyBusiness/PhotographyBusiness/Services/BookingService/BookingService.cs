@@ -20,8 +20,8 @@ namespace PhotographyBusiness.Services.BookingService
         {
             _genericDbService = genericDbService;
             _userService = userService;
-            //_bookings = GetAllBookingsAsync().Result;
-            _bookings = MockBookings.GetAllMockBookings();
+            _bookings = GetAllBookingsAsync().Result;
+            //_bookings = MockBookings.GetAllMockBookings();
             //_genericDbService.SaveObjects(_bookings);
         }
 
@@ -115,14 +115,14 @@ namespace PhotographyBusiness.Services.BookingService
                 this._bookings.Add(booking);
 
             }
-           // await _genericDbService.AddObjectAsync(booking);
+           await _genericDbService.AddObjectAsync(booking);
 
         }
 
         public async Task DeleteBooking(int id)
         {
             _bookings.Remove(GetBookingById(id));
-            //await _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
+            await _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
         }
 
         public Task UpdateBooking(Booking booking)
@@ -139,7 +139,7 @@ namespace PhotographyBusiness.Services.BookingService
                     break;
                 }
             }
-            //_genericDbService.UpdateObjectAsync(booking);
+            _genericDbService.UpdateObjectAsync(booking);
             return null;
         }
 
