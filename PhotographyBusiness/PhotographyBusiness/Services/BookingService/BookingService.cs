@@ -13,10 +13,7 @@ namespace PhotographyBusiness.Services.BookingService
     {
         private IUserService _userService;
         private GenericDbService<Booking> _genericDbService;
-
-
         private List<Booking> _bookings;
-
         public int number { get; set; } // Arun: til sort, så den både kan sortere asc og desc med samme klik. 
 
         public BookingService(GenericDbService<Booking> genericDbService, IUserService userService)
@@ -25,9 +22,9 @@ namespace PhotographyBusiness.Services.BookingService
             _userService = userService;
             //_bookings = GetAllBookingsAsync().Result;
             _bookings = MockBookings.GetAllMockBookings();
-           //_genericDbService.SaveObjects(_bookings);
-
+            //_genericDbService.SaveObjects(_bookings);
         }
+
         /// <summary>
         /// konsturtøren bliver brugt til unit test.
         /// MockData bliver brug ift. CRUD unittest. 
@@ -36,13 +33,17 @@ namespace PhotographyBusiness.Services.BookingService
         {
             _bookings = MockBookings.GetAllMockBookings();
         }
+
+        /// <summary>
+        /// Internal method for returning the user object inside the booking
+        /// </summary>
+        /// <returns></returns>
         internal async Task<List<Booking>> GetAllBookingsAsync()
         {
-            using (var context = new ObjectDbContext()) // Silas: vi skal også have useren med, når vi kalder på bookingen
+            using (var context = new ObjectDbContext())
             {
                 return await context.Bookings.Include(b => b.User).AsNoTracking().ToListAsync();
             }
-            
         }
 
         public List<Booking> GetAllBookings()
@@ -61,6 +62,7 @@ namespace PhotographyBusiness.Services.BookingService
             }
             return null;
         }
+
         public Booking GetBookingById_User(int id)
         {
             foreach (Booking booking in _bookings)
@@ -72,6 +74,7 @@ namespace PhotographyBusiness.Services.BookingService
             }
             return null;
         }
+
         public List<Booking> GetBookingById_User_(int id)
         {
             var tempbookings = new List<Booking>();
@@ -91,7 +94,6 @@ namespace PhotographyBusiness.Services.BookingService
                 }
             
             }
-          
             return _bookings = tempbookings;
         }
 
@@ -120,7 +122,6 @@ namespace PhotographyBusiness.Services.BookingService
         {
             _bookings.Remove(GetBookingById(id));
             //await _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
-            
         }
 
         public Task UpdateBooking(Booking booking)
@@ -138,7 +139,6 @@ namespace PhotographyBusiness.Services.BookingService
                 }
             }
             //_genericDbService.UpdateObjectAsync(booking);
-
             return null;
         }
 
