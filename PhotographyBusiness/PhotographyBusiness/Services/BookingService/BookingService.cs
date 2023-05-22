@@ -108,8 +108,6 @@ namespace PhotographyBusiness.Services.BookingService
 
         public async Task CreateBookingAsync(Booking booking)
         {
-            //Jeg har kommmentere den fordi pga. unittest
-            booking.User = _userService.GetUserByIdAsync(Convert.ToInt32(booking.UserId)).Result; // Manually add the User object (Identity_Insert is set to off in the DB)
             if (booking != null)
             {
                 this._bookings.Add(booking);

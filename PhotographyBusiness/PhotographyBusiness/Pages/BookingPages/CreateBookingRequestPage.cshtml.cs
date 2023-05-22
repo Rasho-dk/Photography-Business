@@ -59,6 +59,7 @@ namespace PhotographyBusiness.Pages.BookingPages
             }
 
             User = _userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
+
             Booking.Category = Category;
             Booking.CustomerNote = CustomerNote;
             Booking.Address = $"{Street}, {City} {ZipCode}";
