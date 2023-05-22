@@ -13,21 +13,18 @@ namespace PhotographyBusiness.Services.BookingService
     {
         private IUserService _userService;
         private GenericDbService<Booking> _genericDbService;
-
-
         private List<Booking> _bookings;
-
         public int number { get; set; } // Arun: til sort, så den både kan sortere asc og desc med samme klik. 
 
         public BookingService(GenericDbService<Booking> genericDbService, IUserService userService)
         {
             _genericDbService = genericDbService;
             _userService = userService;
-            _bookings = GetAllBookingsAsync().Result;
-            //_bookings = MockBookings.GetAllMockBookings();
-           //_genericDbService.SaveObjects(_bookings);
-
+            //_bookings = GetAllBookingsAsync().Result;
+            _bookings = MockBookings.GetAllMockBookings();
+            //_genericDbService.SaveObjects(_bookings);
         }
+
         /// <summary>
         /// konsturtøren bliver brugt til unit test.
         /// MockData bliver brug ift. CRUD unittest. 
@@ -36,13 +33,17 @@ namespace PhotographyBusiness.Services.BookingService
         {
             _bookings = MockBookings.GetAllMockBookings();
         }
+
+        /// <summary>
+        /// Internal method for returning the user object inside the booking
+        /// </summary>
+        /// <returns></returns>
         internal async Task<List<Booking>> GetAllBookingsAsync()
         {
-            using (var context = new ObjectDbContext()) // Silas: vi skal også have useren med, når vi kalder på bookingen
+            using (var context = new ObjectDbContext())
             {
                 return await context.Bookings.Include(b => b.User).AsNoTracking().ToListAsync();
             }
-            
         }
 
         public List<Booking> GetAllBookings()
@@ -61,6 +62,7 @@ namespace PhotographyBusiness.Services.BookingService
             }
             return null;
         }
+
         public Booking GetBookingById_User(int id)
         {
             foreach (Booking booking in _bookings)
@@ -72,6 +74,7 @@ namespace PhotographyBusiness.Services.BookingService
             }
             return null;
         }
+
         public List<Booking> GetBookingById_User_(int id)
         {
             var tempbookings = new List<Booking>();
@@ -91,7 +94,6 @@ namespace PhotographyBusiness.Services.BookingService
                 }
             
             }
-          
             return _bookings = tempbookings;
         }
 
@@ -120,7 +122,6 @@ namespace PhotographyBusiness.Services.BookingService
         {
             _bookings.Remove(GetBookingById(id));
             //await _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
-            
         }
 
         public Task UpdateBooking(Booking booking)
@@ -131,25 +132,24 @@ namespace PhotographyBusiness.Services.BookingService
                 {
                     b.AdminNote = booking.AdminNote;
                     b.Category = booking.Category;
-                    b.DateTimeOfEvent = booking.DateTimeOfEvent;
+                    b.Date = booking.Date;
                     b.Address = booking.Address;
                     b.Price = booking.Price;
                     break;
                 }
             }
-            _genericDbService.UpdateObjectAsync(booking);
-
+            //_genericDbService.UpdateObjectAsync(booking);
             return null;
         }
 
         public List<Booking> GetAllBookingsThisMonth()
         {
-            return GetAllBookings().Where(b => b.DateTimeOfEvent >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
+            return GetAllBookings().Where(b => b.Date >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
         }
 
         public List<Booking> GetUpcomingBookings()
         {
-            return GetAllBookings().Where(b => b.IsAccepted == true && b.DateTimeOfEvent > DateTime.Now).ToList();
+            return GetAllBookings().Where(b => b.IsAccepted == true && b.Date > DateTime.Now).ToList();
         }
 
         public List<Booking> GetMostRecentRequests()
@@ -165,17 +165,9 @@ namespace PhotographyBusiness.Services.BookingService
         public async Task<List<Booking>> FilterBookingsByDate(DateTime startdate, DateTime endDate)
         {
             IEnumerable<Booking> filteredBookings = from booking in _bookings
-                                                    where booking.DateTimeOfEvent >= startdate && booking.DateTimeOfEvent <= endDate
+                                                    where booking.Date >= startdate && booking.Date <= endDate
                                                     && booking.IsAccepted is true
                                                     select booking;
-
-
-
-            //                                    from booking in Bookings
-            //                                    where booking.Date >= startdate && booking.Date <= endDate
-            //                                    select booking;
-
-
 
             return filteredBookings.ToList();
         }
@@ -190,15 +182,6 @@ namespace PhotographyBusiness.Services.BookingService
             return filteredBookings.ToList();
         }
 
-        // REDUNDANT EMAIL SEARCHING IMPLEMENTED IN NAME SEARCH
-
-        //public async Task<List<Booking>> FilterBookingsByEmail(string Email)         
-        //{
-        //    IEnumerable<Booking> filteredBookings = from booking in Bookings
-        //                                            where booking.User.Email.ToLower().Contains((Email))
-        //                                            select booking;
-        //    return filteredBookings.ToList();
-        //}
 
         public async Task<List<Booking>> FilterBookingsByCategory(string Category)
         {
@@ -248,7 +231,7 @@ namespace PhotographyBusiness.Services.BookingService
 
                         from booking in _bookings
                         where booking.IsAccepted is true
-                        orderby booking.DateTimeOfEvent descending
+                        orderby booking.Date descending
                         select booking;
 
                 return filteredBookingsdesc.ToList();
@@ -259,7 +242,7 @@ namespace PhotographyBusiness.Services.BookingService
 
                         from booking in _bookings
                         where booking.IsAccepted is true
-                        orderby booking.DateTimeOfEvent ascending
+                        orderby booking.Date ascending
                         select booking;
 
             return filteredBookingsasc.ToList();

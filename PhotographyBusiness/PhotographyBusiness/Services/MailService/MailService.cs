@@ -49,7 +49,7 @@ namespace PhotographyBusiness.Services.MailService
             message.Subject = $"Your booking has been cancelled {booking.BookingId}";
             message.Body = new TextPart("plain")
             { Text = $@"Dear {booking.User.Name},
-            We are sorry to inform you that your booking ID: {booking.BookingId} on {booking.DateTimeOfEvent} has been cancelled.
+            We are sorry to inform you that your booking ID: {booking.BookingId} on {booking.Date} has been cancelled.
             Kind Regards, Jack Saunders Photography"
             };
                 
@@ -66,7 +66,7 @@ namespace PhotographyBusiness.Services.MailService
             message.Body = new TextPart("plain")
             {
                 Text = $@"Dear {booking.User.Name},
-We are happy to inform you that your booking {booking.BookingId} on {booking.DateTimeOfEvent} has been confirmed
+We are happy to inform you that your booking {booking.BookingId} on {booking.Date} has been confirmed
 Kind Regards, Jack Saunders Photography"
             };
             await SendMail(message);

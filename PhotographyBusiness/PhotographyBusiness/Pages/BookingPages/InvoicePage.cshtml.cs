@@ -19,6 +19,8 @@ namespace PhotographyBusiness.Pages.BookingPages
         public double? Deposit { get; set; }
         [DataType(DataType.Currency)]
         public double? Remaining { get; set; }
+        [BindProperty]
+        public string newText { get; set; } 
         public PlaceHolderModel(IUserService userService, IBookingService bookingService)
         {
             this.userService = userService;
@@ -27,30 +29,12 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         public async Task<IActionResult> OnGet(int id)
         {
-            if(HttpContext.User.Identity.Name != "admin")
-            {
-                User = await userService.GetUserByNameAsync(HttpContext.User.Identity.Name);
-                //Booking =  bookingService.GetBookingById(id);
-                Booking = bookingService.GetBookingById_User(id);
-                Deposit = Booking.Price / 2;
-                Remaining = Deposit;
+            User = await userService.GetUserByNameAsync(HttpContext.User.Identity.Name);
+            Booking =  bookingService.GetBookingById(id);
+            Deposit = Booking.Price / 2;
+            Remaining = Deposit;
+            newText = "04-00-04";
 
-            }
-            else
-            {
-                foreach(var user in userService.GetAllUsers())
-                {
-                    if(user.UserId == id)
-                    {
-                        User = userService.GetUserByIdAsync(user.UserId).Result;
-                        Booking = bookingService.GetBookingById_User(id);
-                        Deposit = Booking.Price / 2;
-                        Remaining = Deposit;
-                    }
-                }
-
-            }
-           
             return Page();
         }
     }
