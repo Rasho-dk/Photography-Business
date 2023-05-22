@@ -7,36 +7,43 @@ namespace PhotographyBusiness.Models
 {
     public class Booking
     {
-
-
         [Required, Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BookingId { get; set; }
+
         [Required(ErrorMessage = "Booking must have an assigned category")]
         public string Category { get; set; }
-        [DataType(DataType.Currency), AllowNull]
+
+        [DataType(DataType.Currency)]
         [Range(typeof(double), minimum: "0", maximum: "100000", ErrorMessage = "Price must be between {1} and {2}")]
         public double? Price { get; set; }
+
         [Required(ErrorMessage = "Booking must have a customer note")]
         [StringLength(200, ErrorMessage = "Customer note must be less than 200 characters long")]
         public string CustomerNote { get; set; }
-        [AllowNull]
+
         [StringLength(200, ErrorMessage = "Admin note must be less than 200 characters long")]
         public string? AdminNote { get; set; }
         [Required(ErrorMessage = "Booking must have an event date"), DataType(DataType.DateTime)]
         public DateTime Date { get; set; }
+
         [Required, DataType(DataType.DateTime)]
         public DateTime DateCreated { get; set; }
+
         public bool IsAccepted { get; set; }
+
         [Required(ErrorMessage = "Booking must have an address")]
         public string Address { get; set; }
-        [Required]
+
+        // Vi fortæller EF eksplicit at denne property er en FK, og at den peger på tabellen med User.
+        [ForeignKey(nameof(User))]
         public int UserId { get; set; }
 
-        [NotMapped]
-        public User User { get; set; }
+        // EF Navigation property, fastsætter en relation mellem booking og user.
+        public virtual User User { get; set; }
 
         /// <summary>
         /// The full constructor
+        /// Used for unit testing and mock data
         /// </summary>
         /// <param name="bookingId">The id of the booking</param>
         /// <param name="category">Required for the photographer to know what kind of photography the job belongs to</param>
@@ -82,7 +89,6 @@ namespace PhotographyBusiness.Models
         /// <summary>
         /// The default constructor used for DB
         /// </summary>
-        public Booking() {  }
-
+        public Booking() { }
     }
 }

@@ -29,9 +29,11 @@ namespace PhotographyBusiness.Models
         [StringLength(12)]
         public string PhoneNumber { get; set; }
 
-        [NotMapped]
         public DateTime DateCreated { get; set; }
 
+        // Denne data annotation gør så EF ikke mapper denne property og laver ikke en kolonne til den.
+        // Denne ICollection kommunikere til EF at det er et one-to-many relationship mellem user og booking
+        // Vi kan derved få fat på en users bookings direkte igennem user objektet
         [NotMapped]
         public virtual ICollection<Booking> Bookings { get; set; }
 

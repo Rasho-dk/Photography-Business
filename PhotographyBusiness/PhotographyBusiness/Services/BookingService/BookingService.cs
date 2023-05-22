@@ -155,7 +155,7 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> GetMostRecentRequests()
         {
-            return GetAllBookingsRequests().OrderByDescending(b => b.DateCreated).Take(5).ToList();
+            return GetAllBookingsRequests().OrderBy(b => b.DateCreated).Take(5).ToList();
         }
 
         public List<Booking> GetAllBookingsRequests()
