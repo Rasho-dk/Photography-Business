@@ -109,13 +109,14 @@ namespace PhotographyBusiness.Services.BookingService
         public async Task CreateBookingAsync(Booking booking)
         {
             //Jeg har kommmentere den fordi pga. unittest
-            await _genericDbService.AddObjectAsync(booking);
             booking.User = _userService.GetUserByIdAsync(Convert.ToInt32(booking.UserId)).Result; // Manually add the User object (Identity_Insert is set to off in the DB)
             if (booking != null)
             {
                 this._bookings.Add(booking);
 
-            }         
+            }
+           // await _genericDbService.AddObjectAsync(booking);
+
         }
 
         public async Task DeleteBooking(int id)

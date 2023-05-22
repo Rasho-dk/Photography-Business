@@ -11,40 +11,149 @@ namespace PhotographyBusiness.Pages.AccountPages
 {
     public class CreateBookingAndUserModel : PageModel
     {
+        //    private IUserService userService;
+        //    private IBookingService bookingService;
+        //    private PasswordHasher<string> passwordHasher;
+
+
+        //    [BindProperty]
+        //    public User User { get; set; }
+        //    [BindProperty, DisplayName("first name")]
+        //    public string FirstName { get; set; }
+        //    [BindProperty, DisplayName("last name")]
+        //    public string LastName { get; set; }
+        //    [BindProperty]
+        //    public Booking Booking { get; set; }  
+
+        //    [BindProperty]
+        //    public string City { get; set; }
+        //    [BindProperty]
+        //    public string ZipCode { get; set; }
+        //    [BindProperty]
+        //    public string Street { get; set; }
+        //    [BindProperty]
+        //    public string CustomerNote { get; set; }
+        //    [BindProperty]
+        //    public string Category { get; set; }
+        //    //[BindProperty, DataType(DataType.Password), DisplayName("password")]
+        //    //public string Password { get; set; }
+        //    //[BindProperty, DataType(DataType.Password), DisplayName("repeat password")]
+        //    //[Compare("Password", ErrorMessage = "The passwords do not match.")]
+        //    //public string RepeatPassword { get; set; }
+        //    [BindProperty,DataType(DataType.DateTime)]
+        //    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        //    public DateTime DateOfEvent { get; set; }
+
+        //    public CreateBookingAndUserModel(IBookingService bookingService,IUserService userService)
+        //    {
+        //        this.bookingService = bookingService;
+        //        this.userService = userService;
+        //        passwordHasher = new PasswordHasher<string>();
+        //    }
+
+        //    public void OnGet()
+        //    {
+
+        //    }
+        //    public async Task<IActionResult> OnPostAsync()
+        //    {
+        //        if(User.Password == User.RepeatPassword && User.Password != null)
+        //        {
+
+
+        //            //User.UserId++;
+
+
+        //           User.Name = $"{FirstName} {LastName}";
+        //           User.Password = passwordHasher.HashPassword(null, User.Password)  ;
+        //           await userService.CreateUserAsync(User);
+
+        //            //Booking.BookingId++;
+        //            Booking = new Booking();
+        //            Booking.UserId = User.UserId;
+        //            Booking.Category = Category;
+        //            Booking.CustomerNote = CustomerNote;
+        //            Booking.Address = $"{Street}, {City} ,{ZipCode}";
+        //            Booking.IsAccepted = false;
+        //            Booking.Date = DateOfEvent;
+        //            Booking.DateCreated = DateTime.Now;
+
+        //            if (!ModelState.IsValid)
+        //            {
+        //                return Page();
+        //            }
+        //            await bookingService.CreateBookingAsync(Booking);
+
+        //            return RedirectToPage("../Index");  
+        //        }                        
+        //        return Page();
+        //    }
+
         private IUserService userService;
         private IBookingService bookingService;
         private PasswordHasher<string> passwordHasher;
 
+        private string _today = DateTime.Now.Date.ToString("yyyy-MM-dd");
+        public string date { get; set; } = "2";
+        public Models.User User { get; set; }
+        public Booking Booking { get; set; }
 
+        /// <summary>
+        /// Part 1 to create User 
+        /// </summary>
         [BindProperty]
-        public User User { get; set; }
+        [Required(ErrorMessage = "Please enter your email address.")]
+        [StringLength(30, ErrorMessage = "The email address must be no more than {1} characters long.")]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Please enter a valid email address. exampel@exampel.com")]
+        public string Email { get; set; }
+        [BindProperty]
+        [Required(ErrorMessage = "Please enter your password.")]
+        [StringLength(12, MinimumLength = 8, ErrorMessage = "The password must be between 8 and 20 characters long.")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+        [BindProperty, DataType(DataType.Password), DisplayName("Repeat password")]
+        [Compare("Password", ErrorMessage = "The passwords do not match.")]
+        public string RepeatPassword { get; set; }
+        [Required]
+        [StringLength(12)]
+        [BindProperty]
+        public string PhoneNumber { get; set; }
         [BindProperty, DisplayName("first name")]
         public string FirstName { get; set; }
         [BindProperty, DisplayName("last name")]
         public string LastName { get; set; }
-        [BindProperty]
-        public Booking Booking { get; set; }  
 
+        /// <summary>
+        /// Part 2 To create Booking
+        /// </summary>
+        [BindProperty]
+        [DataType(DataType.Currency)]
+        public double? Price { get; set; }
+        [Required(ErrorMessage = "Please enter your City.")]
         [BindProperty]
         public string City { get; set; }
+        [Required(ErrorMessage = "Please enter your ZipCode.")]
         [BindProperty]
         public string ZipCode { get; set; }
+        [Required(ErrorMessage = "Please enter your Street.")]
         [BindProperty]
         public string Street { get; set; }
+        [Required(ErrorMessage = "Please enter your note.")]
         [BindProperty]
         public string CustomerNote { get; set; }
         [BindProperty]
+        [Required(ErrorMessage = "Please choose one of the following category.")]
         public string Category { get; set; }
-        //[BindProperty, DataType(DataType.Password), DisplayName("password")]
-        //public string Password { get; set; }
-        //[BindProperty, DataType(DataType.Password), DisplayName("repeat password")]
-        //[Compare("Password", ErrorMessage = "The passwords do not match.")]
-        //public string RepeatPassword { get; set; }
-        [BindProperty,DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "Please enter date of the event.")]
+        [BindProperty]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateOfEvent { get; set; }
 
-        public CreateBookingAndUserModel(IBookingService bookingService,IUserService userService)
+
+        public string DisplayAlert { get; set; }
+        public string DisplayConfirm { get; set; }
+
+        public CreateBookingAndUserModel(IBookingService bookingService, IUserService userService)
         {
             this.bookingService = bookingService;
             this.userService = userService;
@@ -55,38 +164,68 @@ namespace PhotographyBusiness.Pages.AccountPages
         {
 
         }
+        /// <summary>
+        /// 1.th Checkes om koden passer med reapeatPassword
+        /// 2.th Check om Email eksistere allered i systemet, hvis ja : returnere en fejlmeddelelse.
+        /// 3.th  check om dato er bestilt fra dagsdato hvsi nej returnere en fejlmeddelelse.
+        /// 4.th Hvis all overstår er korrket opret en User og en booking request og returnere en succes meddelelse 
+        /// </summary>
+        /// <returns>Hvis der optået fejl fremvises en fejlmeddelelse ellers fortsætter til 
+        /// at oprette User og en booking request</returns>
         public async Task<IActionResult> OnPostAsync()
         {
-            if(User.Password == User.RepeatPassword && User.Password != null)
+
+            if (Password == RepeatPassword && Password != null)
             {
-              
+                foreach (var user in userService.GetAllUsers())
+                {
+                    if (user.Email == Email)
+                    {
+                        DisplayAlert = "This email is allready exist";
+                        return Page();
 
-                //User.UserId++;
+                    }
+                    DateTime currentDate = DateTime.Now.Date;
+                    if (currentDate > DateOfEvent)
+                    {
+                        ModelState.AddModelError("DateOfEvent", "The date must be from today onwards.");
+                    }
+                    if (!ModelState.IsValid)
+                    {
+                        return Page();
+                    }
+
+                }
+
+                await userService.CreateUserAsync
+                    (new Models.User(Email,
+                    passwordHasher.HashPassword(null, Password),
+                    $"{FirstName} {LastName}", PhoneNumber));
+
+                var user1 = userService.GetUserByEmailAsync(Email);
 
 
-               User.Name = $"{FirstName} {LastName}";
-               User.Password = passwordHasher.HashPassword(null, User.Password)  ;
-               await userService.CreateUserAsync(User);
-
-                //Booking.BookingId++;
                 Booking = new Booking();
-                Booking.UserId = User.UserId;
                 Booking.Category = Category;
                 Booking.CustomerNote = CustomerNote;
+                Booking.UserId = user1.Result.UserId;
                 Booking.Address = $"{Street}, {City} ,{ZipCode}";
                 Booking.IsAccepted = false;
                 Booking.Date = DateOfEvent;
-                Booking.DateCreated = DateTime.Now;
-
-                if (!ModelState.IsValid)
+                await bookingService.CreateBookingAsync(Booking);
+                if (Booking is not null)
                 {
+                    DisplayConfirm = "Your booking request has been successfully sent!";
                     return Page();
                 }
-                await bookingService.CreateBookingAsync(Booking);
-              
-                return RedirectToPage("../Index");  
-            }                        
+
+                // return RedirectToPage("../Index");  
+            }
+
             return Page();
         }
+
+
+
     }
 }
