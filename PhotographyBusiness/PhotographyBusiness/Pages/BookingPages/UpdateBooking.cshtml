@@ -23,32 +23,39 @@
                     <input asp-for="@Model.Booking.User.Email" class="form-control" readonly />
                 </div>
                 <div>
-                    <label asp-for="@Model.Booking.User.UserId" class="control-label text-white" hidden></label>
-                    <input asp-for="@Model.Booking.User.UserId" class="form-control" hidden readonly />
+                    <label asp-for="@Model.Booking.CustomerNote" class="control-label text-white" hidden readonly></label>
+                    <input asp-for="@Model.Booking.CustomerNote" class="form-control"hidden readonly />
+                    <span asp-validation-for="@Model.Booking.CustomerNote" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="@Model.Booking.User.Password" class="control-label text-white" hidden></label>
                     <input asp-for="@Model.Booking.User.Password" class="form-control" hidden readonly />
+                    <span asp-validation-for="@Model.Booking.User.Password" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="@Model.Booking.Category" class="control-label text-white">Category</label>
                     <input asp-for="@Model.Booking.Category" class="form-control" />
+                    <span asp-validation-for="@Model.Booking.Category" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="@Model.Booking.Price" class="control-label text-white">Price</label>
                     <input asp-for="@Model.Booking.Price" class="form-control" />
+                    <span asp-validation-for="@Model.Booking.Price" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="@Model.Booking.AdminNote" class="control-label text-white">Admin</label>
                     <input asp-for="@Model.Booking.AdminNote" class="form-control" />
+                    <span asp-validation-for="@Model.Booking.AdminNote" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="@Model.Booking.Date" class="control-label text-white">Date</label>
                     <input asp-for="@Model.Booking.Date" class="form-control" />
+                    <span asp-validation-for="@Model.Booking.Date" class="text-danger"></span>
                 </div>
                 <div>
                     <label asp-for="@Model.Booking.Address" class="control-label text-white">Address</label>
                     <input asp-for="@Model.Booking.Address" class="form-control" />
+                    <span asp-validation-for="@Model.Booking.Address" class="text-danger"></span>
                 </div>
               
 
