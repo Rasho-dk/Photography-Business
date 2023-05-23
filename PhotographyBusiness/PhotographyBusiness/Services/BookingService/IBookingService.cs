@@ -15,7 +15,6 @@ namespace PhotographyBusiness.Services.BookingService
         public List<Booking> GetUpcomingBookings();
         public List<Booking> GetMostRecentRequests();
         public List<Booking> GetAllBookingsRequests();
-        Booking GetBookingById_User(int id);
         public Task<List<Booking>> FilterBookingsByDate(DateTime startdate, DateTime endDate);
         public Task<List<Booking>> FilterBookingsByNameOrEmail(string searchinput);
         public Task<List<Booking>> FilterBookingsByCategory(string Category);
@@ -23,9 +22,6 @@ namespace PhotographyBusiness.Services.BookingService
         public Task<List<Booking>> SortBookingByDate();
         public Task<List<Booking>> SortBookingByName();
         public Task<List<Booking>> SortBookingByEmail();
-        List<Booking> GetBookingById_User_(int id);
-
-
         Booking GetBookingById_User1(int id, int id2);
 
     }

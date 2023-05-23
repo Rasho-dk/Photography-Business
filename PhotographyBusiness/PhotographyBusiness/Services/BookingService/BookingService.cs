@@ -20,9 +20,8 @@ namespace PhotographyBusiness.Services.BookingService
         {
             _genericDbService = genericDbService;
             _userService = userService;
-            //_bookings = GetAllBookingsAsync().Result;
-            _bookings = MockBookings.GetAllMockBookings();
-            //_genericDbService.SaveObjects(_bookings);
+            _bookings = GetAllBookingsAsync().Result;
+            //_bookings = MockBookings.GetAllMockBookings();
         }
 
         /// <summary>
@@ -98,28 +97,6 @@ namespace PhotographyBusiness.Services.BookingService
                 }
             }
             return null;
-        }
-
-        public List<Booking> GetBookingById_User_(int id)
-        {
-            var tempbookings = new List<Booking>();
-            foreach(var user in _userService.GetAllUsers())
-            {
-                if (user.UserId == id)
-                {
-                    foreach (Booking booking in _bookings)
-                    {
-                        if (user.UserId == booking.UserId)
-                        {
-                            tempbookings.Add(booking);
-
-                        }
-                    }
-
-                }
-            
-            }
-            return _bookings = tempbookings;
         }
 
         public List<Booking> GetBookingsByUserId(int userId)
