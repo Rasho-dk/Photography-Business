@@ -46,10 +46,13 @@
                 <div class="input-group mb-2">
                     <label for="CategoryInput"></label>
                     <select aria-label="Filter select" class="form-select me-1" asp-for="CategoryInput">
-                        <option select disabled value="Select Category"> Select Category; </option>
-                        <option value="Marriage">Marriage</option>
-                        <option value="Family">Family</option>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="Party">Party</option>
+                        <option value="Wedding">Wedding</option>
                         <option value="Portrait">Portrait</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Food">Food</option>
+                        <option value="Event">Event</option>
                         <input type="submit" asp-page-handler="CategoryFilter" value="Filter" class="btn btn-border-black btn-even" />
                     </select>
                 </div>
@@ -115,7 +118,7 @@
                             <a class="btn btn-black" asp-page="/BookingPages/UpdateBooking" asp-route-id="@booking.BookingId">
 
                                 <i class="fa fa-edit pop-out"></i></a>
-                            <a class="btn btn-danger" asp-page="/BookingPages/DeleteBooking" asp-route-id="@booking.User.UserId">
+                            <a class="btn btn-danger" asp-page="/BookingPages/DeleteBooking" asp-route-id="@booking.BookingId">
                                 <i class="fa fa-trash pop-out"></i>
                             </a>
                             <a asp-page="/BookingPages/InvoicePage" asp-route-id="@booking.UserId" class="ms-2">

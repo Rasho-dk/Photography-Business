@@ -125,8 +125,9 @@ namespace PhotographyBusiness.Services.BookingService
             await _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
         }
 
-        public Task UpdateBooking(Booking booking)
+        public async Task UpdateBooking(Booking booking)
         {
+            
             foreach (Booking b in this._bookings)
             {
                 if (b.BookingId == booking.BookingId)
@@ -136,11 +137,11 @@ namespace PhotographyBusiness.Services.BookingService
                     b.Date = booking.Date;
                     b.Address = booking.Address;
                     b.Price = booking.Price;
-                    break;
+                    b.IsAccepted = booking.IsAccepted;
                 }
             }
-            _genericDbService.UpdateObjectAsync(booking);
-            return null;
+
+            await _genericDbService.UpdateObjectAsync(booking);
         }
 
         public List<Booking> GetAllBookingsThisMonth()

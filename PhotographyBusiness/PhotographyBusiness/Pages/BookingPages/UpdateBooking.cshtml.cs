@@ -11,7 +11,8 @@ namespace PhotographyBusiness.Pages.BookingPages
     {
         private IBookingService _bookingService;
 
-        [BindProperty] public Booking Booking { get; set; }
+        [BindProperty] 
+        public Booking Booking { get; set; }
 
 
         public UpdateBookingModel(IBookingService bookingService)
@@ -23,7 +24,7 @@ namespace PhotographyBusiness.Pages.BookingPages
         {
 
             Booking = _bookingService.GetBookingById(id);
-            Booking.UserId = Booking.User.UserId;
+            //Booking.UserId = Booking.User.UserId;
 
             if (Booking == null)
             {
@@ -38,17 +39,11 @@ namespace PhotographyBusiness.Pages.BookingPages
         /// <returns>Sender tilbage til listen over alle bookings</returns>
         public async Task<IActionResult> OnPostAsync(int id)
         {
-
-            Booking = _bookingService.GetBookingById(id);
-            Booking.UserId = Booking.User.UserId;
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
-
-
-            _bookingService.UpdateBooking(Booking);
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            await _bookingService.UpdateBooking(Booking);
             return RedirectToPage("GetAllBookings");
         }
     }
