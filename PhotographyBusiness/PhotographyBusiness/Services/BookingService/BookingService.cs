@@ -46,6 +46,19 @@ namespace PhotographyBusiness.Services.BookingService
             }
         }
 
+        public async Task CreateBookingAsync(Booking booking)
+        {
+            if (booking != null)
+            {
+                await _genericDbService.AddObjectAsync(booking);
+                // To accomodate Identity_Insert = OFF, we need to manually instantiate the user by the id that was passed in the request page
+                // Otherwise we will get an SQLException
+                booking.User = _userService.GetUserByIdAsync(booking.UserId).Result;
+                this._bookings.Add(booking);
+            }
+
+        }
+
         public List<Booking> GetAllBookings()
         {
             return _bookings;
@@ -104,17 +117,6 @@ namespace PhotographyBusiness.Services.BookingService
                                             select booking;
 
             return bookings.ToList();
-        }
-
-        public async Task CreateBookingAsync(Booking booking)
-        {
-            if (booking != null)
-            {
-                this._bookings.Add(booking);
-
-            }
-           await _genericDbService.AddObjectAsync(booking);
-
         }
 
         public async Task DeleteBooking(int id)
