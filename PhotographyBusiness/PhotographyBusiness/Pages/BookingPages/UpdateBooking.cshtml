@@ -58,10 +58,19 @@
                     </div>
 
                     @*This div is required in order for model state to be valid. Otherwise the user's phonenumber is null*@
-                    <div>
+                    <div hidden>
                         <label asp-for="@Model.Booking.User.PhoneNumber" class="control-label text-white" hidden>Admin</label>
                         <input asp-for="@Model.Booking.User.PhoneNumber" class="form-control" hidden readonly />
                         <span asp-validation-for="@Model.Booking.User.PhoneNumber" class="text-danger" hidden></span>
+                        <label asp-for="@Model.Booking.IsAccepted" class="control-label text-white" hidden>Admin</label>
+                        <input asp-for="@Model.Booking.IsAccepted" class="form-control" hidden readonly />
+                        <span asp-validation-for="@Model.Booking.IsAccepted" class="text-danger" hidden></span>
+                        <label asp-for="@Model.Booking.UserId" class="control-label text-white" hidden>Admin</label>
+                        <input asp-for="@Model.Booking.UserId" class="form-control" hidden readonly />
+                        <span asp-validation-for="@Model.Booking.User.UserId" class="text-danger" hidden></span>
+                        <label asp-for="@Model.Booking.DateCreated" class="control-label text-white" hidden>Admin</label>
+                        <input asp-for="@Model.Booking.DateCreated" class="form-control" hidden readonly />
+                        <span asp-validation-for="@Model.Booking.DateCreated" class="text-danger" hidden></span>
                     </div>
 
                     <div class="form-group mt-2 d-flex justify-content-between">
