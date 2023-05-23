@@ -14,8 +14,10 @@ namespace PhotographyBusiness.Pages.BookingPages
         private IBookingService _bookingService;
 
 
-        public Booking Booking { get; set; } 
+        public Booking Booking { get; set; }
+        [BindProperty]
         public double Price { get; set; }
+        [BindProperty]
         public string AdminNote { get; set; }
 
         public AcceptRequestPageModel(IBookingService bookingService)

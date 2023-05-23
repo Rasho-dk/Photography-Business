@@ -41,9 +41,9 @@ namespace PhotographyBusiness.Pages.AccountPages
         [StringLength(12)]
         [BindProperty]
         public string PhoneNumber { get; set; }
-        [BindProperty, DisplayName("first name")]
+        [BindProperty, DisplayName("First name")]
         public string FirstName { get; set; }
-        [BindProperty, DisplayName("last name")]
+        [BindProperty, DisplayName("Last name")]
         public string LastName { get; set; }
 
         /// <summary>
@@ -52,16 +52,10 @@ namespace PhotographyBusiness.Pages.AccountPages
         [BindProperty]
         [DataType(DataType.Currency)]
         public double? Price { get; set; }
-        [Required(ErrorMessage = "Please enter your City.")]
+        [Required(ErrorMessage = "Please enter your full address.")]
         [BindProperty]
-        public string City { get; set; }
-        [Required(ErrorMessage = "Please enter your ZipCode.")]
-        [BindProperty]
-        public string ZipCode { get; set; }
-        [Required(ErrorMessage = "Please enter your Street.")]
-        [BindProperty]
-        public string Street { get; set; }
-        [Required(ErrorMessage = "Please enter your note.")]
+        public string Address { get; set; }
+        [Required(ErrorMessage = "Please enter a note.")]
         [BindProperty]
         public string CustomerNote { get; set; }
         [BindProperty]
@@ -134,7 +128,7 @@ namespace PhotographyBusiness.Pages.AccountPages
                 Booking.Category = Category;
                 Booking.CustomerNote = CustomerNote;
                 Booking.UserId = user1.Result.UserId;
-                Booking.Address = $"{Street}, {City} ,{ZipCode}";
+                Booking.Address = Address;
                 Booking.IsAccepted = false;
                 Booking.Date = DateOfEvent;
                 await bookingService.CreateBookingAsync(Booking);

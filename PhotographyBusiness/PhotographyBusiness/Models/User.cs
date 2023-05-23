@@ -33,9 +33,9 @@ namespace PhotographyBusiness.Models
 
         // Denne data annotation gør så EF ikke mapper denne property og laver ikke en kolonne til den.
         // Denne ICollection kommunikere til EF at det er et one-to-many relationship mellem user og booking
-        // Vi kan derved få fat på en users bookings direkte igennem user objektet
+        // Vi kan derved få fat på en users bookings direkte igennem user objektet.
         [NotMapped]
-        public virtual ICollection<Booking> Bookings { get; set; }
+        public virtual ICollection<Booking>? Bookings { get; set; }
 
         /// <summary>
         /// The full constructor

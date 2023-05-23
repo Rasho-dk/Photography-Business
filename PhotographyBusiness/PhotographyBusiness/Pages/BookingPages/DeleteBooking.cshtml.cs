@@ -12,7 +12,6 @@ namespace PhotographyBusiness.Pages.BookingPages
         private IUserService _userService;
 
         [BindProperty] public Booking Booking { get; set; }
-        [BindProperty] public User User { get; set; }
 
         public DeleteBookingModel(IBookingService bookingService, IUserService userService)
         {
@@ -22,8 +21,6 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         public IActionResult OnGet(int id)
         {
-            User = _userService.GetUserByIdAsync(id).Result;
-            Booking = _bookingService.GetBookingById_User(User.UserId);
             Booking = _bookingService.GetBookingById(id);
 
             if (Booking == null)

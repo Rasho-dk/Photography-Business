@@ -22,7 +22,6 @@ namespace PhotographyBusiness.Services.BookingService
             _userService = userService;
             _bookings = GetAllBookingsAsync().Result;
             //_bookings = MockBookings.GetAllMockBookings();
-            //_genericDbService.SaveObjects(_bookings);
         }
 
         /// <summary>
@@ -46,6 +45,19 @@ namespace PhotographyBusiness.Services.BookingService
             }
         }
 
+        public async Task CreateBookingAsync(Booking booking)
+        {
+            if (booking != null)
+            {
+                await _genericDbService.AddObjectAsync(booking);
+                // To accomodate Identity_Insert = OFF, we need to manually instantiate the user by the id that was passed in the request page
+                // Otherwise we will get an SQLException
+                booking.User = _userService.GetUserByIdAsync(booking.UserId).Result;
+                this._bookings.Add(booking);
+            }
+
+        }
+
         public List<Booking> GetAllBookings()
         {
             return _bookings;
@@ -67,34 +79,24 @@ namespace PhotographyBusiness.Services.BookingService
         {
             foreach (Booking booking in _bookings)
             {
-                if (id == booking.User.UserId)
+                if (id == booking.User .UserId)
                 {
                     return booking;
                 }
             }
             return null;
         }
-
-        public List<Booking> GetBookingById_User_(int id)
+        //Shero
+        public Booking GetBookingById_User1(int id,int bId)
         {
-            var tempbookings = new List<Booking>();
-            foreach(var user in _userService.GetAllUsers())
+            foreach (Booking booking in _bookings)
             {
-                if (user.UserId == id)
+                if (id == booking.User.UserId && bId == booking.BookingId)
                 {
-                    foreach (Booking booking in _bookings)
-                    {
-                        if (user.UserId == booking.UserId)
-                        {
-                            tempbookings.Add(booking);
-
-                        }
-                    }
-
+                    return booking;
                 }
-            
             }
-            return _bookings = tempbookings;
+            return null;
         }
 
         public List<Booking> GetBookingsByUserId(int userId)
@@ -106,25 +108,15 @@ namespace PhotographyBusiness.Services.BookingService
             return bookings.ToList();
         }
 
-        public async Task CreateBookingAsync(Booking booking)
-        {
-            if (booking != null)
-            {
-                this._bookings.Add(booking);
-
-            }
-           await _genericDbService.AddObjectAsync(booking);
-
-        }
-
         public async Task DeleteBooking(int id)
         {
             _bookings.Remove(GetBookingById(id));
             await _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
         }
 
-        public Task UpdateBooking(Booking booking)
+        public async Task UpdateBooking(Booking booking)
         {
+            
             foreach (Booking b in this._bookings)
             {
                 if (b.BookingId == booking.BookingId)
@@ -134,11 +126,11 @@ namespace PhotographyBusiness.Services.BookingService
                     b.Date = booking.Date;
                     b.Address = booking.Address;
                     b.Price = booking.Price;
-                    break;
+                    b.IsAccepted = booking.IsAccepted;
                 }
             }
-            _genericDbService.UpdateObjectAsync(booking);
-            return null;
+
+            await _genericDbService.UpdateObjectAsync(booking);
         }
 
         public List<Booking> GetAllBookingsThisMonth()

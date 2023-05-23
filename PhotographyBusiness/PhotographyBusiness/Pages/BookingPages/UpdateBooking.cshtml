@@ -2,68 +2,83 @@
 @model PhotographyBusiness.Pages.BookingPages.UpdateBookingModel
 @{
 }
+<div class="bg-dark">
+    <div class="transparent-black">
+        <h1 class="text-white text-center pt-3">Update booking</h1>
+        <div class="d-flex justify-content-center" style="">
+            <div class="d-flex flex-column m-4" style="min-width:30vw">
+                <form method="post" class="p-4" style="background-color: rgba(0,0,0,0.7)">
+                    <div class="form-group" hidden>
+                        <label asp-for="@Model.Booking.BookingId" class="control-label text-white">Id</label>
+                        <input asp-for="@Model.Booking.BookingId" class="form-control" readonly />
+                        <span asp-validation-for="@Model.Booking.BookingId" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Booking.User.Name" class="control-label text-white">Customer name</label>
+                        <input asp-for="@Model.Booking.User.Name" class="form-control" readonly />
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Booking.User.Email" class="control-label text-white">Customer email</label>
+                        <input asp-for="@Model.Booking.User.Email" class="form-control" readonly />
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Booking.CustomerNote" class="control-label text-white" hidden readonly></label>
+                        <input asp-for="@Model.Booking.CustomerNote" class="form-control" hidden readonly />
+                        <span asp-validation-for="@Model.Booking.CustomerNote" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Booking.User.Password" class="control-label text-white" hidden></label>
+                        <input asp-for="@Model.Booking.User.Password" class="form-control" hidden readonly />
+                        <span asp-validation-for="@Model.Booking.User.Password" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Booking.Category" class="control-label text-white">Category</label>
+                        <input asp-for="@Model.Booking.Category" class="form-control" />
+                        <span asp-validation-for="@Model.Booking.Category" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Booking.Price" class="control-label text-white">Price</label>
+                        <input asp-for="@Model.Booking.Price" class="form-control" />
+                        <span asp-validation-for="@Model.Booking.Price" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Booking.AdminNote" class="control-label text-white">Admin</label>
+                        <input asp-for="@Model.Booking.AdminNote" class="form-control" />
+                        <span asp-validation-for="@Model.Booking.AdminNote" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Booking.Date" class="control-label text-white">Date</label>
+                        <input asp-for="@Model.Booking.Date" class="form-control" />
+                        <span asp-validation-for="@Model.Booking.Date" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <label asp-for="@Model.Booking.Address" class="control-label text-white">Address</label>
+                        <input asp-for="@Model.Booking.Address" class="form-control" />
+                        <span asp-validation-for="@Model.Booking.Address" class="text-danger"></span>
+                    </div>
 
-<link rel="stylesheet" href="/css/styles.css" />
+                    @*This div is required in order for model state to be valid. Otherwise the user's phonenumber is null*@
+                    <div hidden>
+                        <label asp-for="@Model.Booking.User.PhoneNumber" class="control-label text-white" hidden>Admin</label>
+                        <input asp-for="@Model.Booking.User.PhoneNumber" class="form-control" hidden readonly />
+                        <span asp-validation-for="@Model.Booking.User.PhoneNumber" class="text-danger" hidden></span>
+                        <label asp-for="@Model.Booking.IsAccepted" class="control-label text-white" hidden>Admin</label>
+                        <input asp-for="@Model.Booking.IsAccepted" class="form-control" hidden readonly />
+                        <span asp-validation-for="@Model.Booking.IsAccepted" class="text-danger" hidden></span>
+                        <label asp-for="@Model.Booking.UserId" class="control-label text-white" hidden>Admin</label>
+                        <input asp-for="@Model.Booking.UserId" class="form-control" hidden readonly />
+                        <span asp-validation-for="@Model.Booking.User.UserId" class="text-danger" hidden></span>
+                        <label asp-for="@Model.Booking.DateCreated" class="control-label text-white" hidden>Admin</label>
+                        <input asp-for="@Model.Booking.DateCreated" class="form-control" hidden readonly />
+                        <span asp-validation-for="@Model.Booking.DateCreated" class="text-danger" hidden></span>
+                    </div>
 
-<div class="transparent-black">
-    <h1 class="text-white">Update booking</h1>
-    <div class="d-flex justify-content-center" style="">
-        <div class="d-flex flex-column m-4" style="min-width:30vw">
-            <form method="post" class="p-4" style="background-color: rgba(0,0,0,0.7)">
-                <div class="form-group p-2">
-                    <label asp-for="@Model.Booking.BookingId" class="control-label text-white">Id</label>
-                    <input asp-for="@Model.Booking.BookingId" class="form-control" readonly />
-                </div>
-                <div>
-                    <label asp-for="@Model.Booking.User.Name" class="control-label text-white">Customer name</label>
-                    <input asp-for="@Model.Booking.User.Name" class="form-control" readonly />
-                </div>
-                <div>
-                    <label asp-for="@Model.Booking.User.Email" class="control-label text-white">Customer email</label>
-                    <input asp-for="@Model.Booking.User.Email" class="form-control" readonly />
-                </div>
-                <div>
-                    <label asp-for="@Model.Booking.CustomerNote" class="control-label text-white" hidden readonly></label>
-                    <input asp-for="@Model.Booking.CustomerNote" class="form-control"hidden readonly />
-                    <span asp-validation-for="@Model.Booking.CustomerNote" class="text-danger"></span>
-                </div>
-                <div>
-                    <label asp-for="@Model.Booking.User.Password" class="control-label text-white" hidden></label>
-                    <input asp-for="@Model.Booking.User.Password" class="form-control" hidden readonly />
-                    <span asp-validation-for="@Model.Booking.User.Password" class="text-danger"></span>
-                </div>
-                <div>
-                    <label asp-for="@Model.Booking.Category" class="control-label text-white">Category</label>
-                    <input asp-for="@Model.Booking.Category" class="form-control" />
-                    <span asp-validation-for="@Model.Booking.Category" class="text-danger"></span>
-                </div>
-                <div>
-                    <label asp-for="@Model.Booking.Price" class="control-label text-white">Price</label>
-                    <input asp-for="@Model.Booking.Price" class="form-control" />
-                    <span asp-validation-for="@Model.Booking.Price" class="text-danger"></span>
-                </div>
-                <div>
-                    <label asp-for="@Model.Booking.AdminNote" class="control-label text-white">Admin</label>
-                    <input asp-for="@Model.Booking.AdminNote" class="form-control" />
-                    <span asp-validation-for="@Model.Booking.AdminNote" class="text-danger"></span>
-                </div>
-                <div>
-                    <label asp-for="@Model.Booking.Date" class="control-label text-white">Date</label>
-                    <input asp-for="@Model.Booking.Date" class="form-control" />
-                    <span asp-validation-for="@Model.Booking.Date" class="text-danger"></span>
-                </div>
-                <div>
-                    <label asp-for="@Model.Booking.Address" class="control-label text-white">Address</label>
-                    <input asp-for="@Model.Booking.Address" class="form-control" />
-                    <span asp-validation-for="@Model.Booking.Address" class="text-danger"></span>
-                </div>
-              
-
-                <div class="form-group m-2 d-flex justify-content-between">
-                    <a asp-page="/BookingPages/GetAllBookings" class="btn btn-dark btn-border-white" style="border-radius: 0; min-width: 6vw;">Go back</a>
-                    <input type="submit" value="Update" class="btn btn-light" style="min-width: 6vw; border-radius: 0;" />
-                </div>
-            </form>
+                    <div class="form-group mt-2 d-flex justify-content-between">
+                        <a asp-page="/BookingPages/GetAllBookings" class="btn btn-dark btn-border-white" style="border-radius: 0; min-width: 6vw;">Go back</a>
+                        <input type="submit" value="Update" class="btn btn-light" style="min-width: 6vw; border-radius: 0;" />
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
