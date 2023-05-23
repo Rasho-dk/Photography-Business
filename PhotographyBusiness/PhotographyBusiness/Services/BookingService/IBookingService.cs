@@ -26,6 +26,7 @@ namespace PhotographyBusiness.Services.BookingService
         List<Booking> GetBookingById_User_(int id);
 
 
+        Booking GetBookingById_User1(int id, int id2);
 
     }
 }

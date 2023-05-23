@@ -13,6 +13,7 @@
                 <h2 class="text-decoration-underline">Please specify a price and a note</h2>
                 
                 <br />
+            <form method="post">
 
                 <div class="form-group p-2 d-flex justify-content-around">
                     <div class="me-1">
@@ -35,11 +36,9 @@
                         <label asp-for="@Model.Price" class="control-label text-black">Price</label>
                         <input asp-for="@Model.Price" class="form-control btn-border-black" />
 
-                        <label asp-for="@Model.AdminNote" class="control-label text-black">Admin Note</label>
-                        <textarea asp-for="@Model.AdminNote" name="Note" rows="6" cols="23"
+                        <label asp-for="@Model.AdminNote" for="AdminNote" class="control-label text-black">Admin Note</label>
+                        <textarea asp-for="@Model.AdminNote" id="AdminNote" name="AdminNote" rows="6" cols="23"
                               class="form-control textarea-input btn-border-black" style="resize:none"></textarea>
-
-                        
                     </div>
 
                     <div class="ms-1 justify-content-center">
@@ -66,7 +65,6 @@
                 </div>
 
 
-                <form method="post">
                     <div class="form-group p-2">
                         <div class="form-group m-2 d-flex justify-content-center">
 
@@ -78,10 +76,6 @@
                     </div>
                 </form>
             </div>
-
-
-
-
 
     </div>
 
