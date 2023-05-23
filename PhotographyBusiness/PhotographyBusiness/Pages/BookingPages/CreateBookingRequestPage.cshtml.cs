@@ -13,18 +13,23 @@ namespace PhotographyBusiness.Pages.BookingPages
         private IBookingService _bookingService;
         private IUserService _userService;
 
-        [BindProperty] 
-        public string City { get; set; }
-        [BindProperty] 
-        public string ZipCode { get; set; }
-        [BindProperty] 
-        public string Street { get; set; }
-        [BindProperty] 
+        [BindProperty]
+        [Required(ErrorMessage = "Please enter your note.")]
         public string CustomerNote { get; set; }
-        [BindProperty] 
+
+        [Required(ErrorMessage = "Please enter your full address.")]
+        [BindProperty]
+        public string Address { get; set; }
+
+        [BindProperty]
+        [Required(ErrorMessage = "Please choose a category.")]
         public string Category { get; set; }
+
         [BindProperty, DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "Please enter date of the event.")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
+
         public Booking Booking { get; set; } = new Booking();
         public User User { get; set; }
 
@@ -32,11 +37,6 @@ namespace PhotographyBusiness.Pages.BookingPages
         {
             _bookingService = bookingService;
             _userService = userService;
-        }
-
-        public User GetUser()
-        {
-            return User;
         }
 
         public IActionResult OnGet()
@@ -47,7 +47,6 @@ namespace PhotographyBusiness.Pages.BookingPages
             }
             
             User = _userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
-            //User = _userService.GetUserByEmailAsync(HttpContext.User.Identity.Name).Result;
             return Page();
         }
 
@@ -62,7 +61,7 @@ namespace PhotographyBusiness.Pages.BookingPages
 
             Booking.Category = Category;
             Booking.CustomerNote = CustomerNote;
-            Booking.Address = $"{Street}, {City} {ZipCode}";
+            Booking.Address = Address;
             Booking.UserId = User.UserId;
             Booking.IsAccepted = false;
             Booking.Date = Date;
