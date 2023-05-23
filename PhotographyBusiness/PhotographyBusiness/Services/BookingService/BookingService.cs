@@ -20,8 +20,8 @@ namespace PhotographyBusiness.Services.BookingService
         {
             _genericDbService = genericDbService;
             _userService = userService;
-            _bookings = GetAllBookingsAsync().Result;
-            //_bookings = MockBookings.GetAllMockBookings();
+            //_bookings = GetAllBookingsAsync().Result;
+            _bookings = MockBookings.GetAllMockBookings();
             //_genericDbService.SaveObjects(_bookings);
         }
 
@@ -80,7 +80,19 @@ namespace PhotographyBusiness.Services.BookingService
         {
             foreach (Booking booking in _bookings)
             {
-                if (id == booking.User.UserId)
+                if (id == booking.User .UserId)
+                {
+                    return booking;
+                }
+            }
+            return null;
+        }
+        //Shero
+        public Booking GetBookingById_User1(int id,int bId)
+        {
+            foreach (Booking booking in _bookings)
+            {
+                if (id == booking.User.UserId && bId == booking.BookingId)
                 {
                     return booking;
                 }

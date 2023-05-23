@@ -121,7 +121,7 @@
                             <a class="btn btn-danger" asp-page="/BookingPages/DeleteBooking" asp-route-id="@booking.BookingId">
                                 <i class="fa fa-trash pop-out"></i>
                             </a>
-                            <a asp-page="/BookingPages/InvoicePage" asp-route-id="@booking.UserId" class="ms-2">
+                            <a asp-page="/BookingPages/InvoicePage" asp-route-id="@booking.UserId" asp-route-id2="@booking.BookingId" class="ms-2">
                                 <i class="far fa-file-pdf pop-out" style="color: #2a2b2d;"></i>
                             </a>
                         </td>
