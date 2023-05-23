@@ -121,12 +121,16 @@ namespace PhotographyBusiness.Services.BookingService
             {
                 if (b.BookingId == booking.BookingId)
                 {
+                    b.UserId = booking.UserId;
                     b.AdminNote = booking.AdminNote;
                     b.Category = booking.Category;
                     b.Date = booking.Date;
                     b.Address = booking.Address;
                     b.Price = booking.Price;
                     b.IsAccepted = booking.IsAccepted;
+                    b.DateCreated = booking.DateCreated;
+                    b.CustomerNote = booking.CustomerNote;  
+                    booking.User = null;
                 }
             }
 
