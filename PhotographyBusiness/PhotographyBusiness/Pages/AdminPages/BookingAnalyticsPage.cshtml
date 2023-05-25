@@ -1,0 +1,77 @@
+﻿@page
+@model PhotographyBusiness.Pages.AdminPages.BookingAnalyticsPageModel
+@{
+}
+
+<script src="//cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+<script src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+
+<div class="pt-3 pb-3 bg-dark">
+    <h1 class="text-center mb-1 text-white"> Booking Analytics</h1>
+    <div class="d-grid text-center mt-0">
+        <p class="text-decoration-none text-center mt-1 text-white">Quick overview</p>
+    </div>
+    <div class="d-grid">
+        <div class="d-flex justify-content-center">
+            <div class="d-flex w-25 justify-content-end">
+                <h5 class="m-2 text-white">
+                    Pending bookings requests:
+                    <a class="text-white">@Model.PendingRequests</a>
+                    <i class="fa fa-envelope-o text-white" aria-hidden="true" style="height: 25px"></i>
+                </h5>
+            </div>
+            <h5 class="m-2 text-white">|</h5>
+            <div class="d-flex w-25">
+                <h5 class="m-2 text-white">
+                    Total accepted bookings:
+                    <a class="text-white">@Model.TotalBookings</a>
+                    <i class="fa fa-calendar-check-o text-white" aria-hidden="true" style="height: 25px"></i>
+                </h5>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <div class="w-25 d-flex justify-content-end">
+                <h5 class="m-2 text-white">
+                    Bookings completed this month:
+                    <a class="text-white">@Model.CompletedBookingsThisMonth</a>
+                    <i class="fa fa-envelope-o text-white" aria-hidden="true" style="height: 25px"></i>
+                </h5>
+            </div>
+            <h5 class="m-2 text-white">|</h5>
+            <div class="w-25 d-flex">
+                <h5 class="m-2 text-white">
+                    Accepted bookings last 30 days:
+                    <a class="text-white">@Model.BookingsThisMonth</a>
+                    <i class="fa fa-calendar-check-o text-white" aria-hidden="true" style="height: 25px"></i>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        <a asp-page="/AdminPages/AnalyticsPage" class="btn btn-square btn-light ms-1" style="width: 10em">Go back</a>
+    </div>
+</div>
+
+<div style="height: 1px; background-color: black;">
+
+</div>
+
+<div class="py-2">
+    <div class="container d-flex flex-column justify-content-center">
+        <div class="d-flex justify-content-center">
+            <div class="text-center ms-1 me-1">@Html.Raw(Model.PieChartBookingCategory)</div>
+            <div class="text-center me-1 ms-1">@Html.Raw(Model.ChartBookingCategory)</div>
+            <div class="text-center ms-1">@Html.Raw(Model.PieChartBookingAcceptedCompare)</div>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-center">
+            <div class="text-center me-1 mt-2">@Html.Raw(Model.PieChartMonthlyBookingCategory)</div>
+            <div class="text-center mx-1 mt-2">@Html.Raw(Model.ChartMonthlyBookingCategory)</div>
+            <div class="text-center ms-1 mt-2">@Html.Raw(Model.ChartBookingAcceptedCompare)</div>
+        </div>
+        <hr />
+        <div class="d-flex justify-content-center">
+            <div class="text-center">@Html.Raw(Model.ChartMonthlyBookings)</div>
+        </div>
+    </div>
+</div>

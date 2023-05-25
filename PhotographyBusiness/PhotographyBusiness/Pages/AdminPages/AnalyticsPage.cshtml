@@ -1,0 +1,43 @@
+﻿@page
+@model PhotographyBusiness.Pages.AdminPages.AnalyticsPageModel
+@{
+}
+
+<script src="//cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
+<script src="//cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
+
+<div class="bg-dark pt-3 pb-3">
+    <h1 class="text-center text-white mb-1">Analytics</h1>
+    <div class="d-grid text-center mt-0">
+        <a class="text-white text-decoration-none text-center mt-1">Quick overview</a>
+    </div>
+    <div class="d-grid">
+        <div class="d-flex justify-content-center pt-2">
+            <div class="d-flex w-25 justify-content-end">
+                <h5 class="m-2 text-white">
+                    Total revenue:
+                    <a class="text-white">£@Model.TotalRevenue</a>
+                    <i class="fa fa-money text-white" aria-hidden="true" style="height: 25px"></i>
+                </h5>
+            </div>
+            <h5 class="m-2 text-white">|</h5>
+            <div class="d-flex w-25">
+                <h5 class="m-2 text-white" style="text-align: right">
+                    Monthly revenue:
+                    <a class="text-white">£@Model.MonthlyRevenue</a>
+                    <i class="fa fa-money text-white" aria-hidden="true" style="height: 25px"></i>
+                </h5>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+        <a asp-page="/AdminPages/BookingAnalyticsPage" class="btn btn-square btn-light me-1" style="width: 10em">Booking analytics</a>
+        <a asp-page="/AdminPages/UserAnalyticsPage" class="btn btn-square btn-light ms-1" style="width: 10em">User analytics</a>
+    </div>
+    <hr style="height: 5px; margin: 1px;"/>
+</div>
+<div class="d-flex justifiy-content-center flex-column mb-3">
+    <div class="">
+        <div class="text-center me-1 ms-1">@Html.Raw(Model.ChartMonthlyRevenue)</div>
+    </div>
+</div>
