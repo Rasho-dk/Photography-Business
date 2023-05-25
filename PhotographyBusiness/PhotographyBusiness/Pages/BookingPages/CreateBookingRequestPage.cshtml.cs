@@ -59,16 +59,12 @@ namespace PhotographyBusiness.Pages.BookingPages
         /// <returns></returns>
         public async Task<IActionResult> OnPost()
         {
-<<<<<<< HEAD
             DateTime currentDate = DateTime.Now.Date;
             if (currentDate > Date)
             {
                 ModelState.AddModelError("Date", "The date must be from today onwards.");
             }
-=======
-         
 
->>>>>>> main
             if (!ModelState.IsValid)
             {
                 return Page();
