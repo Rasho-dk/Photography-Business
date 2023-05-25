@@ -104,9 +104,13 @@ namespace PhotographyBusiness.Services.UserService
             return null;
         }
 
-        public Task<List<User>> Filtering(User user)
+        public async Task<List<User>> Filtering(User user)
         {
-            throw new NotImplementedException();
+            var filterData = users.Where(data => data.Email.ToLower() == user.Email.ToLower()
+                && data.Name.ToLower() == user.Name.ToLower() 
+                && data.PhoneNumber.ToLower() == user.PhoneNumber.ToLower()   
+            );
+            return users = filterData.ToList();
         }
     }
 }
