@@ -34,7 +34,7 @@ namespace PhotographyBusiness.Pages.AccountPages
                 data.PhoneNumber.Contains(filterData)).ToList();
             if (FilterData.IsNullOrEmpty())
             {
-                DisplayAlert = "This user : " +$"{filterData}, " + "is not exit in system. Please try again";
+                DisplayAlert = "This user : " +$"{filterData}, " + "does not exist in system. Please try again";
             }
         }
 
