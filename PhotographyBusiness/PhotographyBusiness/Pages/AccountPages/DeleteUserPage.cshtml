@@ -1,0 +1,15 @@
+﻿@page "{id:int}"
+@model PhotographyBusiness.Pages.AccountPages.DeleteUserPageModel
+@{
+}
+<div class="container" >
+	<h1>Delete Confirmation</h1>
+	<div class="alert alert-danger">
+		<h5>Are you sure you want to delete User : - @Model.User.Name</h5>
+		<form method="post">
+			<button type="submit" class="btn btn-danger">Yes</button>
+			<input asp-for="@Model.User.UserId" class="form-control" readonly hidden />
+			<a class="btn btn-primary" asp-page="/AccountPages/GetAllUsersPage">No</a>
+		</form>
+	</div>
+</div>

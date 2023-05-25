@@ -44,6 +44,7 @@ namespace PhotographyBusiness.Pages.BookingPages
                 return Page();
             }
             await _bookingService.UpdateBooking(Booking);
+           
             return RedirectToPage("GetAllBookings");
         }
     }

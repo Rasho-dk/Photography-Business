@@ -130,7 +130,7 @@ namespace PhotographyBusiness.Services.BookingService
                     b.IsAccepted = booking.IsAccepted;
                     b.DateCreated = booking.DateCreated;
                     b.CustomerNote = booking.CustomerNote;  
-                    booking.User = null;
+                    //booking.User = null;
                 }
             }
 
