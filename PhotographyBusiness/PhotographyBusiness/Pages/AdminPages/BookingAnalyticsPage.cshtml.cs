@@ -29,6 +29,8 @@ namespace PhotographyBusiness.Pages.AdminPages
         public int CompletedBookingsThisMonth { get; set; }
         public int PendingRequests { get; set; }
 
+        // Lists and misc.
+        public IEnumerable<Booking> Bookings { get; set; }
         private int ChartsHeight = 22;
 
         public BookingAnalyticsPageModel(IBookingService bookingService)
@@ -38,12 +40,14 @@ namespace PhotographyBusiness.Pages.AdminPages
 
         public void OnGet()
         {
+            Bookings = _bookingService.GetAllBookingsAsync().Result;
+
             #region Numbered statistics
 
-            TotalBookings = _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).ToList().Count(); // Total bookings
+            TotalBookings = Bookings.Where(b => b.IsAccepted == true).ToList().Count(); // Total bookings
             BookingsThisMonth = _bookingService.GetAllBookingsThisMonth().Count(); // Bookings last 30 days
             PendingRequests = _bookingService.GetAllBookingsRequests().Count();
-            CompletedBookingsThisMonth = _bookingService.GetAllBookings().Where(b => b.Date < DateTime.Now && b.IsAccepted == true).ToList().Count();
+            CompletedBookingsThisMonth = Bookings.Where(b => b.Date < DateTime.Now && b.IsAccepted == true).Count();
 
             #endregion
 
@@ -55,12 +59,12 @@ namespace PhotographyBusiness.Pages.AdminPages
             categoryData.Columns.Add("Bookings", typeof(System.Int32));
             // Add rows to data table
 
-            categoryData.Rows.Add("Weddings", _bookingService.GetAllBookings().Where(b => b.Category == "Wedding").Count());
-            categoryData.Rows.Add("Parties", _bookingService.GetAllBookings().Where(b => b.Category == "Party").Count());
-            categoryData.Rows.Add("Portraits", _bookingService.GetAllBookings().Where(b => b.Category == "Portrait").Count());
-            categoryData.Rows.Add("Fashion", _bookingService.GetAllBookings().Where(b => b.Category == "Fashion").Count());
-            categoryData.Rows.Add("Food", _bookingService.GetAllBookings().Where(b => b.Category == "Food").Count());
-            categoryData.Rows.Add("Events", _bookingService.GetAllBookings().Where(b => b.Category == "Event").Count());
+            categoryData.Rows.Add("Weddings", Bookings.Where(b => b.Category == "Wedding").Count());
+            categoryData.Rows.Add("Parties", Bookings.Where(b => b.Category == "Party").Count());
+            categoryData.Rows.Add("Portraits", Bookings.Where(b => b.Category == "Portrait").Count());
+            categoryData.Rows.Add("Fashion", Bookings.Where(b => b.Category == "Fashion").Count());
+            categoryData.Rows.Add("Food", Bookings.Where(b => b.Category == "Food").Count());
+            categoryData.Rows.Add("Events", Bookings.Where(b => b.Category == "Event").Count());
 
             // Create static categorySource with this data table
             StaticSource categorySource = new StaticSource(categoryData);
@@ -113,9 +117,9 @@ namespace PhotographyBusiness.Pages.AdminPages
             acceptedData.Columns.Add("State", typeof(System.String));
             acceptedData.Columns.Add("Amount", typeof(System.Int32));
 
-            acceptedData.Rows.Add("Accepted", _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).Count());
-            acceptedData.Rows.Add("Not-accepted", _bookingService.GetAllBookings().Where(b => b.IsAccepted == false).Count());
-            acceptedData.Rows.Add("Total", _bookingService.GetAllBookings().Count());
+            acceptedData.Rows.Add("Accepted", Bookings.Where(b => b.IsAccepted == true).Count());
+            acceptedData.Rows.Add("Not-accepted", Bookings.Where(b => b.IsAccepted == false).Count());
+            acceptedData.Rows.Add("Total", Bookings.Count());
 
             StaticSource acceptedSource = new StaticSource(acceptedData);
             DataModel acceptedModel = new DataModel();
@@ -141,8 +145,8 @@ namespace PhotographyBusiness.Pages.AdminPages
             acceptedPieChartData.Columns.Add("State", typeof(System.String));
             acceptedPieChartData.Columns.Add("Count", typeof(System.Int32));
 
-            acceptedPieChartData.Rows.Add("Accepted", _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).Count());
-            acceptedPieChartData.Rows.Add("Not-accepted", _bookingService.GetAllBookings().Where(b => b.IsAccepted == false).Count());
+            acceptedPieChartData.Rows.Add("Accepted", Bookings.Where(b => b.IsAccepted == true).Count());
+            acceptedPieChartData.Rows.Add("Not-accepted", Bookings.Where(b => b.IsAccepted == false).Count());
 
             StaticSource acceptedSourcePieChart = new StaticSource(acceptedPieChartData);
             DataModel acceptedPieModel = new DataModel();
@@ -167,12 +171,12 @@ namespace PhotographyBusiness.Pages.AdminPages
             monthlyBookingsCategoryData.Columns.Add("Categories", typeof(System.String));
             monthlyBookingsCategoryData.Columns.Add("Bookings", typeof(System.Int32));
 
-            monthlyBookingsCategoryData.Rows.Add("Weddings", _bookingService.GetAllBookings().Where(b => b.Category == "Wedding" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
-            monthlyBookingsCategoryData.Rows.Add("Parties", _bookingService.GetAllBookings().Where(b => b.Category == "Party" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
-            monthlyBookingsCategoryData.Rows.Add("Portraits", _bookingService.GetAllBookings().Where(b => b.Category == "Portrait" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
-            monthlyBookingsCategoryData.Rows.Add("Fashion", _bookingService.GetAllBookings().Where(b => b.Category == "Fashion" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
-            monthlyBookingsCategoryData.Rows.Add("Food", _bookingService.GetAllBookings().Where(b => b.Category == "Food" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
-            monthlyBookingsCategoryData.Rows.Add("Events", _bookingService.GetAllBookings().Where(b => b.Category == "Event" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
+            monthlyBookingsCategoryData.Rows.Add("Weddings", Bookings.Where(b => b.Category == "Wedding" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
+            monthlyBookingsCategoryData.Rows.Add("Parties", Bookings.Where(b => b.Category == "Party" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
+            monthlyBookingsCategoryData.Rows.Add("Portraits", Bookings.Where(b => b.Category == "Portrait" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
+            monthlyBookingsCategoryData.Rows.Add("Fashion", Bookings.Where(b => b.Category == "Fashion" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
+            monthlyBookingsCategoryData.Rows.Add("Food", Bookings.Where(b => b.Category == "Food" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
+            monthlyBookingsCategoryData.Rows.Add("Events", Bookings.Where(b => b.Category == "Event" && b.DateCreated > DateTime.Now.AddDays(-30)).Count());
 
             StaticSource monthlyBookingCategorySource = new StaticSource(monthlyBookingsCategoryData);
             DataModel monthlyBookingCategoryModel = new DataModel();
@@ -207,22 +211,19 @@ namespace PhotographyBusiness.Pages.AdminPages
             bookingsLastYear.Columns.Add("Month", typeof(System.String));
             bookingsLastYear.Columns.Add("Bookings", typeof(System.Double));
 
-            // Put all bookings into an enumarable collection
-            IEnumerable<Booking> bookings = _bookingService.GetAllBookings();
-
             // Display the month and year for the last 12 months. Display the count of bookings in that timespan.
-            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-11).ToString("MMMM yy"), bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-11).Month && x.Date.Year == DateTime.Now.AddMonths(-11).Year).Count());
-            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-10).ToString("MMMM yy"), bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-10).Month && x.Date.Year == DateTime.Now.AddMonths(-10).Year).Count());
-            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-9).ToString("MMMM yy"), bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-9).Month && x.Date.Year == DateTime.Now.AddMonths(-9).Year).Count());
-            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-8).ToString("MMMM yy"), bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-8).Month && x.Date.Year == DateTime.Now.AddMonths(-8).Year).Count());
-            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-7).ToString("MMMM yy"), bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-7).Month && x.Date.Year == DateTime.Now.AddMonths(-7).Year).Count());
-            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-6).ToString("MMMM yy"), bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-6).Month && x.Date.Year == DateTime.Now.AddMonths(-6).Year).Count());
-            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-5).ToString("MMMM yy"), bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-5).Month && x.Date.Year == DateTime.Now.AddMonths(-5).Year).Count());
-            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-4).ToString("MMMM yy"), bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-4).Month && x.Date.Year == DateTime.Now.AddMonths(-4).Year).Count());
-            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-3).ToString("MMMM yy"), bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-3).Month && x.Date.Year == DateTime.Now.AddMonths(-3).Year).Count());
-            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-2).ToString("MMMM yy"), bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-2).Month && x.Date.Year == DateTime.Now.AddMonths(-2).Year).Count());
-            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-1).ToString("MMMM yy"), bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-1).Month && x.Date.Year == DateTime.Now.AddMonths(-1).Year).Count());
-            bookingsLastYear.Rows.Add(DateTime.Now.ToString("MMMM yy"), bookings.Where(x => x.DateCreated.Month == DateTime.Now.Month && x.DateCreated.Year == DateTime.Now.Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-11).ToString("MMMM yy"), Bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-11).Month && x.Date.Year == DateTime.Now.AddMonths(-11).Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-10).ToString("MMMM yy"), Bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-10).Month && x.Date.Year == DateTime.Now.AddMonths(-10).Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-9).ToString("MMMM yy"), Bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-9).Month && x.Date.Year == DateTime.Now.AddMonths(-9).Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-8).ToString("MMMM yy"), Bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-8).Month && x.Date.Year == DateTime.Now.AddMonths(-8).Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-7).ToString("MMMM yy"), Bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-7).Month && x.Date.Year == DateTime.Now.AddMonths(-7).Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-6).ToString("MMMM yy"), Bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-6).Month && x.Date.Year == DateTime.Now.AddMonths(-6).Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-5).ToString("MMMM yy"), Bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-5).Month && x.Date.Year == DateTime.Now.AddMonths(-5).Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-4).ToString("MMMM yy"), Bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-4).Month && x.Date.Year == DateTime.Now.AddMonths(-4).Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-3).ToString("MMMM yy"), Bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-3).Month && x.Date.Year == DateTime.Now.AddMonths(-3).Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-2).ToString("MMMM yy"), Bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-2).Month && x.Date.Year == DateTime.Now.AddMonths(-2).Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.AddMonths(-1).ToString("MMMM yy"), Bookings.Where(x => x.Date.Month == DateTime.Now.AddMonths(-1).Month && x.Date.Year == DateTime.Now.AddMonths(-1).Year).Count());
+            bookingsLastYear.Rows.Add(DateTime.Now.ToString("MMMM yy"), Bookings.Where(x => x.DateCreated.Month == DateTime.Now.Month && x.DateCreated.Year == DateTime.Now.Year).Count());
 
             StaticSource bookingsLastYearSource = new StaticSource(bookingsLastYear);
             DataModel bookingsLastYearModel = new DataModel();

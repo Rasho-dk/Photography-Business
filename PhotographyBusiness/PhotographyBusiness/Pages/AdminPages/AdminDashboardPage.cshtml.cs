@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Models;
+using PhotographyBusiness.Services;
 using PhotographyBusiness.Services.BookingService;
 using PhotographyBusiness.Services.UserService;
 
@@ -12,6 +13,7 @@ namespace PhotographyBusiness.Pages.AdminPages
     {
         private IUserService _userService;
         private IBookingService _bookingService;
+        private GenericDbService<User> _genericDbService; // Using DB service to get latest stats
 
         public List<Booking> Requests { get; set; }
         public List<Booking> Bookings { get; set; }
@@ -22,21 +24,22 @@ namespace PhotographyBusiness.Pages.AdminPages
         public int CompletedBookingsThisMonth { get; set; }
         public int PendingRequests { get; set; }
 
-        public AdminDashboardPageModel(IUserService userService, IBookingService bookingService)
+        public AdminDashboardPageModel(IUserService userService, IBookingService bookingService, GenericDbService<User> genericDbService)
         {
             _userService = userService;
             _bookingService = bookingService;
+            _genericDbService = genericDbService;
         }
 
         public void OnGet()
         {
             Requests = _bookingService.GetMostRecentRequests(); // Get 5 most recent bookings requests
             Bookings = _bookingService.GetUpcomingBookings().Take(5).OrderBy(b => b.Date).ToList(); // Get top 5 upcoming bookings
-            Users = _userService.GetAllUsers().OrderByDescending(u => u.DateCreated).Take(5).ToList(); // Get 5 newest users
-            TotalUsers = _userService.GetAllUsers().Count();
-            TotalBookings = _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).ToList().Count(); // Total bookings
+            Users = _genericDbService.GetObjectsAsync().Result.OrderByDescending(u => u.DateCreated).Take(5).ToList(); // Get 5 newest users
+            TotalUsers = _genericDbService.GetObjectsAsync().Result.Count();
+            TotalBookings = _bookingService.GetAllBookingsAsync().Result.Where(b => b.IsAccepted == true).ToList().Count(); // Total bookings
             BookingsThisMonth = _bookingService.GetAllBookingsThisMonth().Count(); // Bookings last 30 days
-            CompletedBookingsThisMonth = _bookingService.GetAllBookings().Where(b => b.Date < DateTime.Now && b.IsAccepted == true).ToList().Count(); // Completed bookings this month
+            CompletedBookingsThisMonth = _bookingService.GetAllBookingsAsync().Result.Where(b => b.Date < DateTime.Now && b.IsAccepted == true).ToList().Count(); // Completed bookings this month
             PendingRequests = _bookingService.GetAllBookingsRequests().Count();
         }
     }

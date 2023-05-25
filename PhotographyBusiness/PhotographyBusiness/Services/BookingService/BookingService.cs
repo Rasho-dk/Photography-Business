@@ -35,11 +35,11 @@ namespace PhotographyBusiness.Services.BookingService
         /// Internal method for returning the user object inside the booking
         /// </summary>
         /// <returns></returns>
-        internal async Task<List<Booking>> GetAllBookingsAsync()
+        public async Task<List<Booking>> GetAllBookingsAsync()
         {
             using (var context = new ObjectDbContext())
             {
-                return await context.Bookings.Include(b => b.User).AsNoTracking().ToListAsync();
+                return await context.Bookings.Include(b => b.User).ToListAsync();
             }
         }
 
@@ -137,12 +137,12 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> GetAllBookingsThisMonth()
         {
-            return GetAllBookings().Where(b => b.Date >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
+            return GetAllBookingsAsync().Result.Where(b => b.Date >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
         }
 
         public List<Booking> GetUpcomingBookings()
         {
-            return GetAllBookings().Where(b => b.IsAccepted == true && b.Date > DateTime.Now).ToList();
+            return GetAllBookingsAsync().Result.Where(b => b.IsAccepted == true && b.Date > DateTime.Now).ToList();
         }
 
         public List<Booking> GetMostRecentRequests()
@@ -152,7 +152,7 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> GetAllBookingsRequests()
         {
-            return GetAllBookings().Where(b => b.IsAccepted == false).ToList();
+            return GetAllBookingsAsync().Result.Where(b => b.IsAccepted == false).ToList();
         }
 
         public async Task<List<Booking>> FilterBookingsByDate(DateTime startdate, DateTime endDate)

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Models;
+using PhotographyBusiness.Services;
 using PhotographyBusiness.Services.BookingService;
 using PhotographyBusiness.Services.UserService;
 using System.Data;
@@ -15,6 +16,7 @@ namespace PhotographyBusiness.Pages.AdminPages
     {
         private IBookingService _bookingService;
         private IUserService _userService;
+        private GenericDbService<User> _genericDbService;
 
         // Charts
         public string ChartBookingCategory { get; internal set; }
@@ -34,20 +36,28 @@ namespace PhotographyBusiness.Pages.AdminPages
         public double TotalRevenue { get; set; }
         public double MonthlyRevenue { get; set; }
 
+        // Lists and misc.
+        public IEnumerable<Booking> Bookings { get; set; }
+        public IEnumerable<User> Users { get; set; }
+
         public int ChartsHeight = 22;
 
-        public AnalyticsPageModel(IBookingService bookingService, IUserService userService)
+        public AnalyticsPageModel(IBookingService bookingService, IUserService userService, GenericDbService<User> genericDbService)
         {
             _bookingService = bookingService;
             _userService = userService;
+            _genericDbService = genericDbService;
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
+            Bookings = _bookingService.GetAllBookingsAsync().Result;
+            Users = _genericDbService.GetObjectsAsync().Result;
+            
             #region Numbered statistics
 
-            TotalUsers = _userService.GetAllUsers().Count();
-            TotalBookings = _bookingService.GetAllBookings().Where(b => b.IsAccepted == true).ToList().Count(); // Total bookings
+            TotalUsers = Users.Count();
+            TotalBookings = Bookings.Where(b => b.IsAccepted == true).ToList().Count(); // Total bookings
             BookingsThisMonth = _bookingService.GetAllBookingsThisMonth().Count(); // Bookings last 30 days
             PendingRequests = _bookingService.GetAllBookingsRequests().Count();
 
@@ -62,7 +72,8 @@ namespace PhotographyBusiness.Pages.AdminPages
                 }
             }
 
-            bookingsList = _bookingService.GetAllBookings().Where(x => x.Date <= DateTime.Now); // Get all bookings with a date before today. Meaning the event has taken place.
+            // Get all bookings with a date before today. Meaning the event has taken place.
+            bookingsList = Bookings.Where(x => x.Date <= DateTime.Now); 
 
             foreach (Booking booking in bookingsList)
             {
