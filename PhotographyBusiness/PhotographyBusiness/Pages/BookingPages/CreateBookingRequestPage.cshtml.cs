@@ -68,19 +68,7 @@ namespace PhotographyBusiness.Pages.BookingPages
             Booking.IsAccepted = false;
             Booking.Date = Date;
             Booking.DateCreated = DateTime.Now;
-            //await _bookingService.CreateBookingAsync(Booking);
-
-            try
-            {
-                await _bookingService.CreateBookingAsync(Booking);
-                return RedirectToPage("../Index");
-
-            }
-            catch (Exception ex)
-            {
-                ViewData["ErrorMessage"] = ex.Message;
-
-            }
+            await _bookingService.CreateBookingAsync(Booking);
             return Page();
         }
     }
