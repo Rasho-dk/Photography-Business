@@ -33,8 +33,8 @@ namespace PhotographyBusiness.Pages.BookingPages
         public Booking Booking { get; set; } = new Booking();
         public User User { get; set; }
 
-        public string DisplayAlert { get; set; }
-        public string DisplayConfirm { get; set; }
+        //public string DisplayAlert { get; set; }
+        //public string DisplayConfirm { get; set; }
 
         public CreateBookingRequestPageModel(IBookingService bookingService, IUserService userService)
         {
@@ -79,6 +79,8 @@ namespace PhotographyBusiness.Pages.BookingPages
             Booking.Date = Date;
             Booking.DateCreated = DateTime.Now;
             await _bookingService.CreateBookingAsync(Booking);
+          
+
             return RedirectToPage("../Index");
         }
     }

@@ -11,18 +11,6 @@
     <div class="d-flex justify-content-center" style="">
         <div class="d-flex flex-column m-4" style="min-width: 30vw">
             <form method="post" class="p-4" style="background-color: rgba(0,0,0,0.7)">
-                @if(Model.DisplayAlert is not null)
-                {
-                    <div class="alert alert-danger" role="alert">
-                        @Model.DisplayAlert
-                    </div>
-                }
-                @if(Model.Booking is not null)
-                {
-                    <div class="alert alert-success" role="alert" style="word-wrap:break-word;">
-                        @Model.DisplayConfirm
-                    </div>
-                }
                 <div class="form-group p-2">
                     <label asp-for="@Model.User.Email" class="control-label text-white">Email</label>
                     <input asp-for="@Model.User.Email" class="form-control" readonly />
