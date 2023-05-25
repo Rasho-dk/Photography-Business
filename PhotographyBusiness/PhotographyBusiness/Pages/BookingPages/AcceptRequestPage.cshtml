@@ -70,8 +70,8 @@
 
                             <input type="submit" value="Confirm" class="btn btn-dark" style="min-width: 6vw; border-radius: 0; margin-right: 40px;"
                                    asp-route-id="@Model.Booking.BookingId" asp-route-note="@Model.AdminNote" asp-route-price="@Model.Price" />
-
-                            <a asp-page="/BookingPages/GetAllBookingRequestsPage" class="btn btn-light btn-border-black" style="border-radius: 0; min-width: 6vw;">Decline</a>
+                            <input asp-for="@Model.Booking.BookingId" readonly hidden />
+                            <button asp-page-handler="Delete" type="submit"  class="btn btn-light btn-border-black" style="border-radius: 0; min-width: 6vw;">Decline</button>
                         </div>
                     </div>
                 </form>

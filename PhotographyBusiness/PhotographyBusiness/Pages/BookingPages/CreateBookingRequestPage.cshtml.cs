@@ -33,6 +33,9 @@ namespace PhotographyBusiness.Pages.BookingPages
         public Booking Booking { get; set; } = new Booking();
         public User User { get; set; }
 
+        //public string DisplayAlert { get; set; }
+        //public string DisplayConfirm { get; set; }
+
         public CreateBookingRequestPageModel(IBookingService bookingService, IUserService userService)
         {
             _bookingService = bookingService;
@@ -50,15 +53,24 @@ namespace PhotographyBusiness.Pages.BookingPages
             return Page();
         }
 
+        /// <summary>
+        /// OnPost
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> OnPost()
         {
+            DateTime currentDate = DateTime.Now.Date;
+            if (currentDate > Date)
+            {
+                ModelState.AddModelError("Date", "The date must be from today onwards.");
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
             User = _userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
-
             Booking.Category = Category;
             Booking.CustomerNote = CustomerNote;
             Booking.Address = Address;
@@ -66,8 +78,9 @@ namespace PhotographyBusiness.Pages.BookingPages
             Booking.IsAccepted = false;
             Booking.Date = Date;
             Booking.DateCreated = DateTime.Now;
-
             await _bookingService.CreateBookingAsync(Booking);
+          
+
             return RedirectToPage("../Index");
         }
     }

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.IdentityModel.Tokens;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.UserService;
 
@@ -12,6 +12,8 @@ namespace PhotographyBusiness.Pages.AccountPages
     {
         private IUserService _userService;
         public List<User> Users { get; set; }
+        public List<User> FilterData { get; set; }
+        public string DisplayAlert { get; set; }
 
         public GetAllUsersPageModel(IUserService userService)
         {
@@ -19,16 +21,29 @@ namespace PhotographyBusiness.Pages.AccountPages
         }
 
 
-        public IActionResult OnGet()
+        public void OnGet()
         {
             Users = _userService.GetAllUsers();
-            return Page();
+            FilterData = Users;
+        }
+        public void OnPostFilterUsers(string filterData)
+        {
+            Users = _userService.GetAllUsers();
+            FilterData = string.IsNullOrEmpty(filterData) ? Users : Users
+                .Where(data => data.Name.ToLower().Contains(filterData.ToLower()) ||
+                data.PhoneNumber.Contains(filterData)).ToList();
+            if (FilterData.IsNullOrEmpty())
+            {
+                DisplayAlert = "This user : " +$"{filterData}, " + "does not exist in system. Please try again";
+            }
         }
 
-        public IActionResult OnPostDelete(int id) 
+        public IActionResult OnPostDelete(int id)
         {
             _userService.DeleteUserAsync(id);
             return RedirectToPage("../AccountPages/GetAllUsersPage");
         }
+
     }
 }
+

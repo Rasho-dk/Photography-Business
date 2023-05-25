@@ -5,11 +5,30 @@
 
 <div class="container">
     <br />
+    @if (Model.DisplayAlert is not null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.DisplayAlert
+        </div>
+    }
     <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Users</h1>
-
-    <br />
-    <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:30%;">
-    <br>
+    <form asp-page-handler="FilterUsers" method="post">
+        <br />
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-group">
+                    <input class="form-control border-end-0 border " name="FilterData" type="text"
+                        placeholder="Filter by name and phonenumber" id="example-search-input">
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary bg-white border-bottom-0 border  ms-n5"
+                                type="submit" name="filterData">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+    </form>
 
     <table class="table table-bordered table-hover table-striped" width="60%" style="border:1px solid black; word-wrap: break-word;">
         <thead>
@@ -22,7 +41,7 @@
         <tbody id="myTable">
             @if (@Model.Users != null)
             {
-                foreach (var user in Model.Users)
+                foreach (var user in Model.FilterData)
                 {
                     <tr class="table-light">
                         <td>
@@ -45,10 +64,13 @@
                             @user.PhoneNumber
                         </td>
                         <td>
-                            <button data-user-id2="@user.UserId" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" asp-route-id="@user.UserId">
+                            <a class="btn btn-danger" type="button" title="Delete"
+                               asp-page="/AccountPages/DeleteUserPage" asp-route-id="@user.UserId">
+                                <i class="fa fa-trash pop-out"></i>
+                            </a>
+                           @* <button data-user-id2="@user.UserId" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" asp-route-id="@user.UserId">
                                 <i class="fa fa-trash pop-out"></i>
                             </button>
-
                             <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -68,7 +90,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </td>
                     </tr>
                 }

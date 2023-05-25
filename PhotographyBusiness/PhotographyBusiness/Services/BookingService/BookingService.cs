@@ -5,8 +5,6 @@ using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.UserService;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("PhotographerTest")]
-
 namespace PhotographyBusiness.Services.BookingService
 {
     public class BookingService : IBookingService
@@ -130,7 +128,7 @@ namespace PhotographyBusiness.Services.BookingService
                     b.IsAccepted = booking.IsAccepted;
                     b.DateCreated = booking.DateCreated;
                     b.CustomerNote = booking.CustomerNote;  
-                    booking.User = null;
+                    //booking.User = null;
                 }
             }
 
