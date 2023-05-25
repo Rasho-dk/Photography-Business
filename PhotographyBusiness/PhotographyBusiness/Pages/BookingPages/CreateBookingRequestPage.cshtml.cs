@@ -52,6 +52,8 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         public async Task<IActionResult> OnPost()
         {
+         
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -66,9 +68,20 @@ namespace PhotographyBusiness.Pages.BookingPages
             Booking.IsAccepted = false;
             Booking.Date = Date;
             Booking.DateCreated = DateTime.Now;
+            //await _bookingService.CreateBookingAsync(Booking);
 
-            await _bookingService.CreateBookingAsync(Booking);
-            return RedirectToPage("../Index");
+            try
+            {
+                await _bookingService.CreateBookingAsync(Booking);
+                return RedirectToPage("../Index");
+
+            }
+            catch (Exception ex)
+            {
+                ViewData["ErrorMessage"] = ex.Message;
+
+            }
+            return Page();
         }
     }
 }

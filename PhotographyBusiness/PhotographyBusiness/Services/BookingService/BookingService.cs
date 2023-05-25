@@ -2,10 +2,9 @@
 using PhotographyBusiness.EFDbContext;
 using PhotographyBusiness.MockData;
 using PhotographyBusiness.Models;
+using PhotographyBusiness.Services.ADOService;
 using PhotographyBusiness.Services.UserService;
 using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("PhotographerTest")]
 
 namespace PhotographyBusiness.Services.BookingService
 {
@@ -47,14 +46,15 @@ namespace PhotographyBusiness.Services.BookingService
 
         public async Task CreateBookingAsync(Booking booking)
         {
-            if (booking != null)
-            {
-                await _genericDbService.AddObjectAsync(booking);
-                // To accomodate Identity_Insert = OFF, we need to manually instantiate the user by the id that was passed in the request page
-                // Otherwise we will get an SQLException
-                booking.User = _userService.GetUserByIdAsync(booking.UserId).Result;
-                this._bookings.Add(booking);
-            }
+            SQL_Booking.CreateBooking(booking);
+            //if (booking != null)
+            //{
+            //    await _genericDbService.AddObjectAsync(booking);
+            //    // To accomodate Identity_Insert = OFF, we need to manually instantiate the user by the id that was passed in the request page
+            //    // Otherwise we will get an SQLException
+            //    booking.User = _userService.GetUserByIdAsync(booking.UserId).Result;
+            //    this._bookings.Add(booking);
+            //}
 
         }
 
