@@ -69,7 +69,7 @@ namespace PhotographyBusiness.Pages.BookingPages
             Booking.Date = Date;
             Booking.DateCreated = DateTime.Now;
             await _bookingService.CreateBookingAsync(Booking);
-            return Page();
+            return RedirectToPage("../Index");
         }
     }
 }

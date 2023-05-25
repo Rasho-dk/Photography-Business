@@ -103,5 +103,10 @@ namespace PhotographyBusiness.Services.UserService
             }
             return null;
         }
+
+        public Task<List<User>> Filtering(User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
