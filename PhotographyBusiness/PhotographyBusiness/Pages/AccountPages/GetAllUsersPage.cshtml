@@ -45,10 +45,13 @@
                             @user.PhoneNumber
                         </td>
                         <td>
-                            <button data-user-id2="@user.UserId" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" asp-route-id="@user.UserId">
+                            <a class="btn btn-danger" type="button" title="Delete"
+                               asp-page="/AccountPages/DeleteUserPage" asp-route-id="@user.UserId">
+                                <i class="fa fa-trash pop-out"></i>
+                            </a>
+                           @* <button data-user-id2="@user.UserId" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" asp-route-id="@user.UserId">
                                 <i class="fa fa-trash pop-out"></i>
                             </button>
-
                             <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -68,7 +71,7 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </td>
                     </tr>
                 }

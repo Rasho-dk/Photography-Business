@@ -2,7 +2,6 @@
 @model PhotographyBusiness.Pages.BookingPages.MyBookingPageModel
 @{
 }
-                                                                                <!-- SHERO:  MÅ ikke ændres på kode struktur og design. -->
 
 
 <div class="container">
@@ -68,7 +67,7 @@
                             }
                         </td>
                         <td>
-                            <a asp-page="/BookingPages/InvoicePage" asp-route-id="@booking.BookingId">
+                            <a asp-page="/BookingPages/InvoicePage" asp-route-id="@booking.UserId" asp-route-id2="@booking.BookingId">
                                 <i class="far fa-file-pdf pop-out" style="color: #2a2b2d;"></i>
                             </a>
                         </td>

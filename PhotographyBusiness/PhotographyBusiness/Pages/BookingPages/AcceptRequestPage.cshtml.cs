@@ -47,6 +47,16 @@ namespace PhotographyBusiness.Pages.BookingPages
             } 
             return RedirectToPage("NotFound");
         }
+        /// <summary>
+        /// Here når admin trykker på Decline så sletter denne booking fra databasen og fra listen
+        /// </summary>
+        /// <returns>Redirect to page GetAllBookings </returns>
+        public  IActionResult OnPostDelete(int id)
+        {
+            var toBeDeleted = _bookingService.DeleteBooking(id);
+
+            return RedirectToPage("GetAllBookings");
+        }
 
     }
 }

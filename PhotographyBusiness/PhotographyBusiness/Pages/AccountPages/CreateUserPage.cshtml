@@ -8,6 +8,12 @@
 <div class="transparent-black" style="min-height: 75.2vh">
     <div class="d-flex justify-content-center" style="">
         <div class="d-flex flex-column m-4" style="min-width: 30vw">
+            @if (Model.DisplayAlert is not null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @Model.DisplayAlert
+                </div>
+            }
             <form method="post" class="p-4" style="background-color: rgba(0,0,0,0.7)">
                 <div class="form-group p-2">
                     <label asp-for="@Model.Email" class="control-lable text-white">Email</label>
