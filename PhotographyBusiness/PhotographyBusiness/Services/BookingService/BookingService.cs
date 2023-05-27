@@ -49,10 +49,10 @@ namespace PhotographyBusiness.Services.BookingService
         {
             if (booking != null)
             {
-                await _genericDbService.AddObjectAsync(booking);
+               // await _genericDbService.AddObjectAsync(booking);
                 // To accomodate Identity_Insert = OFF, we need to manually instantiate the user by the id that was passed in the request page
                 // Otherwise we will get an SQLException
-                booking.User = _userService.GetUserByIdAsync(booking.UserId).Result;
+                //Sbooking.User = _userService.GetUserByIdAsync(booking.UserId).Result;
                 this._bookings.Add(booking);
             }
 
@@ -75,19 +75,8 @@ namespace PhotographyBusiness.Services.BookingService
             return null;
         }
 
-        public Booking GetBookingById_User(int id)
-        {
-            foreach (Booking booking in _bookings)
-            {
-                if (id == booking.User .UserId)
-                {
-                    return booking;
-                }
-            }
-            return null;
-        }
         //Shero
-        public Booking GetBookingById_User1(int id,int bId)
+        public Booking GetBookingById_User(int id,int bId)
         {
             foreach (Booking booking in _bookings)
             {

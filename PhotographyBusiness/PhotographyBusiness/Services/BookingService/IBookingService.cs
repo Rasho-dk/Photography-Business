@@ -22,7 +22,7 @@ namespace PhotographyBusiness.Services.BookingService
         public Task<List<Booking>> SortBookingByDate();
         public Task<List<Booking>> SortBookingByName();
         public Task<List<Booking>> SortBookingByEmail();
-        Booking GetBookingById_User1(int id, int id2);
+        Booking GetBookingById_User(int id, int id2);
 
     }
 }

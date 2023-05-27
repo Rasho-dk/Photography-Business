@@ -78,30 +78,76 @@ namespace PhotographerTest
             Assert.IsNull(resultOFDeleteBooking);
         }
         [TestMethod]
-        public async Task Test_GetBookingById_Valid()
-        {
-
-        }
-        [TestMethod]
-        public void Test_GetBookingById_User_ValindUserId()
+        public void GetBookingByUserId_BookingId()
         {
             //Arrange
-            int userId = 4;
+            Booking booking = new Booking();
+            booking.User = new User();
+            booking.User.UserId = 99;
+            booking.UserId = booking.User.UserId;
+            booking.BookingId = 99;
 
             //Act
+            _bookingService.CreateBookingAsync(booking);
+            var result = _bookingService.GetBookingById_User(99, 99);
 
-            //Asset
+            //Assert
+            Assert.AreEqual(result.BookingId, booking.BookingId);
+            Assert.AreEqual(result.UserId, booking.UserId);
         }
         [TestMethod]
-        public void Test_GetBookingById_User_InvalidUserId()
+        public void GetBookingByUserId_BookingId_InvalindId()
         {
             //Arrange
+            int userId = 22;
+            int bookingId = 22;
 
             //Act
-
+            var result = _bookingService.GetBookingById_User(userId, bookingId);
 
             //Asset
+            Assert.IsNull(result); 
         }
+        [TestMethod]
+        public void Test_GetBookingsByUserId_Valind()
+        {
+            //Arrange
+            Booking booking   = new Booking { User = new User() };
+            booking.User.UserId = 99;
+
+            //Act
+            _bookingService.CreateBookingAsync(booking);
+            var result = _bookingService.GetBookingsByUserId(99);
+
+            //Asset
+            Assert.IsTrue(result.Contains(booking));
+        }
+        /// <summary>
+        /// Formålet er at kalde på existerende booking objekt(obj) ved at bruge GettAllBooking()[index].
+        ///indtaster en ny værdier ved hjælp af varibelen. 
+        ///Tjekker om inholdet passer
+        /// </summary>
+        [TestMethod]
+        public void Test_Update_BookingInforamtion()
+        {
+            //Arrange
+            var existingBooking = _bookingService.GetAllBookings()[1];
+            existingBooking.Address = "En ny address";
+            existingBooking.AdminNote = "Husk have en kaffe med";
+            existingBooking.Date = DateTime.Now;
+            existingBooking.Price= 100;
+            existingBooking.Category = "Fest";
+
+            //Act
+            _bookingService.UpdateBooking(existingBooking);
+            var updatedBooking = _bookingService.GetBookingById(existingBooking.BookingId);
+
+            //Assert
+            Assert.IsNotNull(updatedBooking);
+            Assert.AreEqual(existingBooking, updatedBooking);
+
+        }
+
 
     }
 }

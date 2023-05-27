@@ -43,9 +43,9 @@ namespace PhotographyBusiness.Pages.AccountPages
                 if (ModelState.IsValid)
                 {
                     // Shero: Jeg har brugt det kun for at lave unit test på den..Den er uden HashPassword
-                   //_userService.CreateUserAsync(new Models.User(Email, Password, $"{FirstName} {LastName}", PhoneNumber));
+                   _userService.CreateUserAsync(new Models.User(Email, Password, $"{FirstName} {LastName}", PhoneNumber));
 
-                    _userService.CreateUserAsync(new Models.User(Email, passwordHasher.HashPassword(Email, Password), $"{FirstName} {LastName}", PhoneNumber));
+                   // _userService.CreateUserAsync(new Models.User(Email, passwordHasher.HashPassword(Email, Password), $"{FirstName} {LastName}", PhoneNumber));
                     //_mailService.SendUserCreationEmail(Email, $"{FirstName} {LastName}");
 
                     return RedirectToPage("../Index");

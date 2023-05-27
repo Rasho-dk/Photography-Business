@@ -31,7 +31,7 @@ namespace PhotographyBusiness.Pages.BookingPages
             {
                 User = await userService.GetUserByNameAsync(HttpContext.User.Identity.Name);
                 //Booking =  bookingService.GetBookingById(id);
-                Booking = bookingService.GetBookingById_User1(id,id2);
+                Booking = bookingService.GetBookingById_User(id,id2);
                 Deposit = Booking.Price / 2;
                 Remaining = Deposit;
 
@@ -44,7 +44,7 @@ namespace PhotographyBusiness.Pages.BookingPages
                     {
                         User = userService.GetUserByIdAsync(user.UserId).Result;
                         //Booking = bookingService.GetBookingById_User(id);
-                        Booking = bookingService.GetBookingById_User1(id, id2);
+                        Booking = bookingService.GetBookingById_User(id, id2);
                         Deposit = Booking.Price / 2;
                         Remaining = Deposit;
                     }
