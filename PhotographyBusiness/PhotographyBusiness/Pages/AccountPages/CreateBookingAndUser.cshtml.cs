@@ -13,6 +13,9 @@ namespace PhotographyBusiness.Pages.AccountPages
 {
     public class CreateBookingAndUserModel : PageModel
     {
+        private const string existingEmail = "This email is already exist";
+        private const string comfierBooking = "Your booking request has been successfully sent!";
+        private const string dateAlert = "The date must be from today onwards.";
         private IUserService userService;
         private IBookingService bookingService;
         private PasswordHasher<string> passwordHasher;
@@ -82,9 +85,9 @@ namespace PhotographyBusiness.Pages.AccountPages
 
         }
         /// <summary>
-        /// 1.th Checkes om koden passer med reapeatPassword
-        /// 2.th Check om Email eksistere allered i systemet, hvis ja : returnere en fejlmeddelelse.
-        /// 3.th  check om dato er bestilt fra dagsdato hvsi nej returnere en fejlmeddelelse.
+        /// 1.th tjekke om koden passer med reapeatPassword
+        /// 2.th tjekke om Email eksistere allered i systemet, hvis ja : returnere en fejlmeddelelse.
+        /// 3.th  tjekke om dato er bestilt fra dagsdato hvsi nej returnere en fejlmeddelelse.
         /// 4.th Hvis all overstår er korrket opret en User og en booking request og returnere en succes meddelelse 
         /// </summary>
         /// <returns>Hvis der optået fejl fremvises en fejlmeddelelse ellers fortsætter til 
@@ -98,14 +101,14 @@ namespace PhotographyBusiness.Pages.AccountPages
                 {
                     if (user.Email == Email)
                     {
-                        DisplayAlert = "This email is allready exist";
+                        DisplayAlert = existingEmail;
                         return Page();
 
                     }
                     DateTime currentDate = DateTime.Now.Date;
                     if(currentDate > DateOfEvent)
                     {
-                        ModelState.AddModelError("DateOfEvent", "The date must be from today onwards.");
+                        ModelState.AddModelError("DateOfEvent", dateAlert);
                     }
                     if (!ModelState.IsValid)
                     {
@@ -134,7 +137,7 @@ namespace PhotographyBusiness.Pages.AccountPages
                 await bookingService.CreateBookingAsync(Booking);
                 if (Booking is not null)
                 {
-                    DisplayConfirm = "Your booking request has been successfully sent!";
+                    DisplayConfirm = comfierBooking;
                     return Page();
                 }
 
