@@ -28,16 +28,13 @@ namespace PhotographyBusiness.Pages.AccountPages
         }
         public void OnPostFilterUsers(string filterData)
         {
-            Users = _userService.GetAllUsers();
-            FilterData = string.IsNullOrEmpty(filterData) ? Users : Users
-                .Where(data => data.Name.ToLower().Contains(filterData.ToLower()) ||
-                data.PhoneNumber.Contains(filterData)).ToList();
+            Users = _userService.Filtering(filterData).Result;
+            FilterData = Users;
             if (FilterData.IsNullOrEmpty())
             {
                 DisplayAlert = "This user : " +$"{filterData}, " + "does not exist in system. Please try again";
             }
         }
-
         public IActionResult OnPostDelete(int id)
         {
             _userService.DeleteUserAsync(id);
