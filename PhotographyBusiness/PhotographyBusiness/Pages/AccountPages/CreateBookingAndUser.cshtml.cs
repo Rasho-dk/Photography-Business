@@ -30,7 +30,7 @@ namespace PhotographyBusiness.Pages.AccountPages
         [BindProperty]
         [Required(ErrorMessage = "Please enter your email address.")]
         [StringLength(30, ErrorMessage = "The email address must be no more than {1} characters long.")]
-        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Please enter a valid email address. exampel@exampel.com")]
+        [RegularExpression(@"^[^@\s]+@[^@\s]+\.[^@\s]+$", ErrorMessage = "Please enter a valid email address. example@example.com")]
         public string Email { get; set; }
         [BindProperty]
         [Required(ErrorMessage = "Please enter your password.")]
