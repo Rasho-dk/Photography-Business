@@ -11,8 +11,7 @@ namespace PhotographyBusiness.Services.UserService
         Task<User> DeleteUserAsync(int id);
         Task CreateUserAsync(User user);
         Task<User> UpdateUserAsync(User user);
-        Task<List<User>> Filtering(User user);
-
+        Task<List<User>> Filtering(string filter);  
 
     }
 }
