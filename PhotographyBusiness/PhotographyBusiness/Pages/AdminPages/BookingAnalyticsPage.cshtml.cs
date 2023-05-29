@@ -230,7 +230,7 @@ namespace PhotographyBusiness.Pages.AdminPages
             bookingsLastYearModel.DataSources.Add(bookingsLastYearSource);
             Charts.ColumnChart bookingsLastYearChart = new Charts.ColumnChart("monthlyBookingsChartLastYear");
 
-            bookingsLastYearChart.Width.Percentage(80);
+            bookingsLastYearChart.Width.Em(80);
             bookingsLastYearChart.Height.Em(ChartsHeight);
 
             bookingsLastYearChart.Data.Source = bookingsLastYearModel;
