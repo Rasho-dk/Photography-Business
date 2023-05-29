@@ -6,13 +6,13 @@ namespace PhotographyBusiness.Services.UserService
     {
         private List<User> users; 
         private GenericDbService<User> _genericDbService; 
-        public UserService(GenericDbService<User> genericDbService)
+        private MailService.IMailService _mailService;
+        public UserService(GenericDbService<User> genericDbService, MailService.IMailService mailService)
         {
             _genericDbService = genericDbService;
-           users = genericDbService.GetObjectsAsync().Result.ToList(); 
-           //users = MockData.MockUsers.GetMockUsers();
-           // _genericDbService.SaveObjects(users);
-
+            _mailService = mailService;
+            users = genericDbService.GetObjectsAsync().Result.ToList();
+            //users = MockData.MockUsers.GetMockUsers();
         }
         /// <summary>
         /// konsturtøren bliver brugt til unit test.
@@ -27,6 +27,7 @@ namespace PhotographyBusiness.Services.UserService
         {
             users.Add(user);    
             await _genericDbService.AddObjectAsync(user);
+            await _mailService.SendUserCreationEmail(user.Email, user.Name);
         }
 
         public async Task<User> DeleteUserAsync(int id)

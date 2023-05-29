@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MailKit;
+using Microsoft.EntityFrameworkCore;
 using PhotographyBusiness.EFDbContext;
 using PhotographyBusiness.MockData;
 using PhotographyBusiness.Models;
+using PhotographyBusiness.Services.MailService;
 using PhotographyBusiness.Services.UserService;
 using System.Runtime.CompilerServices;
 
@@ -10,14 +12,16 @@ namespace PhotographyBusiness.Services.BookingService
     public class BookingService : IBookingService
     {
         private IUserService _userService;
+        private MailService.IMailService _mailService;
         private GenericDbService<Booking> _genericDbService;
         private List<Booking> _bookings;
         public int number { get; set; } // Arun: til sort, så den både kan sortere asc og desc med samme klik. 
 
-        public BookingService(GenericDbService<Booking> genericDbService, IUserService userService)
+        public BookingService(GenericDbService<Booking> genericDbService, IUserService userService, MailService.IMailService mailService)
         {
             _genericDbService = genericDbService;
             _userService = userService;
+            _mailService = mailService;
             _bookings = GetAllBookingsAsync().Result;
             //_bookings = MockBookings.GetAllMockBookings();
         }
@@ -52,6 +56,7 @@ namespace PhotographyBusiness.Services.BookingService
                 // Otherwise we will get an SQLException
                 booking.User = _userService.GetUserByIdAsync(booking.UserId).Result;
                 this._bookings.Add(booking);
+                await _mailService.SendRequestMail(booking);
             }
 
         }
@@ -108,8 +113,18 @@ namespace PhotographyBusiness.Services.BookingService
 
         public async Task DeleteBooking(int id)
         {
-            _bookings.Remove(GetBookingById(id));
-            await _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
+            if (GetBookingById(id) != null)
+            {
+                Booking toBeDeleted = GetBookingById(id);
+                _bookings.Remove(GetBookingById(id));
+                await _genericDbService.DeleteObjectAsync(_genericDbService.GetObjectByIdAsync(id).Result);
+                
+                if (!toBeDeleted.IsAccepted)
+                {
+                    await _mailService.SendCancellationMail(toBeDeleted);
+                }
+            }
+            
         }
 
         public async Task UpdateBooking(Booking booking)

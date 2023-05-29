@@ -24,7 +24,6 @@ namespace PhotographyBusiness.Pages.BookingPages
         {
 
             Booking = _bookingService.GetBookingById(id);
-            //Booking.UserId = Booking.User.UserId;
 
             if (Booking == null)
             {
@@ -37,7 +36,7 @@ namespace PhotographyBusiness.Pages.BookingPages
         /// Onpost metode til update booking 
         /// </summary>
         /// <returns>Sender tilbage til listen over alle bookings</returns>
-        public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
