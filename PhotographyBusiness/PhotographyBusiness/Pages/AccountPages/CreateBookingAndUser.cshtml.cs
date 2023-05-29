@@ -14,7 +14,7 @@ namespace PhotographyBusiness.Pages.AccountPages
     public class CreateBookingAndUserModel : PageModel
     {
         private const string existingEmail = "This email is already exist";
-        private const string comfierBooking = "Your booking request has been successfully sent!";
+        private const string confirmBooking = "Your booking request has been successfully sent!";
         private const string dateAlert = "The date must be from today onwards.";
         private IUserService userService;
         private IBookingService bookingService;
@@ -137,7 +137,7 @@ namespace PhotographyBusiness.Pages.AccountPages
                 await bookingService.CreateBookingAsync(Booking);
                 if (Booking is not null)
                 {
-                    DisplayConfirm = comfierBooking;
+                    DisplayConfirm = confirmBooking;
                     return Page();
                 }
 
