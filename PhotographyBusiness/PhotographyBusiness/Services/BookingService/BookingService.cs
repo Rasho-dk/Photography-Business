@@ -150,6 +150,24 @@ namespace PhotographyBusiness.Services.BookingService
             await _genericDbService.UpdateObjectAsync(booking);
         }
 
+        // Basically a copy of update booking, however also adding the emailservice. 
+        public async Task ConfirmBooking(Booking booking)
+        {
+
+            foreach (Booking b in this._bookings)
+            {
+                if (b.BookingId == booking.BookingId)
+                {
+                    b.AdminNote = booking.AdminNote;
+                    b.Price = booking.Price;
+                    b.IsAccepted = booking.IsAccepted;
+                }
+            }
+
+            await _genericDbService.UpdateObjectAsync(booking);
+            await _mailService.SendConfirmationMail(booking);
+        }
+
         public List<Booking> GetAllBookingsThisMonth()
         {
             return GetAllBookingsAsync().Result.Where(b => b.Date >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
