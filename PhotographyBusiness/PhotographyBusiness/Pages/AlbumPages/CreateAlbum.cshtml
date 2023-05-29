@@ -1,0 +1,29 @@
+﻿@page "{id:int}"
+@model PhotographyBusiness.Pages.AlbumPages.CreateAlbumModel
+@{
+}
+
+<div class="transparent-black container" style="min-height: 75.2vh">
+    <form method="post" class="p-4" style="background-color: rgba(0,0,0,0.7)">
+        <div class="form-group p-2">
+            <label asp-for="@Model.Album.Name" class="control-lable text-white"></label>
+            <input asp-for="@Model.Album.Name" class="form-control" />
+            <span asp-validation-for="@Model.Album.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group p-2">
+            <label asp-for="@Model.Album.Description" class="control-lable text-white"></label>
+            <input asp-for="@Model.Album.Description" class="form-control" />
+            <span asp-validation-for="@Model.Album.Description" class="text-danger"></span>
+        </div>
+        <div class="form-group p-2">
+            <input asp-for="@Model.Booking.BookingId" class="form-control"  readonly/>
+
+        </div>
+
+        <div class="form-group m-2 d-flex justify-content-between">
+            <input type="submit" value="Create" class="btn btn-light btn-border-black" style="min-width: 6vw;" />
+        </div>
+
+    </form>
+
+</div>

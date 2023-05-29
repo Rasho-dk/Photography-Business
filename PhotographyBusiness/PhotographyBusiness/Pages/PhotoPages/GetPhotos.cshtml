@@ -1,0 +1,24 @@
+﻿@page
+@model PhotographyBusiness.Pages.PhotoPages.GetPhotosModel
+@{
+}
+<section>
+    <div class="container">
+        <h3>Your Pitcures</h3>
+        <hr />
+        <p>Her yo can finde your pictures</p>
+        @foreach (var photos in Model.Photos)
+        {
+
+            <div class="row mx-auto container">
+                <div class="product text-center col-lg-3 col-md-4 col-12">
+                    <img class="img-fluid mb-3" src="@photos.FilePath" alt="Billede">
+                </div>
+            </div>
+            <button class="buy-btn">Add to basket</button>
+        }
+   
+    </div>
+
+
+</section>

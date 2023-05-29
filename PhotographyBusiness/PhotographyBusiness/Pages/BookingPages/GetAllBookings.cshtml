@@ -72,6 +72,7 @@
                 <th>Category</th>
                 <th>Date</th>
                 <th>Functionality</th>
+                <th>Create an album</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -119,7 +120,11 @@
                                 <i class="far fa-file-pdf pop-out" style="color: #2a2b2d;"></i>
                             </a>
                         </td>
+                        <td>
+                            <a class="btn btn-black" asp-page="/AlbumPages/CreateAlbum" asp-route-id="@booking.BookingId">XX</a>
+                        </td>
                     </tr>
+
                 }
             }
         </tbody>
