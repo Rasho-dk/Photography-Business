@@ -6,6 +6,7 @@ using PhotographyBusiness.Services;
 using PhotographyBusiness.Services.AlbumService;
 using PhotographyBusiness.Services.BookingService;
 using PhotographyBusiness.Services.MailService;
+using PhotographyBusiness.Services.OrderService;
 using PhotographyBusiness.Services.PhotoService;
 using PhotographyBusiness.Services.UserService;
 using System.Security.Claims;
@@ -19,12 +20,17 @@ builder.Services.AddTransient<GenericDbService<User>>();
 //builder.Services.AddSingleton<GenericDbService<Booking>>();
 builder.Services.AddTransient<GenericDbService<Booking>>();
 
+builder.Services.AddTransient<GenericDbService<Album>>();
+builder.Services.AddTransient<GenericDbService<Photo>>();
+builder.Services.AddTransient<GenericDbService<OrderPhoto>>();
+
 builder.Services.AddSingleton<IBookingService, BookingService>();
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IMailService, MailService>();
 
 builder.Services.AddTransient<IAlbumService,AlbumService>();
 builder.Services.AddTransient<IPhotoService, PhotoService>();
+builder.Services.AddTransient<IOrderPhotoService, OrderPhotoService>();
 
 
 builder.Services.AddDbContext<ObjectDbContext>();

@@ -67,6 +67,7 @@ namespace PhotographyBusiness.Pages.BookingPages
 
             if (!ModelState.IsValid)
             {
+                User = _userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
                 return Page();
             }
 

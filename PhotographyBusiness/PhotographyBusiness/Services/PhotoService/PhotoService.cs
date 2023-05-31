@@ -1,19 +1,31 @@
-﻿using PhotographyBusiness.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PhotographyBusiness.EFDbContext;
+using PhotographyBusiness.Models;
 
 namespace PhotographyBusiness.Services.PhotoService
 {
     public class PhotoService : IPhotoService
     {
+        private GenericDbService<Photo> dbphotoService;
         private List<Photo> photos;
-        public PhotoService()
+        public PhotoService(GenericDbService<Photo> dbphotoService)
         {
-            photos = MockData.MockPhoto.GetPhotos();
+            //photos = MockData.MockPhoto.GetPhotos();
+            photos = dbphotoService.GetObjectsAsync().Result.ToList();  
+            this.dbphotoService = dbphotoService;
         }
-
-        public async Task AddPhotoAsync(Photo photo, string filePath)
+        //public async Task<List<Photo>> GetAllPhotoAsyncIncludeAlbum()
+        //{
+        //    using(var context = new ObjectDbContext)
+        //    {
+        //        return await context.Photos.Include(a => a.Album).ToListAsync();
+        //    }
+        //}
+        public async Task AddPhotoAsync(Photo photo)
         {
-            photo.FilePath = filePath;
             photos.Add(photo);   
+            await dbphotoService.AddObjectAsync(photo); 
+
         }
 
         public List<Photo> GetAllPhotos()
@@ -21,9 +33,16 @@ namespace PhotographyBusiness.Services.PhotoService
             return photos;
         }
 
-        public Task<Photo> GetPhotoById()
+        public async Task<Photo> GetPhotoById(int id)
         {
-            throw new NotImplementedException();
+            foreach (var photo in photos)
+            {
+                if(photo.Id == id)
+                {
+                    return photo;
+                }
+            }
+            return null;
         }
     }
 }

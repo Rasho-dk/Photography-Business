@@ -19,6 +19,7 @@
                 <th>Date</th>
                 <th>Status</th>
                 <th>Invoice</th>
+                <th>Album</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -70,7 +71,13 @@
                             <a asp-page="/BookingPages/InvoicePage" asp-route-id="@booking.UserId" asp-route-id2="@booking.BookingId">
                                 <i class="far fa-file-pdf pop-out" style="color: #2a2b2d;"></i>
                             </a>
+                        </td> 
+                        <td>
+                            <a asp-page="/AlbumPages/MyAlbumPage"  asp-route-id2="@booking.BookingId">
+                                <i class="far fa-images fa-lg pop-out" style="color: #3f4040;"></i>
+                            </a>
                         </td>
+                        
                     </tr>
                 }
             }

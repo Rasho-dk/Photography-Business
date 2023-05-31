@@ -6,7 +6,7 @@ namespace PhotographyBusiness.Services.AlbumService
     {
         Album? GetAlbumByIdAsync(int albumId);
         List<Album> GetAllAlbumsAsync ();
-        Task<Album> GetAlbumByBookingId();
+        Task<Album> GetAlbumByBookingId(int id);
         Task CreateAlbum(Album album);
 
     }

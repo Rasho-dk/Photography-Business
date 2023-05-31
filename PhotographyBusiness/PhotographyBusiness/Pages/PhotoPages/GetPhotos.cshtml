@@ -1,24 +1,46 @@
 ﻿@page
 @model PhotographyBusiness.Pages.PhotoPages.GetPhotosModel
+@using PhotographyBusiness.Pages.AccountPages
 @{
 }
-<section>
-    <div class="container">
+ <div class="container lightbox mt-4 mb-2"  style="min-height: 75.2vh; box-sizing:content-box;">
         <h3>Your Pitcures</h3>
+         <p>Her yo can finde your pictures</p>
         <hr />
-        <p>Her yo can finde your pictures</p>
+
+
+    <div class="row g-3 container">
         @foreach (var photos in Model.Photos)
-        {
+        {   
+                <div class="col-4">
+                    <div class="p border">
+                    <img src="~/mediaUpload/@photos.FilePath"
+                     class="p-2 border img-fluid rounded mb-1 mt-2 img-thumbnail"
+                         alt="Img" />
 
-            <div class="row mx-auto container">
-                <div class="product text-center col-lg-3 col-md-4 col-12">
-                    <img class="img-fluid mb-3" src="@photos.FilePath" alt="Billede">
+                    @if (HttpContext.User.Identity.Name != "admin" && HttpContext.User.Identity.Name != null)
+                    {
+                        <form method="post">
+                            <button type="submit"
+                                class="p-1 mb-3 btn btn-border-white btn-border-white" 
+                                style="border-radius: 0; min-width: 6vw;">
+                                <i class="fas fa-plus" style="color: #3e4147;"></i>
+                            </button>
+                            <input type="hidden" name="id" value="@photos.Id">
+                        </form>
+                    }
+                 
+                  
                 </div>
-            </div>
-            <button class="buy-btn">Add to basket</button>
+                </div>
         }
-   
-    </div>
+  
+ </div>
 
 
-</section>
+
+
+
+
+
+

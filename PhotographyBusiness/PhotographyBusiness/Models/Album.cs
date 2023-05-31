@@ -29,7 +29,7 @@ namespace PhotographyBusiness.Models
         public virtual ICollection<Photo> Photos { get;}
         public Album()
         {
-            Id =nextId++;   
+
         }
         private static int nextId = 1;
         public Album(string name, string description, int bookingId)

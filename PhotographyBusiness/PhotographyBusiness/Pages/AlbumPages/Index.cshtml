@@ -25,11 +25,11 @@
                         <td>@alb.Name</td>
                         <td>@alb.Description</td>
                         <td>
-                            <a asp-page="/PhotoPages/AddPhotoToAlbum" asp-route-albumid="@alb.Id">XX</a>
+                            <a asp-page="/PhotoPages/AddPhotoToAlbum" asp-route-albumid="@alb.Id">Add</a>
                         </td>
                         <td>
                             <a asp-page="/PhotoPages/GetPhotos" asp-route-albumid="@alb.Id"
-                               asp-route-bookingid="@alb.BookingId">XX</a>
+                               asp-route-bookingid="@alb.BookingId">Show</a>
                         </td>
                     </tr>
                 }           

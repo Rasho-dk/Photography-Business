@@ -22,7 +22,6 @@ namespace PhotographyBusiness.Models
 
         public OrderPhoto()
         {
-            
         }
 
 

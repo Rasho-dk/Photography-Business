@@ -1,0 +1,42 @@
+﻿@page "{id2:int}"
+@model PhotographyBusiness.Pages.AlbumPages.MyAlbumPageModel
+@{
+}
+
+<div class="container">
+    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Album</h1>
+    <table class="table table-bordered table-hover table-striped"
+           width="60%" style="border:1px solid black; word-wrap: break-word;">
+        <thead>
+            <tr class="table-light">
+                <th>Name</th>
+                <th>Description</th>
+                <th>Shows Photo</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @if (Model.Albums != null)
+            {
+                foreach (var alb in Model.Albums)
+                {
+                    <tr class="table-light">
+                        <td>@alb.Name</td>
+                        <td>@alb.Description</td>
+                        <td>
+                            <a asp-page="/PhotoPages/GetPhotos" asp-route-albumid="@alb.Id"
+                               asp-route-bookingid="@alb.BookingId">
+                                <i class="far fa-eye fa-lg pop-out" style="color: #414448;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    No table found
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

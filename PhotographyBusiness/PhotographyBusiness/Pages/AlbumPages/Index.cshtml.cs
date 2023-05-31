@@ -9,7 +9,6 @@ namespace PhotographyBusiness.Pages.PhotoPages
     {
         private IAlbumService albumService;
         public List<Album> Albums { get; private set; }
-        private List<Photo> photos;
         
         public GallAllPhotosModel(IAlbumService albumService)
         {

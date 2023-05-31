@@ -9,21 +9,17 @@ namespace PhotographyBusiness.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string FilePath { get; set; }
+        [NotMapped]
         public IFormFile ImageFile { get; set; }
         [Required]
         [ForeignKey(nameof(Album))]
         public int AlbumId { get; set; }
         public Album Album { get; set; }
-      
+     
+       
         public Photo()
         {
-            Id = nextId++;
-        }   
-        private static int nextId = 1;
-        public Photo(int albumId)
-        {
-            Id = nextId++;
-            AlbumId = albumId;
+            
         }
     }
 }

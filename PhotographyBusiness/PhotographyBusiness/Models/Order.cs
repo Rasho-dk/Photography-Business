@@ -12,5 +12,7 @@ namespace PhotographyBusiness.Models
         public decimal TotalPriceWithTax { get; set; }        
         [NotMapped]
         public virtual ICollection<OrderPhoto>? OrderPhotos { get; set; }
+
+      
     }
 }

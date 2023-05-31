@@ -5,7 +5,7 @@ namespace PhotographyBusiness.Services.PhotoService
     public interface IPhotoService
     {
         List<Photo> GetAllPhotos();
-        Task<Photo> GetPhotoById();
-        Task AddPhotoAsync(Photo photo,string filePath);
+        Task<Photo> GetPhotoById(int id);
+        Task AddPhotoAsync(Photo photo);
     }
 }

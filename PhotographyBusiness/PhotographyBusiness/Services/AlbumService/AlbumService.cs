@@ -6,14 +6,18 @@ namespace PhotographyBusiness.Services.AlbumService
     {
         private List<Album> _albums;
         private IAlbumService _albumService;
-        public AlbumService()
+        private GenericDbService<Album> genericDbService;
+        public AlbumService(GenericDbService<Album> genericDbService)
         {
-            _albums = MockData.MockAlbum.GetAlbums();
+            //_albums = MockData.MockAlbum.GetAlbums();
+            this.genericDbService = genericDbService;
+            _albums = genericDbService.GetObjectsAsync().Result.ToList();
         }
 
         public async Task CreateAlbum(Album album)
         {
             _albums.Add(album);
+            await genericDbService.AddObjectAsync(album);   
         }
 
         public Task<List<Album>> GetAlbumByBookingId()
@@ -39,9 +43,16 @@ namespace PhotographyBusiness.Services.AlbumService
             return _albums;
         }
 
-        Task<Album> IAlbumService.GetAlbumByBookingId()
+        public async Task<Album> GetAlbumByBookingId(int id)
         {
-            throw new NotImplementedException();
+            foreach (var album in _albums)
+            {
+                if (album.BookingId.Equals(id))
+                {
+                    return album;
+                }
+            }
+            return null;
         }
     }
 }
