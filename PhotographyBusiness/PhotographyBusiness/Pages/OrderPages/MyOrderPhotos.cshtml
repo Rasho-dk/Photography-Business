@@ -1,0 +1,35 @@
+﻿@page "{orderid:int}"
+@model PhotographyBusiness.Pages.OrderPages.MyOrderPhotosModel
+@{
+}
+
+<div class="container lightbox mt-4 mb-2" style="min-height: 75.2vh; box-sizing:content-box;">
+
+    <h3>Your Pitcures</h3>
+    <p>Her yo can finde your pictures</p>
+    <hr />
+    <div class="row g-3 container">
+        @foreach (var photos in Model.Photos)
+        {
+            foreach(var orderphoto in Model.OrderPhotos)
+            {
+                if(photos.Id == orderphoto.PhotoId)
+                {
+                    <div class="col-4">
+                        <div class="p border">
+                            <img src="~/mediaUpload/@photos.FilePath"
+                                 class="p-2 border img-fluid rounded mb-1 mt-2 img-thumbnail"
+                                 alt="Img" />
+                            <p class="btn" style="border-radius:10px;"><strong>Quntity : </strong>@orderphoto.Quantity</p>
+                        </div>
+                    </div>
+                    
+                }
+              
+
+            }
+                    
+        }
+
+    </div>
+</div>

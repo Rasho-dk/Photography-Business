@@ -7,5 +7,7 @@ namespace PhotographyBusiness.Services.PhotoService
         List<Photo> GetAllPhotos();
         Task<Photo> GetPhotoById(int id);
         Task AddPhotoAsync(Photo photo);
+        Task<List<Photo>> GetAll(int orderid);
+
     }
 }

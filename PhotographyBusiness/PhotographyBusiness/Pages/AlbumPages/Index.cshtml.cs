@@ -1,10 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.AlbumService;
+using System.Data;
 
 namespace PhotographyBusiness.Pages.PhotoPages
 {
+    [Authorize(Roles = "admin")]
+
     public class GallAllPhotosModel : PageModel
     {
         private IAlbumService albumService;

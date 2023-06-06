@@ -1,0 +1,79 @@
+﻿@page
+@model PhotographyBusiness.Pages.OrderPages.MyOrderModel
+@{
+}
+@*<a class="btn btn-border-black ms-5 mt-2" style="border-radius:10px;"
+   asp-page="/BookingPages/MyBookingPage">
+    Go back to album
+</a>*@
+<div class="container lightbox mt-4 mb-2" style="min-height: 5.2vh;" id="contbox">
+    <h1 class="pop-out mt-3 me-2 ms-5" style="font-family:fantasy; float:left;">My Orders</h1>
+
+    <div class="row g-3 container">
+
+        @if(Model.Orders is not null)
+        {
+            foreach(var order in Model.Orders)
+            {
+                <div class="col-6 p-5">
+                    <div class="p-5" id="box">
+                        <div class="row">
+                            <div class="col-8">
+                                <strong>ID :</strong>
+                                <p>@order.Id</p>
+                            </div>
+                            <div class="col-4">
+                                <strong>Condition:</strong>
+                                <p>@order.Condition</p>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-8">
+                                <strong>Date :</strong>
+                                <p>@order.CreatedDate.ToShortDateString()</p>
+                            </div>
+                            <div class="col-4">
+                                <strong>Price :</strong>
+                                <p>@order.TotalPriceWithTax</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <a class="btn btn-border-black" style="border-radius:10px;"
+                            asp-page="/OrderPages/MyOrderPhotos" 
+                             asp-route-orderid="@order.Id">Show my Order
+                        </a>
+                    </div>
+                </div>
+            }
+        }
+
+    
+
+    </div>
+
+</div>
+
+  <style>
+      body{
+        box-shadow: 200px -37px 72px 200px rgba(249,249,249,1) inset;
+        -webkit-box-shadow: 200px -37px 72px 200px rgba(249,249,249,1) inset;
+        -moz-box-shadow: 200px -37px 72px 200px rgba(249,249,249,1) inset;
+      }
+      #box{
+        border-radius: 67px 67px 67px 67px;
+        -webkit-border-radius: 67px 67px 67px 67px;
+        -moz-border-radius: 67px 67px 67px 67px;
+        border-color: rgba(200,187,187,0.15);
+        background-color: rgba(249,249,249,0.04);
+        border: 20px groove rgba(200,187,187,0.15);
+      }
+
+    #contbox{
+        box-shadow: 200px -37px 72px 200px rgba(249,249,249,1) inset;
+        -webkit-box-shadow: 200px -37px 72px 200px rgba(249,249,249,1) inset;
+        -moz-box-shadow: 200px -37px 72px 200px rgba(249,249,249,1) inset;
+    }
+
+
+  </style>

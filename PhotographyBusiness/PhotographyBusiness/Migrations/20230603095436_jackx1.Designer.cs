@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhotographyBusiness.EFDbContext;
 
@@ -11,9 +12,11 @@ using PhotographyBusiness.EFDbContext;
 namespace PhotographyBusiness.Migrations
 {
     [DbContext(typeof(ObjectDbContext))]
-    partial class ObjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230603095436_jackx1")]
+    partial class jackx1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,12 +109,6 @@ namespace PhotographyBusiness.Migrations
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Condition")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<decimal>("TotalPriceWithTax")
                         .HasColumnType("decimal(18,2)");
 
@@ -130,9 +127,6 @@ namespace PhotographyBusiness.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PhotoId")
                         .HasColumnType("int");
 
@@ -147,8 +141,6 @@ namespace PhotographyBusiness.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
 
                     b.HasIndex("PhotoId");
 
@@ -237,19 +229,11 @@ namespace PhotographyBusiness.Migrations
 
             modelBuilder.Entity("PhotographyBusiness.Models.OrderPhoto", b =>
                 {
-                    b.HasOne("PhotographyBusiness.Models.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("PhotographyBusiness.Models.Photo", "Photo")
                         .WithMany("OrderPhotos")
                         .HasForeignKey("PhotoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
 
                     b.Navigation("Photo");
                 });

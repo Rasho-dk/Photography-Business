@@ -4,37 +4,80 @@
 @{
 }
  <div class="container lightbox mt-4 mb-2"  style="min-height: 75.2vh; box-sizing:content-box;">
-        <h3>Your Pitcures</h3>
-         <p>Her yo can finde your pictures</p>
+    @if (Model.Message is not null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @Model.Message
+        </div>
+    }
+    <div class="row">
+        <div class="col">
+            <h3>Your pictures</h3>
+            <p>Choose the pictures you want</p>
+        </div>
+        <div class="col" style="text-align:end;">
+            @if (Model.OrderPhotos is not null && Model.OrderPhotos.Count > 0)
+            {
+                @foreach (var orph in Model.OrderPhotos)
+                {
+                    <a class="btn text-dark pop-out me-0"
+                       style=" width:20%; font-size:2em;"
+                       asp-route-orderid="@orph.OrderId" asp-route-albumid="@Model.AlbumId"
+                       asp-page="/OrderPages/MyCart">
+                        <i class="fas fa-shopping-basket fa-lg" style="color:#3e4147; "></i>
+                        <span><small style="font-size:large;">@Model.CartQuantity</small></span>
+                    </a>
+                    break;
+
+                }
+            }
+        </div>
+    </div>   
         <hr />
-
-
     <div class="row g-3 container">
         @foreach (var photos in Model.Photos)
-        {   
-                <div class="col-4">
-                    <div class="p border">
+        {
+            <div class="col-4">
+                <div class="p border">
                     <img src="~/mediaUpload/@photos.FilePath"
-                     class="p-2 border img-fluid rounded mb-1 mt-2 img-thumbnail"
+                         class="p-2 border img-fluid rounded mb-1 mt-2 img-thumbnail"
                          alt="Img" />
 
-                    @if (HttpContext.User.Identity.Name != "admin" && HttpContext.User.Identity.Name != null)
+                    @if (HttpContext.User.Identity.Name != "admin" && HttpContext.User.Identity.Name != null && Model.OrderId > 0)
                     {
-                        <form method="post">
-                            <button type="submit"
-                                class="p-1 mb-3 btn btn-border-white btn-border-white" 
-                                style="border-radius: 0; min-width: 6vw;">
-                                <i class="fas fa-plus" style="color: #3e4147;"></i>
+                        <form method="post" class="p-1 mb-2">
+
+                            <Input asp-for="@Model.OrderPhoto.Quantity" type="number" min="0" max="10"
+                                   style="width:13%; height:2em; margin-bottom:8px;" class="form-floating" />
+
+                            <label asp-for="@Model.Size" for="Size">
+                                <select id="Size" name="Size" class="form-floating mt-1 ms-2" style="height:2em;" asp-for="@Model.Size">
+                                    <option value="" disabled selected>Size</option>
+                                    <option value="4x6">4x6 inch</option>
+                                    <option value="5x7">5x7 inch</option>
+                                    <option value="8x8">8x8 inch</option>
+                                    <option value="10x12">10x12 inch</option>
+                                    <option value="20x24">20x24 inch</option>
+                                </select>
+                            </label>
+
+                            <input asp-for="@Model.OrderPhoto.Price" hidden readonly />
+
+
+                            <button type="submit" class="btn-group-lg ms-2" style="border:1px solid black;">
+                                <i class="fas fa-plus pop-out" style="color: #3e4147;"></i>
                             </button>
-                            <input type="hidden" name="id" value="@photos.Id">
+                            <input type="hidden" name="id" value="@photos.Id" />
+
                         </form>
                     }
-                 
-                  
+
+
                 </div>
-                </div>
+            </div>
         }
   
+    </div>
  </div>
 
 

@@ -2,6 +2,7 @@
 @model PhotographyBusiness.Pages.AlbumPages.MyAlbumPageModel
 @{
 }
+<script src="https://kit.fontawesome.com/5d5c0091b5.js" crossorigin="anonymous"></script>
 
 <div class="container">
     <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Album</h1>
@@ -12,6 +13,9 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Shows Photo</th>
+                <th>
+                    Create an order
+                </th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -26,6 +30,12 @@
                             <a asp-page="/PhotoPages/GetPhotos" asp-route-albumid="@alb.Id"
                                asp-route-bookingid="@alb.BookingId">
                                 <i class="far fa-eye fa-lg pop-out" style="color: #414448;"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a asp-page="/OrderPages/CreateOrder" asp-route-bookingid="@alb.BookingId"  asp-route-albumid="@alb.Id">
+                                <i class="fas fa-shopping-cart fa-lg" style="color:#3e4147; "></i>
+
                             </a>
                         </td>
                     </tr>

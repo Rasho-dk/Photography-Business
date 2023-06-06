@@ -5,6 +5,12 @@
 
 
 <div class="container">
+    @if (TempData["OrderConfirmation"] != null)
+    {
+        <div class="alert alert-success mt-3">
+            @TempData["OrderConfirmation"]
+        </div>
+    }
     <br />
     <h1 class="pop-out mt-3 me-3" style="font-family:fantasy; float:left;">Bookings</h1>
     <br />
@@ -19,7 +25,7 @@
                 <th>Date</th>
                 <th>Status</th>
                 <th>Invoice</th>
-                <th>Album</th>
+                <th>Album / Create Order</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -77,7 +83,7 @@
                                 <i class="far fa-images fa-lg pop-out" style="color: #3f4040;"></i>
                             </a>
                         </td>
-                        
+                     
                     </tr>
                 }
             }

@@ -9,7 +9,7 @@ namespace PhotographyBusiness.EFDbContext
         {
             #region Shero 
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial " +
-                "Catalog=Jack;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust" +
+                "Catalog=Jack1x;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust" +
                 " Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False");
             #endregion
 
@@ -26,6 +26,7 @@ namespace PhotographyBusiness.EFDbContext
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<OrderPhoto> OrderPhotos { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
     }
 }

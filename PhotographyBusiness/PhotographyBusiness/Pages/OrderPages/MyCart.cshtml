@@ -1,0 +1,76 @@
+﻿@page "{orderid:int},{albumid:int}"
+@model PhotographyBusiness.Pages.OrderPages.MyCartModel
+@{
+}
+
+<div class="container">
+    @if (Model.AlertMessage is not null)
+    {
+        <div class="alert alert-danger mt-2" role="alert" style="width:50%">
+            @Model.AlertMessage
+        </div>
+    }
+    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Cart</h1>
+    <table class="table table-bordered table-hover table-striped"
+           width="60%" style="border:1px solid black; word-wrap: break-word;">
+        <thead>
+            <tr class="table-light">
+                <th >Size</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Functionality</th>
+
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @if (Model.OrderPhotos != null)
+            {
+                foreach (var alb in Model.OrderPhotos)
+                {
+                    <tr class="table-light">
+                        <td>@alb.Size</td>
+                        <td>@alb.Price</td>    
+                        <td>@alb.Quantity</td>    
+                        <td>
+                            <form method="post" asp-page-handler="DeleteOrderPhoto">
+                                <input  name="orderphotoId" value="@alb.Id" readonly hidden/>
+                                <button type="submit" class="btn-danger">
+                                    <i class="fa fa-trash pop-out"></i>
+
+                                </button>
+                            </form>
+                            
+                        </td>
+                       
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot id="myTable" class="m">
+            <tr class="table-light">
+                <th colspan="3">Total Pris</th>
+                @if(Model.SumOfPrice is 0)
+                {
+                    <td>00.00 £</td>
+                }
+                else
+                {
+                    <td>@Model.SumOfPrice £</td>
+
+                }
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="form-group m-2 d-flex justify-content-between">
+        <a asp-page="/PhotoPages/GetPhotos" asp-route-albumid="@Model.AlbumId"
+           asp-route-orderid="@Model.OrderId" class="btn btn-dark btn-border-white" style="border-radius: 0; min-width: 6vw;">Go back</a>
+        <form method="post">
+            <input asp-page-handler="ConfirmOrder" type="submit" value="Confirm Order" class="btn btn-light" style="min-width: 6vw;
+                border:1px solid black; border-radius:0px;" />
+        </form>
+    </div>
+
+
+</div>
+

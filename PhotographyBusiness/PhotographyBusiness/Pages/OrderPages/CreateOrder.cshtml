@@ -1,0 +1,33 @@
+﻿@page "{bookingid:int},{albumid:int}"
+@model PhotographyBusiness.Pages.OrderPages.CreateOrderModel
+@{
+}
+
+<div class="container">
+    <h1 class="pop-out mt-3 me-2" style="font-family:fantasy; float:left;">Order</h1>
+    <table class="table table-bordered table-hover table-striped"
+           width="60%" style="border:1px solid black; word-wrap: break-word;">
+        <thead>
+            <tr class="table-light">
+                <th>BookingId</th>
+                <th>TotalPriceWithTax</th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @if (Model.Orders != null)
+            {
+                foreach (var alb in Model.Orders)
+                {
+                    <tr class="table-light">
+                        <td>@alb.BookingId</td>
+                        <td>@alb.TotalPriceWithTax</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <div class="btn btn-light btn-border-black mb-5 " style="min-width: 6vw;">
+        <a style="font-family:fantasy; float:left; text-decoration:none; color:black;"
+           asp-page="/PhotoPages/GetPhotos">Add Photo to Order</a>
+    </div>
+</div>

@@ -1,11 +1,14 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.AlbumService;
 using PhotographyBusiness.Services.BookingService;
+using System.Data;
 
 namespace PhotographyBusiness.Pages.AlbumPages
 {
+    [Authorize(Roles = "admin")]
     public class CreateAlbumModel : PageModel
     {
         private const string textAlert = "Album for this booking is already exist";

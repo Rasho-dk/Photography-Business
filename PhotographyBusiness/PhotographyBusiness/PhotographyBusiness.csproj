@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="EFDbContext\" />
     <Folder Include="wwwroot\mediaUpload\" />
   </ItemGroup>
 

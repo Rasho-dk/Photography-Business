@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PhotographyBusiness.EFDbContext;
 
@@ -11,9 +12,11 @@ using PhotographyBusiness.EFDbContext;
 namespace PhotographyBusiness.Migrations
 {
     [DbContext(typeof(ObjectDbContext))]
-    partial class ObjectDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230603203122_DateTimeToOrder")]
+    partial class DateTimeToOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,9 +108,6 @@ namespace PhotographyBusiness.Migrations
 
                     b.Property<int>("BookingId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("Condition")
-                        .HasColumnType("bit");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");

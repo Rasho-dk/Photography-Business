@@ -15,7 +15,7 @@ namespace PhotographyBusiness.Models
         [ForeignKey(nameof(Album))]
         public int AlbumId { get; set; }
         public Album Album { get; set; }
-     
+        public virtual ICollection<OrderPhoto> OrderPhotos { get; set; }  
        
         public Photo()
         {

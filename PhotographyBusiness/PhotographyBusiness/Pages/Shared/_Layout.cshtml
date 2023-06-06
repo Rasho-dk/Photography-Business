@@ -68,8 +68,7 @@
                             </li>
                           
                         }
-
-                        
+                                              
 
                        @{
                            if (Context.User.Identity.Name == null)
@@ -118,6 +117,10 @@
                                         @if (Context.User.Identity.Name != "admin")
                                         {
                                             <li><a asp-page="/BookingPages/MyBookingPage" class="dropdown-item text-dark">My Bookings</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li class="dropdown-header">Photos</li>
+                                            <li><a asp-page="/BookingPages/MyBookingPage" class="dropdown-item text-dark">Album</a></li>
+                                            <li><a asp-page="/OrderPages/MyOrder" class="dropdown-item text-dark">My Orders</a></li>
                                         }
                                         @if (Context.User.Identity.Name == "admin")
                                         {
@@ -136,10 +139,18 @@
                                 </li>
 
                           }
+                           
                         }
                     </ul>
                 </div>
             </div>
+        @*    @if (Context.User.Identity.Name != "admin" && Context.User.Identity.Name != null)
+            {
+                <a asp-page="/BookingPages/MyBookingPage"
+                    style="text-align:end;" class="me-5">
+                    <i class="fas fa-shopping-cart fa-lg pop-out" style="color:#3e4147; font-size:2em;"></i>
+                </a>
+            }*@
         </nav>
     </header>
 
