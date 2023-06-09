@@ -16,21 +16,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddTransient<GenericDbService<User>>();
-//builder.Services.AddSingleton<GenericDbService<Booking>>();
-builder.Services.AddTransient<GenericDbService<Booking>>();
+builder.Services.AddSingleton<GenericDbService<User>>();
 
+builder.Services.AddTransient<GenericDbService<Booking>>();
 builder.Services.AddTransient<GenericDbService<Album>>();
 builder.Services.AddTransient<GenericDbService<Photo>>();
 builder.Services.AddTransient<GenericDbService<OrderPhoto>>();
 builder.Services.AddTransient<GenericDbService<Order>>();
 
 
-builder.Services.AddSingleton<IBookingService, BookingService>();
+builder.Services.AddTransient<IBookingService, BookingService>();
+
 builder.Services.AddSingleton<IUserService, UserService>();
 builder.Services.AddSingleton<IMailService, MailService>();
-builder.Services.AddSingleton<OrderService, OrderService>();
 
+builder.Services.AddTransient<OrderService, OrderService>();
 builder.Services.AddTransient<IAlbumService,AlbumService>();
 builder.Services.AddTransient<IPhotoService, PhotoService>();
 builder.Services.AddTransient<IOrderPhotoService, OrderPhotoService>();
