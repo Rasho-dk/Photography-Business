@@ -42,7 +42,7 @@ namespace PhotographyBusiness.Pages.BookingPages
                 Booking.IsAccepted = true;
                 Booking.Price = Price;
                 Booking.AdminNote = AdminNote;
-                _bookingService.UpdateBooking(Booking);
+                _bookingService.ConfirmBooking(Booking);
                 return RedirectToPage("GetAllBookingRequestsPage");
             } 
             return RedirectToPage("NotFound");

@@ -83,24 +83,26 @@
                                     </a>
                           
                                     <div class="dropdown-menu login-dropdown dropdown-menu-center" style="min-width: 18vw;" aria-labelledby="navbarDropdown">                         
-                                            <form asp-page="/AccountPages/LogInPage" method="post">
-                                                <div class="text-dark mx-3">
-                                                    <label for="inputEmail">Email address</label>
-                                                    <input type="email" class="form-control" id="inputEmail" name="Email" placeholder="Email">
-                                                </div>
-                                                <div class="text-dark mx-3">
-                                                    <label for="inputPassword">Password</label>
-                                                    <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="Password">
-                                                </div>
-                                                <div class="d-flex justify-content-between">
-                                                    <a class="btn btn-dark m-2 ms-3 btn-square" style="min-width: 5vw" asp-page="/AccountPages/CreateUserPage">Register</a>
-                                                    <button type="submit" class="btn btn btn-border-black m-2 me-3 btn-square" style="min-width: 5vw">Sign in</button>
-                                                </div>
-                                            </form>
-                                
+                                        <form asp-page="/AccountPages/LogInPage" method="post">
+                                            <div class="text-dark mx-3">
+                                                <label for="inputEmail">Email address</label>
+                                                <input type="email" class="form-control" id="inputEmail" name="Email" placeholder="Email">
+                                            </div>
+                                            <div class="text-dark mx-3">
+                                                <label for="inputPassword">Password</label>
+                                                <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="Password">
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <a class="btn btn-dark m-2 ms-3 btn-square" style="min-width: 5vw" asp-page="/AccountPages/CreateUserPage">Register</a>
+                                                <button type="submit" class="btn btn btn-border-black m-2 me-3 btn-square" style="min-width: 5vw">Sign in</button>
+                                            </div>
+                                        </form>
+                                        <hr>
+                                        <p>Admin Email: admin@admin.com</p>
+                                        <p>Admin Password: admin</p>
                                     </div>
 
-                                </li>                           
+                                </li>
                            }
                           else
                           {
@@ -164,11 +166,11 @@
 </body>
 
 <footer class="bg-white pb-1 footer pt-2 border-top">
-    <div class="d-flex justify-content-evenly container">
+    <div class="d-flex justify-content-evenly container" style="max-width: 100%">
         <div class="pt-2">
-            <img src="~/media/logo.png" style="height: 150px" class="pop-out" />
+            <img src="~/media/logo.png" style="max-height: 10em" class="pop-out" />
             <hr />
-            <h5 style="font-size: 12px" class="pt-1">&copy2023 Copyright Jack Saunders Photography</h5>
+            <h5 style="font-size: 1em" class="pt-1">&copy2023 Copyright Jack Saunders Photography</h5>
         </div>
         
         <div class="pt-2">
@@ -176,15 +178,15 @@
             <div class="">
                 <div class="mt-5 d-flex">
                     <div class="mx-3">
-                        <a class="text-dark" href="https://www.google.com/maps/place/JS+Photography/52.2411449,1.0544412,9z/data=!4m5!3m4!1s0x0:0xf0555126a55c3764!8m2!3d52.2411449!4d1.0544412?hl=en&coh=164777&entry=tt&shorturl=1" target="_blank" style="text-decoration: none;	font-size: 20px;
+                        <a class="text-dark" href="https://www.google.com/maps/place/JS+Photography/52.2411449,1.0544412,9z/data=!4m5!3m4!1s0x0:0xf0555126a55c3764!8m2!3d52.2411449!4d1.0544412?hl=en&coh=164777&entry=tt&shorturl=1" target="_blank" style="text-decoration: none;	font-size: 1.5em;
 								"><i class="fa fa-brands fa-square-google-plus fa-2xl"></i> Google Business</a><br />
                     </div>
                     <div class="mx-3">
-                        <a class="text-dark" href="https://www.facebook.com/profile.php?id=100089246393025" target="_blank" style="text-decoration: none;	font-size: 20px;
+                        <a class="text-dark" href="https://www.facebook.com/profile.php?id=100089246393025" target="_blank" style="text-decoration: none;	font-size: 1.5em;
 								"><i class="fa fa-brands fa-square-facebook fa-2xl"></i> Facebook</a><br />
                     </div>
                     <div class="mx-3">
-                        <a class="text-dark" href="https://www.instagram.com/jack.saundersphotography/" target="_blank" style="text-decoration: none;	font-size: 20px;
+                        <a class="text-dark" href="https://www.instagram.com/jack.saundersphotography/" target="_blank" style="text-decoration: none;	font-size: 1.5em;
 								"><i class="fa fa-brands fa-square-instagram fa-2xl"></i> Instagram</a><br />
                     </div>
                 </div>
@@ -192,10 +194,10 @@
             <hr class="" style="margin-top: 4em" />
 
             <div class="text-center">
-                <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 12px;
+                <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 1em;
 								"> Privacy Policy</a>
-                <a class="text-dark" style="font-size:12px">|</a>
-                <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 12px;">
+                <a class="text-dark" style="font-size:1em">|</a>
+                <a class="text-dark" href="/Privacy" style="text-decoration: none; font-size: 1em;">
                     Terms & Conditions
                 </a>
             </div>

@@ -109,7 +109,7 @@ namespace PhotographyBusiness.Pages.AdminPages
             usersLastYearModel.DataSources.Add(usersLastYearSource);
             Charts.ColumnChart userLastYearChart = new Charts.ColumnChart("monthlyUsersChartLastYear");
 
-            userLastYearChart.Width.Percentage(80);
+            userLastYearChart.Width.Em(80);
             userLastYearChart.Height.Em(ChartsHeight);
 
             userLastYearChart.Data.Source = usersLastYearModel;

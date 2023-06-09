@@ -26,12 +26,8 @@ namespace PhotographyBusiness.Pages.AdminPages
         public string ChartMonthlyBookingCategory { get; internal set; }
         public string PieChartMonthlyBookingCategory { get; internal set; }
         public string ChartMonthlyRevenue { get; internal set; }
-
-        // Numbered statistics
-        public int TotalUsers { get; set; }
-        public int TotalBookings { get; set; }
-        public int BookingsThisMonth { get; set; }
-        public int PendingRequests { get; set; }
+        public string ChartCategoryRevenue { get; internal set; }
+        public string ChartCategoryRevenueMonthly { get; internal set; }
 
         public double TotalRevenue { get; set; }
         public double MonthlyRevenue { get; set; }
@@ -55,11 +51,6 @@ namespace PhotographyBusiness.Pages.AdminPages
             Users = _genericDbService.GetObjectsAsync().Result;
             
             #region Numbered statistics
-
-            TotalUsers = Users.Count();
-            TotalBookings = Bookings.Where(b => b.IsAccepted == true).ToList().Count(); // Total bookings
-            BookingsThisMonth = _bookingService.GetAllBookingsThisMonth().Count(); // Bookings last 30 days
-            PendingRequests = _bookingService.GetAllBookingsRequests().Count();
 
             IEnumerable<Booking> bookingsList = new List<Booking>();
             bookingsList = _bookingService.GetAllBookingsThisMonth().Where(x => x.Date <= DateTime.Now); // Get all bookings for this month that have happened before today. Meaning the event has taken place.
@@ -134,7 +125,7 @@ namespace PhotographyBusiness.Pages.AdminPages
             monthlyRevenueModel.DataSources.Add(monthlyRevenueSource);
             Charts.ColumnChart monthlyRevenueChart = new Charts.ColumnChart("monthlyRevenueChart");
 
-            monthlyRevenueChart.Width.Percentage(80);
+            monthlyRevenueChart.Width.Em(80);
             monthlyRevenueChart.Height.Em(ChartsHeight);
 
             monthlyRevenueChart.Data.Source = monthlyRevenueModel;
@@ -145,6 +136,88 @@ namespace PhotographyBusiness.Pages.AdminPages
             monthlyRevenueChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;
 
             ChartMonthlyRevenue = monthlyRevenueChart.Render();
+
+            // Most revenue per category chart
+
+            DataTable categoryRevenueData = new DataTable();
+            categoryRevenueData.Columns.Add("Category", typeof(System.String));
+            categoryRevenueData.Columns.Add("Revenue", typeof(System.Double));
+
+            revenueList = bookingsList.Where(b => b.Category == "Wedding" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueData.Rows.Add("Weddings", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            revenueList = bookingsList.Where(b => b.Category == "Party" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueData.Rows.Add("Parties", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            revenueList = bookingsList.Where(b => b.Category == "Portrait" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueData.Rows.Add("Portraits", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            revenueList = bookingsList.Where(b => b.Category == "Fashion" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueData.Rows.Add("Fashion", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            revenueList = bookingsList.Where(b => b.Category == "Food" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueData.Rows.Add("Food", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            revenueList = bookingsList.Where(b => b.Category == "Event" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueData.Rows.Add("Events", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            StaticSource categoryRevenueSource = new StaticSource(categoryRevenueData);
+            DataModel categoryRevenueModel = new DataModel();
+            categoryRevenueModel.DataSources.Add(categoryRevenueSource);
+            Charts.ColumnChart categoryRevenueChart = new Charts.ColumnChart("categoryRevenueChart");
+
+            categoryRevenueChart.Width.Em(40);
+            categoryRevenueChart.Height.Em(ChartsHeight);
+
+            categoryRevenueChart.Data.Source = categoryRevenueModel;
+            categoryRevenueChart.Caption.Text = "Revenue by category";
+            categoryRevenueChart.SubCaption.Text = "Lifetime";
+            categoryRevenueChart.Legend.Show = false;
+            categoryRevenueChart.XAxis.Text = "Category";
+            categoryRevenueChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;
+
+            ChartCategoryRevenue = categoryRevenueChart.Render();
+
+            // Revenue by category last month
+
+            DataTable categoryRevenueMonthlyData = new DataTable();
+            categoryRevenueMonthlyData.Columns.Add("Category", typeof(System.String));
+            categoryRevenueMonthlyData.Columns.Add("Revenue", typeof(System.Double));
+
+            revenueList = bookingsList.Where(b => b.Category == "Wedding" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueMonthlyData.Rows.Add("Weddings", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            revenueList = bookingsList.Where(b => b.Category == "Party" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueMonthlyData.Rows.Add("Parties", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            revenueList = bookingsList.Where(b => b.Category == "Portrait" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueMonthlyData.Rows.Add("Portraits", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            revenueList = bookingsList.Where(b => b.Category == "Fashion" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueMonthlyData.Rows.Add("Fashion", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            revenueList = bookingsList.Where(b => b.Category == "Food" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueMonthlyData.Rows.Add("Food", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            revenueList = bookingsList.Where(b => b.Category == "Event" && b.IsAccepted == true).Select(x => Convert.ToDouble(x.Price));
+            categoryRevenueMonthlyData.Rows.Add("Events", revenueList.Sum(x => Convert.ToDouble(x)));
+
+            StaticSource categoryRevenueMonthlySource = new StaticSource(categoryRevenueMonthlyData);
+            DataModel categoryRevenueMonthlyModel = new DataModel();
+            categoryRevenueMonthlyModel.DataSources.Add(categoryRevenueMonthlySource);
+            Charts.ColumnChart categoryRevenueMonthlyChart = new Charts.ColumnChart("categoryRevenueChartMonthly");
+
+            categoryRevenueMonthlyChart.Width.Em(40);
+            categoryRevenueMonthlyChart.Height.Em(ChartsHeight);
+
+            categoryRevenueMonthlyChart.Data.Source = categoryRevenueMonthlyModel;
+            categoryRevenueMonthlyChart.Caption.Text = "Revenue by category";
+            categoryRevenueMonthlyChart.SubCaption.Text = "Last 30 days";
+            categoryRevenueMonthlyChart.Legend.Show = false;
+            categoryRevenueMonthlyChart.XAxis.Text = "Category";
+            categoryRevenueMonthlyChart.ThemeName = FusionChartsTheme.ThemeName.FUSION;
+
+            ChartCategoryRevenueMonthly = categoryRevenueMonthlyChart.Render();
 
             #endregion
 
