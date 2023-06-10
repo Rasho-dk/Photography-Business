@@ -33,12 +33,17 @@
                         <label asp-for="@Model.Booking.Address" class="control-label text-black">Address</label>
                         <input asp-for="@Model.Booking.Address" class="form-control btn-border-black" readonly />
 
-                        <label asp-for="@Model.Price" class="control-label text-black">Price</label>
-                        <input asp-for="@Model.Price" class="form-control btn-border-black" />
+                        <div>
+                            <label asp-for="@Model.Price" class="control-label text-black">Price</label>
+                            <input asp-for="@Model.Price" class="form-control btn-border-black" />
+                            <span asp-validation-for="@Model.Price" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <label asp-for="@Model.AdminNote" for="AdminNote" class="control-label text-black">Admin Note</label>
+                            <textarea asp-for="@Model.AdminNote" id="AdminNote" name="AdminNote" rows="6" cols="23"
+                                  class="form-control textarea-input btn-border-black" style="resize:none"></textarea>
+                        </div>
 
-                        <label asp-for="@Model.AdminNote" for="AdminNote" class="control-label text-black">Admin Note</label>
-                        <textarea asp-for="@Model.AdminNote" id="AdminNote" name="AdminNote" rows="6" cols="23"
-                              class="form-control textarea-input btn-border-black" style="resize:none"></textarea>
                     </div>
 
                     <div class="ms-1 justify-content-center">
@@ -46,6 +51,7 @@
                         <h5>
                             Customer Information
                         </h5>
+
                         <br />
 
                         <label asp-for="@Model.Booking.User.Name" class="control-label text-black">Customer Name</label>

@@ -27,6 +27,7 @@ namespace PhotographyBusiness.Pages.BookingPages
 
             if (Booking == null)
             {
+                //TODO
                 return RedirectToPage("/NotFound");
             }
             return Page();

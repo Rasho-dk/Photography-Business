@@ -43,33 +43,39 @@
             {
                 foreach (var user in Model.FilterData)
                 {
-                    <tr class="table-light">
-                        <td>
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn  pop-out" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                    data-user-name="@user.Name"
-                                    data-user-email="@user.Email"
-                                    data-user-phone="@user.PhoneNumber"
-                                    data-user-created="@user.DateCreated"
-                                    data-user-id="@user.UserId"
-                            asp-route-id="@user.UserId">
-                                @user.Name <i class="fas fa-info-circle fa-xs"></i>
-                            </button>
-                        </td>
-                        <td>
-                            @user.Email
-                        </td>
+                    @if (user.Name != "admin")
+                    {
+                        <tr class="table-light">
+                            <td>
+                                <!-- Button trigger modal -->
+                           
+                                    <button type="button" class="btn  pop-out" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            data-user-name="@user.Name"
+                                            data-user-email="@user.Email"
+                                            data-user-phone="@user.PhoneNumber"
+                                            data-user-created="@user.DateCreated"
+                                            data-user-id="@user.UserId"
+                                            asp-route-id="@user.UserId">
+                                        @user.Name <i class="fas fa-info-circle fa-xs"></i>
+                                    </button>
+                            
+                           
+                            </td>
+                            <td>
+                                @user.Email
+                            </td>
 
-                        <td>
-                            @user.PhoneNumber
-                        </td>
-                        <td>
-                            <a class="btn btn-danger" type="button" title="Delete"
-                               asp-page="/AccountPages/DeleteUserPage" asp-route-id="@user.UserId">
-                                <i class="fa fa-trash pop-out"></i>
-                            </a>                        
-                        </td>
-                    </tr>
+                            <td>
+                                @user.PhoneNumber
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" type="button" title="Delete"
+                                   asp-page="/AccountPages/DeleteUserPage" asp-route-id="@user.UserId">
+                                    <i class="fa fa-trash pop-out"></i>
+                                </a>                        
+                            </td>
+                        </tr>
+                    }
                 }
             }
         </tbody>

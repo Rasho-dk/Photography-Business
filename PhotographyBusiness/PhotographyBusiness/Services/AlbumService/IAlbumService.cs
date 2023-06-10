@@ -8,6 +8,7 @@ namespace PhotographyBusiness.Services.AlbumService
         List<Album> GetAllAlbumsAsync ();
         Task<Album> GetAlbumByBookingId(int id);
         Task CreateAlbum(Album album);
+        Task DeleteAlbum(int id);
 
     }
 }

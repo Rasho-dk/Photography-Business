@@ -133,6 +133,7 @@ namespace PhotographyBusiness.Pages.AccountPages
                 Booking.UserId = user1.Result.UserId;
                 Booking.Address = Address;
                 Booking.IsAccepted = false;
+                Booking.DateCreated = DateTime.Now;
                 Booking.Date = DateOfEvent;
                 await bookingService.CreateBookingAsync(Booking);
                 if (Booking is not null)

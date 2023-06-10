@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.BookingService;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 
 namespace PhotographyBusiness.Pages.BookingPages
@@ -16,6 +18,8 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         public Booking Booking { get; set; }
         [BindProperty]
+        [Required]
+        [Range(1, int.MaxValue,ErrorMessage = "Can only start with 1")]    
         public double Price { get; set; }
         [BindProperty]
         public string AdminNote { get; set; }
@@ -39,13 +43,18 @@ namespace PhotographyBusiness.Pages.BookingPages
 
             if(Booking != null)
             {
-                Booking.IsAccepted = true;
-                Booking.Price = Price;
-                Booking.AdminNote = AdminNote;
-                _bookingService.ConfirmBooking(Booking);
-                return RedirectToPage("GetAllBookingRequestsPage");
+                ModelState.Remove("AdminNote");
+                if(ModelState.IsValid)
+                {
+                    Booking.IsAccepted = true;
+                    Booking.Price = Price;
+                    Booking.AdminNote = AdminNote;
+                    _bookingService.ConfirmBooking(Booking);
+                    return RedirectToPage("GetAllBookingRequestsPage");
+                }
+               
             } 
-            return RedirectToPage("NotFound");
+            return Page();
         }
         /// <summary>
         /// Here når admin trykker på Decline så sletter denne booking fra databasen og fra listen

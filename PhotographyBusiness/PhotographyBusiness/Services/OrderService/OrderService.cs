@@ -14,7 +14,7 @@ namespace PhotographyBusiness.Services.OrderService
         public OrderService(GenericDbService<Order> genericDbService) 
         {
             this.genericDbService = genericDbService;
-            OrderList = new List<Order>();  
+            //OrderList = new List<Order>();  
             OrderList = genericDbService.GetObjectsAsync().Result.ToList();
         }
         public async Task CreateOrder(Order order)
@@ -90,15 +90,15 @@ namespace PhotographyBusiness.Services.OrderService
         }
         public async Task StartAutoDeletionAsync(int orderId)
         {
-            _timer = new Timer(state => DeleteIfConditionIsFalse(orderId), null, TimeSpan.FromMinutes(15), Timeout.InfiniteTimeSpan);
+            _timer = new Timer(state => DeleteIfConditionIsFalse(orderId), null, TimeSpan.FromMinutes(5), Timeout.InfiniteTimeSpan);
 
-            //await Task.Delay(TimeSpan.FromMinutes(10));
-
-            // = true;
+           // await Task.Delay(TimeSpan.FromMinutes(1));
+           //var order = GetOrderById(orderId);
+           //order.Condition  = true;
         }
         private async void DeleteIfConditionIsFalse(int orderId)
         {
-          var order = GetOrderById(orderId);
+          var order = genericDbService.GetObjectByIdAsync(orderId).Result;
 
             if (!order.Condition)
             {

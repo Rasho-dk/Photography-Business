@@ -27,7 +27,7 @@ namespace PhotographyBusiness.Pages.OrderPages
         public IActionResult OnGet()
         {
             User = userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result;
-           Orders = orderService.GetOrderWithBookingByUserId(User.UserId).Result;
+           Orders = orderService.GetOrderWithBookingByUserId(User.UserId).Result.Where(o => o.Condition.Equals(true));
             return Page();
         }
      

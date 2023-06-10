@@ -17,7 +17,7 @@ namespace PhotographyBusiness.Services.AlbumService
         public async Task CreateAlbum(Album album)
         {
             _albums.Add(album);
-            await genericDbService.AddObjectAsync(album);   
+            await genericDbService.AddObjectAsync(album);
         }
 
         public Task<List<Album>> GetAlbumByBookingId()
@@ -53,6 +53,18 @@ namespace PhotographyBusiness.Services.AlbumService
                 }
             }
             return null;
+        }
+
+        public async Task DeleteAlbum(int id)
+        {
+            foreach (var album in _albums)
+            {
+                if (album.Id.Equals(id))
+                {
+                    //_albums.Remove(album);
+                    genericDbService.DeleteObjectAsync(album);
+                }
+            }
         }
     }
 }

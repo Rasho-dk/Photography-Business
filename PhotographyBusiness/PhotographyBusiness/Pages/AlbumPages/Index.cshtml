@@ -14,6 +14,7 @@
                 <th>Description</th>
                 <th>Add Photo</th>
                 <th>Shows Photo</th>
+                <th>Functionality</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -25,11 +26,22 @@
                         <td>@alb.Name</td>
                         <td>@alb.Description</td>
                         <td>
-                            <a asp-page="/PhotoPages/AddPhotoToAlbum" asp-route-albumid="@alb.Id">Add</a>
+                            <a asp-page="/PhotoPages/AddPhotoToAlbum" asp-route-albumid="@alb.Id">
+                                <i class="fas fa-plus-square fa-lg pop-out" style="color: #74787b;"></i>
+                                </a>
                         </td>
                         <td>
                             <a asp-page="/PhotoPages/GetPhotos" asp-route-albumid="@alb.Id"
-                               asp-route-bookingid="@alb.BookingId">Show</a>
+                               asp-route-bookingid="@alb.BookingId">
+                               <i class="far fa-eye fa-lg pop-out" style="color: #414448;"></i>
+                           </a>
+                        </td>
+                        <td>
+                            <form method="post" asp-page-handler="DeleteAlbum">
+                                <input name="albumid" value="@alb.Id" hidden readonly  />
+                                <button type="submit" class="btn-danger">
+                                    <i class="fa fa-trash pop-out"></i></button>
+                            </form>
                         </td>
                     </tr>
                 }           

@@ -62,7 +62,7 @@ namespace PhotographyBusiness.Pages.PhotoPages
         {
             OrderPhoto.Size = Size;
 
-            if (!Size.IsNullOrEmpty())
+                if (!Size.IsNullOrEmpty())
             {
                 OrderPhoto.Size = Size;
             }

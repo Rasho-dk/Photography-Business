@@ -18,12 +18,12 @@
     <form method="post" class="p-4 test-dark" style="width:50%">
         <div class="form-group p-2">
             <label asp-for="@Model.Album.Name" class="control-lable text-dark"></label>
-            <input asp-for="@Model.Album.Name" class="form-control" />
+            <input asp-for="@Model.Album.Name" value="@Model.Booking.User.Name" class="form-control" />
             <span asp-validation-for="@Model.Album.Name" class="text-danger"></span>
         </div>
         <div class="form-group p-2">
             <label asp-for="@Model.Album.Description" class="control-lable text-dark"></label>
-            <input asp-for="@Model.Album.Description" class="form-control" />
+            <input asp-for="@Model.Album.Description" value="@Model.Booking.Category" class="form-control" />
             <span asp-validation-for="@Model.Album.Description" class="text-danger"></span>
         </div>
         <div class="form-group p-2">

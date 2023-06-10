@@ -24,6 +24,12 @@ namespace PhotographyBusiness.Pages.PhotoPages
             Albums = albumService.GetAllAlbumsAsync();
             return Page();
         }
+        public async Task<IActionResult> OnPostDeleteAlbum(int albumid)
+        {
+          await albumService.DeleteAlbum(albumid);  
+
+            return RedirectToPage("/AlbumPages/Index");  
+        }
       
     }
 }

@@ -39,6 +39,7 @@ namespace PhotographyBusiness.Pages.AlbumPages
         /// <returns>til Album/Index</returns>
         public IActionResult OnPost(int id)
         {
+          
             var alert = _albumService.GetAllAlbumsAsync().Where(a => a.BookingId.Equals(id)).ToList();
             if(alert.Any())
             {

@@ -6,11 +6,11 @@ namespace PhotographyBusiness.Services.OrderService
 {
     public class OrderPhotoService : IOrderPhotoService
     {
-        private const decimal firstCase = 100;
-        private const decimal secondCase = 150;
-        private const decimal thirdCase = 200;
-        private const decimal fourthCase = 250;
-        private const decimal fifthCase = 300;
+        private const decimal firstCase = 7.5M;
+        private const decimal secondCase = 10.5M;
+        private const decimal thirdCase = 15.5M;
+        private const decimal fourthCase = 20.5M;
+        private const decimal fifthCase = 30.5M;
 
         private List<OrderPhoto> _orderPhotos;
         private GenericDbService<OrderPhoto> _dbService;

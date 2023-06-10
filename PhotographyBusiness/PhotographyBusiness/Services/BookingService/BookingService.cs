@@ -161,6 +161,7 @@ namespace PhotographyBusiness.Services.BookingService
                     b.AdminNote = booking.AdminNote;
                     b.Price = booking.Price;
                     b.IsAccepted = booking.IsAccepted;
+
                 }
             }
 

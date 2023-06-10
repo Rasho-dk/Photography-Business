@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
-using Newtonsoft.Json;
 using PhotographyBusiness.Models;
 using PhotographyBusiness.Services.OrderService;
 using PhotographyBusiness.Services.UserService;
@@ -26,8 +24,8 @@ namespace PhotographyBusiness.Pages.OrderPages
         /// <param name="bookingid">BookingId: bruges til at hente orderId som lige oprettet</param>
         /// <param name="albumid">AlbumId: den bruges til at route videre til at hente billede på den valgt album</param>
         /// <returns> Til billede side </returns>
-        public async Task<IActionResult> OnGet(int bookingid,int albumid)
-            {
+        public async Task<IActionResult> OnGet(int bookingid, int albumid)
+        {
             int orderId = 0;
             Order order = new Order();
             order.CreatedDate = DateTime.Now;
@@ -35,11 +33,11 @@ namespace PhotographyBusiness.Pages.OrderPages
             await orderService.CreateOrder(order);
             //var userId = userService.GetUserByNameAsync(HttpContext.User.Identity.Name).Result.UserId;
             orderId = orderService.GetOrderWithBookingById(bookingid).Result.Id;
-             orderService.StartAutoDeletionAsync(orderId);
-            
+            orderService.StartAutoDeletionAsync(orderId);
+
             return RedirectToPage("/PhotoPages/GetPhotos", new { bookingid, albumid, orderId });
         }
-      
+
 
     }
 }

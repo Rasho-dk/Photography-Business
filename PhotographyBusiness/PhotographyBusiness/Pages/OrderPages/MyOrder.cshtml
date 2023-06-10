@@ -23,8 +23,12 @@
                                 <p>@order.Id</p>
                             </div>
                             <div class="col-4">
-                                <strong>Condition:</strong>
-                                <p>@order.Condition</p>
+                                <strong>Status :</strong>
+                                @if(order.Condition is true)
+                                {
+                                   <p> <i class="fas fa-check-circle" style="color: #25c137;"></i></p>
+
+                                }
                             </div>
                         </div>
                         <br />
@@ -34,8 +38,8 @@
                                 <p>@order.CreatedDate.ToShortDateString()</p>
                             </div>
                             <div class="col-4">
-                                <strong>Price :</strong>
-                                <p>@order.TotalPriceWithTax</p>
+                                <strong>Price.tax :</strong>
+                                <p>@order.TotalPriceWithTax £</p>
                             </div>
                         </div>
                         <hr>
