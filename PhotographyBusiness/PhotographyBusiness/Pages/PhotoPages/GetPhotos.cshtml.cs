@@ -40,16 +40,24 @@ namespace PhotographyBusiness.Pages.PhotoPages
             this._albumService = albumService;
         }
 
-
+        /// <summary>
+        /// Metoden skal hente alle Photos som passer med orderId.
+        /// Metoden skal hente alle Photos som ligger i kruv for kunne vise den til brugeren. 
+        /// </summary>
+        /// <param name="albumid"> Album Id </param>
+        /// <param name="orderid"> Order Id</param>
+        /// <returns>Returende med den opdaterende oplysning.</returns>
         public IActionResult OnGet(int albumid, int orderid)
         {
             OrderId = orderid; // Bruges i HTML for at tjekke om værdig er større end 0
             AlbumId = albumid; // bruges i HTML for at route albumid med for at bruge den når man skal tilbage til siden.
             Photos = _photoService.GetAllPhotos()
                .Where(p => p.AlbumId.Equals(albumid)).ToList();
+
+            //Bruges til at vise hvor mange Items ligger i kruv i forsiden i GetPhotosPage som route orderId og Albumt id til MyCart Page.
             OrderPhotos = orderPhotoService.GetAllPhotos().Where(o => o.OrderId.Equals(orderid)).ToList();
             List<int> tep = new List<int>();
-            OrderPhotos.ForEach(p => { tep.Add(p.Quantity);});
+            OrderPhotos.ForEach(p => { tep.Add(p.Quantity); });
             CartQuantity = tep.Sum();
             return Page();
         }
@@ -57,12 +65,12 @@ namespace PhotographyBusiness.Pages.PhotoPages
         /// Metoden skal håndtere at kunden kan oprette en til mange orderphoto til forskellige type af størrelse.
         /// </summary>
         /// <param name="id">PhotoId</param>
-        /// <returns>til samlede OrderPhoto</returns>
+        /// <returns>RedirectToPage GetPhotos for at kunden kunne tilføre flere items</returns>
         public async Task<IActionResult> OnPost(int id, int albumid, int orderId)
         {
             OrderPhoto.Size = Size;
 
-                if (!Size.IsNullOrEmpty())
+            if (!Size.IsNullOrEmpty())
             {
                 OrderPhoto.Size = Size;
             }
@@ -78,13 +86,14 @@ namespace PhotographyBusiness.Pages.PhotoPages
             OrderPhoto.Price = orderPhotoService.CalculatePrice(OrderPhoto.Size, OrderPhoto.Quantity);
             OrderPhoto.PhotoId = _photoService.GetPhotoById(id).Result.Id;
             await orderPhotoService.AddPhotoToOrder(OrderPhoto);
+
             //Photos = _photoService.GetAllPhotos()
             //    .Where(p => p.AlbumId.Equals(albumid)).ToList();
 
-            OrderPhotos = orderPhotoService.GetAllPhotos().Where(o => o.OrderId.Equals(orderId)).ToList();
+            //OrderPhotos = orderPhotoService.GetAllPhotos().Where(o => o.OrderId.Equals(orderId)).ToList();
             return RedirectToPage("/PhotoPages/GetPhotos", new { albumid, orderId });
         }
-    
+
 
     }
 }
