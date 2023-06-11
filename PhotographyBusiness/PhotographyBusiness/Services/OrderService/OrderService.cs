@@ -37,6 +37,12 @@ namespace PhotographyBusiness.Services.OrderService
             }
             return null;
         }
+        /// <summary>
+        ///OrderByDescending bruges til at hente den nyeste Order Id som er blevet oprettet. 
+        ///Grunden er for at kunne routere den nyeste Order Id videre nu man lave en OrderPhoto. 
+        /// </summary>
+        /// <param name="id">Booking Id</param>
+        /// <returns> returende den order som er lige blevet oprettet</returns>
         public async Task<Order> GetOrderWithBookingById(int id)
         {
             using( var context = new ObjectDbContext())
@@ -47,6 +53,11 @@ namespace PhotographyBusiness.Services.OrderService
                             .OrderByDescending( o => o.CreatedDate).FirstOrDefault();  
             }
         } 
+        /// <summary>
+        /// Metoden skal hente Alle Order på den bruger som er logget.
+        /// </summary>
+        /// <param name="id">User Id</param>
+        /// <returns> returende en liste over Order på en spesifike User</returns>
         public Task<List<Order>> GetOrderWithBookingByUserId(int id)
         {
             using(var context = new ObjectDbContext())
@@ -66,6 +77,7 @@ namespace PhotographyBusiness.Services.OrderService
             }
             return null;
         }
+        //Ikke brug
         public async Task<Order> DeleteOrderAsync(int id)
         {
             Order orderToBeDeleted = null;
@@ -84,6 +96,10 @@ namespace PhotographyBusiness.Services.OrderService
             }
             return orderToBeDeleted;
         }
+
+        /// <summary>
+        ///  Den stater en automatiske slettning for hvis kunden ikke genemmføre sin order så vil sletter Order fra DB efter et bestemt tidspunt som vi kan vægle det. 
+        /// </summary>
         public async Task StartAutoDeletionAsync(int orderId)
         {
             _timer = new Timer(state => DeleteIfConditionIsFalse(orderId), null, TimeSpan.FromMinutes(5), Timeout.InfiniteTimeSpan);
@@ -92,6 +108,10 @@ namespace PhotographyBusiness.Services.OrderService
            //var order = GetOrderById(orderId);
            //order.Condition  = true;
         }
+        /// <summary>
+        ///  Henter data fra DB og tjekke om Status på den efter den bestemt tidspunkt hvis den flase så slettes fra DB
+        /// </summary>
+        /// <param name="orderId"></param>
         private async void DeleteIfConditionIsFalse(int orderId)
         {
           var order = genericDbService.GetObjectByIdAsync(orderId).Result;
