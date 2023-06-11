@@ -45,10 +45,6 @@ namespace PhotographyBusiness.Services.OrderService
                     ThenInclude(u => u.User).Where(b => b.BookingId == id).
                            AsNoTracking()
                             .OrderByDescending( o => o.CreatedDate).FirstOrDefault();  
-
-                //return context.Orders.Include(o => o.Booking)
-                //       .ThenInclude(u => u.User).AsNoTracking().
-                //       FirstOrDefault(u => u.BookingId == id);
             }
         } 
         public Task<List<Order>> GetOrderWithBookingByUserId(int id)
