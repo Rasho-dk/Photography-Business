@@ -6,6 +6,7 @@ namespace PhotographyBusiness.Services.OrderService
 {
     public class OrderPhotoService : IOrderPhotoService
     {
+        //Der skal bruges M når bruger decimal tal for at kunne håntere (.)
         private const decimal firstCase = 7.5M;
         private const decimal secondCase = 10.5M;
         private const decimal thirdCase = 15.5M;
@@ -28,6 +29,13 @@ namespace PhotographyBusiness.Services.OrderService
         {
             return _orderPhotos;
         }
+        /// <summary>
+        /// Metoden skal kunne udregne pisen på den enkelt foto med hensyn til deres størrelse og antal af de bestilt billeder. 
+        /// Billeder har forskellige størrelse
+        /// </summary>
+        /// <param name="size">Størrelse på billeden</param>
+        /// <param name="quantity">Antal af billede som kunden kan vælge</param>
+        /// <returns>Returende prisen på disse vlaget</returns>
         public decimal CalculatePrice(string size,int quantity)
         {
             decimal price = 0;
