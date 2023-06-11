@@ -28,8 +28,8 @@
                 foreach (var alb in Model.OrderPhotos)
                 {
                     <tr class="table-light">
-                        <td>@alb.Size</td>
-                        <td>@alb.Price</td>    
+                        <td>@alb.Size inch</td>
+                        <td>@alb.Price <strong>£</strong></td>
                         <td>@alb.Quantity</td>    
                         <td>
                             <form method="post" asp-page-handler="DeleteOrderPhoto">
@@ -55,7 +55,7 @@
                 }
                 else
                 {
-                    <td>@Model.SumOfPrice £</td>
+                    <td>@Model.SumOfPrice <strong>£</strong></td>
 
                 }
             </tr>
