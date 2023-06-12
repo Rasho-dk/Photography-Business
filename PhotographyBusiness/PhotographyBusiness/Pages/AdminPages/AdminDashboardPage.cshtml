@@ -164,51 +164,52 @@
                     {
                         <tr >
                             <td>
-                                <button 
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#userModal" class="btn"
                                     data-user-name="@user.Name"
                                     data-user-email="@user.Email"
                                     data-user-phone="@user.PhoneNumber"
                                     data-user-created="@user.DateCreated"
                                     data-user-id="@user.UserId"
-                                    type="button" data-bs-toggle="modal" data-bs-target="#userModal" class="btn">
+                                    asp-route-id="@user.UserId">
                                     @user.Name <i class="fa fa-info-circle pop-out"></i>
                                 </button>
-                                <!-- User information modal -->
-                                <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title text-center" id="deleteModalLabel">User information (@user.UserId)</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                        <tr><th>User profile</th></tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr><td><p>User ID: <span id="userId" style="font-style: italic;"></span></p></td></tr>
-                                                        <tr><td><p>Name: <span id="userName" style="font-style:italic;"></span></p></td></tr>
-                                                        <tr><td><p>Email: <span id="userEmail" style="font-style:italic;"></span></p></td></tr>
-                                                        <tr><td><p>Phone: <span id="userPhone" style="font-style:italic;"></span></p></td></tr>
-                                                        <tr><td><p>Date joined: <span id="userCreated" style="font-style:italic;"></span></p></td></tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <div class="modal-footer d-flex justify-content-center">
-                                                <button type="button" class="btn btn-light btn-outline-dark btn-square" data-bs-dismiss="modal">Close</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
                             </td>
                             <td><a asp-page="#" asp-route-id="@user.UserId" class="text-dark text-decoration-none">@user.Email</a></td>
                         </tr>
                     }
                 </table>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- User information modal -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="userModalLabel">User information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr><th>User profile</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><p>User ID: <span id="userId" style="font-style: italic;"></span></p></td></tr>
+                        <tr><td><p>Name: <span id="userName" style="font-style:italic;"></span></p></td></tr>
+                        <tr><td><p>Email: <span id="userEmail" style="font-style:italic;"></span></p></td></tr>
+                        <tr><td><p>Phone: <span id="userPhone" style="font-style:italic;"></span></p></td></tr>
+                        <tr><td><p>Date joined: <span id="userCreated" style="font-style:italic;"></span></p></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn btn-light btn-outline-dark btn-square" data-bs-dismiss="modal">Close</button>
+            </div>
+
         </div>
     </div>
 </div>
@@ -258,22 +259,6 @@
     </div>
 </div>
 
-
-
-<style>
-    table {
-        border-collapse: collapse;
-    }
-
-    .no-border {
-        border: none;
-    }
-
-    h5 {
-        font-size: 1.1rem;
-    }
-</style>
-
 @section scripts {
     <script>
         var bookingModal = document.getElementById("bookingModal")
@@ -317,8 +302,8 @@
             bookingPriceElement.textContent = bookingPrice
             bookingAdminNoteElement.textContent = bookingAdminNote
         })
-
-
+    </script>
+    <script>
         // User modal variables
         var userNameElement = document.getElementById("userName")
         var userEmailElement = document.getElementById("userEmail")
@@ -327,15 +312,15 @@
         var userIdElement = document.getElementById("userId")
 
         userModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget
+            var button1 = event.relatedTarget
 
             // Extract info from data-* attributes
             //User
-            var userName = button.getAttribute('data-user-name')
-            var userEmail = button.getAttribute('data-user-email')
-            var userPhone = button.getAttribute('data-user-phone')
-            var userCreated = button.getAttribute('data-user-created')
-            var userId = button.getAttribute('data-user-id')
+            var userName = button1.getAttribute('data-user-name')
+            var userEmail = button1.getAttribute('data-user-email')
+            var userPhone = button1.getAttribute('data-user-phone')
+            var userCreated = button1.getAttribute('data-user-created')
+            var userId = button1.getAttribute('data-user-id')
 
 
             // Display user info. in modal
@@ -348,3 +333,17 @@
         })
     </script>
 }
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    .no-border {
+        border: none;
+    }
+
+    h5 {
+        font-size: 1.1rem;
+    }
+</style>

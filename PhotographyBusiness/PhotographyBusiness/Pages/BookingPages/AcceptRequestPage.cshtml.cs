@@ -35,7 +35,7 @@ namespace PhotographyBusiness.Pages.BookingPages
             return Page();
         }
 
-        public IActionResult OnPost(int id)
+        public async Task<IActionResult> OnPost(int id)
         {
             Booking = _bookingService.GetBookingById(id);
 
@@ -46,7 +46,7 @@ namespace PhotographyBusiness.Pages.BookingPages
                     Booking.IsAccepted = true;
                     Booking.Price = Price;
                     Booking.AdminNote = AdminNote;
-                    _bookingService.ConfirmBooking(Booking);
+                    await _bookingService.ConfirmBooking(Booking);
                     return RedirectToPage("GetAllBookingRequestsPage");
                 }
             }

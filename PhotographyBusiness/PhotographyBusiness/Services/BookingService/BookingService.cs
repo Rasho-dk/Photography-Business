@@ -170,7 +170,7 @@ namespace PhotographyBusiness.Services.BookingService
 
         public List<Booking> GetAllBookingsThisMonth()
         {
-            return GetAllBookingsAsync().Result.Where(b => b.Date >= DateTime.Now.AddDays(-30) && b.IsAccepted == true).ToList();
+            return GetAllBookingsAsync().Result.Where(b => b.Date.Month == DateTime.Now.Month && b.IsAccepted == true).ToList();
         }
 
         public List<Booking> GetUpcomingBookings()
