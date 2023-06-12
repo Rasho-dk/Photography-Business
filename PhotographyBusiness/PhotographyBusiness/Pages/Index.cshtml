@@ -4,7 +4,8 @@
     ViewData["Title"] = "Home page";
 }
 
-@using PhotographyBusiness.Pages.AccountPages
+@using PhotographyBusiness.Pages.AccountPages;
+@using Microsoft.AspNetCore.Mvc.Razor;
 
 <link rel="stylesheet" href="css/carousel.css" />
 
@@ -25,19 +26,26 @@
     </div>
 </div>
 
-@if (HttpContext.User.Identity.Name != "admin")
+@if (HttpContext.User.Identity.Name == "admin")
+{
+    <div class="text-center">
+        <a class="btn btn-lg btn-dark m-3 btn-square pop-out" asp-area="" asp-page="/AdminPages/AdminDashboardPage">Admin Dashboard</a>
+    </div>
+}
+@if (HttpContext.User.Identity.Name != null && HttpContext.User.Identity.Name != "admin")
 {
     <div class="text-center">
         <a class="btn btn-lg btn-dark m-3 btn-square pop-out" asp-area="" asp-page="/BookingPages/CreateBookingRequestPage">Enquiry</a>
     </div>
 
 }
-else
+@if (HttpContext.User.Identity.Name == null) 
 {
     <div class="text-center">
-        <a class="btn btn-lg btn-dark m-3 btn-square pop-out" asp-area="" asp-page="/AdminPages/AdminDashboardPage">Admin Dashboard</a>
+        <a class="btn btn-lg btn-dark m-3 btn-square pop-out" asp-area="" asp-page="/AccountPages/CreateBookingAndUser">Enquiry</a>
     </div>
 }
+
 
 <div class="w-100 text-center pt-4 pb-3" style="background-color: #000000">
     <h5 class="text-white m-2 pb-3">What people have to say about us...</h5>
@@ -46,8 +54,8 @@ else
             <img src="~/media/five-star.png" style="height: 2.5vw" class="mb-3"/>
             <p class="text-white m-0">"Jack is incredibly easy to work with, friendly and professional. Most importantly of all, the end result and the quality of images was excellent. Would highly recommend him!"</p>
             <br />
-            <a class="text-white m-0" href="https://goo.gl/maps/i27hyeS1kJ9M9hZQ8 target=" _blank"">Dan Kohn</a>
-            <a class="text-white mt-1" href="https://goo.gl/maps/i27hyeS1kJ9M9hZQ8 target=" _blank""><i class="fa fa-google fa-2x"></i></a>
+            <a class="text-white m-0" href="https://goo.gl/maps/AZ138EqA13baG7kP8" target=" _blank">Dan Kohn</a>
+            <a class="text-white mt-1" href="https://goo.gl/maps/AZ138EqA13baG7kP8" target=" _blank"><i class="fa fa-google fa-2x"></i></a>
         </div>
         <div class="review d-flex flex-column justify-content-center align-content-start" style="width: 15%">
             <img src="~/media/five-star.png" style="height: 2.5vw" class="mb-3"/>
