@@ -1,7 +1,6 @@
-﻿using PhotographyBusiness.Models;
-using MailKit.Net.Smtp;
+﻿using MailKit.Net.Smtp;
 using MimeKit;
-using MailKit;
+using PhotographyBusiness.Models;
 
 namespace PhotographyBusiness.Services.MailService
 {
@@ -11,7 +10,7 @@ namespace PhotographyBusiness.Services.MailService
         private string _senderPW = "VgroupFTW!";
         private string _jackEmail = "silasrasch@gmail.com";
 
-        public MailService() {  }
+        public MailService() { }
 
         /// <summary>
         /// Internal helper-method for connecting to SMTP and sending emails asynchronously
@@ -21,7 +20,7 @@ namespace PhotographyBusiness.Services.MailService
         /// <exception cref="Exception"></exception>
         public async Task SendMail(MimeMessage message)
         {
-            using (SmtpClient client = new SmtpClient()) 
+            using (SmtpClient client = new SmtpClient())
             {
                 try
                 {
@@ -48,11 +47,12 @@ namespace PhotographyBusiness.Services.MailService
             message.To.Add(MailboxAddress.Parse(booking.User.Email));
             message.Subject = $"Your booking has been cancelled {booking.BookingId}";
             message.Body = new TextPart("plain")
-            { Text = $@"Dear {booking.User.Name},
+            {
+                Text = $@"Dear {booking.User.Name},
             We are sorry to inform you that your booking ID: {booking.BookingId} on {booking.Date} has been cancelled.
             Kind Regards, Jack Saunders Photography"
             };
-                
+
 
             await SendMail(message);
         }
@@ -86,7 +86,7 @@ Name: {booking.User.Name}
 Email: {booking.User.Email}
 Phone: {booking.Address}"
             };
-                
+
             await SendMail(message);
         }
 
@@ -100,9 +100,24 @@ Phone: {booking.Address}"
             {
                 Text = $@"An account has been created on Jack Saunders Photography using this Email 
 Username: {name}"
-            };     
+            };
 
             await SendMail(message);
         }
+        public async Task SendAlbumReadyMail(Booking booking)
+        {
+            MimeMessage message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Jack Saunders Photography", _sender));
+            message.To.Add(MailboxAddress.Parse(booking.User.Email));
+            message.Subject = $"Booking confirmation {booking.BookingId}";
+            message.Body = new TextPart("plain")
+            {
+                Text = $@"Dear {booking.User.Name},
+We are happy to inform you that your photos from category : {booking.Category} on {booking.Date} are ready for you.
+Kind Regards, Jack Saunders Photography"
+            };
+            await SendMail(message);
+        }
     }
+
 }

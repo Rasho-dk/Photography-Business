@@ -30,6 +30,5 @@ namespace PhotographyBusiness.Pages.PhotoPages
 
             return RedirectToPage("/AlbumPages/Index");  
         }
-      
     }
 }

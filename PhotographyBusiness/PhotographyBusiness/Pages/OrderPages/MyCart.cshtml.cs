@@ -9,7 +9,7 @@ namespace PhotographyBusiness.Pages.OrderPages
     public class MyCartModel : PageModel
     {
         private const decimal TaxPrice = 1.25M; //25% moms
-        private const string TextAlert = "This order has been already confirm confirmed";
+        //private const string TextAlert = "This order has already been confirmed";
         private IOrderPhotoService orderPhotoService;
         private OrderService orderService;
         private IUserService userService;
@@ -68,7 +68,7 @@ namespace PhotographyBusiness.Pages.OrderPages
             var orderToBeConfirm = orderService.GetOrderById(orderid);
             if(orderToBeConfirm.Condition is true)
             {
-                AlertMessage = TextAlert;
+                //AlertMessage = TextAlert;
                 return Page();
             }
             SumOfPrice = orderPhotoService.SumOfCalculatePrice(orderid);
@@ -79,7 +79,7 @@ namespace PhotographyBusiness.Pages.OrderPages
                 orderToBeConfirm.TotalPriceWithTax = SumOfPrice * TaxPrice;
                 await orderService.ConfirmOrder(orderToBeConfirm);
             }
-            TempData["OrderConfirmation"] = "The Order is been created";
+            TempData["OrderConfirmation"] = "The order has been created";
 
             orderPhotoService.BasketClean(orderid);
           

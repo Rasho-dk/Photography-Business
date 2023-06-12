@@ -102,7 +102,7 @@ namespace PhotographyBusiness.Services.OrderService
         /// </summary>
         public async Task StartAutoDeletionAsync(int orderId)
         {
-            _timer = new Timer(state => DeleteIfConditionIsFalse(orderId), null, TimeSpan.FromMinutes(5), Timeout.InfiniteTimeSpan);
+            _timer = new Timer(state => DeleteIfConditionIsFalse(orderId), null, TimeSpan.FromMinutes(15), Timeout.InfiniteTimeSpan);
 
            // await Task.Delay(TimeSpan.FromMinutes(1));
            //var order = GetOrderById(orderId);

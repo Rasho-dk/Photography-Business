@@ -12,10 +12,7 @@ namespace PhotographyBusiness.Pages.BookingPages
     [Authorize(Roles = "admin")]
     public class AcceptRequestPageModel : PageModel
     {
-
         private IBookingService _bookingService;
-
-
         public Booking Booking { get; set; }
         [BindProperty]
         [Required]

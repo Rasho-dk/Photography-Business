@@ -44,6 +44,7 @@ namespace PhotographyBusiness.Pages.AlbumPages
             if(alert.Any())
             {
                 DisplayAlert = textAlert;
+                Booking = _bookingService.GetBookingById(id);
                 return Page();
             }
 
@@ -56,6 +57,7 @@ namespace PhotographyBusiness.Pages.AlbumPages
             }
             Album.BookingId = _bookingService.GetBookingById(id).BookingId;
             _ = _albumService.CreateAlbum(Album);
+
 
             // Opret albummappen
             //string albumFolder = Path.Combine(Directory.GetCurrentDirectory(), "Albums", Album.Name);

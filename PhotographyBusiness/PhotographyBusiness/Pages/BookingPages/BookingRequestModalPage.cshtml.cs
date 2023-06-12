@@ -21,8 +21,6 @@ namespace PhotographyBusiness.Pages.BookingPages
 
         // asp-route virker ikke i HTML. Input bliver ikke bundet til property.
 
-
-
         public BookingRequestModalPageModel(IBookingService bookingService)
         {
             _bookingService = bookingService;
@@ -35,12 +33,10 @@ namespace PhotographyBusiness.Pages.BookingPages
             return Page();
         }
 
-        public IActionResult OnPost(int id)
-        {
-
-            
-            return RedirectToPage("/BookingPages/AcceptRequestPage",id);
-        }
+        //public IActionResult OnPost(int id)
+        //{            
+        //    return RedirectToPage("/BookingPages/AcceptRequestPage",id);
+        //}
 
         
     }
