@@ -76,7 +76,7 @@ namespace PhotographyBusiness.Pages.PhotoPages
                 }
                 Album = albumService.GetAlbumByIdAsync(albumid);
                 Booking booking = bookingService.GetBookingById(Album.BookingId);
-                //await _mailService.SendAlbumReadyMail(booking);
+                await _mailService.SendAlbumReadyMail(booking);
 
 
                 return RedirectToPage("/AlbumPages/Index");
